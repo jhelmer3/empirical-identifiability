@@ -1,0 +1,2087 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.33">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Jess Helmer">
+<meta name="dcterms.date" content="2026-02-24">
+
+<title>Proposal – Empirical Identifiability</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-dfb324f25d9b1687192fa8be62ac8f9c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Empirical Identifiability</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="./proposal.html" aria-current="page"> 
+<span class="menu-text">Proposal</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#methods" id="toc-methods" class="nav-link" data-scroll-target="#methods">Methods</a>
+  <ul class="collapse">
+  <li><a href="#large-dataset" id="toc-large-dataset" class="nav-link" data-scroll-target="#large-dataset">Large Dataset</a></li>
+  <li><a href="#model-of-interest" id="toc-model-of-interest" class="nav-link" data-scroll-target="#model-of-interest">Model of Interest</a></li>
+  <li><a href="#manipulating-identifiability" id="toc-manipulating-identifiability" class="nav-link" data-scroll-target="#manipulating-identifiability">Manipulating Identifiability</a></li>
+  <li><a href="#empirical-outcomes" id="toc-empirical-outcomes" class="nav-link" data-scroll-target="#empirical-outcomes">Empirical Outcomes</a></li>
+  </ul></li>
+  <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results">Results</a>
+  <ul class="collapse">
+  <li><a href="#complete-data" id="toc-complete-data" class="nav-link" data-scroll-target="#complete-data">Complete Data</a></li>
+  <li><a href="#subsetted-data" id="toc-subsetted-data" class="nav-link" data-scroll-target="#subsetted-data">Subsetted Data</a></li>
+  </ul></li>
+  <li><a href="#archive" id="toc-archive" class="nav-link" data-scroll-target="#archive">Archive</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Proposal</h1>
+<p class="subtitle lead">Empirical Identifiability With Multilevel Models</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Jess Helmer </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">February 24, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Not writing formally yet.</p>
+<section id="setup" class="level4">
+<h4 class="anchored" data-anchor-id="setup">Setup</h4>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(haven)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>In this project, we want to try to identify empirical diagnostic criteria for poorly identified models and demonstrate this with a couple examples in different frameworks. I will be working on this goal in the context of multilevel models.</p>
+<p>Multilevel models can have issues with identification just like any other. These often show up as model convergence issues when trying to fit a model, especially those with many varying effects. Researchers then might cite the lack of model convergence as their reason for not proceeding with that model, but the underlying issue may really be<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> one of model identifiability. Model convergence alone is not the greatest reason to put aside a model<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>, but being able to point to a lack of identifiability may be more constructive—at least acknowledging the underlying reason <em>why</em> the model did not converge.</p>
+</section>
+<section id="methods" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="methods">Methods</h2>
+<p>Our high-level strategy here is to examine the properties of well- and poorly-identified models to identify differences that are therefore indicative of poor identification. Using a large dataset, we will first fit a model of interest, assuming that the size of the dataset will mean the model is identified. For the most relevance, the model of interest might ideally be one known to be prone to identification issues. Then, we will induce a lack of identifiability by subsetting the dataset into smaller versions and fitting the model of interest with the subsets. We will compare the identified and unidentified models by examining bootstrapped sampling distributions of their estimates and convergence warnings.</p>
+<section id="large-dataset" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="large-dataset">Large Dataset</h3>
+<div class="page-columns page-full"><p>We will use publicly available data from the Trends in International Mathematics and Science Study (TIMSS) in this example. This large dataset contains lots of information on student, teacher, and school variables. We will use the 2023 data for 8th graders in the United States. </p><div class="no-row-height column-margin column-container"><span class="margin-aside">Broadest population within a single data file. Could go larger (including other countries or 6th grade as well). But using this as a starting point</span></div></div>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">".."</span>, <span class="st">"Data"</span>, <span class="st">"TIMSS"</span>, <span class="st">"bsgusam8.rdata"</span>)) <span class="co"># student context data</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">".."</span>, <span class="st">"Data"</span>, <span class="st">"TIMSS"</span>, <span class="st">"bcgusam8.rdata"</span>)) <span class="co"># school context data</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> BSGUSAM8 <span class="sc">|&gt;</span> <span class="fu">select</span>(<span class="at">school_id =</span> IDSCHOOL, <span class="at">class_id =</span> IDCLASS, <span class="at">student_id =</span> IDSTUD,</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>            <span class="fu">starts_with</span>(<span class="st">"BSMMAT0"</span>), <span class="at">sex =</span> ITSEX, <span class="at">student_likes_math =</span> BSDGSLM) <span class="sc">|&gt;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename_with</span>(<span class="sc">~</span> <span class="fu">paste0</span>(<span class="st">"math_pv_"</span>, <span class="fu">parse_number</span>(.x)), <span class="fu">starts_with</span>(<span class="st">"BSMMAT0"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(BCGUSAM8 <span class="sc">|&gt;</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>              <span class="fu">select</span>(<span class="at">school_id =</span> IDSCHOOL, <span class="at">school_socioeconomic =</span> BCDGSBC),</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">by =</span> <span class="st">"school_id"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">everything</span>(), <span class="sc">~</span> <span class="fu">case_when</span>(.x <span class="sc">==</span> <span class="fu">attr</span>(.x, <span class="st">"na_values"</span>) <span class="sc">~</span> <span class="cn">NA</span>, </span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">.default =</span> .x)),</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>         <span class="fu">across</span>(<span class="fu">c</span>(student_likes_math, school_socioeconomic), <span class="sc">~</span> <span class="fu">factor</span>(.x, <span class="at">ordered =</span> F)),</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>         <span class="at">male =</span> <span class="fu">factor</span>(sex, <span class="at">levels =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"female"</span>, <span class="st">"male"</span>))) <span class="sc">|&gt;</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">zap_labels</span>() <span class="sc">|&gt;</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>sex) <span class="sc">|&gt;</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>()</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>n_schools <span class="ot">&lt;-</span> dat <span class="sc">|&gt;</span> <span class="fu">pull</span>(school_id) <span class="sc">|&gt;</span> <span class="fu">unique</span>() <span class="sc">|&gt;</span> <span class="fu">length</span>()</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>n_students <span class="ot">&lt;-</span> dat <span class="sc">|&gt;</span> <span class="fu">pull</span>(student_id) <span class="sc">|&gt;</span> <span class="fu">unique</span>() <span class="sc">|&gt;</span> <span class="fu">length</span>()</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>n_info <span class="ot">&lt;-</span> dat <span class="sc">|&gt;</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">.by =</span> school_id,</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>            <span class="at">n_students =</span> <span class="fu">n</span>()) <span class="sc">|&gt;</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_n_students =</span> <span class="fu">mean</span>(n_students),</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd_n_students =</span> <span class="fu">sd</span>(n_students),</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>            <span class="at">min_n_students =</span> <span class="fu">min</span>(n_students),</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>            <span class="at">max_n_students =</span> <span class="fu">max</span>(n_students))</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">|&gt;</span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(school_id, class_id, student_id)) <span class="sc">|&gt;</span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">school_socioeconomic =</span> <span class="fu">factor</span>(school_socioeconomic,</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"1"</span> <span class="ot">=</span> <span class="st">"More Affluent"</span>,</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>                                                  <span class="st">"2"</span> <span class="ot">=</span> <span class="st">"Neither More Affluent nor More Disadvantaged"</span>,</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>                                                  <span class="st">"3"</span> <span class="ot">=</span> <span class="st">"More Disadvantaged"</span>)),</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>         <span class="at">student_likes_math =</span> <span class="fu">factor</span>(student_likes_math,</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"1"</span> <span class="ot">=</span> <span class="st">"Very Much Like Learning Mathematics"</span>,</span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>                                                <span class="st">"2"</span> <span class="ot">=</span> <span class="st">"Somewhat Like Learning Mathematics"</span>,</span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>                                                <span class="st">"3"</span> <span class="ot">=</span> <span class="st">"Do Not Like Learning Mathematics"</span>)),</span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>         <span class="at">male =</span> <span class="fu">factor</span>(male,</span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>                       <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"male"</span> <span class="ot">=</span> <span class="st">"Male"</span>,</span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>                                  <span class="st">"female"</span> <span class="ot">=</span> <span class="st">"Female"</span>))) <span class="sc">|&gt;</span></span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>  gtsummary<span class="sc">::</span><span class="fu">tbl_summary</span>(<span class="at">label =</span> <span class="fu">list</span>(<span class="at">student_likes_math =</span> <span class="st">"Student Likes Math"</span>,</span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">school_socioeconomic =</span> <span class="st">"School Socioeconomic Status"</span>,</span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">male =</span> <span class="st">"Gender"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>  gtsummary<span class="sc">::</span><span class="fu">as_gt</span>() <span class="sc">|&gt;</span></span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>  gt<span class="sc">::</span><span class="fu">tab_footnote</span>(<span class="st">"The plausible values are five imputed values for each student's score. I think ideally these would be modeled in an imputation way, but for now I've just used the 1st PV as the outcome."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="cnicbvrdqe" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#cnicbvrdqe table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#cnicbvrdqe thead, #cnicbvrdqe tbody, #cnicbvrdqe tfoot, #cnicbvrdqe tr, #cnicbvrdqe td, #cnicbvrdqe th {
+  border-style: none;
+}
+
+#cnicbvrdqe p {
+  margin: 0;
+  padding: 0;
+}
+
+#cnicbvrdqe .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#cnicbvrdqe .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#cnicbvrdqe .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#cnicbvrdqe .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#cnicbvrdqe .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#cnicbvrdqe .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#cnicbvrdqe .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#cnicbvrdqe .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#cnicbvrdqe .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#cnicbvrdqe .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#cnicbvrdqe .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#cnicbvrdqe .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#cnicbvrdqe .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#cnicbvrdqe .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#cnicbvrdqe .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#cnicbvrdqe .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#cnicbvrdqe .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#cnicbvrdqe .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#cnicbvrdqe .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#cnicbvrdqe .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#cnicbvrdqe .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#cnicbvrdqe .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#cnicbvrdqe .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#cnicbvrdqe .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#cnicbvrdqe .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#cnicbvrdqe .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#cnicbvrdqe .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#cnicbvrdqe .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#cnicbvrdqe .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#cnicbvrdqe .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#cnicbvrdqe .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#cnicbvrdqe .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#cnicbvrdqe .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#cnicbvrdqe .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#cnicbvrdqe .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#cnicbvrdqe .gt_left {
+  text-align: left;
+}
+
+#cnicbvrdqe .gt_center {
+  text-align: center;
+}
+
+#cnicbvrdqe .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#cnicbvrdqe .gt_font_normal {
+  font-weight: normal;
+}
+
+#cnicbvrdqe .gt_font_bold {
+  font-weight: bold;
+}
+
+#cnicbvrdqe .gt_font_italic {
+  font-style: italic;
+}
+
+#cnicbvrdqe .gt_super {
+  font-size: 65%;
+}
+
+#cnicbvrdqe .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#cnicbvrdqe .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#cnicbvrdqe .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#cnicbvrdqe .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#cnicbvrdqe .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#cnicbvrdqe .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#cnicbvrdqe .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#cnicbvrdqe .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#cnicbvrdqe div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="label"><span data-qmd-base64="KipDaGFyYWN0ZXJpc3RpYyoq"><span class="gt_from_md"><strong>Characteristic</strong></span></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="stat_0"><span data-qmd-base64="KipOID0gNywwMjcqKg=="><span class="gt_from_md"><strong>N = 7,027</strong></span></span><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="label" class="gt_row gt_left">1ST PLAUSIBLE VALUE MATHEMATICS</td>
+<td headers="stat_0" class="gt_row gt_center">493 (429, 560)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">2ND PLAUSIBLE VALUE MATHEMATICS</td>
+<td headers="stat_0" class="gt_row gt_center">493 (429, 561)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">3RD PLAUSIBLE VALUE MATHEMATICS</td>
+<td headers="stat_0" class="gt_row gt_center">494 (428, 562)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">4TH PLAUSIBLE VALUE MATHEMATICS</td>
+<td headers="stat_0" class="gt_row gt_center">492 (427, 561)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">5TH PLAUSIBLE VALUE MATHEMATICS</td>
+<td headers="stat_0" class="gt_row gt_center">493 (428, 562)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">Student Likes Math</td>
+<td headers="stat_0" class="gt_row gt_center"><br></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;Very Much Like Learning Mathematics</td>
+<td headers="stat_0" class="gt_row gt_center">1,027 (15%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;Somewhat Like Learning Mathematics</td>
+<td headers="stat_0" class="gt_row gt_center">2,365 (34%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;Do Not Like Learning Mathematics</td>
+<td headers="stat_0" class="gt_row gt_center">3,635 (52%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">School Socioeconomic Status</td>
+<td headers="stat_0" class="gt_row gt_center"><br></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;More Affluent</td>
+<td headers="stat_0" class="gt_row gt_center">840 (12%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;Neither More Affluent nor More Disadvantaged</td>
+<td headers="stat_0" class="gt_row gt_center">2,602 (37%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;More Disadvantaged</td>
+<td headers="stat_0" class="gt_row gt_center">3,585 (51%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">Gender</td>
+<td headers="stat_0" class="gt_row gt_center"><br></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;Male</td>
+<td headers="stat_0" class="gt_row gt_center">3,449 (49%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;Female</td>
+<td headers="stat_0" class="gt_row gt_center">3,578 (51%)</td></tr>
+  </tbody>
+  <tfoot>
+    <tr class="gt_footnotes">
+      <td class="gt_footnote" colspan="2"> The plausible values are five imputed values for each student's score. I think ideally these would be modeled in an imputation way, but for now I've just used the 1st PV as the outcome.</td>
+    </tr>
+    <tr class="gt_footnotes">
+      <td class="gt_footnote" colspan="2"><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span> <span data-qmd-base64="TWVkaWFuIChRMSwgUTMpOyBuICglKQ=="><span class="gt_from_md">Median (Q1, Q3); n (%)</span></span></td>
+    </tr>
+  </tfoot>
+</table>
+</div>
+</div>
+</div>
+<p>The full dataset contains complete data (on the variables in the model) for 189 schools, 402 classrooms, and 7027 students.</p>
+<div class="cell page-columns page-full">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>n_info <span class="sc">|&gt;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">|&gt;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_label</span>(<span class="at">mean_n_students =</span> <span class="st">"Mean"</span>,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">sd_n_students =</span> <span class="st">"SD"</span>,</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">min_n_students =</span> <span class="st">"Min"</span>, </span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">max_n_students =</span> <span class="st">"Max"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(<span class="st">"Students Per School"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fmt_number</span>() <span class="sc">|&gt;</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(<span class="at">style =</span> <span class="fu">cell_text</span>(<span class="at">weight =</span> <span class="st">"bold"</span>),</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>            <span class="fu">cells_column_labels</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+
+<div class="no-row-height column-margin column-container"><div class="cell-output-display">
+<div id="vvjdboixqb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#vvjdboixqb table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#vvjdboixqb thead, #vvjdboixqb tbody, #vvjdboixqb tfoot, #vvjdboixqb tr, #vvjdboixqb td, #vvjdboixqb th {
+  border-style: none;
+}
+
+#vvjdboixqb p {
+  margin: 0;
+  padding: 0;
+}
+
+#vvjdboixqb .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#vvjdboixqb .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#vvjdboixqb .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#vvjdboixqb .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#vvjdboixqb .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#vvjdboixqb .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#vvjdboixqb .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#vvjdboixqb .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#vvjdboixqb .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#vvjdboixqb .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#vvjdboixqb .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#vvjdboixqb .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#vvjdboixqb .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#vvjdboixqb .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#vvjdboixqb .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#vvjdboixqb .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#vvjdboixqb .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#vvjdboixqb .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#vvjdboixqb .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#vvjdboixqb .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#vvjdboixqb .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#vvjdboixqb .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#vvjdboixqb .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#vvjdboixqb .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#vvjdboixqb .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#vvjdboixqb .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#vvjdboixqb .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#vvjdboixqb .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#vvjdboixqb .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#vvjdboixqb .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#vvjdboixqb .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#vvjdboixqb .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#vvjdboixqb .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#vvjdboixqb .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#vvjdboixqb .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#vvjdboixqb .gt_left {
+  text-align: left;
+}
+
+#vvjdboixqb .gt_center {
+  text-align: center;
+}
+
+#vvjdboixqb .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#vvjdboixqb .gt_font_normal {
+  font-weight: normal;
+}
+
+#vvjdboixqb .gt_font_bold {
+  font-weight: bold;
+}
+
+#vvjdboixqb .gt_font_italic {
+  font-style: italic;
+}
+
+#vvjdboixqb .gt_super {
+  font-size: 65%;
+}
+
+#vvjdboixqb .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#vvjdboixqb .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#vvjdboixqb .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#vvjdboixqb .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#vvjdboixqb .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#vvjdboixqb .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#vvjdboixqb .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#vvjdboixqb .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#vvjdboixqb div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    <tr class="gt_heading">
+      <td colspan="4" class="gt_heading gt_title gt_font_normal gt_bottom_border" style="">Students Per School</td>
+    </tr>
+    
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="font-weight: bold;" scope="col" id="mean_n_students">Mean</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="font-weight: bold;" scope="col" id="sd_n_students">SD</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="font-weight: bold;" scope="col" id="min_n_students">Min</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="font-weight: bold;" scope="col" id="max_n_students">Max</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="mean_n_students" class="gt_row gt_right">37.18</td>
+<td headers="sd_n_students" class="gt_row gt_right">11.55</td>
+<td headers="min_n_students" class="gt_row gt_right">4.00</td>
+<td headers="max_n_students" class="gt_row gt_right">66.00</td></tr>
+  </tbody>
+  
+</table>
+</div>
+</div></div></div>
+<p>On average, each school has 37.18 students. Three schools have less than 10 students (4, 5, and 6 students).</p>
+</section>
+<section id="model-of-interest" class="level3">
+<h3 class="anchored" data-anchor-id="model-of-interest">Model of Interest</h3>
+<p>As an example model of interest, we can examine the population effects of student gender, how much students report liking math, and school socioeconomic status on student math achievement scores with a two-level model of students nested within schools. We can also examine whether the student-level effects of gender and reporting liking math effects vary among schools, for two varying slope terms.</p>
+<p>We can represent the unconditional form of this model as</p>
+<div class="math">
+<span class="math display">\[\begin{gathered}
+  \begin{aligned}
+    \text{Level 1}: &amp; \ \text{MATH SCORE}_{ij} = \beta_{0j} + r_i \\[.8em]
+    \text{Level 2}: &amp; \ \beta_{0j} = \ \gamma_{00} + u_{0j}
+  \end{aligned}
+
+  \\[1.6em]
+
+  \text{MATH SCORE}_{ij} = \gamma_{00} + u_{0j} + r_i
+\end{gathered}\]</span>
+</div>
+<p>and the conditional form of this model as</p>
+<div class="math">
+<span class="math display">\[\begin{gathered}
+  \begin{aligned}
+    \text{Level 1}: &amp; \ \text{MATH SCORE}_{ij} = \beta_{0j} + \beta_{1j} \text{GENDER}_i + \beta_{2j} \text{LIKES MATH}_i + r_i \\[.8em]
+    \text{Level 2}: &amp;
+      \begin{aligned}
+        \beta_{0j} =&amp; \ \gamma_{00} + \gamma_{01} \text{SOCIOECONOMIC}_j + u_{0j} \\
+        \beta_{1j} =&amp; \ \gamma_{10} + u_{1j} \\
+        \beta_{2j} =&amp; \ \gamma_{20} + u_{2j}
+      \end{aligned}
+  \end{aligned}
+
+  \\[1.6em]
+
+  \text{MATH SCORE}_{ij} = \gamma_{00} + \gamma_{01} \text{SOCIOECONOMIC}_j + u_{0j} + (\gamma_{10} + u_{1j}) \text{GENDER}_i + (\gamma_{20} + u_{2j}) \text{LIKES MATH}_i + r_i
+\end{gathered}\]</span>
+</div>
+<p>.</p>
+<div class="callout callout-style-simple callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Distributional Notation
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>If you’ll indulge my trying to practice translating these things into a distributional form.</p>
+<div class="math">
+<span class="math display">\[\begin{aligned}
+  \text{MATH SCORE}_{i} &amp;= \alpha_{school[i]} + {\beta_{female}}_{school[i]} \text{female}_i + {\beta_{likesMath}}_{school[i]} \text{likesMath}_i\\
+  \alpha_{school[i]} &amp;\sim \mathcal{N}(\bar{\alpha}_j, \sigma_{school[i]}) \\
+  {\beta_{female}}_{school[i]}  &amp;\sim \mathcal{N}({\bar{\beta}_{female}}_{school[i]}, {\sigma_{female}}_{school[i]}) \\
+  {\beta_{likesMath}}_{school[i]}  &amp;\sim \mathcal{N}({\bar{\beta}_{likesMath}}_{school[i]}, {\sigma_{likesMath}}_{school[i]}) \\
+
+\begin{bmatrix}
+\alpha_j &amp; {\beta_j}_{female} &amp; {\beta_j}_{likesMath}
+\end{bmatrix}
+
+&amp;\sim
+
+\mathcal{MVN}(\begin{bmatrix}
+\bar{\alpha} &amp; \bar{\beta}_{female} &amp; \bar{\beta}_{likesMath}
+\end{bmatrix},
+R,
+\begin{bmatrix}
+{\tau}_{\alpha} &amp; {\tau_{\beta}}_{female} &amp; {\tau_{\beta}}_{likesMath}
+\end{bmatrix}) \\
+
+  \bar{\alpha}, \bar{\beta}_{female}, \bar{\beta}_{likesMath} &amp;\sim \mathcal{N}(0, 1) \\
+  {\tau}_{\alpha}, {\tau_{\beta}}_{female}, {\tau_{\beta}}_{likesMath} &amp;\sim \mathcal{Uniform}(0, 400)\\
+  R &amp;\sim \mathcal{LKJCorr}(4)
+\end{aligned}\]</span>
+</div>
+<p>Or, centered<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> parameterization for the covariance matrix.</p>
+<p><span class="math display">\[
+\begin{bmatrix}
+  \alpha_j \\
+  {\beta_j}_{female}\\
+  {\beta_j}_{likesMath}
+\end{bmatrix} \sim \mathcal{MVN}(
+  \begin{bmatrix}
+    \bar{\alpha} \\
+    \bar{\beta}_{female} \\
+    \bar{\beta}_{likesMath}
+  \end{bmatrix}, \Sigma=
+  \begin{bmatrix}
+    {\tau}_{\alpha}^2 &amp; \tau_{\alpha \beta_{female}} &amp; \tau_{\alpha \beta_{likesMath}} \\
+    \tau_{\beta_{female} \alpha} &amp; {\tau}_{\beta_{female}}^2 &amp; \tau_{\beta_{female}\beta_{likesMath}} \\
+    \tau_{\beta_{likesMath} \alpha} &amp; \tau_{\beta_{likesMath} \beta_{female}} &amp; {\tau}_{\beta_{likesMath}}^2
+\end{bmatrix})
+\]</span></p>
+</div>
+</div>
+</div>
+</section>
+<section id="manipulating-identifiability" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="manipulating-identifiability">Manipulating Identifiability</h3>
+<div class="page-columns page-full"><p>Because this dataset is so large, we can assume that the model fit on the full dataset is well-identified. We can then manipulate identifiability by randomly subsetting the data into smaller datasets. This represents what smaller research teams might be more likely to encounter in their work. </p><div class="no-row-height column-margin column-container"><span class="margin-aside">We could also subset the data by narrowing the population, e.g., 8th graders in the Midwest.</span></div></div>
+<p>We still need to decide what the sample sizes of the smaller datasets should be, considering both number of schools and number of students within schools.</p>
+</section>
+<section id="empirical-outcomes" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="empirical-outcomes">Empirical Outcomes</h3>
+<div class="page-columns page-full"><p>After manipulating identifiability, we will examine how the model reacts to having fewer observations with which to estimate its parameters. As one approach to empirically diagnosing poor identifiability, we will examine bootstrapped sampling distributions for parameters to examine them for issues. We will also track warnings that the model did not converge. </p><div class="no-row-height column-margin column-container"><span class="margin-aside">We want to do at least part of this with MCMC, right? So we can also look at the posterior distributions in that way?</span></div></div>
+<div class="page-columns page-full"><p>We migh also be able to show that by moving to a Bayesian framework with even gentle priors, identifiability issues are reduced. </p><div class="no-row-height column-margin column-container"><span class="margin-aside">So like <code>{lme4}</code> → <code>{brms}</code> with flat priors → <code>{brms}</code> with weakly informative priors? Or <code>{lme4}</code> → <code>{brms}</code> with weakly informative priors.</span></div></div>
+</section>
+</section>
+<section id="results" class="level2">
+<h2 class="anchored" data-anchor-id="results">Results</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>n_bootstraps <span class="ot">&lt;-</span> <span class="dv">100</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Just starting to build up the code for this.</p>
+<section id="complete-data" class="level3">
+<h3 class="anchored" data-anchor-id="complete-data">Complete Data</h3>
+<p>Below are the distributions and correlations for the bootstrapped parameter estimates (100 bootstraps) for the model fit on the full data. Just displaying fixed effects right now to get started</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>bootstr <span class="ot">&lt;-</span> dat <span class="sc">|&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># filter(school_id %in% sample(school_id, 4)) |&gt;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># slice_sample(by = school_id, n = 8) |&gt;</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  modelr<span class="sc">::</span><span class="fu">bootstrap</span>(n_bootstraps, <span class="at">id =</span> <span class="st">"id"</span>)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>bootres <span class="ot">&lt;-</span> bootstr <span class="sc">|&gt;</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">lm =</span> <span class="fu">map</span>(strap, <span class="sc">~</span> lme4<span class="sc">::</span><span class="fu">lmer</span>(math_pv_1 <span class="sc">~</span> male <span class="sc">+</span> student_likes_math <span class="sc">+</span> school_socioeconomic <span class="sc">+</span> </span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>                                        (male <span class="sc">+</span> student_likes_math <span class="sc">|</span> school_id),</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">data =</span> .x)),</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>         <span class="at">tidy =</span> <span class="fu">map</span>(lm, broom.mixed<span class="sc">::</span>tidy),</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>         <span class="at">opt_warnings =</span> <span class="fu">map_chr</span>(lm, </span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>                                <span class="sc">~</span> <span class="fu">ifelse</span>(.x <span class="sc">|&gt;</span> <span class="fu">pluck</span>(<span class="st">"optinfo"</span>) <span class="sc">|&gt;</span> <span class="fu">pluck</span>(<span class="st">"warnings"</span>) <span class="sc">|&gt;</span> <span class="fu">length</span>() <span class="sc">==</span> <span class="dv">0</span>, <span class="cn">NA</span>,</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>                                .x <span class="sc">|&gt;</span> <span class="fu">pluck</span>(<span class="st">"optinfo"</span>) <span class="sc">|&gt;</span> <span class="fu">pluck</span>(<span class="st">"warnings"</span>))),</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>         <span class="at">lme4_warnings =</span> <span class="fu">map_chr</span>(lm, </span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>                                 <span class="sc">~</span> <span class="fu">ifelse</span>(.x <span class="sc">|&gt;</span> <span class="fu">pluck</span>(<span class="st">"optinfo"</span>) <span class="sc">|&gt;</span> <span class="fu">pluck</span>(<span class="st">"conv"</span>) <span class="sc">|&gt;</span> <span class="fu">pluck</span>(<span class="st">"lme4"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>                                            <span class="fu">pluck</span>(<span class="st">"messages"</span>) <span class="sc">|&gt;</span> <span class="fu">pluck</span>(<span class="dv">1</span>) <span class="sc">|&gt;</span> <span class="fu">is_null</span>(), <span class="cn">NA</span>,</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>                                          .x <span class="sc">|&gt;</span> <span class="fu">pluck</span>(<span class="st">"optinfo"</span>) <span class="sc">|&gt;</span> <span class="fu">pluck</span>(<span class="st">"conv"</span>) <span class="sc">|&gt;</span> <span class="fu">pluck</span>(<span class="st">"lme4"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>                                            <span class="fu">pluck</span>(<span class="st">"messages"</span>) <span class="sc">|&gt;</span> <span class="fu">pluck</span>(<span class="dv">1</span>))))</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>bootest <span class="ot">&lt;-</span> bootres <span class="sc">|&gt;</span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(tidy) <span class="sc">|&gt;</span></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map2</span>(<span class="fu">seq</span>(<span class="dv">1</span>, bootres <span class="sc">|&gt;</span> <span class="fu">pull</span>(id) <span class="sc">|&gt;</span> <span class="fu">parse_number</span>() <span class="sc">|&gt;</span> <span class="fu">max</span>()), </span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>       <span class="sc">~</span> <span class="fu">mutate</span>(.x, <span class="at">iter =</span> .y)) <span class="sc">|&gt;</span></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list_rbind</span>() <span class="sc">|&gt;</span></span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(group, term, estimate, iter) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>terms <span class="ot">&lt;-</span> bootest <span class="sc">|&gt;</span> <span class="fu">pull</span>(term) <span class="sc">|&gt;</span> <span class="fu">unique</span>() <span class="sc">|&gt;</span> <span class="fu">head</span>(<span class="dv">6</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">imap</span>(terms, \(yterm, yid_term) </span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>     <span class="fu">imap</span>(terms <span class="sc">|&gt;</span> <span class="fu">head</span>(yid_term),</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>          \(xterm, xid_term) <span class="cf">if</span> (xterm <span class="sc">!=</span> yterm){</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>            bootest <span class="sc">|&gt;</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>              <span class="fu">filter</span>(term <span class="sc">==</span> xterm <span class="sc">|</span> term <span class="sc">==</span> yterm) <span class="sc">|&gt;</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>              <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> term, <span class="at">values_from =</span> estimate) <span class="sc">|&gt;</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>              <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="sc">!!</span><span class="fu">sym</span>(xterm), <span class="at">y =</span> <span class="sc">!!</span><span class="fu">sym</span>(yterm))) <span class="sc">+</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>              <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>              <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>              <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>              <span class="fu">labs</span>(<span class="at">x =</span> <span class="cf">if</span> (yid_term <span class="sc">==</span> <span class="fu">length</span>(terms)) xterm <span class="sc">|&gt;</span> <span class="fu">str_replace_all</span>(<span class="st">"_"</span>, <span class="st">" "</span>) <span class="sc">|&gt;</span> <span class="fu">str_wrap</span>(<span class="dv">10</span>) <span class="cf">else</span> <span class="cn">NULL</span>,</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>                   <span class="at">y =</span> yterm <span class="sc">|&gt;</span> <span class="fu">str_replace_all</span>(<span class="st">"_"</span>, <span class="st">" "</span>) <span class="sc">|&gt;</span> <span class="fu">str_wrap</span>(<span class="dv">10</span>))}</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>          <span class="cf">else</span> {bootest <span class="sc">|&gt;</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>              <span class="fu">filter</span>(term <span class="sc">==</span> yterm) <span class="sc">|&gt;</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>              <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> estimate)) <span class="sc">+</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>              <span class="fu">geom_density</span>() <span class="sc">+</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>              <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>              <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>              <span class="fu">labs</span>(<span class="at">x =</span> <span class="cf">if</span> (yid_term <span class="sc">==</span> <span class="fu">length</span>(terms)) xterm <span class="sc">|&gt;</span> <span class="fu">str_replace_all</span>(<span class="st">"_"</span>, <span class="st">" "</span>) <span class="sc">|&gt;</span> <span class="fu">str_wrap</span>(<span class="dv">10</span>) <span class="cf">else</span> <span class="cn">NULL</span>,</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>                   <span class="at">y =</span> yterm <span class="sc">|&gt;</span> <span class="fu">str_replace_all</span>(<span class="st">"_"</span>, <span class="st">" "</span>) <span class="sc">|&gt;</span> <span class="fu">str_wrap</span>(<span class="dv">10</span>))}) <span class="sc">|&gt;</span></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>       patchwork<span class="sc">::</span><span class="fu">wrap_plots</span>(<span class="at">axis_titles =</span> <span class="st">"collect"</span>, <span class="at">nrow =</span> <span class="dv">1</span>, <span class="at">widths =</span> <span class="fu">rep</span>(<span class="dv">1</span>, <span class="fu">length</span>(terms))) <span class="sc">&amp;</span></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>       <span class="fu">theme_classic</span>()</span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>  patchwork<span class="sc">::</span><span class="fu">wrap_plots</span>(<span class="at">axis_titles =</span> <span class="st">"collect"</span>, <span class="at">ncol =</span> <span class="dv">1</span>, <span class="at">heights =</span> <span class="fu">rep</span>(<span class="dv">1</span>, <span class="fu">length</span>(terms))) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="proposal_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="subsetted-data" class="level3">
+<h3 class="anchored" data-anchor-id="subsetted-data">Subsetted Data</h3>
+<p>And here’s the same thing with a subset of 5 schools and 10 students within each school.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>bootstr <span class="ot">&lt;-</span> dat <span class="sc">|&gt;</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(school_id <span class="sc">%in%</span> <span class="fu">sample</span>(school_id, <span class="dv">5</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_sample</span>(<span class="at">by =</span> school_id, <span class="at">n =</span> <span class="dv">10</span>) <span class="sc">|&gt;</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  modelr<span class="sc">::</span><span class="fu">bootstrap</span>(n_bootstraps, <span class="at">id =</span> <span class="st">"id"</span>)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>bootres <span class="ot">&lt;-</span> bootstr <span class="sc">|&gt;</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">lm =</span> <span class="fu">map</span>(strap, <span class="sc">~</span> lme4<span class="sc">::</span><span class="fu">lmer</span>(math_pv_1 <span class="sc">~</span> male <span class="sc">+</span> student_likes_math <span class="sc">+</span> school_socioeconomic <span class="sc">+</span> </span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>                                        (male <span class="sc">+</span> student_likes_math <span class="sc">|</span> school_id),</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">data =</span> .x)),</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>         <span class="at">tidy =</span> <span class="fu">map</span>(lm, broom.mixed<span class="sc">::</span>tidy),</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>         <span class="at">opt_warnings =</span> <span class="fu">map_chr</span>(lm, </span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>                                <span class="sc">~</span> <span class="fu">ifelse</span>(.x <span class="sc">|&gt;</span> <span class="fu">pluck</span>(<span class="st">"optinfo"</span>) <span class="sc">|&gt;</span> <span class="fu">pluck</span>(<span class="st">"warnings"</span>) <span class="sc">|&gt;</span> <span class="fu">length</span>() <span class="sc">==</span> <span class="dv">0</span>, <span class="cn">NA</span>,</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>                                .x <span class="sc">|&gt;</span> <span class="fu">pluck</span>(<span class="st">"optinfo"</span>) <span class="sc">|&gt;</span> <span class="fu">pluck</span>(<span class="st">"warnings"</span>))),</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>         <span class="at">lme4_warnings =</span> <span class="fu">map_chr</span>(lm, </span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>                                 <span class="sc">~</span> <span class="fu">ifelse</span>(.x <span class="sc">|&gt;</span> <span class="fu">pluck</span>(<span class="st">"optinfo"</span>) <span class="sc">|&gt;</span> <span class="fu">pluck</span>(<span class="st">"conv"</span>) <span class="sc">|&gt;</span> <span class="fu">pluck</span>(<span class="st">"lme4"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>                                            <span class="fu">pluck</span>(<span class="st">"messages"</span>) <span class="sc">|&gt;</span> <span class="fu">pluck</span>(<span class="dv">1</span>) <span class="sc">|&gt;</span> <span class="fu">is_null</span>(), <span class="cn">NA</span>,</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>                                          .x <span class="sc">|&gt;</span> <span class="fu">pluck</span>(<span class="st">"optinfo"</span>) <span class="sc">|&gt;</span> <span class="fu">pluck</span>(<span class="st">"conv"</span>) <span class="sc">|&gt;</span> <span class="fu">pluck</span>(<span class="st">"lme4"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>                                            <span class="fu">pluck</span>(<span class="st">"messages"</span>) <span class="sc">|&gt;</span> <span class="fu">pluck</span>(<span class="dv">1</span>))))</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>bootest <span class="ot">&lt;-</span> bootres <span class="sc">|&gt;</span></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(tidy) <span class="sc">|&gt;</span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map2</span>(<span class="fu">seq</span>(<span class="dv">1</span>, bootres <span class="sc">|&gt;</span> <span class="fu">pull</span>(id) <span class="sc">|&gt;</span> <span class="fu">parse_number</span>() <span class="sc">|&gt;</span> <span class="fu">max</span>()), </span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>       <span class="sc">~</span> <span class="fu">mutate</span>(.x, <span class="at">iter =</span> .y)) <span class="sc">|&gt;</span></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list_rbind</span>() <span class="sc">|&gt;</span></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(group, term, estimate, iter) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>terms <span class="ot">&lt;-</span> bootest <span class="sc">|&gt;</span> <span class="fu">filter</span>(<span class="fu">str_detect</span>(term, dat <span class="sc">|&gt;</span> <span class="fu">names</span>() <span class="sc">|&gt;</span> <span class="fu">paste</span>(<span class="at">collapse =</span> <span class="st">"|"</span>)) <span class="sc">|</span> </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">str_detect</span>(term, <span class="st">"Intercept"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">str_detect</span>(term, <span class="st">"sd|cor"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(term) <span class="sc">|&gt;</span> <span class="fu">unique</span>()</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="fu">imap</span>(terms, \(yterm, yid_term) </span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>     <span class="fu">imap</span>(terms <span class="sc">|&gt;</span> <span class="fu">head</span>(yid_term),</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>          \(xterm, xid_term) <span class="cf">if</span> (xterm <span class="sc">!=</span> yterm){</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>            bootest <span class="sc">|&gt;</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>              <span class="fu">filter</span>(term <span class="sc">==</span> xterm <span class="sc">|</span> term <span class="sc">==</span> yterm) <span class="sc">|&gt;</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>              <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> term, <span class="at">values_from =</span> estimate) <span class="sc">|&gt;</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>              <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="sc">!!</span><span class="fu">sym</span>(xterm), <span class="at">y =</span> <span class="sc">!!</span><span class="fu">sym</span>(yterm))) <span class="sc">+</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>              <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>              <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>              <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>              <span class="fu">labs</span>(<span class="at">x =</span> <span class="cf">if</span> (yid_term <span class="sc">==</span> <span class="fu">length</span>(terms)) xterm <span class="sc">|&gt;</span> <span class="fu">str_replace_all</span>(<span class="st">"_"</span>, <span class="st">" "</span>) <span class="sc">|&gt;</span> <span class="fu">str_wrap</span>(<span class="dv">10</span>) <span class="cf">else</span> <span class="cn">NULL</span>,</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>                   <span class="at">y =</span> yterm <span class="sc">|&gt;</span> <span class="fu">str_replace_all</span>(<span class="st">"_"</span>, <span class="st">" "</span>) <span class="sc">|&gt;</span> <span class="fu">str_wrap</span>(<span class="dv">10</span>))}</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>          <span class="cf">else</span> {bootest <span class="sc">|&gt;</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>              <span class="fu">filter</span>(term <span class="sc">==</span> yterm) <span class="sc">|&gt;</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>              <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> estimate)) <span class="sc">+</span></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>              <span class="fu">geom_density</span>() <span class="sc">+</span></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>              <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>              <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>              <span class="fu">labs</span>(<span class="at">x =</span> <span class="cf">if</span> (yid_term <span class="sc">==</span> <span class="fu">length</span>(terms)) xterm <span class="sc">|&gt;</span> <span class="fu">str_replace_all</span>(<span class="st">"_"</span>, <span class="st">" "</span>) <span class="sc">|&gt;</span> <span class="fu">str_wrap</span>(<span class="dv">10</span>) <span class="cf">else</span> <span class="cn">NULL</span>,</span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>                   <span class="at">y =</span> yterm <span class="sc">|&gt;</span> <span class="fu">str_replace_all</span>(<span class="st">"_"</span>, <span class="st">" "</span>) <span class="sc">|&gt;</span> <span class="fu">str_wrap</span>(<span class="dv">10</span>))}) <span class="sc">|&gt;</span></span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>       patchwork<span class="sc">::</span><span class="fu">wrap_plots</span>(<span class="at">axis_titles =</span> <span class="st">"collect"</span>, <span class="at">nrow =</span> <span class="dv">1</span>, <span class="at">widths =</span> <span class="fu">rep</span>(<span class="dv">1</span>, <span class="fu">length</span>(terms))) <span class="sc">&amp;</span></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>       <span class="fu">theme_classic</span>()</span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>  patchwork<span class="sc">::</span><span class="fu">wrap_plots</span>(<span class="at">axis_titles =</span> <span class="st">"collect"</span>, <span class="at">ncol =</span> <span class="dv">1</span>, <span class="at">heights =</span> <span class="fu">rep</span>(<span class="dv">1</span>, <span class="fu">length</span>(terms))) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="proposal_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="archive" class="level2">
+<h2 class="anchored" data-anchor-id="archive">Archive</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>terms <span class="ot">&lt;-</span> bootest <span class="sc">|&gt;</span> <span class="fu">pull</span>(term) <span class="sc">|&gt;</span> <span class="fu">unique</span>() <span class="sc">|&gt;</span> <span class="fu">head</span>(<span class="dv">3</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">imap</span>(terms, \(yterm, yid_term) </span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>     <span class="fu">imap</span>(terms <span class="sc">|&gt;</span> <span class="fu">head</span>(yid_term),</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>          \(xterm, xid_term) <span class="cf">if</span> (xterm <span class="sc">==</span> yterm) {</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>            bootest <span class="sc">|&gt;</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>              <span class="fu">filter</span>(term <span class="sc">==</span> xterm) <span class="sc">|&gt;</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>              <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> estimate)) <span class="sc">+</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>              <span class="fu">geom_density</span>() <span class="sc">+</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>              <span class="fu">labs</span>(<span class="at">x =</span> xterm, <span class="at">y =</span> xterm) <span class="sc">+</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>              <span class="fu">theme</span>(<span class="at">aspect.ratio =</span> <span class="dv">1</span>)</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>          } <span class="cf">else</span> {</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>            bootest <span class="sc">|&gt;</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>              <span class="fu">filter</span>(term <span class="sc">==</span> xterm <span class="sc">|</span> term <span class="sc">==</span> yterm) <span class="sc">|&gt;</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>              <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> term, <span class="at">values_from =</span> estimate) <span class="sc">|&gt;</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>              <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="sc">!!</span><span class="fu">sym</span>(xterm), <span class="at">y =</span> <span class="sc">!!</span><span class="fu">sym</span>(yterm))) <span class="sc">+</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>              <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>              <span class="fu">labs</span>(<span class="at">x =</span> xterm, <span class="at">y =</span> yterm) <span class="sc">+</span></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>              <span class="fu">theme</span>(<span class="at">aspect.ratio =</span> <span class="dv">1</span>)</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>          }) <span class="sc">|&gt;</span></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>       patchwork<span class="sc">::</span><span class="fu">wrap_plots</span>(<span class="at">ncol =</span> <span class="fu">length</span>(terms), <span class="at">byrow =</span> T, <span class="at">axis_titles =</span> <span class="st">"collect"</span>)</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>yid_term <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>yterm <span class="ot">&lt;-</span> terms[yid_term]</span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a><span class="fu">map</span>(terms <span class="sc">|&gt;</span> <span class="fu">head</span>(yid_term),</span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>    \(xterm) <span class="cf">if</span> (xterm <span class="sc">!=</span> yterm){</span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>      bootest <span class="sc">|&gt;</span></span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>        <span class="fu">filter</span>(term <span class="sc">==</span> xterm <span class="sc">|</span> term <span class="sc">==</span> yterm) <span class="sc">|&gt;</span></span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>        <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> term, <span class="at">values_from =</span> estimate) <span class="sc">|&gt;</span></span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>        <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="sc">!!</span><span class="fu">sym</span>(xterm), <span class="at">y =</span> <span class="sc">!!</span><span class="fu">sym</span>(yterm))) <span class="sc">+</span></span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a>        <span class="fu">labs</span>(<span class="at">x =</span> xterm, <span class="at">y =</span> yterm)}</span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span> {bootest <span class="sc">|&gt;</span></span>
+<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a>        <span class="fu">filter</span>(term <span class="sc">==</span> yterm) <span class="sc">|&gt;</span></span>
+<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a>        <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> estimate)) <span class="sc">+</span></span>
+<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_density</span>() <span class="sc">+</span></span>
+<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a>        <span class="fu">labs</span>(<span class="at">x =</span> yterm, <span class="at">y =</span> yterm)}) <span class="sc">|&gt;</span></span>
+<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a>  patchwork<span class="sc">::</span><span class="fu">wrap_plots</span>(<span class="at">axis_titles =</span> <span class="st">"collect"</span>)</span>
+<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a>    <span class="fu">map</span>(iris<span class="sc">$</span>Species <span class="sc">|&gt;</span> <span class="fu">unique</span>(),</span>
+<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a>    \(sp) <span class="cf">if</span> (sp <span class="sc">!=</span> <span class="st">"setosa"</span>) </span>
+<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a>    {iris <span class="sc">|&gt;</span></span>
+<span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a>        <span class="fu">filter</span>(Species <span class="sc">==</span> <span class="st">"setosa"</span> <span class="sc">|</span> Species <span class="sc">==</span> sp) <span class="sc">|&gt;</span></span>
+<span id="cb9-47"><a href="#cb9-47" aria-hidden="true" tabindex="-1"></a>        <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Petal.Length, <span class="at">y =</span> Sepal.Length)) <span class="sc">+</span></span>
+<span id="cb9-48"><a href="#cb9-48" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_point</span>()</span>
+<span id="cb9-49"><a href="#cb9-49" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> </span>
+<span id="cb9-50"><a href="#cb9-50" aria-hidden="true" tabindex="-1"></a>    {iris <span class="sc">|&gt;</span></span>
+<span id="cb9-51"><a href="#cb9-51" aria-hidden="true" tabindex="-1"></a>        <span class="fu">filter</span>(Species <span class="sc">==</span> <span class="st">"setosa"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb9-52"><a href="#cb9-52" aria-hidden="true" tabindex="-1"></a>        <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Petal.Length, <span class="at">y =</span> Sepal.Length)) <span class="sc">+</span></span>
+<span id="cb9-53"><a href="#cb9-53" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_point</span>()}) <span class="sc">|&gt;</span></span>
+<span id="cb9-54"><a href="#cb9-54" aria-hidden="true" tabindex="-1"></a>  patchwork<span class="sc">::</span><span class="fu">wrap_plots</span>(<span class="at">axis_titles =</span> <span class="st">"collect"</span>)</span>
+<span id="cb9-55"><a href="#cb9-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-56"><a href="#cb9-56" aria-hidden="true" tabindex="-1"></a><span class="fu">map</span>(iris<span class="sc">$</span>Species <span class="sc">|&gt;</span> <span class="fu">unique</span>(),</span>
+<span id="cb9-57"><a href="#cb9-57" aria-hidden="true" tabindex="-1"></a>    \(sp) iris <span class="sc">|&gt;</span></span>
+<span id="cb9-58"><a href="#cb9-58" aria-hidden="true" tabindex="-1"></a>        <span class="fu">filter</span>(Species <span class="sc">==</span> <span class="st">"setosa"</span> <span class="sc">|</span> Species <span class="sc">==</span> sp) <span class="sc">|&gt;</span></span>
+<span id="cb9-59"><a href="#cb9-59" aria-hidden="true" tabindex="-1"></a>        <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Petal.Length, <span class="at">y =</span> Sepal.Length)) <span class="sc">+</span></span>
+<span id="cb9-60"><a href="#cb9-60" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_point</span>()) <span class="sc">|&gt;</span></span>
+<span id="cb9-61"><a href="#cb9-61" aria-hidden="true" tabindex="-1"></a>  patchwork<span class="sc">::</span><span class="fu">wrap_plots</span>(<span class="at">axis_titles =</span> <span class="st">"collect"</span>) <span class="sc">&amp;</span></span>
+<span id="cb9-62"><a href="#cb9-62" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span>
+<span id="cb9-63"><a href="#cb9-63" aria-hidden="true" tabindex="-1"></a><span class="co"># expand_grid(x = terms, y = terms) |&gt;</span></span>
+<span id="cb9-64"><a href="#cb9-64" aria-hidden="true" tabindex="-1"></a><span class="co">#   pmap(\(x, y) if (x == y) {</span></span>
+<span id="cb9-65"><a href="#cb9-65" aria-hidden="true" tabindex="-1"></a><span class="co">#     bootest |&gt;</span></span>
+<span id="cb9-66"><a href="#cb9-66" aria-hidden="true" tabindex="-1"></a><span class="co">#       filter(term == x) |&gt;</span></span>
+<span id="cb9-67"><a href="#cb9-67" aria-hidden="true" tabindex="-1"></a><span class="co">#       ggplot(aes(x = estimate)) +</span></span>
+<span id="cb9-68"><a href="#cb9-68" aria-hidden="true" tabindex="-1"></a><span class="co">#       geom_density() +</span></span>
+<span id="cb9-69"><a href="#cb9-69" aria-hidden="true" tabindex="-1"></a><span class="co">#       labs(x = x, y = x)</span></span>
+<span id="cb9-70"><a href="#cb9-70" aria-hidden="true" tabindex="-1"></a><span class="co">#   } else {</span></span>
+<span id="cb9-71"><a href="#cb9-71" aria-hidden="true" tabindex="-1"></a><span class="co">#     bootest |&gt;</span></span>
+<span id="cb9-72"><a href="#cb9-72" aria-hidden="true" tabindex="-1"></a><span class="co">#       filter(term == x | term == y) |&gt;</span></span>
+<span id="cb9-73"><a href="#cb9-73" aria-hidden="true" tabindex="-1"></a><span class="co">#       pivot_wider(names_from = term, values_from = estimate) |&gt;</span></span>
+<span id="cb9-74"><a href="#cb9-74" aria-hidden="true" tabindex="-1"></a><span class="co">#       ggplot(aes(x = !!sym(x), y = !!sym(y))) +</span></span>
+<span id="cb9-75"><a href="#cb9-75" aria-hidden="true" tabindex="-1"></a><span class="co">#       geom_point()+</span></span>
+<span id="cb9-76"><a href="#cb9-76" aria-hidden="true" tabindex="-1"></a><span class="co">#       labs(x = x, y = y)</span></span>
+<span id="cb9-77"><a href="#cb9-77" aria-hidden="true" tabindex="-1"></a><span class="co">#   }) |&gt;</span></span>
+<span id="cb9-78"><a href="#cb9-78" aria-hidden="true" tabindex="-1"></a><span class="co">#   patchwork::wrap_plots(axis_titles = "collect", guides = "collect", byrow = F) &amp;</span></span>
+<span id="cb9-79"><a href="#cb9-79" aria-hidden="true" tabindex="-1"></a><span class="co">#   theme(aspect.ratio = 1)</span></span>
+<span id="cb9-80"><a href="#cb9-80" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb9-81"><a href="#cb9-81" aria-hidden="true" tabindex="-1"></a><span class="co"># bootest |&gt;</span></span>
+<span id="cb9-82"><a href="#cb9-82" aria-hidden="true" tabindex="-1"></a><span class="co">#       filter(term == "(Intercept)" | term == y) |&gt;</span></span>
+<span id="cb9-83"><a href="#cb9-83" aria-hidden="true" tabindex="-1"></a><span class="co">#       pivot_wider(names_from = term, values_from = estimate) |&gt;</span></span>
+<span id="cb9-84"><a href="#cb9-84" aria-hidden="true" tabindex="-1"></a><span class="co">#       ggplot(aes(x = "(Intercept)", y = y)) +</span></span>
+<span id="cb9-85"><a href="#cb9-85" aria-hidden="true" tabindex="-1"></a><span class="co">#       geom_point()</span></span>
+<span id="cb9-86"><a href="#cb9-86" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb9-87"><a href="#cb9-87" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb9-88"><a href="#cb9-88" aria-hidden="true" tabindex="-1"></a><span class="co"># map(bootest |&gt; pull(term) |&gt; unique(), </span></span>
+<span id="cb9-89"><a href="#cb9-89" aria-hidden="true" tabindex="-1"></a><span class="co">#     ~ bootest |&gt; </span></span>
+<span id="cb9-90"><a href="#cb9-90" aria-hidden="true" tabindex="-1"></a><span class="co">#       filter(term == .x) |&gt;</span></span>
+<span id="cb9-91"><a href="#cb9-91" aria-hidden="true" tabindex="-1"></a><span class="co">#       ggplot(aes(x = estimate)) +</span></span>
+<span id="cb9-92"><a href="#cb9-92" aria-hidden="true" tabindex="-1"></a><span class="co">#       geom_density() +</span></span>
+<span id="cb9-93"><a href="#cb9-93" aria-hidden="true" tabindex="-1"></a><span class="co">#       labs(title = .x |&gt; str_replace_all("_", " ") |&gt; str_wrap(width = 15)) +</span></span>
+<span id="cb9-94"><a href="#cb9-94" aria-hidden="true" tabindex="-1"></a><span class="co">#       theme_classic() +</span></span>
+<span id="cb9-95"><a href="#cb9-95" aria-hidden="true" tabindex="-1"></a><span class="co">#       theme(axis.text = element_blank(),</span></span>
+<span id="cb9-96"><a href="#cb9-96" aria-hidden="true" tabindex="-1"></a><span class="co">#             plot.title = element_text(hjust = 0.5, size = 8))) |&gt;</span></span>
+<span id="cb9-97"><a href="#cb9-97" aria-hidden="true" tabindex="-1"></a><span class="co">#   patchwork::wrap_plots(axes = "collect") +</span></span>
+<span id="cb9-98"><a href="#cb9-98" aria-hidden="true" tabindex="-1"></a><span class="co">#   patchwork::plot_annotation() </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>is?<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>why?<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>non-centered?<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
