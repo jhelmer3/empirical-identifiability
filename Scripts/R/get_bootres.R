@@ -12,9 +12,10 @@ get_bootres <- function(params) {
     modelr::bootstrap(n_bootstraps, id = "id") |>
     mutate(res = map(strap, 
                       safely(\(strap) lme4::lmer(frm,
-                                           data = strap))),
-           errors = map(res, "error"),
+                                           data = strap),
+                             otherwise = NA_real_)),
            model = map(res, "result"),
+           error = map_chr(res, \(res) pluck(res, "error", "message", .default = NA)),
            tidy = imap(model, \(model, idx) model |>
                          broom.mixed::tidy() |>
                          mutate(iter = idx)),
@@ -48,7 +49,12 @@ get_bootres <- function(params) {
 #            opt_warnings = map_chr(model, get_warnings),
 #            lme4_warnings = map_chr(model, get_lme4_warnings))
 # }
-
+# 
+# tibble(x = list("a", 10, 100),
+#        res = map(x, safely(\(x) log(x),
+#                            otherwise = NA_real_))) |>
+#   mutate(result = map_dbl(res, "result"),
+#          error = map_chr(res, \(res) pluck(res, "error", "message", .default = NA)))
 
 
 
