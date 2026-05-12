@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Jess Helmer">
-<meta name="dcterms.date" content="2026-02-24">
+<meta name="dcterms.date" content="2026-02-26">
 
 <title>Proposal – Empirical Identifiability</title>
 <style>
@@ -160,6 +160,10 @@ window.Quarto = {
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="./ecls-k.html"> 
+<span class="menu-text">ECLS-K Bootstrapping</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link active" href="./proposal.html" aria-current="page"> 
 <span class="menu-text">Proposal</span></a>
   </li>  
@@ -219,7 +223,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">February 24, 2026</p>
+      <p class="date">February 26, 2026</p>
     </div>
   </div>
   
@@ -306,23 +310,23 @@ window.Quarto = {
 <span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>  gt<span class="sc">::</span><span class="fu">tab_options</span>(<span class="at">table.width =</span> <span class="fu">pct</span>(<span class="dv">66</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div id="rrnnsnkmkz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#rrnnsnkmkz table {
+<div id="mgcstloymd" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#mgcstloymd table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#rrnnsnkmkz thead, #rrnnsnkmkz tbody, #rrnnsnkmkz tfoot, #rrnnsnkmkz tr, #rrnnsnkmkz td, #rrnnsnkmkz th {
+#mgcstloymd thead, #mgcstloymd tbody, #mgcstloymd tfoot, #mgcstloymd tr, #mgcstloymd td, #mgcstloymd th {
   border-style: none;
 }
 
-#rrnnsnkmkz p {
+#mgcstloymd p {
   margin: 0;
   padding: 0;
 }
 
-#rrnnsnkmkz .gt_table {
+#mgcstloymd .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -348,12 +352,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#rrnnsnkmkz .gt_caption {
+#mgcstloymd .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#rrnnsnkmkz .gt_title {
+#mgcstloymd .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -365,7 +369,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#rrnnsnkmkz .gt_subtitle {
+#mgcstloymd .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -377,7 +381,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#rrnnsnkmkz .gt_heading {
+#mgcstloymd .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -389,13 +393,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#rrnnsnkmkz .gt_bottom_border {
+#mgcstloymd .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#rrnnsnkmkz .gt_col_headings {
+#mgcstloymd .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -410,7 +414,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#rrnnsnkmkz .gt_col_heading {
+#mgcstloymd .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -430,7 +434,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#rrnnsnkmkz .gt_column_spanner_outer {
+#mgcstloymd .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -442,15 +446,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#rrnnsnkmkz .gt_column_spanner_outer:first-child {
+#mgcstloymd .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#rrnnsnkmkz .gt_column_spanner_outer:last-child {
+#mgcstloymd .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#rrnnsnkmkz .gt_column_spanner {
+#mgcstloymd .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -462,11 +466,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#rrnnsnkmkz .gt_spanner_row {
+#mgcstloymd .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#rrnnsnkmkz .gt_group_heading {
+#mgcstloymd .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -492,7 +496,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#rrnnsnkmkz .gt_empty_group_heading {
+#mgcstloymd .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -507,15 +511,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#rrnnsnkmkz .gt_from_md > :first-child {
+#mgcstloymd .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#rrnnsnkmkz .gt_from_md > :last-child {
+#mgcstloymd .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#rrnnsnkmkz .gt_row {
+#mgcstloymd .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -534,7 +538,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#rrnnsnkmkz .gt_stub {
+#mgcstloymd .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -547,7 +551,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#rrnnsnkmkz .gt_stub_row_group {
+#mgcstloymd .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -561,15 +565,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#rrnnsnkmkz .gt_row_group_first td {
+#mgcstloymd .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#rrnnsnkmkz .gt_row_group_first th {
+#mgcstloymd .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#rrnnsnkmkz .gt_summary_row {
+#mgcstloymd .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -579,16 +583,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#rrnnsnkmkz .gt_first_summary_row {
+#mgcstloymd .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#rrnnsnkmkz .gt_first_summary_row.thick {
+#mgcstloymd .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#rrnnsnkmkz .gt_last_summary_row {
+#mgcstloymd .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -598,7 +602,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#rrnnsnkmkz .gt_grand_summary_row {
+#mgcstloymd .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -608,7 +612,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#rrnnsnkmkz .gt_first_grand_summary_row {
+#mgcstloymd .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -618,7 +622,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#rrnnsnkmkz .gt_last_grand_summary_row_top {
+#mgcstloymd .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -628,11 +632,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#rrnnsnkmkz .gt_striped {
+#mgcstloymd .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#rrnnsnkmkz .gt_table_body {
+#mgcstloymd .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -641,7 +645,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#rrnnsnkmkz .gt_footnotes {
+#mgcstloymd .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -655,7 +659,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#rrnnsnkmkz .gt_footnote {
+#mgcstloymd .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -664,7 +668,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#rrnnsnkmkz .gt_sourcenotes {
+#mgcstloymd .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -678,7 +682,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#rrnnsnkmkz .gt_sourcenote {
+#mgcstloymd .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -686,72 +690,72 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#rrnnsnkmkz .gt_left {
+#mgcstloymd .gt_left {
   text-align: left;
 }
 
-#rrnnsnkmkz .gt_center {
+#mgcstloymd .gt_center {
   text-align: center;
 }
 
-#rrnnsnkmkz .gt_right {
+#mgcstloymd .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#rrnnsnkmkz .gt_font_normal {
+#mgcstloymd .gt_font_normal {
   font-weight: normal;
 }
 
-#rrnnsnkmkz .gt_font_bold {
+#mgcstloymd .gt_font_bold {
   font-weight: bold;
 }
 
-#rrnnsnkmkz .gt_font_italic {
+#mgcstloymd .gt_font_italic {
   font-style: italic;
 }
 
-#rrnnsnkmkz .gt_super {
+#mgcstloymd .gt_super {
   font-size: 65%;
 }
 
-#rrnnsnkmkz .gt_footnote_marks {
+#mgcstloymd .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#rrnnsnkmkz .gt_asterisk {
+#mgcstloymd .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#rrnnsnkmkz .gt_indent_1 {
+#mgcstloymd .gt_indent_1 {
   text-indent: 5px;
 }
 
-#rrnnsnkmkz .gt_indent_2 {
+#mgcstloymd .gt_indent_2 {
   text-indent: 10px;
 }
 
-#rrnnsnkmkz .gt_indent_3 {
+#mgcstloymd .gt_indent_3 {
   text-indent: 15px;
 }
 
-#rrnnsnkmkz .gt_indent_4 {
+#mgcstloymd .gt_indent_4 {
   text-indent: 20px;
 }
 
-#rrnnsnkmkz .gt_indent_5 {
+#mgcstloymd .gt_indent_5 {
   text-indent: 25px;
 }
 
-#rrnnsnkmkz .katex-display {
+#mgcstloymd .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#rrnnsnkmkz div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#mgcstloymd div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -825,23 +829,23 @@ window.Quarto = {
 </details>
 
 <div class="no-row-height column-margin column-container"><div class="cell-output-display">
-<div id="lylcvmdldg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#lylcvmdldg table {
+<div id="utpfnatvqa" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#utpfnatvqa table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#lylcvmdldg thead, #lylcvmdldg tbody, #lylcvmdldg tfoot, #lylcvmdldg tr, #lylcvmdldg td, #lylcvmdldg th {
+#utpfnatvqa thead, #utpfnatvqa tbody, #utpfnatvqa tfoot, #utpfnatvqa tr, #utpfnatvqa td, #utpfnatvqa th {
   border-style: none;
 }
 
-#lylcvmdldg p {
+#utpfnatvqa p {
   margin: 0;
   padding: 0;
 }
 
-#lylcvmdldg .gt_table {
+#utpfnatvqa .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -867,12 +871,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#lylcvmdldg .gt_caption {
+#utpfnatvqa .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#lylcvmdldg .gt_title {
+#utpfnatvqa .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -884,7 +888,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#lylcvmdldg .gt_subtitle {
+#utpfnatvqa .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -896,7 +900,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#lylcvmdldg .gt_heading {
+#utpfnatvqa .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -908,13 +912,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#lylcvmdldg .gt_bottom_border {
+#utpfnatvqa .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#lylcvmdldg .gt_col_headings {
+#utpfnatvqa .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -929,7 +933,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#lylcvmdldg .gt_col_heading {
+#utpfnatvqa .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -949,7 +953,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#lylcvmdldg .gt_column_spanner_outer {
+#utpfnatvqa .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -961,15 +965,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#lylcvmdldg .gt_column_spanner_outer:first-child {
+#utpfnatvqa .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#lylcvmdldg .gt_column_spanner_outer:last-child {
+#utpfnatvqa .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#lylcvmdldg .gt_column_spanner {
+#utpfnatvqa .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -981,11 +985,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#lylcvmdldg .gt_spanner_row {
+#utpfnatvqa .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#lylcvmdldg .gt_group_heading {
+#utpfnatvqa .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1011,7 +1015,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#lylcvmdldg .gt_empty_group_heading {
+#utpfnatvqa .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1026,15 +1030,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#lylcvmdldg .gt_from_md > :first-child {
+#utpfnatvqa .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#lylcvmdldg .gt_from_md > :last-child {
+#utpfnatvqa .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#lylcvmdldg .gt_row {
+#utpfnatvqa .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1053,7 +1057,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#lylcvmdldg .gt_stub {
+#utpfnatvqa .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1066,7 +1070,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#lylcvmdldg .gt_stub_row_group {
+#utpfnatvqa .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1080,15 +1084,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#lylcvmdldg .gt_row_group_first td {
+#utpfnatvqa .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#lylcvmdldg .gt_row_group_first th {
+#utpfnatvqa .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#lylcvmdldg .gt_summary_row {
+#utpfnatvqa .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1098,16 +1102,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#lylcvmdldg .gt_first_summary_row {
+#utpfnatvqa .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#lylcvmdldg .gt_first_summary_row.thick {
+#utpfnatvqa .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#lylcvmdldg .gt_last_summary_row {
+#utpfnatvqa .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1117,7 +1121,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#lylcvmdldg .gt_grand_summary_row {
+#utpfnatvqa .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1127,7 +1131,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#lylcvmdldg .gt_first_grand_summary_row {
+#utpfnatvqa .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1137,7 +1141,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#lylcvmdldg .gt_last_grand_summary_row_top {
+#utpfnatvqa .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1147,11 +1151,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#lylcvmdldg .gt_striped {
+#utpfnatvqa .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#lylcvmdldg .gt_table_body {
+#utpfnatvqa .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1160,7 +1164,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#lylcvmdldg .gt_footnotes {
+#utpfnatvqa .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1174,7 +1178,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#lylcvmdldg .gt_footnote {
+#utpfnatvqa .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1183,7 +1187,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#lylcvmdldg .gt_sourcenotes {
+#utpfnatvqa .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1197,7 +1201,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#lylcvmdldg .gt_sourcenote {
+#utpfnatvqa .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1205,72 +1209,72 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#lylcvmdldg .gt_left {
+#utpfnatvqa .gt_left {
   text-align: left;
 }
 
-#lylcvmdldg .gt_center {
+#utpfnatvqa .gt_center {
   text-align: center;
 }
 
-#lylcvmdldg .gt_right {
+#utpfnatvqa .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#lylcvmdldg .gt_font_normal {
+#utpfnatvqa .gt_font_normal {
   font-weight: normal;
 }
 
-#lylcvmdldg .gt_font_bold {
+#utpfnatvqa .gt_font_bold {
   font-weight: bold;
 }
 
-#lylcvmdldg .gt_font_italic {
+#utpfnatvqa .gt_font_italic {
   font-style: italic;
 }
 
-#lylcvmdldg .gt_super {
+#utpfnatvqa .gt_super {
   font-size: 65%;
 }
 
-#lylcvmdldg .gt_footnote_marks {
+#utpfnatvqa .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#lylcvmdldg .gt_asterisk {
+#utpfnatvqa .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#lylcvmdldg .gt_indent_1 {
+#utpfnatvqa .gt_indent_1 {
   text-indent: 5px;
 }
 
-#lylcvmdldg .gt_indent_2 {
+#utpfnatvqa .gt_indent_2 {
   text-indent: 10px;
 }
 
-#lylcvmdldg .gt_indent_3 {
+#utpfnatvqa .gt_indent_3 {
   text-indent: 15px;
 }
 
-#lylcvmdldg .gt_indent_4 {
+#utpfnatvqa .gt_indent_4 {
   text-indent: 20px;
 }
 
-#lylcvmdldg .gt_indent_5 {
+#utpfnatvqa .gt_indent_5 {
   text-indent: 25px;
 }
 
-#lylcvmdldg .katex-display {
+#utpfnatvqa .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#lylcvmdldg div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#utpfnatvqa div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1528,31 +1532,124 @@ R,
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">str_detect</span>(term, <span class="st">"sd|cor"</span>)) <span class="sc">|&gt;</span></span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(term) <span class="sc">|&gt;</span> <span class="fu">unique</span>()</span>
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="fu">imap</span>(terms, \(yterm, yid_term) </span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>     <span class="fu">imap</span>(terms <span class="sc">|&gt;</span> <span class="fu">head</span>(yid_term),</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>          \(xterm, xid_term) <span class="cf">if</span> (xterm <span class="sc">!=</span> yterm){</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>            bootest <span class="sc">|&gt;</span></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>              <span class="fu">filter</span>(term <span class="sc">==</span> xterm <span class="sc">|</span> term <span class="sc">==</span> yterm) <span class="sc">|&gt;</span></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>              <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> term, <span class="at">values_from =</span> estimate) <span class="sc">|&gt;</span></span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>              <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="sc">!!</span><span class="fu">sym</span>(xterm), <span class="at">y =</span> <span class="sc">!!</span><span class="fu">sym</span>(yterm))) <span class="sc">+</span></span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>              <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>              <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>              <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>              <span class="fu">labs</span>(<span class="at">x =</span> <span class="cf">if</span> (yid_term <span class="sc">==</span> <span class="fu">length</span>(terms)) xterm <span class="sc">|&gt;</span> <span class="fu">str_replace_all</span>(<span class="st">"_"</span>, <span class="st">" "</span>) <span class="sc">|&gt;</span> <span class="fu">str_wrap</span>(<span class="dv">10</span>) <span class="cf">else</span> <span class="cn">NULL</span>,</span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>                   <span class="at">y =</span> yterm <span class="sc">|&gt;</span> <span class="fu">str_replace_all</span>(<span class="st">"_"</span>, <span class="st">" "</span>) <span class="sc">|&gt;</span> <span class="fu">str_wrap</span>(<span class="dv">10</span>))}</span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>          <span class="cf">else</span> {bootest <span class="sc">|&gt;</span></span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>              <span class="fu">filter</span>(term <span class="sc">==</span> yterm) <span class="sc">|&gt;</span></span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>              <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> estimate)) <span class="sc">+</span></span>
-<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>              <span class="fu">geom_density</span>() <span class="sc">+</span></span>
-<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>              <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
-<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>              <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
-<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>              <span class="fu">labs</span>(<span class="at">x =</span> <span class="cf">if</span> (yid_term <span class="sc">==</span> <span class="fu">length</span>(terms)) xterm <span class="sc">|&gt;</span> <span class="fu">str_replace_all</span>(<span class="st">"_"</span>, <span class="st">" "</span>) <span class="sc">|&gt;</span> <span class="fu">str_wrap</span>(<span class="dv">10</span>) <span class="cf">else</span> <span class="cn">NULL</span>,</span>
-<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>                   <span class="at">y =</span> yterm <span class="sc">|&gt;</span> <span class="fu">str_replace_all</span>(<span class="st">"_"</span>, <span class="st">" "</span>) <span class="sc">|&gt;</span> <span class="fu">str_wrap</span>(<span class="dv">10</span>))}) <span class="sc">|&gt;</span></span>
-<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>       patchwork<span class="sc">::</span><span class="fu">wrap_plots</span>(<span class="at">axis_titles =</span> <span class="st">"collect"</span>, <span class="at">nrow =</span> <span class="dv">1</span>, <span class="at">widths =</span> <span class="fu">rep</span>(<span class="dv">1</span>, <span class="fu">length</span>(terms))) <span class="sc">&amp;</span></span>
-<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>       <span class="fu">theme_classic</span>()</span>
-<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
-<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>  patchwork<span class="sc">::</span><span class="fu">wrap_plots</span>(<span class="at">axis_titles =</span> <span class="st">"collect"</span>, <span class="at">ncol =</span> <span class="dv">1</span>, <span class="at">heights =</span> <span class="fu">rep</span>(<span class="dv">1</span>, <span class="fu">length</span>(terms))) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>terms <span class="ot">&lt;-</span> bootest <span class="sc">|&gt;</span> <span class="fu">filter</span>(<span class="fu">str_detect</span>(term, <span class="st">"sd|cor"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(term) <span class="sc">|&gt;</span> <span class="fu">unique</span>()</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="fu">imap</span>(terms, \(yterm, yid_term) </span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>     <span class="fu">imap</span>(terms <span class="sc">|&gt;</span> <span class="fu">head</span>(yid_term),</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>          \(xterm, xid_term) <span class="cf">if</span> (xterm <span class="sc">!=</span> yterm){</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>            bootest <span class="sc">|&gt;</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>              <span class="fu">filter</span>(term <span class="sc">==</span> xterm <span class="sc">|</span> term <span class="sc">==</span> yterm) <span class="sc">|&gt;</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>              <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> term, <span class="at">values_from =</span> estimate) <span class="sc">|&gt;</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>              <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="sc">!!</span><span class="fu">sym</span>(xterm), <span class="at">y =</span> <span class="sc">!!</span><span class="fu">sym</span>(yterm))) <span class="sc">+</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>              <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>              <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>              <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>              <span class="fu">labs</span>(<span class="at">x =</span> <span class="cf">if</span> (yid_term <span class="sc">==</span> <span class="fu">length</span>(terms)) xterm <span class="sc">|&gt;</span> <span class="fu">str_replace_all</span>(<span class="st">"_"</span>, <span class="st">" "</span>) <span class="sc">|&gt;</span> <span class="fu">str_wrap</span>(<span class="dv">10</span>) <span class="cf">else</span> <span class="cn">NULL</span>,</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>                   <span class="at">y =</span> yterm <span class="sc">|&gt;</span> <span class="fu">str_replace_all</span>(<span class="st">"_"</span>, <span class="st">" "</span>) <span class="sc">|&gt;</span> <span class="fu">str_wrap</span>(<span class="dv">10</span>))}</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>          <span class="cf">else</span> {bootest <span class="sc">|&gt;</span></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>              <span class="fu">filter</span>(term <span class="sc">==</span> yterm) <span class="sc">|&gt;</span></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>              <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> estimate)) <span class="sc">+</span></span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>              <span class="fu">geom_density</span>() <span class="sc">+</span></span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>              <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>              <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>              <span class="fu">labs</span>(<span class="at">x =</span> <span class="cf">if</span> (yid_term <span class="sc">==</span> <span class="fu">length</span>(terms)) xterm <span class="sc">|&gt;</span> <span class="fu">str_replace_all</span>(<span class="st">"_"</span>, <span class="st">" "</span>) <span class="sc">|&gt;</span> <span class="fu">str_wrap</span>(<span class="dv">10</span>) <span class="cf">else</span> <span class="cn">NULL</span>,</span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>                   <span class="at">y =</span> yterm <span class="sc">|&gt;</span> <span class="fu">str_replace_all</span>(<span class="st">"_"</span>, <span class="st">" "</span>) <span class="sc">|&gt;</span> <span class="fu">str_wrap</span>(<span class="dv">10</span>))}) <span class="sc">|&gt;</span></span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>       patchwork<span class="sc">::</span><span class="fu">wrap_plots</span>(<span class="at">axis_titles =</span> <span class="st">"collect"</span>, <span class="at">nrow =</span> <span class="dv">1</span>, <span class="at">widths =</span> <span class="fu">rep</span>(<span class="dv">1</span>, <span class="fu">length</span>(terms))) <span class="sc">&amp;</span></span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>       <span class="fu">theme_classic</span>()</span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>  patchwork<span class="sc">::</span><span class="fu">wrap_plots</span>(<span class="at">axis_titles =</span> <span class="st">"collect"</span>, <span class="at">ncol =</span> <span class="dv">1</span>, <span class="at">heights =</span> <span class="fu">rep</span>(<span class="dv">1</span>, <span class="fu">length</span>(terms))) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 3 rows containing missing values or values outside the scale range
+(`geom_point()`).</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 3 rows containing non-finite outside the scale range
+(`stat_density()`).</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 3 rows containing missing values or values outside the scale range
+(`geom_point()`).
+Removed 3 rows containing missing values or values outside the scale range
+(`geom_point()`).</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 3 rows containing non-finite outside the scale range
+(`stat_density()`).</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 3 rows containing missing values or values outside the scale range
+(`geom_point()`).
+Removed 3 rows containing missing values or values outside the scale range
+(`geom_point()`).
+Removed 3 rows containing missing values or values outside the scale range
+(`geom_point()`).</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 3 rows containing non-finite outside the scale range
+(`stat_density()`).</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 3 rows containing missing values or values outside the scale range
+(`geom_point()`).
+Removed 3 rows containing missing values or values outside the scale range
+(`geom_point()`).
+Removed 3 rows containing missing values or values outside the scale range
+(`geom_point()`).
+Removed 3 rows containing missing values or values outside the scale range
+(`geom_point()`).
+Removed 3 rows containing missing values or values outside the scale range
+(`geom_point()`).
+Removed 3 rows containing missing values or values outside the scale range
+(`geom_point()`).
+Removed 3 rows containing missing values or values outside the scale range
+(`geom_point()`).
+Removed 3 rows containing missing values or values outside the scale range
+(`geom_point()`).
+Removed 3 rows containing missing values or values outside the scale range
+(`geom_point()`).
+Removed 3 rows containing missing values or values outside the scale range
+(`geom_point()`).
+Removed 3 rows containing missing values or values outside the scale range
+(`geom_point()`).
+Removed 3 rows containing missing values or values outside the scale range
+(`geom_point()`).
+Removed 3 rows containing missing values or values outside the scale range
+(`geom_point()`).
+Removed 3 rows containing missing values or values outside the scale range
+(`geom_point()`).
+Removed 3 rows containing missing values or values outside the scale range
+(`geom_point()`).
+Removed 3 rows containing missing values or values outside the scale range
+(`geom_point()`).
+Removed 3 rows containing missing values or values outside the scale range
+(`geom_point()`).
+Removed 3 rows containing missing values or values outside the scale range
+(`geom_point()`).</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 200 rows containing missing values or values outside the scale range
+(`geom_point()`).
+Removed 200 rows containing missing values or values outside the scale range
+(`geom_point()`).
+Removed 200 rows containing missing values or values outside the scale range
+(`geom_point()`).
+Removed 200 rows containing missing values or values outside the scale range
+(`geom_point()`).
+Removed 200 rows containing missing values or values outside the scale range
+(`geom_point()`).
+Removed 200 rows containing missing values or values outside the scale range
+(`geom_point()`).
+Removed 200 rows containing missing values or values outside the scale range
+(`geom_point()`).
+Removed 200 rows containing missing values or values outside the scale range
+(`geom_point()`).
+Removed 200 rows containing missing values or values outside the scale range
+(`geom_point()`).
+Removed 200 rows containing missing values or values outside the scale range
+(`geom_point()`).</code></pre>
+</div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -1568,104 +1665,104 @@ R,
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>terms <span class="ot">&lt;-</span> bootest <span class="sc">|&gt;</span> <span class="fu">pull</span>(term) <span class="sc">|&gt;</span> <span class="fu">unique</span>() <span class="sc">|&gt;</span> <span class="fu">head</span>(<span class="dv">3</span>)</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">imap</span>(terms, \(yterm, yid_term) </span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>     <span class="fu">imap</span>(terms <span class="sc">|&gt;</span> <span class="fu">head</span>(yid_term),</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>          \(xterm, xid_term) <span class="cf">if</span> (xterm <span class="sc">==</span> yterm) {</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>            bootest <span class="sc">|&gt;</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>              <span class="fu">filter</span>(term <span class="sc">==</span> xterm) <span class="sc">|&gt;</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>              <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> estimate)) <span class="sc">+</span></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>              <span class="fu">geom_density</span>() <span class="sc">+</span></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>              <span class="fu">labs</span>(<span class="at">x =</span> xterm, <span class="at">y =</span> xterm) <span class="sc">+</span></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>              <span class="fu">theme</span>(<span class="at">aspect.ratio =</span> <span class="dv">1</span>)</span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>          } <span class="cf">else</span> {</span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>            bootest <span class="sc">|&gt;</span></span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>              <span class="fu">filter</span>(term <span class="sc">==</span> xterm <span class="sc">|</span> term <span class="sc">==</span> yterm) <span class="sc">|&gt;</span></span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>              <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> term, <span class="at">values_from =</span> estimate) <span class="sc">|&gt;</span></span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>              <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="sc">!!</span><span class="fu">sym</span>(xterm), <span class="at">y =</span> <span class="sc">!!</span><span class="fu">sym</span>(yterm))) <span class="sc">+</span></span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>              <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>              <span class="fu">labs</span>(<span class="at">x =</span> xterm, <span class="at">y =</span> yterm) <span class="sc">+</span></span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>              <span class="fu">theme</span>(<span class="at">aspect.ratio =</span> <span class="dv">1</span>)</span>
-<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>          }) <span class="sc">|&gt;</span></span>
-<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>       patchwork<span class="sc">::</span><span class="fu">wrap_plots</span>(<span class="at">ncol =</span> <span class="fu">length</span>(terms), <span class="at">byrow =</span> T, <span class="at">axis_titles =</span> <span class="st">"collect"</span>)</span>
-<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>yid_term <span class="ot">&lt;-</span> <span class="dv">3</span></span>
-<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>yterm <span class="ot">&lt;-</span> terms[yid_term]</span>
-<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a><span class="fu">map</span>(terms <span class="sc">|&gt;</span> <span class="fu">head</span>(yid_term),</span>
-<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>    \(xterm) <span class="cf">if</span> (xterm <span class="sc">!=</span> yterm){</span>
-<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>      bootest <span class="sc">|&gt;</span></span>
-<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>        <span class="fu">filter</span>(term <span class="sc">==</span> xterm <span class="sc">|</span> term <span class="sc">==</span> yterm) <span class="sc">|&gt;</span></span>
-<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>        <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> term, <span class="at">values_from =</span> estimate) <span class="sc">|&gt;</span></span>
-<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>        <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="sc">!!</span><span class="fu">sym</span>(xterm), <span class="at">y =</span> <span class="sc">!!</span><span class="fu">sym</span>(yterm))) <span class="sc">+</span></span>
-<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a>        <span class="fu">labs</span>(<span class="at">x =</span> xterm, <span class="at">y =</span> yterm)}</span>
-<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span> {bootest <span class="sc">|&gt;</span></span>
-<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a>        <span class="fu">filter</span>(term <span class="sc">==</span> yterm) <span class="sc">|&gt;</span></span>
-<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a>        <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> estimate)) <span class="sc">+</span></span>
-<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_density</span>() <span class="sc">+</span></span>
-<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a>        <span class="fu">labs</span>(<span class="at">x =</span> yterm, <span class="at">y =</span> yterm)}) <span class="sc">|&gt;</span></span>
-<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a>  patchwork<span class="sc">::</span><span class="fu">wrap_plots</span>(<span class="at">axis_titles =</span> <span class="st">"collect"</span>)</span>
-<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a>    <span class="fu">map</span>(iris<span class="sc">$</span>Species <span class="sc">|&gt;</span> <span class="fu">unique</span>(),</span>
-<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a>    \(sp) <span class="cf">if</span> (sp <span class="sc">!=</span> <span class="st">"setosa"</span>) </span>
-<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a>    {iris <span class="sc">|&gt;</span></span>
-<span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a>        <span class="fu">filter</span>(Species <span class="sc">==</span> <span class="st">"setosa"</span> <span class="sc">|</span> Species <span class="sc">==</span> sp) <span class="sc">|&gt;</span></span>
-<span id="cb9-47"><a href="#cb9-47" aria-hidden="true" tabindex="-1"></a>        <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Petal.Length, <span class="at">y =</span> Sepal.Length)) <span class="sc">+</span></span>
-<span id="cb9-48"><a href="#cb9-48" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_point</span>()</span>
-<span id="cb9-49"><a href="#cb9-49" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> </span>
-<span id="cb9-50"><a href="#cb9-50" aria-hidden="true" tabindex="-1"></a>    {iris <span class="sc">|&gt;</span></span>
-<span id="cb9-51"><a href="#cb9-51" aria-hidden="true" tabindex="-1"></a>        <span class="fu">filter</span>(Species <span class="sc">==</span> <span class="st">"setosa"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb9-52"><a href="#cb9-52" aria-hidden="true" tabindex="-1"></a>        <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Petal.Length, <span class="at">y =</span> Sepal.Length)) <span class="sc">+</span></span>
-<span id="cb9-53"><a href="#cb9-53" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_point</span>()}) <span class="sc">|&gt;</span></span>
-<span id="cb9-54"><a href="#cb9-54" aria-hidden="true" tabindex="-1"></a>  patchwork<span class="sc">::</span><span class="fu">wrap_plots</span>(<span class="at">axis_titles =</span> <span class="st">"collect"</span>)</span>
-<span id="cb9-55"><a href="#cb9-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-56"><a href="#cb9-56" aria-hidden="true" tabindex="-1"></a><span class="fu">map</span>(iris<span class="sc">$</span>Species <span class="sc">|&gt;</span> <span class="fu">unique</span>(),</span>
-<span id="cb9-57"><a href="#cb9-57" aria-hidden="true" tabindex="-1"></a>    \(sp) iris <span class="sc">|&gt;</span></span>
-<span id="cb9-58"><a href="#cb9-58" aria-hidden="true" tabindex="-1"></a>        <span class="fu">filter</span>(Species <span class="sc">==</span> <span class="st">"setosa"</span> <span class="sc">|</span> Species <span class="sc">==</span> sp) <span class="sc">|&gt;</span></span>
-<span id="cb9-59"><a href="#cb9-59" aria-hidden="true" tabindex="-1"></a>        <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Petal.Length, <span class="at">y =</span> Sepal.Length)) <span class="sc">+</span></span>
-<span id="cb9-60"><a href="#cb9-60" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_point</span>()) <span class="sc">|&gt;</span></span>
-<span id="cb9-61"><a href="#cb9-61" aria-hidden="true" tabindex="-1"></a>  patchwork<span class="sc">::</span><span class="fu">wrap_plots</span>(<span class="at">axis_titles =</span> <span class="st">"collect"</span>) <span class="sc">&amp;</span></span>
-<span id="cb9-62"><a href="#cb9-62" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span>
-<span id="cb9-63"><a href="#cb9-63" aria-hidden="true" tabindex="-1"></a><span class="co"># expand_grid(x = terms, y = terms) |&gt;</span></span>
-<span id="cb9-64"><a href="#cb9-64" aria-hidden="true" tabindex="-1"></a><span class="co">#   pmap(\(x, y) if (x == y) {</span></span>
-<span id="cb9-65"><a href="#cb9-65" aria-hidden="true" tabindex="-1"></a><span class="co">#     bootest |&gt;</span></span>
-<span id="cb9-66"><a href="#cb9-66" aria-hidden="true" tabindex="-1"></a><span class="co">#       filter(term == x) |&gt;</span></span>
-<span id="cb9-67"><a href="#cb9-67" aria-hidden="true" tabindex="-1"></a><span class="co">#       ggplot(aes(x = estimate)) +</span></span>
-<span id="cb9-68"><a href="#cb9-68" aria-hidden="true" tabindex="-1"></a><span class="co">#       geom_density() +</span></span>
-<span id="cb9-69"><a href="#cb9-69" aria-hidden="true" tabindex="-1"></a><span class="co">#       labs(x = x, y = x)</span></span>
-<span id="cb9-70"><a href="#cb9-70" aria-hidden="true" tabindex="-1"></a><span class="co">#   } else {</span></span>
-<span id="cb9-71"><a href="#cb9-71" aria-hidden="true" tabindex="-1"></a><span class="co">#     bootest |&gt;</span></span>
-<span id="cb9-72"><a href="#cb9-72" aria-hidden="true" tabindex="-1"></a><span class="co">#       filter(term == x | term == y) |&gt;</span></span>
-<span id="cb9-73"><a href="#cb9-73" aria-hidden="true" tabindex="-1"></a><span class="co">#       pivot_wider(names_from = term, values_from = estimate) |&gt;</span></span>
-<span id="cb9-74"><a href="#cb9-74" aria-hidden="true" tabindex="-1"></a><span class="co">#       ggplot(aes(x = !!sym(x), y = !!sym(y))) +</span></span>
-<span id="cb9-75"><a href="#cb9-75" aria-hidden="true" tabindex="-1"></a><span class="co">#       geom_point()+</span></span>
-<span id="cb9-76"><a href="#cb9-76" aria-hidden="true" tabindex="-1"></a><span class="co">#       labs(x = x, y = y)</span></span>
-<span id="cb9-77"><a href="#cb9-77" aria-hidden="true" tabindex="-1"></a><span class="co">#   }) |&gt;</span></span>
-<span id="cb9-78"><a href="#cb9-78" aria-hidden="true" tabindex="-1"></a><span class="co">#   patchwork::wrap_plots(axis_titles = "collect", guides = "collect", byrow = F) &amp;</span></span>
-<span id="cb9-79"><a href="#cb9-79" aria-hidden="true" tabindex="-1"></a><span class="co">#   theme(aspect.ratio = 1)</span></span>
-<span id="cb9-80"><a href="#cb9-80" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb9-81"><a href="#cb9-81" aria-hidden="true" tabindex="-1"></a><span class="co"># bootest |&gt;</span></span>
-<span id="cb9-82"><a href="#cb9-82" aria-hidden="true" tabindex="-1"></a><span class="co">#       filter(term == "(Intercept)" | term == y) |&gt;</span></span>
-<span id="cb9-83"><a href="#cb9-83" aria-hidden="true" tabindex="-1"></a><span class="co">#       pivot_wider(names_from = term, values_from = estimate) |&gt;</span></span>
-<span id="cb9-84"><a href="#cb9-84" aria-hidden="true" tabindex="-1"></a><span class="co">#       ggplot(aes(x = "(Intercept)", y = y)) +</span></span>
-<span id="cb9-85"><a href="#cb9-85" aria-hidden="true" tabindex="-1"></a><span class="co">#       geom_point()</span></span>
-<span id="cb9-86"><a href="#cb9-86" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb9-87"><a href="#cb9-87" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb9-88"><a href="#cb9-88" aria-hidden="true" tabindex="-1"></a><span class="co"># map(bootest |&gt; pull(term) |&gt; unique(), </span></span>
-<span id="cb9-89"><a href="#cb9-89" aria-hidden="true" tabindex="-1"></a><span class="co">#     ~ bootest |&gt; </span></span>
-<span id="cb9-90"><a href="#cb9-90" aria-hidden="true" tabindex="-1"></a><span class="co">#       filter(term == .x) |&gt;</span></span>
-<span id="cb9-91"><a href="#cb9-91" aria-hidden="true" tabindex="-1"></a><span class="co">#       ggplot(aes(x = estimate)) +</span></span>
-<span id="cb9-92"><a href="#cb9-92" aria-hidden="true" tabindex="-1"></a><span class="co">#       geom_density() +</span></span>
-<span id="cb9-93"><a href="#cb9-93" aria-hidden="true" tabindex="-1"></a><span class="co">#       labs(title = .x |&gt; str_replace_all("_", " ") |&gt; str_wrap(width = 15)) +</span></span>
-<span id="cb9-94"><a href="#cb9-94" aria-hidden="true" tabindex="-1"></a><span class="co">#       theme_classic() +</span></span>
-<span id="cb9-95"><a href="#cb9-95" aria-hidden="true" tabindex="-1"></a><span class="co">#       theme(axis.text = element_blank(),</span></span>
-<span id="cb9-96"><a href="#cb9-96" aria-hidden="true" tabindex="-1"></a><span class="co">#             plot.title = element_text(hjust = 0.5, size = 8))) |&gt;</span></span>
-<span id="cb9-97"><a href="#cb9-97" aria-hidden="true" tabindex="-1"></a><span class="co">#   patchwork::wrap_plots(axes = "collect") +</span></span>
-<span id="cb9-98"><a href="#cb9-98" aria-hidden="true" tabindex="-1"></a><span class="co">#   patchwork::plot_annotation() </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>terms <span class="ot">&lt;-</span> bootest <span class="sc">|&gt;</span> <span class="fu">pull</span>(term) <span class="sc">|&gt;</span> <span class="fu">unique</span>() <span class="sc">|&gt;</span> <span class="fu">head</span>(<span class="dv">3</span>)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">imap</span>(terms, \(yterm, yid_term) </span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>     <span class="fu">imap</span>(terms <span class="sc">|&gt;</span> <span class="fu">head</span>(yid_term),</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>          \(xterm, xid_term) <span class="cf">if</span> (xterm <span class="sc">==</span> yterm) {</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>            bootest <span class="sc">|&gt;</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>              <span class="fu">filter</span>(term <span class="sc">==</span> xterm) <span class="sc">|&gt;</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>              <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> estimate)) <span class="sc">+</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>              <span class="fu">geom_density</span>() <span class="sc">+</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>              <span class="fu">labs</span>(<span class="at">x =</span> xterm, <span class="at">y =</span> xterm) <span class="sc">+</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>              <span class="fu">theme</span>(<span class="at">aspect.ratio =</span> <span class="dv">1</span>)</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>          } <span class="cf">else</span> {</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>            bootest <span class="sc">|&gt;</span></span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>              <span class="fu">filter</span>(term <span class="sc">==</span> xterm <span class="sc">|</span> term <span class="sc">==</span> yterm) <span class="sc">|&gt;</span></span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>              <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> term, <span class="at">values_from =</span> estimate) <span class="sc">|&gt;</span></span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>              <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="sc">!!</span><span class="fu">sym</span>(xterm), <span class="at">y =</span> <span class="sc">!!</span><span class="fu">sym</span>(yterm))) <span class="sc">+</span></span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>              <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>              <span class="fu">labs</span>(<span class="at">x =</span> xterm, <span class="at">y =</span> yterm) <span class="sc">+</span></span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>              <span class="fu">theme</span>(<span class="at">aspect.ratio =</span> <span class="dv">1</span>)</span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>          }) <span class="sc">|&gt;</span></span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>       patchwork<span class="sc">::</span><span class="fu">wrap_plots</span>(<span class="at">ncol =</span> <span class="fu">length</span>(terms), <span class="at">byrow =</span> T, <span class="at">axis_titles =</span> <span class="st">"collect"</span>)</span>
+<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a>yid_term <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a>yterm <span class="ot">&lt;-</span> terms[yid_term]</span>
+<span id="cb17-27"><a href="#cb17-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-28"><a href="#cb17-28" aria-hidden="true" tabindex="-1"></a><span class="fu">map</span>(terms <span class="sc">|&gt;</span> <span class="fu">head</span>(yid_term),</span>
+<span id="cb17-29"><a href="#cb17-29" aria-hidden="true" tabindex="-1"></a>    \(xterm) <span class="cf">if</span> (xterm <span class="sc">!=</span> yterm){</span>
+<span id="cb17-30"><a href="#cb17-30" aria-hidden="true" tabindex="-1"></a>      bootest <span class="sc">|&gt;</span></span>
+<span id="cb17-31"><a href="#cb17-31" aria-hidden="true" tabindex="-1"></a>        <span class="fu">filter</span>(term <span class="sc">==</span> xterm <span class="sc">|</span> term <span class="sc">==</span> yterm) <span class="sc">|&gt;</span></span>
+<span id="cb17-32"><a href="#cb17-32" aria-hidden="true" tabindex="-1"></a>        <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> term, <span class="at">values_from =</span> estimate) <span class="sc">|&gt;</span></span>
+<span id="cb17-33"><a href="#cb17-33" aria-hidden="true" tabindex="-1"></a>        <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="sc">!!</span><span class="fu">sym</span>(xterm), <span class="at">y =</span> <span class="sc">!!</span><span class="fu">sym</span>(yterm))) <span class="sc">+</span></span>
+<span id="cb17-34"><a href="#cb17-34" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb17-35"><a href="#cb17-35" aria-hidden="true" tabindex="-1"></a>        <span class="fu">labs</span>(<span class="at">x =</span> xterm, <span class="at">y =</span> yterm)}</span>
+<span id="cb17-36"><a href="#cb17-36" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span> {bootest <span class="sc">|&gt;</span></span>
+<span id="cb17-37"><a href="#cb17-37" aria-hidden="true" tabindex="-1"></a>        <span class="fu">filter</span>(term <span class="sc">==</span> yterm) <span class="sc">|&gt;</span></span>
+<span id="cb17-38"><a href="#cb17-38" aria-hidden="true" tabindex="-1"></a>        <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> estimate)) <span class="sc">+</span></span>
+<span id="cb17-39"><a href="#cb17-39" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_density</span>() <span class="sc">+</span></span>
+<span id="cb17-40"><a href="#cb17-40" aria-hidden="true" tabindex="-1"></a>        <span class="fu">labs</span>(<span class="at">x =</span> yterm, <span class="at">y =</span> yterm)}) <span class="sc">|&gt;</span></span>
+<span id="cb17-41"><a href="#cb17-41" aria-hidden="true" tabindex="-1"></a>  patchwork<span class="sc">::</span><span class="fu">wrap_plots</span>(<span class="at">axis_titles =</span> <span class="st">"collect"</span>)</span>
+<span id="cb17-42"><a href="#cb17-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-43"><a href="#cb17-43" aria-hidden="true" tabindex="-1"></a>    <span class="fu">map</span>(iris<span class="sc">$</span>Species <span class="sc">|&gt;</span> <span class="fu">unique</span>(),</span>
+<span id="cb17-44"><a href="#cb17-44" aria-hidden="true" tabindex="-1"></a>    \(sp) <span class="cf">if</span> (sp <span class="sc">!=</span> <span class="st">"setosa"</span>) </span>
+<span id="cb17-45"><a href="#cb17-45" aria-hidden="true" tabindex="-1"></a>    {iris <span class="sc">|&gt;</span></span>
+<span id="cb17-46"><a href="#cb17-46" aria-hidden="true" tabindex="-1"></a>        <span class="fu">filter</span>(Species <span class="sc">==</span> <span class="st">"setosa"</span> <span class="sc">|</span> Species <span class="sc">==</span> sp) <span class="sc">|&gt;</span></span>
+<span id="cb17-47"><a href="#cb17-47" aria-hidden="true" tabindex="-1"></a>        <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Petal.Length, <span class="at">y =</span> Sepal.Length)) <span class="sc">+</span></span>
+<span id="cb17-48"><a href="#cb17-48" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_point</span>()</span>
+<span id="cb17-49"><a href="#cb17-49" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> </span>
+<span id="cb17-50"><a href="#cb17-50" aria-hidden="true" tabindex="-1"></a>    {iris <span class="sc">|&gt;</span></span>
+<span id="cb17-51"><a href="#cb17-51" aria-hidden="true" tabindex="-1"></a>        <span class="fu">filter</span>(Species <span class="sc">==</span> <span class="st">"setosa"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb17-52"><a href="#cb17-52" aria-hidden="true" tabindex="-1"></a>        <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Petal.Length, <span class="at">y =</span> Sepal.Length)) <span class="sc">+</span></span>
+<span id="cb17-53"><a href="#cb17-53" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_point</span>()}) <span class="sc">|&gt;</span></span>
+<span id="cb17-54"><a href="#cb17-54" aria-hidden="true" tabindex="-1"></a>  patchwork<span class="sc">::</span><span class="fu">wrap_plots</span>(<span class="at">axis_titles =</span> <span class="st">"collect"</span>)</span>
+<span id="cb17-55"><a href="#cb17-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-56"><a href="#cb17-56" aria-hidden="true" tabindex="-1"></a><span class="fu">map</span>(iris<span class="sc">$</span>Species <span class="sc">|&gt;</span> <span class="fu">unique</span>(),</span>
+<span id="cb17-57"><a href="#cb17-57" aria-hidden="true" tabindex="-1"></a>    \(sp) iris <span class="sc">|&gt;</span></span>
+<span id="cb17-58"><a href="#cb17-58" aria-hidden="true" tabindex="-1"></a>        <span class="fu">filter</span>(Species <span class="sc">==</span> <span class="st">"setosa"</span> <span class="sc">|</span> Species <span class="sc">==</span> sp) <span class="sc">|&gt;</span></span>
+<span id="cb17-59"><a href="#cb17-59" aria-hidden="true" tabindex="-1"></a>        <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Petal.Length, <span class="at">y =</span> Sepal.Length)) <span class="sc">+</span></span>
+<span id="cb17-60"><a href="#cb17-60" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_point</span>()) <span class="sc">|&gt;</span></span>
+<span id="cb17-61"><a href="#cb17-61" aria-hidden="true" tabindex="-1"></a>  patchwork<span class="sc">::</span><span class="fu">wrap_plots</span>(<span class="at">axis_titles =</span> <span class="st">"collect"</span>) <span class="sc">&amp;</span></span>
+<span id="cb17-62"><a href="#cb17-62" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span>
+<span id="cb17-63"><a href="#cb17-63" aria-hidden="true" tabindex="-1"></a><span class="co"># expand_grid(x = terms, y = terms) |&gt;</span></span>
+<span id="cb17-64"><a href="#cb17-64" aria-hidden="true" tabindex="-1"></a><span class="co">#   pmap(\(x, y) if (x == y) {</span></span>
+<span id="cb17-65"><a href="#cb17-65" aria-hidden="true" tabindex="-1"></a><span class="co">#     bootest |&gt;</span></span>
+<span id="cb17-66"><a href="#cb17-66" aria-hidden="true" tabindex="-1"></a><span class="co">#       filter(term == x) |&gt;</span></span>
+<span id="cb17-67"><a href="#cb17-67" aria-hidden="true" tabindex="-1"></a><span class="co">#       ggplot(aes(x = estimate)) +</span></span>
+<span id="cb17-68"><a href="#cb17-68" aria-hidden="true" tabindex="-1"></a><span class="co">#       geom_density() +</span></span>
+<span id="cb17-69"><a href="#cb17-69" aria-hidden="true" tabindex="-1"></a><span class="co">#       labs(x = x, y = x)</span></span>
+<span id="cb17-70"><a href="#cb17-70" aria-hidden="true" tabindex="-1"></a><span class="co">#   } else {</span></span>
+<span id="cb17-71"><a href="#cb17-71" aria-hidden="true" tabindex="-1"></a><span class="co">#     bootest |&gt;</span></span>
+<span id="cb17-72"><a href="#cb17-72" aria-hidden="true" tabindex="-1"></a><span class="co">#       filter(term == x | term == y) |&gt;</span></span>
+<span id="cb17-73"><a href="#cb17-73" aria-hidden="true" tabindex="-1"></a><span class="co">#       pivot_wider(names_from = term, values_from = estimate) |&gt;</span></span>
+<span id="cb17-74"><a href="#cb17-74" aria-hidden="true" tabindex="-1"></a><span class="co">#       ggplot(aes(x = !!sym(x), y = !!sym(y))) +</span></span>
+<span id="cb17-75"><a href="#cb17-75" aria-hidden="true" tabindex="-1"></a><span class="co">#       geom_point()+</span></span>
+<span id="cb17-76"><a href="#cb17-76" aria-hidden="true" tabindex="-1"></a><span class="co">#       labs(x = x, y = y)</span></span>
+<span id="cb17-77"><a href="#cb17-77" aria-hidden="true" tabindex="-1"></a><span class="co">#   }) |&gt;</span></span>
+<span id="cb17-78"><a href="#cb17-78" aria-hidden="true" tabindex="-1"></a><span class="co">#   patchwork::wrap_plots(axis_titles = "collect", guides = "collect", byrow = F) &amp;</span></span>
+<span id="cb17-79"><a href="#cb17-79" aria-hidden="true" tabindex="-1"></a><span class="co">#   theme(aspect.ratio = 1)</span></span>
+<span id="cb17-80"><a href="#cb17-80" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb17-81"><a href="#cb17-81" aria-hidden="true" tabindex="-1"></a><span class="co"># bootest |&gt;</span></span>
+<span id="cb17-82"><a href="#cb17-82" aria-hidden="true" tabindex="-1"></a><span class="co">#       filter(term == "(Intercept)" | term == y) |&gt;</span></span>
+<span id="cb17-83"><a href="#cb17-83" aria-hidden="true" tabindex="-1"></a><span class="co">#       pivot_wider(names_from = term, values_from = estimate) |&gt;</span></span>
+<span id="cb17-84"><a href="#cb17-84" aria-hidden="true" tabindex="-1"></a><span class="co">#       ggplot(aes(x = "(Intercept)", y = y)) +</span></span>
+<span id="cb17-85"><a href="#cb17-85" aria-hidden="true" tabindex="-1"></a><span class="co">#       geom_point()</span></span>
+<span id="cb17-86"><a href="#cb17-86" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb17-87"><a href="#cb17-87" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb17-88"><a href="#cb17-88" aria-hidden="true" tabindex="-1"></a><span class="co"># map(bootest |&gt; pull(term) |&gt; unique(), </span></span>
+<span id="cb17-89"><a href="#cb17-89" aria-hidden="true" tabindex="-1"></a><span class="co">#     ~ bootest |&gt; </span></span>
+<span id="cb17-90"><a href="#cb17-90" aria-hidden="true" tabindex="-1"></a><span class="co">#       filter(term == .x) |&gt;</span></span>
+<span id="cb17-91"><a href="#cb17-91" aria-hidden="true" tabindex="-1"></a><span class="co">#       ggplot(aes(x = estimate)) +</span></span>
+<span id="cb17-92"><a href="#cb17-92" aria-hidden="true" tabindex="-1"></a><span class="co">#       geom_density() +</span></span>
+<span id="cb17-93"><a href="#cb17-93" aria-hidden="true" tabindex="-1"></a><span class="co">#       labs(title = .x |&gt; str_replace_all("_", " ") |&gt; str_wrap(width = 15)) +</span></span>
+<span id="cb17-94"><a href="#cb17-94" aria-hidden="true" tabindex="-1"></a><span class="co">#       theme_classic() +</span></span>
+<span id="cb17-95"><a href="#cb17-95" aria-hidden="true" tabindex="-1"></a><span class="co">#       theme(axis.text = element_blank(),</span></span>
+<span id="cb17-96"><a href="#cb17-96" aria-hidden="true" tabindex="-1"></a><span class="co">#             plot.title = element_text(hjust = 0.5, size = 8))) |&gt;</span></span>
+<span id="cb17-97"><a href="#cb17-97" aria-hidden="true" tabindex="-1"></a><span class="co">#   patchwork::wrap_plots(axes = "collect") +</span></span>
+<span id="cb17-98"><a href="#cb17-98" aria-hidden="true" tabindex="-1"></a><span class="co">#   patchwork::plot_annotation() </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 

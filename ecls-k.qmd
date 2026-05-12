@@ -1,0 +1,608 @@
+---
+title: "ECLS-K Bootstrapping"
+author: "Jess Helmer"
+date: last-modified
+toc: true
+format: 
+  html:
+    code-fold: true
+html-table-processing: none
+---
+
+::: panel-tabset
+### Setup
+
+```{r}
+#| message: false
+#| code-fold: show
+library(tidyverse)
+library(patchwork)
+library(gt)
+
+here::here("Scripts", "R") |> dir() |>
+  walk(\(file) glue::glue("{here::here('Scripts', 'R')}/{file}") |> source())
+```
+
+### Reading
+```{r}
+#| code-fold: show
+ecls <- readRDS(here::here("..", "Data", "ECLS-K", "ECLS-K.rds"))
+```
+
+```{r}
+#| eval: false
+ecls |> 
+  names() |>
+  str_extract("[a-zA-Z]_*\\d*")
+
+ecls |> select(starts_with("T1")) |> names()
+
+ecls |> select(starts_with("c2shape")) |>
+  mutate(across(everything(), ~ recode_values(.x |> as.character(),
+                                              "1: CORRECT" ~ 1,
+                                              "2: INCORRECT" ~ 0,
+                                              "-9: NOT ASCERTAINED" ~ NA,
+                                              default = NA))) |>
+  colMeans(na.rm = T)
+
+ecls |> select(starts_with("T1"))
+```
+:::
+
+Model: two-levels (students nested in schools) with a level-one predictor (student SES), level-two predictor (private vs. public school), and an interaction between them. The effect of SES has a varying slope over school. Outcome is student math score.
+
+::: panel-tabset
+### Traditional
+
+::: math
+\begin{aligned}
+
+\text{MATH}_{ij} &= \beta_{0j} + \beta_{1j} \text{SES}_{ij} + r_{ij} \\
+\beta_{0j} &= \gamma_{00} + \gamma_{01} \text{PRIVATE}_{0j} + u_{0j} \\
+\beta_{1j} &= \gamma_{10} + \gamma_{11} \text{PRIVATE}_{1j} + u_{1j}
+
+\end{aligned}
+:::
+
+::: math
+\begin{aligned}
+\text{MATH}_{ij} &= \gamma_{00} + \gamma_{01} \text{PRIVATE}_{0j} + u_{0j} + (\gamma_{10} + \gamma_{11} \text{PRIVATE}_{1j} + u_{1j}) \text{SES}_{ij} + r_{ij} \\
+
+\text{MATH}_{ij} &= \gamma_{00} + \gamma_{01} \text{PRIVATE}_{0j} + \gamma_{10} \text{SES}_{ij} + \gamma_{11} (\text{PRIVATE}_{1j} \times \text{SES}_{ij}) + u_{0j} + \text{SES}_{ij} u_{1j} + r_{ij}
+\end{aligned}
+:::
+
+### Distributional
+
+::: math
+\begin{aligned}
+\text{MATH}_{i} &\sim Normal(\mu_{i}, \sigma) \\
+
+\mu_i &= \mu_{school[i]} + \beta_{SES_{school[i]}} SES_i \\
+
+\mu_{school[i]} &= \alpha_{school[i]} + (\beta_{PRI} + \beta_{PRI \times SES} SES_i) PRI_{school[i]} \\
+
+\begin{bmatrix}
+ \alpha_{school[i]}\\
+ \beta_{SES_{school[i]}}
+\end{bmatrix} &\sim 
+
+MVN \left(
+\begin{bmatrix}
+  \alpha \\
+  \beta_{\text{SES}}
+\end{bmatrix}, 
+\textbf{S}
+\right) \\ 
+
+\textbf{S} &= 
+\begin{bmatrix}
+  \sigma_{\alpha} & 0 \\
+  0 & \sigma_{\beta_{\text{SES}}}
+\end{bmatrix} 
+\textbf{R}
+\begin{bmatrix}
+  \sigma_{\alpha} & 0 \\
+  0 & \sigma_{\beta_{\text{SES}}}
+\end{bmatrix} \\[1em]
+
+\alpha &\sim Normal(0, 2) \\ 
+\beta_{\text{SES}} &\sim Normal(0, 1) \\ 
+\beta_{\text{PRI}} &\sim Normal(0, 1) \\ 
+\beta_{\text{PRI} \times \text{SES}} &\sim Normal(0, 1) \\ 
+(\sigma, \ \sigma_{\alpha}, \ \sigma_{\beta_{\text{SES}}}) &\sim Exp(1) \\
+\textbf{R} &\sim LKJCorr(2)
+
+\end{aligned}
+
+:::
+
+:::
+
+
+### Full Data
+
+Selecting columns with the outcome (math scores), level-one predictor (student SES), and level-two predictor (public vs. private school indicator). Removing any students with missing data on any of the predictors, and removing schools that have fewer than 10 students remaining.
+
+```{r}
+#| column: margin
+ecls_dat <- ecls |>
+  select(childid, s2_id, x12sesl, x2pubpri, x2mthetk5) |>
+  mutate(private = recode_values(as.character(x2pubpri),
+                                 "1: PUBLIC" ~ 0,
+                                 "2: PRIVATE" ~ 1,
+                                 "-1: NOT APPLICABLE" ~ NA,
+                                 "-9: NOT ASCERTAINED" ~ NA),
+         schoolid = s2_id,
+         ses = x12sesl,
+         mathscore = x2mthetk5,
+         .keep = "unused") |>
+    drop_na() |>
+  # removing schools with less than 10 students
+  filter_out(.by = schoolid,
+             length(unique(childid)) < 10) 
+
+list(ecls |> rename(schoolid = s2_id), ecls_dat) |>
+  map(\(data) data |>
+        select(schoolid, childid) |>
+        summarize(schools = length(unique(schoolid)),
+                  students = length(unique(childid)))) |>
+  list_rbind() |>
+  summarize(across(everything(), \(value)
+                   range(value) |> 
+                     reduce(`-`) |>
+                     abs())) |>
+  j_gt() |>
+  tab_header("Units Removed")
+
+```
+
+Distributions of the outcome and predictors in the remaining data.
+
+```{r}
+#| fig-height: 3
+ecls_dat |>
+  select(-c(childid, schoolid)) |>
+  imap(\(var, name) ecls_dat |> 
+         ggplot(aes(x = var)) +
+         {if (length(unique(var)) == 2) geom_bar() else geom_histogram(bins = 14)} +
+         {if (length(unique(var)) == 2) scale_x_continuous(breaks = unique(var)) else NULL} +
+         guides(x = guide_axis(name, cap = "both"),
+                y = guide_axis(cap = "both")) +
+         theme(aspect.ratio = 1)) |>
+         wrap_plots()
+```
+
+Results from the model applied to the full dataset.
+
+::: {style="font-size:70%"}
+```{r}
+#| layout-ncol: 2
+m0 <- lme4::lmer(mathscore ~ 1 + (1 | schoolid),
+                 dat = ecls_dat)
+sjPlot::tab_model(m0,
+                  title = "Unconditional")
+
+m1 <- lme4::lmer(mathscore ~ ses * private + (ses | schoolid),
+                 dat = ecls_dat)
+sjPlot::tab_model(m1,
+                  title = "Conditional")
+```
+:::
+
+
+## Bootstrapping
+
+```{r}
+#| column: margin
+params <- list(n_bootstraps = c(500),
+               n_students = c(3, 10),
+               n_schools = c(10, 30))
+
+tibble(parameters = names(params),
+       values = map(params, \(values) reduce(values, list))) |>
+  gt() |>
+  tab_style(cell_text(weight = "bold"),
+            cells_column_labels()) |>
+  cols_label_with(fn = str_to_title)
+
+n_conditions <- params |> map(length) |> reduce(`*`)
+```
+
+Starting conditions: number of level-one units (students) within level-two units (schools). This set of parameters creates `r n_conditions` conditions.
+
+```{r}
+#| eval: false
+#| code-fold: show
+
+param_tbl <- do.call(crossing, params) |>
+  mutate(condition_id = row_number(),
+         .before = everything())
+
+bs_dat <- param_tbl |>
+  pmap(\(...) tibble(...) |>
+         get_bootres())
+
+saveRDS(bs_dat, here::here("Data", "2026-05-08_bs-dat.rds"))
+```
+
+```{r}
+#| column: page
+#| fig-height: 8
+#| layout-ncol: 2
+#| warning: false
+
+bs_dat <- readRDS(here::here("Data", "2026-05-08_bs-dat.rds"))
+
+bs_dat |>
+  walk(\(bootres) {
+    plt_dat <- make_plt_dat(bootres)
+    
+    pat <- make_plt_pattern(plt_dat)
+    
+    n_terms <- plt_dat |>
+      select(n_terms) |>
+      max()
+    
+    table_height_prop <- 1/4
+    
+    {
+      (plt_dat |>
+         pull(plots) |>
+         unlist(recursive = F) |>
+         append(wrap_table(make_warnings_tbl(bootres))) |>
+         wrap_plots(design = pat,
+                    axes = "collect",
+                    heights = c(rep(((1 - table_height_prop) / n_terms), 
+                                  times = n_terms),
+                                table_height_prop))) |>
+        cowplot::ggdraw() + 
+        cowplot::draw_label(
+          plot_annotation(bootres |> 
+                            head(1) |>
+                            select(starts_with("param")) |> 
+                            rename_with(\(name) str_extract(name, "param_(.+)", group = 1)) |>
+                            select(-condition_id) |>
+                            imap_chr(\(value, name) glue::glue("{name}: {value}")) |> 
+                            glue::glue_collapse(sep = ", ")),
+          x = 0.5, y = 1, vjust = 1, fontface = "bold", size = 14)
+    } |>
+      print()
+  })
+
+```
+
+## Archive
+
+<!-- ```{r} -->
+<!-- bootstr <- ecls_dat |> -->
+<!--   # should this take into account the clustering more? -->
+<!--   modelr::bootstrap(n_bootstraps, id = "id") -->
+
+<!-- t1 <- Sys.time() -->
+<!-- bootres <- bootstr |> -->
+<!--   mutate(model = map(strap,  -->
+<!--                      \(strap) lme4::lmer(mathscore ~ ses * private + (ses | schoolid), -->
+<!--                                          data = strap)), -->
+<!--          tidy = map(model, broom.mixed::tidy), -->
+<!--          opt_warnings = map_chr(model, get_warnings), -->
+<!--          lme4_warnings = map_chr(model, get_lme4_warnings)) -->
+<!-- t2 <- Sys.time() -->
+
+<!-- get_bootres <- function(bootstrapped_dat) { -->
+<!--   frm <- mathscore ~ ses * private + (ses | schoolid) -->
+
+<!--   bootstrapped_dat |> -->
+<!--     mutate(model = map(strap,  -->
+<!--                        \(strap) lme4::lmer(frm, -->
+<!--                                            data = strap)), -->
+<!--            tidy = map(model, broom.mixed::tidy), -->
+<!--            opt_warnings = map_chr(model, get_warnings), -->
+<!--            lme4_warnings = map_chr(model, get_lme4_warnings)) -->
+<!-- } -->
+
+<!-- t3 <- Sys.time() -->
+<!-- get_bootres(bootstr) -->
+<!-- t4 <- Sys.time() -->
+
+<!-- (t2 - t1) -->
+<!-- (t4 - t3) -->
+
+<!-- bootest <- bootres |> -->
+<!--   # giving each `tidy` an iteration id -->
+<!--   mutate(tidy = imap(tidy, \(tidy, idx) mutate(tidy, iter = idx))) |> -->
+<!--   pull(tidy) |> -->
+<!--   list_rbind() |> -->
+<!--   select(group, term, estimate, iter) -->
+<!-- ``` -->
+
+
+
+<!-- ```{r} -->
+<!-- bootstr <- ecls_dat |> -->
+<!--   # should this take into account the clustering more? -->
+<!--   modelr::bootstrap(n_bootstraps, id = "id") -->
+
+<!-- t1 <- Sys.time() -->
+<!-- bootres <- ecls_dat |> -->
+<!--   # should this take into account the clustering more? -->
+<!--   modelr::bootstrap(n_bootstraps, id = "id") |> -->
+<!--   mutate(model = map(strap,  -->
+<!--                      \(strap) lme4::lmer(mathscore ~ ses * private + (ses | schoolid), -->
+<!--                                          data = strap)), -->
+<!--          tidy = map(model, broom.mixed::tidy), -->
+<!--          opt_warnings = map_chr(model, get_warnings), -->
+<!--          lme4_warnings = map_chr(model, get_lme4_warnings)) -->
+<!-- t2 <- Sys.time() -->
+
+<!-- get_bootres <- function(n_bootstraps) { -->
+<!--   frm <- mathscore ~ ses * private + (ses | schoolid) -->
+
+<!--   ecls_dat |> -->
+<!--     # should this take into account the clustering more? -->
+<!--     modelr::bootstrap(n_bootstraps, id = "id") |> -->
+<!--     mutate(model = map(strap,  -->
+<!--                        \(strap) lme4::lmer(frm, -->
+<!--                                            data = strap)), -->
+<!--            tidy = imap(model, \(model, idx) model |> -->
+<!--                         broom.mixed::tidy() |> -->
+<!--                         mutate(iter = idx)), -->
+<!--            opt_warnings = map_chr(model, get_warnings), -->
+<!--            lme4_warnings = map_chr(model, get_lme4_warnings)) -->
+<!-- } -->
+
+<!-- t3 <- Sys.time() -->
+<!-- get_bootres(n_bootstraps) -->
+<!-- t4 <- Sys.time() -->
+
+<!-- (t2 - t1) -->
+<!-- (t4 - t3) -->
+
+<!-- b <- get_bootres(10) -->
+
+<!-- b |> mutate(tidy = imap(tidy, \(tidy, idx) mutate(tidy, iter = idx))) |> -->
+<!--   pull(tidy) -->
+
+<!-- bootest <- bootres |> -->
+<!--   # giving each `tidy` an iteration id -->
+<!--   mutate(tidy = imap(tidy, \(tidy, idx) mutate(tidy, iter = idx))) |> -->
+<!--   pull(tidy) |> -->
+<!--   list_rbind() |> -->
+<!--   select(group, term, estimate, iter) -->
+<!-- ``` -->
+
+
+
+
+<!-- ```{r} -->
+
+<!-- plt_dat <- tibble(term = terms) |> -->
+<!--   mutate(plot_terms = imap(term, \(term, idx) tibble(xterm = term, -->
+<!--                                                      yterm = head(terms, idx))), -->
+<!--          n_terms = map_int(plot_terms, \(plot_terms) nrow(plot_terms)), -->
+<!--          n_prev_terms = map_int(n_terms, \(n_terms) seq(n_terms - 1, 0) |> sum()), -->
+<!--          # pat only worked as a way to setup the patchwork when length(terms) < 7 -->
+<!--          pat = map2_chr(n_terms, n_prev_terms, -->
+<!--                         \(n_terms, n_prev_terms) paste0(LETTERS[seq(n_prev_terms + 1, length.out = n_terms)] |>  -->
+<!--                                                           paste(collapse = ""), -->
+<!--                                             rep("#", times = length(terms) - n_terms) |> paste(collapse = "")))) |> -->
+<!--   mutate(plots = map(plot_terms, -->
+<!--                           \(plot_terms) plot_terms |> -->
+<!--                             mutate(plot = map2(xterm, yterm, -->
+<!--                                                \(xterm, yterm) { -->
+
+<!--                                                  df <- bootest |> -->
+<!--                                                    filter(term %in% c(xterm, yterm)) |> -->
+<!--                                                    select(term, estimate, iter) |> -->
+<!--                                                    pivot_wider(names_from = term, values_from = estimate) -->
+
+<!--                                                  mapping <- if (xterm == yterm) { -->
+<!--                                                    do.call(aes, list(x = as.name(xterm))) -->
+<!--                                                  } else { -->
+<!--                                                    do.call(aes, list(y = as.name(xterm), x = as.name(yterm))) -->
+<!--                                                  } -->
+<!--                                                  geom <- if (xterm == yterm) geom_density() else geom_point() -->
+
+<!--                                                  ggplot(df, mapping) +  -->
+<!--                                                    geom + -->
+<!--                                                    {if (xterm == yterm) labs(y = NULL) else NULL} + -->
+<!--                                                    scale_x_continuous(breaks = NULL) + -->
+<!--                                                    scale_y_continuous(breaks = NULL) + -->
+<!--                                                    theme_classic() -->
+<!--                                                }))  |> pluck("plot"))) -->
+
+
+<!-- ``` -->
+```{r}
+#| eval: false
+
+
+
+# bootres <- get_bootres(10)
+# 
+# plt_dat <- make_plt_dat(bootres)
+# 
+# pat <- make_plt_pattern(plt_dat)
+# 
+# plt_dat |>
+#     pull(plots) |>
+#     unlist(recursive = F) |>
+#     wrap_plots(design = pat,
+#                axes = "collect")
+
+list(n_bootstraps = c(10, 20),
+     n_students = c(3, 10),
+     n_schools = c(5, 20)) |>
+  do.call(crossing, args = _) |>
+  mutate(condition_id = row_number()) |>
+  nest(params = -condition_id) |>
+  pull(params) |>
+  map(\(params) {
+    print(params)
+    
+    params |>
+      pivot_longer(everything(),
+                   names_to = "param",
+                   values_to = "value") |>
+      pmap(\(param, value) assign(param, value))
+    
+    glue::glue("{param}: {value}")
+  })
+
+# bs_dat <- do.call(crossing, params) |>
+#   mutate(condition_id = row_number()) |>
+#   pmap(\(...) {
+#     list2env(list(...), envir = environment())
+#     glue::glue("condition {condition_id}: n_bootstraps={n_bootstraps}, n_students={n_students}, n_schools={n_schools}")
+#     
+#     get_bootres(n_bootstraps, n_students, n_schools) |>
+#       mutate(condition_str = glue::glue("condition {condition_id}: n_bootstraps={n_bootstraps}, n_students={n_students},  n_schools={n_schools}"))
+#   })
+
+
+
+bs_dat |>
+  head(2) |>
+  map(\(bootres) {
+    plt_dat <- 
+    
+    make_plt_pattern(plt_dat)
+    })
+
+make_plt_dat(bres) |>
+    get_table_row_location
+
+p1 <- ggplot(mtcars) + geom_point(aes(mpg, disp)) + theme_classic()
+p2 <- ggplot(mtcars) + geom_boxplot(aes(gear, disp, group = gear)) + theme_classic()
+p3 <- ggplot(mtcars) + geom_bar(aes(gear)) + facet_wrap(~cyl) + theme_classic()
+
+
+design <- "
+  AB
+  AC
+"
+
+(p1 + p2 + p3) +
+  plot_layout(design = design, heights = c(3, 1), axes = "collect") &
+  theme_classic()
+```
+
+<!-- ### Bootstrapped Data -->
+
+<!-- ```{r} -->
+<!-- m1_bs <- function(n_students) { -->
+<!--   bootstr <- ecls_dat |> -->
+<!--     filter(.by = schoolid, -->
+<!--            childid %in% sample(childid, n_students)) |> -->
+<!--     modelr::bootstrap(n_bootstraps, id = "studentid") -->
+
+<!--   bootres <- bootstr |> -->
+<!--     mutate(model = map(strap, -->
+<!--                        \(strap) lme4::lmer(mathscore ~ ses * private + (ses | schoolid), -->
+<!--                                            dat = strap)), -->
+<!--            tidy = map(model, broom.mixed::tidy), -->
+<!--            opt_warnings = map_chr(model, get_warnings), -->
+<!--            lme4_warnings = map_chr(model, get_lme4_warnings)) -->
+<!--   #  -->
+<!--   # # n_students <- bootres |> -->
+<!--   # #   pull(n_students) |>  -->
+<!--   # #   first() -->
+<!--   #  -->
+<!--   bootest <- bootres |> -->
+<!--     # giving each `tidy` an iteration id -->
+<!--     mutate(tidy = imap(tidy, \(tidy, idx) mutate(tidy, iter = idx))) |> -->
+<!--     pull(tidy) |> -->
+<!--     list_rbind() |> -->
+<!--     select(group, term, estimate, iter) -->
+<!--   #  -->
+<!--   terms <- bootest |> pull(term) |> unique() -->
+
+<!--   plt_dat <- tibble(term = terms) |> -->
+<!--     mutate(plot_terms = imap(term, \(term, idx) tibble(xterm = term, -->
+<!--                                                        yterm = head(terms, idx))), -->
+<!--            n_terms = map_int(plot_terms, \(plot_terms) nrow(plot_terms)), -->
+<!--            n_prev_terms = map_int(n_terms, \(n_terms) seq(n_terms - 1, 0) |> sum()), -->
+<!--            pat = map2_chr(n_terms, n_prev_terms, -->
+<!--                           \(n_terms, n_prev_terms) paste0(LETTERS[seq(n_prev_terms + 1, length.out = n_terms)] |> -->
+<!--                                                             paste(collapse = ""), -->
+<!--                                                           rep("#", times = length(terms) - n_terms) |> paste(collapse = "")))) |> -->
+<!--     mutate(plots = map(plot_terms, -->
+<!--                        \(plot_terms) plot_terms |> -->
+<!--                          mutate(plot = map2(xterm, yterm, -->
+<!--                                             \(xterm, yterm) { -->
+
+<!--                                               df <- bootest |> -->
+<!--                                                 filter(term %in% c(xterm, yterm)) |> -->
+<!--                                                 select(term, estimate, iter) |> -->
+<!--                                                 pivot_wider(names_from = term, values_from = estimate) -->
+
+<!--                                               mapping <- if (xterm == yterm) { -->
+<!--                                                 do.call(aes, list(x = as.name(xterm))) -->
+<!--                                               } else { -->
+<!--                                                 do.call(aes, list(y = as.name(xterm), x = as.name(yterm))) -->
+<!--                                               } -->
+<!--                                               geom <- if (xterm == yterm) geom_density() else geom_point() -->
+
+<!--                                               ggplot(df, mapping) + -->
+<!--                                                 geom + -->
+<!--                                                 {if (xterm == yterm) labs(y = NULL) else NULL} + -->
+<!--                                                 scale_x_continuous(breaks = NULL) + -->
+<!--                                                 scale_y_continuous(breaks = NULL) + -->
+<!--                                                 theme_classic() -->
+<!--                                             }))  |> pluck("plot"))) -->
+
+
+<!--   pat <- plt_dat |> -->
+<!--     select(n_terms, n_prev_terms) |> -->
+<!--     mutate(areas = map(n_terms, -->
+<!--                        \(n_terms) seq(1, n_terms) |> -->
+<!--                          map2(n_terms, \(y, x) c(x, y)) -->
+<!--     )) |> -->
+<!--     pull(areas) |> -->
+<!--     list_flatten() |> -->
+<!--     map(\(a) area(t = a[1], l = a[2], b = a[1], r = a[2])) |> -->
+<!--     reduce(c) -->
+
+
+<!--   plt_dat |> -->
+<!--     pull(plots) |> -->
+<!--     unlist(recursive = F) |> -->
+<!--     wrap_plots(design = pat, -->
+<!--                axes = "collect") + -->
+<!--     plot_annotation(title = glue::glue("Students per Classroom: {n_students}")) -->
+<!-- } -->
+<!-- ``` -->
+
+<!-- ```{r} -->
+<!-- list(3, 10) |> -->
+<!--   map(\(n_students) m1_bs(n_students)) -->
+
+
+<!-- bootres <- list(3, 10) |> -->
+<!--   map(\(n_students) m1_bs(n_students)) -->
+
+<!-- m1_bs(3) -->
+
+<!-- bootres |> -->
+<!--   map(m1_bs_plt) -->
+
+<!-- bootres |> -->
+<!--   map(\(bootres) bootres |> -->
+<!--         summarize(opt_warnings = list(unique(opt_warnings)))) -->
+<!-- ``` -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
