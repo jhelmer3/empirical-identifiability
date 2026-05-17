@@ -269,7 +269,323 @@ bs_dat |>
     } |>
       print()
   })
+```
 
+
+#### Other Distributions by Condition
+
+::: panel-tabset
+
+### ICC
+
+```{r}
+#| message: false
+#| warning: false
+icc_dat <- bs_dat |>
+  map(\(data) data |>
+        select(model) |>
+        mutate(
+          icc = map_dbl(model, \(model) {
+            
+            icc <- performance::icc(model) |>
+              pluck("ICC_adjusted") 
+            
+            ifelse(is.null(icc), NA, icc)  
+          })
+        ))
+
+
+icc_dat |>
+  map(\(data) data |>
+        ggplot(aes(x = icc)) +
+        geom_density(na.rm = T) +
+        geom_text(data = data |>
+                    mutate(icc_error = is.na(icc)) |>
+                    summarize(percent_removed = mean(icc_error) * 100),
+                  aes(label = glue::glue("{round(percent_removed, 2)}% ICCs errored"),
+                      x = -Inf, y = Inf, vjust = 1, hjust = 0)) +
+        scale_x_continuous("ICC", limits = c(0, 1), breaks = seq(0, 1, .2)) +
+        scale_y_continuous(NULL, breaks = NULL) +
+        guides(x = guide_axis(cap = T)) +
+        theme(aspect.ratio = (1.618)^-1,
+              axis.line.y = element_blank())) |>
+  wrap_plots(ncol = 2, axes = "collect_x")
+```
+
+### $R^2$
+
+```{r}
+#| message: false
+#| warning: false
+#| results: hide
+r2_dat <- bs_dat |>
+  map(\(data) data |>
+        select(model) |>
+        mutate(
+          r2s = map(model, \(model) {
+            
+            r2s <- performance::r2(model) 
+            
+            r2_conditional <- r2s$R2_conditional
+            r2_marginal <- r2s$R2_marginal
+          
+            tribble(~ r2_type, ~ r2_estimate,
+                    "conditional", ifelse(is.null(r2_conditional), NA, r2_conditional),
+                    "marginal", ifelse(is.null(r2_marginal), NA, r2_marginal))
+          })
+        ) |>
+            unnest(r2s))
+  
+
+r2_dat |>
+  map(\(data) {
+    error_dat <- data |>
+      mutate(r2_error = is.na(r2_estimate)) |>
+      summarize(.by = r2_type,
+                percent_removed = mean(r2_error) * 100) |>
+      mutate(string = glue::glue("{round(percent_removed, 2)}% {r2_type} R^2s errored"))
+
+    data |>
+      ggplot(aes(x = r2_estimate, color = r2_type)) +
+      geom_density(na.rm = T) +
+      geom_text(data = error_dat,
+                aes(label = string,
+                    x = -Inf, y = Inf, vjust = c(1, 2.3), hjust = 0)) +
+      scale_x_continuous("R^2", limits = c(0, 1), breaks = seq(0, 1, .2)) +
+      scale_y_continuous(NULL, breaks = NULL) +
+      guides(x = guide_axis(cap = T),
+             color = guide_none()) +
+      theme(aspect.ratio = (1.618)^-1,
+            axis.line.y = element_blank(),
+            axis.title.x = ggtext::element_markdown())
+    }) |>
+ wrap_plots(ncol = 2, axes = "collect_x")
+```
+:::
+
+## Generated Data
+
+Generating data from model estimates of one bootstrap hit.
+
+```{r}
+# bs_dat |>
+#   pluck(1) |>
+#   unnest(tidy) |>
+#   filter(term == "ses") |>
+#   filter(estimate > quantile(estimate, .97)) |>
+#   arrange(desc(estimate)) # didn't estimate intercept
+
+# bs_dat |>
+#   pluck(1) |>
+#   unnest(tidy) |>
+#   filter(term == "sd__(Intercept)") |>
+#   filter(estimate > quantile(estimate, .97)) |>
+#   arrange(desc(estimate))
+
+data_gen_params <- bs_dat |>
+  pluck(1) |>
+  filter(id == "331") |>
+  unnest(tidy) |>
+  select(param_n_bootstraps, param_n_schools, param_n_students, term, estimate) |>
+  pivot_wider(names_from = term, values_from = estimate)
+
+data_gen_params |>
+  gt() |>
+  fmt_number()
+
+data_gen_vcov <- matrix(c(data_gen_params$`sd__(Intercept)`,
+         0,
+         0,
+         data_gen_params$`sd__ses`),
+       ncol = 2, byrow = T) %*% 
+  matrix(c(1,
+           data_gen_params$`cor__(Intercept).ses`,
+           data_gen_params$`cor__(Intercept).ses`,
+           1),
+       ncol = 2, byrow = T) %*%
+  matrix(c(data_gen_params$`sd__(Intercept)`,
+           0,
+           0,
+           data_gen_params$`sd__ses`),
+       ncol = 2, byrow = T)
+```
+
+```{r}
+gen_data <- function(data_gen_params) {
+  tibble(schoolid = seq(1, data_gen_params$param_n_schools),
+         n_students = data_gen_params$param_n_students,
+         private = rbinom(data_gen_params$param_n_schools, 1, .3),
+         beta_ses = data_gen_params$ses,
+         beta_private = data_gen_params$private,
+         beta_private_by_ses = data_gen_params$`ses:private`) |>
+    bind_cols(varying_effects = MASS::mvrnorm(data_gen_params$param_n_schools, 
+                                              mu = c(data_gen_params$`(Intercept)`, data_gen_params$ses), 
+                                              Sigma = data_gen_vcov) |>
+                as_tibble() |>
+                set_names(c("alpha_school", "beta_ses_school"))) |>
+    uncount(n_students) |>
+    mutate(studentid = row_number(),
+           .after = schoolid) |>
+    mutate(ses = rnorm(data_gen_params$param_n_schools * data_gen_params$param_n_students),
+           private_by_ses = private * ses,
+           mu_school = alpha_school + 
+             beta_private * private +
+             beta_private_by_ses * private_by_ses,
+           mu = mu_school + beta_ses * ses,
+           mathscore = rnorm(data_gen_params$param_n_schools * data_gen_params$param_n_students,
+                        mean = mu, sd = data_gen_params$sd__Observation)) |>
+    nest(gen_params = c(starts_with("beta"), starts_with("alpha"), starts_with("mu")))
+}
+
+
+```
+
+```{r}
+#| warning: false
+#| message: false
+frm <- mathscore ~ ses * private + (ses | schoolid)
+
+bs_gen_dat <- tibble(iter = seq(1, data_gen_params$param_n_bootstraps),
+                     strap = map(iter, \(iter) gen_data(data_gen_params))) |>
+  mutate(res = map(strap, 
+                   safely(\(strap) lme4::lmer(frm,
+                                              data = strap),
+                          otherwise = NA_real_)),
+         model = map(res, "result"),
+         error = map_chr(res, \(res) pluck(res, "error", "message", .default = NA)),
+         tidy = imap(model, \(model, idx) model |>
+                       broom.mixed::tidy() |>
+                       mutate(iter = idx)),
+         opt_warnings = map_chr(model, get_warnings),
+         lme4_warnings = map_chr(model, get_lme4_warnings)) |>
+  bind_cols(data_gen_params)
+
+```
+
+```{r}
+#| column: page
+#| fig-height: 8
+#| warning: false
+
+list(bs_gen_dat) |>
+  walk(\(bootres) {
+    plt_dat <- make_plt_dat(bootres)
+    
+    pat <- make_plt_pattern(plt_dat)
+    
+    n_terms <- plt_dat |>
+      select(n_terms) |>
+      max()
+    
+    table_height_prop <- 1/4
+    
+    {
+      (plt_dat |>
+         pull(plots) |>
+         unlist(recursive = F) |>
+         append(wrap_table(make_warnings_tbl(bootres))) |>
+         wrap_plots(design = pat,
+                    axes = "collect",
+                    heights = c(rep(((1 - table_height_prop) / n_terms), 
+                                  times = n_terms),
+                                table_height_prop))) |>
+        cowplot::ggdraw() + 
+        cowplot::draw_label(
+          plot_annotation("Generated Data Bootstrap"),
+          x = 0.5, y = 1, vjust = 1, fontface = "bold", size = 14)
+    } |>
+      print()
+  })
+```
+
+#### Other Distributions by Condition
+
+::: panel-tabset
+
+### ICC
+
+```{r}
+#| message: false
+#| warning: false
+icc_dat <- list(bs_gen_dat) |>
+  map(\(data) data |>
+        select(model) |>
+        mutate(
+          icc = map_dbl(model, \(model) {
+            
+            icc <- performance::icc(model) |>
+              pluck("ICC_adjusted") 
+            
+            ifelse(is.null(icc), NA, icc)  
+          })
+        ))
+
+
+icc_dat |>
+  map(\(data) data |>
+        ggplot(aes(x = icc)) +
+        geom_density(na.rm = T) +
+        geom_text(data = data |>
+                    mutate(icc_error = is.na(icc)) |>
+                    summarize(percent_removed = mean(icc_error) * 100),
+                  aes(label = glue::glue("{round(percent_removed, 2)}% ICCs errored"),
+                      x = -Inf, y = Inf, vjust = 1, hjust = 0)) +
+        scale_x_continuous("ICC", limits = c(0, 1), breaks = seq(0, 1, .2)) +
+        scale_y_continuous(NULL, breaks = NULL) +
+        guides(x = guide_axis(cap = T)) +
+        theme(aspect.ratio = (1.618)^-1,
+              axis.line.y = element_blank())) |>
+  wrap_plots(ncol = 2, axes = "collect_x")
+```
+
+### $R^2$
+
+```{r}
+#| message: false
+#| warning: false
+#| results: hide
+r2_dat <- list(bs_gen_dat) |>
+  map(\(data) data |>
+        select(model) |>
+        mutate(
+          r2s = map(model, \(model) {
+            
+            r2s <- performance::r2(model) 
+            
+            r2_conditional <- r2s$R2_conditional
+            r2_marginal <- r2s$R2_marginal
+          
+            tribble(~ r2_type, ~ r2_estimate,
+                    "conditional", ifelse(is.null(r2_conditional), NA, r2_conditional),
+                    "marginal", ifelse(is.null(r2_marginal), NA, r2_marginal))
+          })
+        ) |>
+            unnest(r2s))
+  
+
+r2_dat |>
+  map(\(data) {
+    error_dat <- data |>
+      mutate(r2_error = is.na(r2_estimate)) |>
+      summarize(.by = r2_type,
+                percent_removed = mean(r2_error) * 100) |>
+      mutate(string = glue::glue("{round(percent_removed, 2)}% {r2_type} R^2s errored"))
+
+    data |>
+      ggplot(aes(x = r2_estimate, color = r2_type)) +
+      geom_density(na.rm = T) +
+      geom_text(data = error_dat,
+                aes(label = string,
+                    x = -Inf, y = Inf, vjust = c(1, 2.3), hjust = 0)) +
+      scale_x_continuous("R^2", limits = c(0, 1), breaks = seq(0, 1, .2)) +
+      scale_y_continuous(NULL, breaks = NULL) +
+      guides(x = guide_axis(cap = T),
+             color = guide_none()) +
+      theme(aspect.ratio = (1.618)^-1,
+            axis.line.y = element_blank(),
+            axis.title.x = ggtext::element_markdown())
+    }) |>
+ wrap_plots(ncol = 2, axes = "collect_x")
 ```
 
 ## Archive
