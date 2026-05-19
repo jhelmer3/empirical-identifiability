@@ -1,4 +1,4 @@
-bs_plt_layout <- function(terms) {
+make_plt_layout <- function(terms) {
   tibble(term = terms) |>
     mutate(plot_terms = imap(term, \(term, idx) tibble(xterm = term,
                                                        yterm = head(terms, idx))),

@@ -3,6 +3,6 @@ get_lme4_warnings <- function(model) {
     pluck("lme4") |> pluck("messages") |> pluck(1)
   
   return(
-    ifelse(is_null(warnings), NA, warnings)
+    ifelse(is_null(warnings), NA_character_, warnings)
   )
 }
