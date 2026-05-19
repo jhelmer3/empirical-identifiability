@@ -1,7 +1,7 @@
 
-patch_plt_dat <- function(condition_dat, plt_layout, table_height_prop = 1/4) {
-  
-  condition_plt_dat <- make_plt_dat(condition_dat, plt_layout)
+patch_plt_dat <- function(condition_dat, plt_layout, axis_limits, table_height_prop = 1/4) {
+
+  condition_plt_dat <- make_plt_dat(condition_dat, plt_layout, axis_limits)
   
   n_terms <- plt_layout |>
     pull(n_terms) |>

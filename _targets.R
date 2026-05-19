@@ -12,7 +12,7 @@ tar_option_set(
 
 tar_source(here::here("Scripts", "R"))
 
-n_bootstraps <- 24
+n_bootstraps <- 8
 
 list(
   tar_target(ecls_file,
@@ -33,12 +33,13 @@ list(
             fit_model(), 
           reps = n_bootstraps / 8, 
           batches = 8),
+  tar_target(axis_limits, identify_axis_limits(results)),
   tar_group_by(results_grouped, results |> 
                  dplyr::mutate(.by = condition_id,
                                rep = row_number()), 
                condition_id),
   tar_target(condition_plt, 
-             patch_plt_dat(results_grouped, plt_layout),
+             patch_plt_dat(results_grouped, plt_layout, axis_limits),
              pattern = map(results_grouped),
              iteration = "list"),
   tar_quarto(ecls_report, "ecls-k.qmd",

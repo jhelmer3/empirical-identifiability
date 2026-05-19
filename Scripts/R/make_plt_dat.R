@@ -1,5 +1,5 @@
 
-make_plt_dat <- function(replication, plt_layout) {
+make_plt_dat <- function(condition_dat, plt_layout, axis_limits) {
   axis_label_width <- 5
   
   plt_layout |>
@@ -7,15 +7,15 @@ make_plt_dat <- function(replication, plt_layout) {
                        \(plot_terms) plot_terms |>
                          mutate(plot = map2(xterm, yterm,
                                             \(xterm, yterm) {
-                                              format_plt_dat(replication, xterm, yterm) |>
-                                              make_single_plt(xterm, yterm)
+                                              format_plt_dat(condition_dat, xterm, yterm) |>
+                                              make_single_plt(xterm, yterm, axis_limits)
                                             })) |> pluck("plot")))
 }
 # 
-# bs_dat |>
-#   pluck(1) |>
-#   make_plt_dat() |>
-#   pull(plots) 
+# tar_read(results_grouped) |>
+#   filter(condition_id == 1) |>
+#   make_plt_dat(tar_read(plt_layout), tar_read(results_grouped) |>
+#                  filter(condition_id == 1) |> identify_axis_limits())
 
 # make_plt_dat <- function(bootres) {
 #   axis_label_width <- 5
