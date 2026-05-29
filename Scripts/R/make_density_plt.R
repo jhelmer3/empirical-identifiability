@@ -11,7 +11,7 @@ make_density_plt <- function(plt_dat, xterm, yterm, xlims = NULL, ylims = NULL) 
 # x_term; y_term <- "(Intercept)"
 # 
 # tar_read(results_grouped) |>
-#   filter(condition_id == 1) |> 
+#   filter(condition_id == 1) |>
 #   format_plt_dat(xterm = x_term, yterm = x_term) |>
 #   make_single_plt(xterm = x_term, yterm = x_term,
 #                   tar_read(results_grouped) |>
@@ -21,7 +21,7 @@ make_density_plt <- function(plt_dat, xterm, yterm, xlims = NULL, ylims = NULL) 
 # y_term <- "ses:private"
 # 
 # tar_read(results_grouped) |>
-#   filter(condition_id == 1) |> 
+#   filter(condition_id == 1) |>
 #   format_plt_dat(xterm = x_term, yterm = y_term) |>
 #   make_single_plt(xterm = x_term, yterm = y_term,
 #                   tar_read(results_grouped) |>

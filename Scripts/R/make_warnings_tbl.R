@@ -1,11 +1,11 @@
-make_warnings_tbl <- function(results) {
+make_warnings_tbl <- function(condition_dat) {
   
   warning_patterns_rm <- c(
     "max\\|grad\\| = [\\d.]+",
     ": see help\\('isSingular'\\)?"
   ) |> str_c(collapse = "|")
   
-  results |>
+  condition_dat |>
     # some of this should probably be moved to fit_model()
     mutate(
       lme4_warnings = map_chr(lme4_warnings, \(w)
@@ -15,7 +15,7 @@ make_warnings_tbl <- function(results) {
                   \(col) map_chr(col, \(x) str_c(x, collapse = ", ")))) |>
     summarize(.by = c(opt_warnings, lme4_warnings, error),
               count = n(),
-              prop =  n() / first(results |> pull(n_bootstraps))) |>
+              prop =  n() / first(condition_dat |> pull(n_bootstraps))) |>
     arrange(desc(prop)) |>
     j_gt() |>
     tab_style(style = cell_text(weight = "bold"),
@@ -34,6 +34,21 @@ make_warnings_tbl <- function(results) {
     opt_horizontal_padding(scale = .2) |>
     tab_options(table.font.size = 13)
 }
+
+# need n_bootstraps to be exposed in examples_results_grouped
+# tar_read(examples_results_grouped) |>
+#   filter(example_type == "bad") 
+#   mutate(
+#     lme4_warnings = map_chr(lme4_warnings, \(w)
+#                             str_replace_all(w, warning_patterns_rm, ""))
+#   ) |>
+#   mutate(across(c(opt_warnings, lme4_warnings, error),
+#                 \(col) map_chr(col, \(x) str_c(x, collapse = ", ")))) |>
+#   summarize(.by = c(opt_warnings, lme4_warnings, error),
+#             count = n(),
+#             prop =  n() / first(tar_read(examples_results_grouped) |>
+#                                   filter(example_type == "bad") |>
+#                                   pull(n_bootstraps)))
 
 # tar_read(results_grouped) |>
 #   filter(condition_id == 4) |>

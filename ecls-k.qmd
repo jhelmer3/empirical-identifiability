@@ -18,11 +18,14 @@ html-table-processing: none
 library(tidyverse)
 library(targets)
 library(patchwork)
+library(ggtext)
 library(gt)
 
 tar_source(here::here("Scripts", "R"))
 
-tar_load(c(ecls_dat, param_set), store = here::here("_targets"))
+c(ecls_dat, param_set, icc_plt, r2_plt, 
+  examples_condition_plt, examples_icc_plt, examples_r2_plt) |>
+  tar_load(store = here::here("_targets"))
 ```
 
 ### Reading
@@ -205,94 +208,47 @@ walk(tar_read(condition_plt), print)
 
 #### Other Distributions by Condition
 
-<!-- ::: panel-tabset -->
+::: panel-tabset
 
-<!-- ### ICC -->
+### ICC
 
-<!-- ```{r} -->
-<!-- #| message: false -->
-<!-- #| warning: false -->
-<!-- icc_dat <- bs_dat |> -->
-<!--   map(\(data) data |> -->
-<!--         select(model) |> -->
-<!--         mutate( -->
-<!--           icc = map_dbl(model, \(model) { -->
+```{r}
+icc_plt
+```
 
-<!--             icc <- performance::icc(model) |> -->
-<!--               pluck("ICC_adjusted")  -->
+### $R^2$ 
 
-<!--             ifelse(is.null(icc), NA, icc)   -->
-<!--           }) -->
-<!--         )) -->
+```{r}
+r2_plt
+```
+
+:::
 
 
-<!-- icc_dat |> -->
-<!--   map(\(data) data |> -->
-<!--         ggplot(aes(x = icc)) + -->
-<!--         geom_density(na.rm = T) + -->
-<!--         geom_text(data = data |> -->
-<!--                     mutate(icc_error = is.na(icc)) |> -->
-<!--                     summarize(percent_removed = mean(icc_error) * 100), -->
-<!--                   aes(label = glue::glue("{round(percent_removed, 2)}% ICCs errored"), -->
-<!--                       x = -Inf, y = Inf, vjust = 1, hjust = 0)) + -->
-<!--         scale_x_continuous("ICC", limits = c(0, 1), breaks = seq(0, 1, .2)) + -->
-<!--         scale_y_continuous(NULL, breaks = NULL) + -->
-<!--         guides(x = guide_axis(cap = T)) + -->
-<!--         theme(aspect.ratio = (1.618)^-1, -->
-<!--               axis.line.y = element_blank())) |> -->
-<!--   wrap_plots(ncol = 2, axes = "collect_x") -->
-<!-- ``` -->
+## Simulated Data from Bootstrap Hit
 
-<!-- ### $R^2$ -->
+```{r}
+#| column: page
+#| fig-height: 8
+#| layout-ncol: 2
+walk(tar_read(examples_condition_plt), print)
+```
 
-<!-- ```{r} -->
-<!-- #| message: false -->
-<!-- #| warning: false -->
-<!-- #| results: hide -->
-<!-- r2_dat <- bs_dat |> -->
-<!--   map(\(data) data |> -->
-<!--         select(model) |> -->
-<!--         mutate( -->
-<!--           r2s = map(model, \(model) { -->
+::: panel-tabset
 
-<!--             r2s <- performance::r2(model)  -->
+### ICC
 
-<!--             r2_conditional <- r2s$R2_conditional -->
-<!--             r2_marginal <- r2s$R2_marginal -->
+```{r}
+examples_icc_plt
+```
 
-<!--             tribble(~ r2_type, ~ r2_estimate, -->
-<!--                     "conditional", ifelse(is.null(r2_conditional), NA, r2_conditional), -->
-<!--                     "marginal", ifelse(is.null(r2_marginal), NA, r2_marginal)) -->
-<!--           }) -->
-<!--         ) |> -->
-<!--             unnest(r2s)) -->
+### $R^2$ 
 
+```{r}
+examples_r2_plt
+```
 
-<!-- r2_dat |> -->
-<!--   map(\(data) { -->
-<!--     error_dat <- data |> -->
-<!--       mutate(r2_error = is.na(r2_estimate)) |> -->
-<!--       summarize(.by = r2_type, -->
-<!--                 percent_removed = mean(r2_error) * 100) |> -->
-<!--       mutate(string = glue::glue("{round(percent_removed, 2)}% {r2_type} R^2s errored")) -->
-
-<!--     data |> -->
-<!--       ggplot(aes(x = r2_estimate, color = r2_type)) + -->
-<!--       geom_density(na.rm = T) + -->
-<!--       geom_text(data = error_dat, -->
-<!--                 aes(label = string, -->
-<!--                     x = -Inf, y = Inf, vjust = c(1, 2.3), hjust = 0)) + -->
-<!--       scale_x_continuous("R^2", limits = c(0, 1), breaks = seq(0, 1, .2)) + -->
-<!--       scale_y_continuous(NULL, breaks = NULL) + -->
-<!--       guides(x = guide_axis(cap = T), -->
-<!--              color = guide_none()) + -->
-<!--       theme(aspect.ratio = (1.618)^-1, -->
-<!--             axis.line.y = element_blank(), -->
-<!--             axis.title.x = ggtext::element_markdown()) -->
-<!--     }) |> -->
-<!--  wrap_plots(ncol = 2, axes = "collect_x") -->
-<!-- ``` -->
-<!-- ::: -->
+:::
 
 <!-- ## Generated Data -->
 
@@ -316,9 +272,9 @@ walk(tar_read(condition_plt), print)
 <!-- data_gen_params <- bs_dat |> -->
 <!--   pluck(1) |> -->
 <!--   filter(id == "331") |> -->
-<!--   unnest(tidy) |> -->
-<!--   select(param_n_bootstraps, param_n_schools, param_n_students, term, estimate) |> -->
-<!--   pivot_wider(names_from = term, values_from = estimate) -->
+  <!-- unnest(tidy) |> -->
+  <!-- select(param_n_bootstraps, param_n_schools, param_n_students, term, estimate) |> -->
+  <!-- pivot_wider(names_from = term, values_from = estimate) -->
 
 <!-- data_gen_params |> -->
 <!--   gt() |> -->
@@ -328,7 +284,7 @@ walk(tar_read(condition_plt), print)
 <!--          0, -->
 <!--          0, -->
 <!--          data_gen_params$`sd__ses`), -->
-<!--        ncol = 2, byrow = T) %*%  -->
+<!--        ncol = 2, byrow = T) %*% -->
 <!--   matrix(c(1, -->
 <!--            data_gen_params$`cor__(Intercept).ses`, -->
 <!--            data_gen_params$`cor__(Intercept).ses`, -->
@@ -349,8 +305,8 @@ walk(tar_read(condition_plt), print)
 <!--          beta_ses = data_gen_params$ses, -->
 <!--          beta_private = data_gen_params$private, -->
 <!--          beta_private_by_ses = data_gen_params$`ses:private`) |> -->
-<!--     bind_cols(varying_effects = MASS::mvrnorm(data_gen_params$param_n_schools,  -->
-<!--                                               mu = c(data_gen_params$`(Intercept)`, data_gen_params$ses),  -->
+<!--     bind_cols(varying_effects = MASS::mvrnorm(data_gen_params$param_n_schools, -->
+<!--                                               mu = c(data_gen_params$`(Intercept)`, data_gen_params$ses), -->
 <!--                                               Sigma = data_gen_vcov) |> -->
 <!--                 as_tibble() |> -->
 <!--                 set_names(c("alpha_school", "beta_ses_school"))) |> -->
@@ -359,7 +315,7 @@ walk(tar_read(condition_plt), print)
 <!--            .after = schoolid) |> -->
 <!--     mutate(ses = rnorm(data_gen_params$param_n_schools * data_gen_params$param_n_students), -->
 <!--            private_by_ses = private * ses, -->
-<!--            mu_school = alpha_school +  -->
+<!--            mu_school = alpha_school + -->
 <!--              beta_private * private + -->
 <!--              beta_private_by_ses * private_by_ses, -->
 <!--            mu = mu_school + beta_ses * ses, -->
