@@ -12,6 +12,8 @@ tar_option_set(
 
 tar_source(here::here("Scripts", "R"))
 
+dir.create("outputs", showWarnings = FALSE, recursive = TRUE)
+
 n_bootstraps <- 240
 
 list(
@@ -25,7 +27,7 @@ list(
   tar_target(full_conditional_model,
              safe_model(ecls_dat)$result),
   tar_target(true_values,
-             broom.mixed::tidy()),
+             broom.mixed::tidy(full_conditional_model)),
   tar_target(model_terms, full_conditional_model |> broom.mixed::tidy() |> pull(term)),
   tar_target(plt_layout, make_plt_layout(model_terms)),
   
@@ -42,7 +44,7 @@ list(
                                rep = row_number()), 
                condition_id),
   tar_target(condition_plt, 
-             patch_plt_dat(results_grouped, plt_layout, axis_limits),
+             patch_plt_dat(results_grouped, plt_layout, true_values, axis_limits),
              pattern = map(results_grouped),
              iteration = "list"),
   tar_target(icc_dat, 
@@ -75,11 +77,24 @@ list(
                                rep = row_number()),
                example_type),
   tar_target(examples_condition_plt,
-             patch_plt_dat(examples_results_grouped, plt_layout, examples_axis_limits,
+             patch_plt_dat(examples_results_grouped, plt_layout, true_values, examples_axis_limits,
                            title_info_vars = c("example_type", "n_bootstraps", 
                                                "n_students", "n_schools")),
              pattern = map(examples_results_grouped),
              iteration = "list"),
+  tar_target(examples_condition_plt_files,
+    {
+      path <- paste0("outputs/examples_condition_plt_", 
+                     targets::tar_name(), 
+                     ".png")
+      ggplot2::ggsave(path, 
+             examples_condition_plt, width = 8, height = 8)
+      path
+    },
+    pattern = map(examples_condition_plt),
+    iteration = "list",
+    format = "file"
+  ),
   tar_target(examples_icc_dat, 
              make_icc_dat(examples_results_grouped),
              pattern = map(examples_results_grouped),

@@ -1,8 +1,8 @@
 
-patch_plt_dat <- function(condition_dat, plt_layout, axis_limits, table_height_prop = 1/4,
+patch_plt_dat <- function(condition_dat, plt_layout, true_values, axis_limits, table_height_prop = 1/4,
                           title_info_vars = c("n_bootstraps", "n_students", "n_schools")) {
   
-  condition_plt_dat <- make_plt_dat(condition_dat, plt_layout, axis_limits)
+  condition_plt_dat <- make_plt_dat(condition_dat, plt_layout, true_values, axis_limits)
   
   n_terms <- plt_layout |>
     pull(n_terms) |>
@@ -27,7 +27,7 @@ patch_plt_dat <- function(condition_dat, plt_layout, axis_limits, table_height_p
       x = 0.5, y = 1, vjust = 1, fontface = "bold", size = 14)
 }
 
-# make_plt_dat(tar_read(examples_results_grouped) |> 
+# make_plt_dat(tar_read(examples_results_grouped) |>
 #                filter(example_type == "bad"),
 #              tar_read(plt_layout),
 #              tar_read(examples_axis_limits))
@@ -36,7 +36,7 @@ patch_plt_dat <- function(condition_dat, plt_layout, axis_limits, table_height_p
 # tar_read(results_grouped) |>
 #   # mimic grouping
 #   filter(condition_id ==  1) |>
-#   # patch_plt_dat(tar_read(plt_layout))
+#   patch_plt_dat(tar_read(plt_layout), tar_read(true_values), tar_read(axis_limits))
 
 # tar_read(results_grouped) |>
 #   # mimic grouping

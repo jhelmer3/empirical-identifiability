@@ -229,9 +229,10 @@ r2_plt
 
 ```{r}
 #| column: page
-#| fig-height: 8
 #| layout-ncol: 2
-walk(tar_read(examples_condition_plt), print)
+examples_condition_plt_files <- targets::tar_read(examples_condition_plt_files)
+examples_condition_plt_files_flat <- unlist(examples_condition_plt_files)
+knitr::include_graphics(examples_condition_plt_files_flat)
 ```
 
 ::: panel-tabset

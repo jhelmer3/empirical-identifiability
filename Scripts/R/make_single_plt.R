@@ -1,5 +1,6 @@
 
-make_single_plt <- function(plt_dat, xterm, yterm, axis_limits) {
+make_single_plt <- function(plt_dat, true_values,
+                            xterm, yterm, axis_limits) {
   
   xlims <- axis_limits |>
     filter(term == xterm) |>
@@ -10,8 +11,10 @@ make_single_plt <- function(plt_dat, xterm, yterm, axis_limits) {
     select(-term) |>
     reduce(c)
   
-  {if (xterm == yterm) make_density_plt(plt_dat, xterm, yterm, xlims, ylims)
-  else make_scatter_plt(plt_dat, xterm, yterm, xlims, ylims)} +
+  {if (xterm == yterm) make_density_plt(plt_dat, true_values, 
+                                        xterm, yterm, xlims, ylims)
+  else make_scatter_plt(plt_dat, true_values,
+                        xterm, yterm, xlims, ylims)} +
     scale_x_continuous(breaks = NULL) +
     scale_y_continuous(breaks = NULL) +
     theme_classic() +

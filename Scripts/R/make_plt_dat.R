@@ -1,5 +1,5 @@
 
-make_plt_dat <- function(condition_dat, plt_layout, axis_limits) {
+make_plt_dat <- function(condition_dat, plt_layout, true_values, axis_limits) {
   axis_label_width <- 5
   
   plt_layout |>
@@ -8,7 +8,7 @@ make_plt_dat <- function(condition_dat, plt_layout, axis_limits) {
                          mutate(plot = map2(xterm, yterm,
                                             \(xterm, yterm) {
                                               format_plt_dat(condition_dat, xterm, yterm) |>
-                                              make_single_plt(xterm, yterm, axis_limits)
+                                              make_single_plt(true_values, xterm, yterm, axis_limits)
                                             })) |> pluck("plot")))
 }
 # 
