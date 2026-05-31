@@ -20,10 +20,16 @@ make_scatter_plt <- function(plt_dat, true_values,
                filter(term == xterm) |>
                pull(estimate)) +
     coord_cartesian(xlim = xlims, ylim = ylims) +
-        scale_color_manual(values = c("0" = "black",
-                                      "1" = "orange",
-                                      "2" = "red",
-                                      "3" = "purple")) +
-        labs(x = wrap_axis_labels(yterm),
-             y = wrap_axis_labels(xterm))
+    scale_color_manual(values = c("0" = "black",
+                                  "1" = "orange",
+                                  "2" = "red",
+                                  "3" = "purple")) +
+    labs(x = wrap_axis_labels(yterm),
+         y = wrap_axis_labels(xterm))
 }
+
+# tar_read(results_grouped) |>
+#   filter(condition_id == 1) |>
+#   make_plt_dat(tar_read(plt_layout), tar_read(true_values),
+#                tar_read(results_grouped) |>
+#                  filter(condition_id == 1) |> identify_axis_limits())

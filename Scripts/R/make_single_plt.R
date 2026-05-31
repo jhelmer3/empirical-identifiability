@@ -21,6 +21,19 @@ make_single_plt <- function(plt_dat, true_values,
     theme(legend.position = "none")
 }
 
+# add something as an indicator of how many are removed?
+# tar_read(results_grouped) |>
+#   # mimic grouping
+#   filter(condition_id ==  1) |>
+#   format_plt_dat("(Intercept)", "private") |>
+#   filter(if_any(everything(), is.na)) |>
+#   nrow()
+#   make_single_plt(tar_read(true_values),
+#                   "(Intercept)", "private",
+#                   tar_read(results_grouped) |>
+#                     filter(condition_id == 1) |> identify_axis_limits())
+
+
 # make_single_plt <- function(plt_dat, xterm, yterm, axis_limits) {
 # 
 #   xlims <- axis_limits |>

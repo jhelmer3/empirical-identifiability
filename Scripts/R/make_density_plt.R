@@ -3,13 +3,13 @@ make_density_plt <- function(plt_dat, true_values,
                              xterm, yterm, xlims = NULL, ylims = NULL) {
   
   ggplot(plt_dat, aes(x = .data[[xterm]])) +
+    annotate("segment", x = true_values |>
+               filter(term == xterm) |>
+               pull(estimate), y = 0, yend = Inf) +
     geom_density() +
     coord_cartesian(xlim = xlims) +
     labs(x = wrap_axis_labels(xterm),
-         y = NULL) +
-    annotate("segment", x = true_values |>
-               filter(term == xterm) |>
-               pull(estimate), y = 0, yend = Inf)
+         y = NULL)
 }
 
 # x_term <- "(Intercept)"

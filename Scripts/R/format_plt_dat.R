@@ -11,8 +11,8 @@ format_plt_dat <- function(replication, xterm, yterm) {
     unnest(tidy) |>
     filter(term %in% c(xterm, yterm)) |>
     select(rep, error_type, term, estimate) |>
-    filter_out(is.na(estimate)) |>
-    pivot_wider(names_from = term, values_from = estimate)
+    pivot_wider(names_from = term, values_from = estimate) |>
+    drop_na()
 }
 
 # tar_read(results_grouped) |>
@@ -22,7 +22,8 @@ format_plt_dat <- function(replication, xterm, yterm) {
 # tar_read(results_grouped) |>
 #   # mimic grouping
 #   filter(condition_id ==  1) |>
-#   format_plt_dat("(Intercept)", "ses")
+#   format_plt_dat("(Intercept)", "private") |>
+#   filter(if_any(everything(), is.na))
 # 
 # tar_read(results_grouped) |>
 #   # mimic grouping

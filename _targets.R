@@ -6,7 +6,7 @@ library(crew.cluster)
 
 tar_option_set(
   packages = c("tidyverse", "patchwork", "gt"),
-  controller = crew_controller_local(workers = 8),
+  controller = crew_controller_local(workers = 6),
   format = "qs"
 )
 
@@ -36,8 +36,8 @@ list(
   tar_rep(results, ecls_dat |> 
             bootstrap_data(params) |>
             fit_model(), 
-          reps = n_bootstraps / 8, 
-          batches = 8),
+          reps = n_bootstraps / 6, 
+          batches = 6),
   tar_target(axis_limits, identify_axis_limits(results)),
   tar_group_by(results_grouped, results |> 
                  dplyr::mutate(.by = condition_id,
