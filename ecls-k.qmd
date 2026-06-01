@@ -24,6 +24,7 @@ library(gt)
 tar_source(here::here("Scripts", "R"))
 
 c(ecls_dat, param_set, icc_plt, r2_plt, 
+  examples_params, examples_spaghetti_plts,
   examples_condition_plt, examples_icc_plt, examples_r2_plt) |>
   tar_load(store = here::here("_targets"))
 ```
@@ -226,6 +227,29 @@ r2_plt
 
 
 ## Simulated Data from Bootstrap Hit
+
+```{r}
+examples_params |>
+  select(-iter) |>
+  unique() |>
+  group_split(.by = example_type,
+              .keep = F) |>
+  map(\(data) {
+    title <- data$example_type
+    data |>
+      j_gt() |>
+      cols_hide(c(example_type, n_bootstraps)) |>
+      fmt_number() |>
+      tab_header(title = title)
+    } |> wrap_table()) |>
+  wrap_plots(ncol = 1)
+```
+
+```{r}
+#| layout-ncol: 2
+walk(examples_spaghetti_plts, print)
+```
+
 
 ```{r}
 #| column: page

@@ -29,6 +29,7 @@ list(
   tar_target(true_values,
              broom.mixed::tidy(full_conditional_model)),
   tar_target(model_terms, full_conditional_model |> broom.mixed::tidy() |> pull(term)),
+  tar_target(full_conditional_spaghetti_plt, make_spaghetti_plt(full_conditional_model)),
   tar_target(plt_layout, make_plt_layout(model_terms)),
   
   tar_target(param_set, init_params(n_bootstraps)),
@@ -72,10 +73,17 @@ list(
              pattern = map(examples_design)),
   tar_target(examples_axis_limits,
              identify_axis_limits(examples_results)),
-  tar_group_by(examples_results_grouped, examples_results |>
+  tar_group_by(examples_results_grouped, 
+               examples_results |>
                  dplyr::mutate(.by = example_type,
                                rep = row_number()),
                example_type),
+  tar_target(examples_spaghetti_plts, 
+             examples_results_grouped |>
+               pluck("model", 1) |> 
+               make_spaghetti_plt(),
+             pattern = map(examples_results_grouped),
+             iteration = "list"),
   tar_target(examples_condition_plt,
              patch_plt_dat(examples_results_grouped, plt_layout, true_values, examples_axis_limits,
                            title_info_vars = c("example_type", "n_bootstraps", 
@@ -83,18 +91,15 @@ list(
              pattern = map(examples_results_grouped),
              iteration = "list"),
   tar_target(examples_condition_plt_files,
-    {
-      path <- paste0("outputs/examples_condition_plt_", 
+    {path <- paste0("outputs/examples_condition_plt_", 
                      targets::tar_name(), 
                      ".png")
       ggplot2::ggsave(path, 
              examples_condition_plt, width = 8, height = 8)
-      path
-    },
+      path},
     pattern = map(examples_condition_plt),
     iteration = "list",
-    format = "file"
-  ),
+    format = "file"),
   tar_target(examples_icc_dat, 
              make_icc_dat(examples_results_grouped),
              pattern = map(examples_results_grouped),
