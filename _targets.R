@@ -6,8 +6,9 @@ library(crew.cluster)
 
 tar_option_set(
   packages = c("tidyverse", "patchwork", "gt"),
-  controller = crew_controller_local(workers = 6),
-  format = "qs"
+  controller = crew_controller_local(workers = 4),
+  format = "qs",
+  seed = 123
 )
 
 tar_source(here::here("Scripts", "R"))
@@ -28,12 +29,39 @@ list(
              safe_model(ecls_dat)$result),
   tar_target(true_values,
              broom.mixed::tidy(full_conditional_model)),
-  tar_target(model_terms, full_conditional_model |> broom.mixed::tidy() |> pull(term)),
+  tar_target(model_terms, 
+             full_conditional_model |> broom.mixed::tidy() |> pull(term)),
   tar_target(full_conditional_spaghetti_plt, make_spaghetti_plt(full_conditional_model)),
   tar_target(plt_layout, make_plt_layout(model_terms)),
   
   tar_target(param_set, init_params(n_bootstraps)),
   tar_target(params, define_params(param_set)),
+  
+  ## subsetting once per condition, bootstrapping within
+  tar_target(params_w_subset, subset_dat(ecls_dat, params),
+             pattern = map(params)),
+  tar_target(results_v_subset, bootstrap_subset(params_w_subset) |>
+               fit_model(),
+             pattern = map(params_w_subset)),
+  tar_target(axis_limits_v_subset, identify_axis_limits(results_v_subset)),
+  tar_group_by(results_grouped_v_subset, results_v_subset |> 
+                 dplyr::mutate(.by = condition_id,
+                               rep = row_number()), 
+               condition_id),
+  tar_target(condition_plt_v_subset, 
+             patch_plt_dat(results_grouped_v_subset, plt_layout, true_values, axis_limits_v_subset),
+             pattern = map(results_grouped_v_subset),
+             iteration = "list"),
+  tar_target(condition_plt_v_subset_files,
+             paste0("outputs/condition_plt_v_subset_", 
+                    targets::tar_name(), ".png") |>
+               ggsave_and_return_path(condition_plt_v_subset, 
+                                      width = 8, height = 8),
+             pattern = map(condition_plt_v_subset),
+             iteration = "list",
+             format = "file"),
+  
+  ## subsetting on each "bootstrap" replication
   tar_rep(results, ecls_dat |> 
             bootstrap_data(params) |>
             fit_model(), 
@@ -48,6 +76,14 @@ list(
              patch_plt_dat(results_grouped, plt_layout, true_values, axis_limits),
              pattern = map(results_grouped),
              iteration = "list"),
+  tar_target(condition_plt_files,
+             paste0("outputs/condition_plt_", 
+                    targets::tar_name(), ".png") |>
+               ggsave_and_return_path(condition_plt, 
+                                      width = 8, height = 8),
+             pattern = map(condition_plt),
+             iteration = "list",
+             format = "file"),
   tar_target(icc_dat, 
              make_icc_dat(results_grouped),
              pattern = map(results_grouped),
@@ -91,15 +127,13 @@ list(
              pattern = map(examples_results_grouped),
              iteration = "list"),
   tar_target(examples_condition_plt_files,
-    {path <- paste0("outputs/examples_condition_plt_", 
-                     targets::tar_name(), 
-                     ".png")
-      ggplot2::ggsave(path, 
-             examples_condition_plt, width = 8, height = 8)
-      path},
-    pattern = map(examples_condition_plt),
-    iteration = "list",
-    format = "file"),
+             paste0("outputs/examples_condition_plt_", 
+                    targets::tar_name(), ".png") |>
+               ggsave_and_return_path(examples_condition_plt, 
+                                      width = 8, height = 8),
+             pattern = map(examples_condition_plt),
+             iteration = "list",
+             format = "file"),
   tar_target(examples_icc_dat, 
              make_icc_dat(examples_results_grouped),
              pattern = map(examples_results_grouped),

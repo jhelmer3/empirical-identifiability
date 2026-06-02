@@ -27,6 +27,25 @@ patch_plt_dat <- function(condition_dat, plt_layout, true_values, axis_limits, t
       x = 0.5, y = 1, vjust = 1, fontface = "bold", size = 14)
 }
 
+
+# tar_read(results_grouped_v_subset) |>
+#   filter(condition_id == 1) |> 
+#   patch_plt_dat(tar_read(plt_layout),
+#                 tar_read(true_values),
+#                 tar_read(axis_limits_v_subset))
+# 
+# tar_read(results_grouped_v_subset) |>
+#   filter(condition_id == 1) |> 
+#   make_plt_dat(tar_read(plt_layout),
+#                 tar_read(true_values),
+#                 tar_read(axis_limits_v_subset)) |>
+#   pull(plots)
+
+# tar_read(params_w_subset) |>
+#   pull(data_subset) |>
+#   map(\(data) data$private |> sum())
+
+
 # make_plt_dat(tar_read(examples_results_grouped) |>
 #                filter(example_type == "bad"),
 #              tar_read(plt_layout),

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Jess Helmer">
-<meta name="dcterms.date" content="2026-06-01">
+<meta name="dcterms.date" content="2026-06-02">
 
 <title>ECLS-K Bootstrapping – Empirical Identifiability</title>
 <style>
@@ -185,6 +185,7 @@ window.Quarto = {
   <ul>
   <li><a href="#full-data" id="toc-full-data" class="nav-link active" data-scroll-target="#full-data">Full Data</a></li>
   <li><a href="#bootstrapping" id="toc-bootstrapping" class="nav-link" data-scroll-target="#bootstrapping">Bootstrapping</a></li>
+  <li><a href="#bootstrapping-from-one-subset" id="toc-bootstrapping-from-one-subset" class="nav-link" data-scroll-target="#bootstrapping-from-one-subset">Bootstrapping From One Subset</a></li>
   <li><a href="#simulated-data-from-bootstrap-hit" id="toc-simulated-data-from-bootstrap-hit" class="nav-link" data-scroll-target="#simulated-data-from-bootstrap-hit">Simulated Data from Bootstrap Hit</a></li>
   <li><a href="#archive" id="toc-archive" class="nav-link" data-scroll-target="#archive">Archive</a></li>
   </ul>
@@ -212,7 +213,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">June 1, 2026</p>
+      <p class="date">June 2, 2026</p>
     </div>
   </div>
   
@@ -240,9 +241,8 @@ window.Quarto = {
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_source</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"Scripts"</span>, <span class="st">"R"</span>))</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(ecls_dat, param_set, icc_plt, r2_plt, </span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  examples_params, examples_spaghetti_plts,</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  examples_condition_plt, examples_icc_plt, examples_r2_plt) <span class="sc">|&gt;</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tar_load</span>(<span class="at">store =</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"_targets"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  examples_params, examples_spaghetti_plts, examples_icc_plt, examples_r2_plt) <span class="sc">|&gt;</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tar_load</span>(<span class="at">store =</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"_targets"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </div>
@@ -360,23 +360,23 @@ MVN \left(
 <div class="cell quarto-layout-panel" data-layout-ncol="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
-<div id="lbgkmqgcdq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#lbgkmqgcdq table {
+<div id="hrocrknwwj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#hrocrknwwj table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#lbgkmqgcdq thead, #lbgkmqgcdq tbody, #lbgkmqgcdq tfoot, #lbgkmqgcdq tr, #lbgkmqgcdq td, #lbgkmqgcdq th {
+#hrocrknwwj thead, #hrocrknwwj tbody, #hrocrknwwj tfoot, #hrocrknwwj tr, #hrocrknwwj td, #hrocrknwwj th {
   border-style: none;
 }
 
-#lbgkmqgcdq p {
+#hrocrknwwj p {
   margin: 0;
   padding: 0;
 }
 
-#lbgkmqgcdq .gt_table {
+#hrocrknwwj .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -402,12 +402,12 @@ MVN \left(
   border-left-color: #D3D3D3;
 }
 
-#lbgkmqgcdq .gt_caption {
+#hrocrknwwj .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#lbgkmqgcdq .gt_title {
+#hrocrknwwj .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -419,7 +419,7 @@ MVN \left(
   border-bottom-width: 0;
 }
 
-#lbgkmqgcdq .gt_subtitle {
+#hrocrknwwj .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -431,7 +431,7 @@ MVN \left(
   border-top-width: 0;
 }
 
-#lbgkmqgcdq .gt_heading {
+#hrocrknwwj .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -443,13 +443,13 @@ MVN \left(
   border-right-color: #D3D3D3;
 }
 
-#lbgkmqgcdq .gt_bottom_border {
+#hrocrknwwj .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#lbgkmqgcdq .gt_col_headings {
+#hrocrknwwj .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -464,7 +464,7 @@ MVN \left(
   border-right-color: #D3D3D3;
 }
 
-#lbgkmqgcdq .gt_col_heading {
+#hrocrknwwj .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -484,7 +484,7 @@ MVN \left(
   overflow-x: hidden;
 }
 
-#lbgkmqgcdq .gt_column_spanner_outer {
+#hrocrknwwj .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -496,15 +496,15 @@ MVN \left(
   padding-right: 4px;
 }
 
-#lbgkmqgcdq .gt_column_spanner_outer:first-child {
+#hrocrknwwj .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#lbgkmqgcdq .gt_column_spanner_outer:last-child {
+#hrocrknwwj .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#lbgkmqgcdq .gt_column_spanner {
+#hrocrknwwj .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -516,11 +516,11 @@ MVN \left(
   width: 100%;
 }
 
-#lbgkmqgcdq .gt_spanner_row {
+#hrocrknwwj .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#lbgkmqgcdq .gt_group_heading {
+#hrocrknwwj .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -546,7 +546,7 @@ MVN \left(
   text-align: left;
 }
 
-#lbgkmqgcdq .gt_empty_group_heading {
+#hrocrknwwj .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -561,15 +561,15 @@ MVN \left(
   vertical-align: middle;
 }
 
-#lbgkmqgcdq .gt_from_md > :first-child {
+#hrocrknwwj .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#lbgkmqgcdq .gt_from_md > :last-child {
+#hrocrknwwj .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#lbgkmqgcdq .gt_row {
+#hrocrknwwj .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -588,7 +588,7 @@ MVN \left(
   overflow-x: hidden;
 }
 
-#lbgkmqgcdq .gt_stub {
+#hrocrknwwj .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -601,7 +601,7 @@ MVN \left(
   padding-right: 5px;
 }
 
-#lbgkmqgcdq .gt_stub_row_group {
+#hrocrknwwj .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -615,15 +615,15 @@ MVN \left(
   vertical-align: top;
 }
 
-#lbgkmqgcdq .gt_row_group_first td {
+#hrocrknwwj .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#lbgkmqgcdq .gt_row_group_first th {
+#hrocrknwwj .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#lbgkmqgcdq .gt_summary_row {
+#hrocrknwwj .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -633,16 +633,16 @@ MVN \left(
   padding-right: 5px;
 }
 
-#lbgkmqgcdq .gt_first_summary_row {
+#hrocrknwwj .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#lbgkmqgcdq .gt_first_summary_row.thick {
+#hrocrknwwj .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#lbgkmqgcdq .gt_last_summary_row {
+#hrocrknwwj .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -652,7 +652,7 @@ MVN \left(
   border-bottom-color: #D3D3D3;
 }
 
-#lbgkmqgcdq .gt_grand_summary_row {
+#hrocrknwwj .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -662,7 +662,7 @@ MVN \left(
   padding-right: 5px;
 }
 
-#lbgkmqgcdq .gt_first_grand_summary_row {
+#hrocrknwwj .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -672,7 +672,7 @@ MVN \left(
   border-top-color: #D3D3D3;
 }
 
-#lbgkmqgcdq .gt_last_grand_summary_row_top {
+#hrocrknwwj .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -682,11 +682,11 @@ MVN \left(
   border-bottom-color: #D3D3D3;
 }
 
-#lbgkmqgcdq .gt_striped {
+#hrocrknwwj .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#lbgkmqgcdq .gt_table_body {
+#hrocrknwwj .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -695,7 +695,7 @@ MVN \left(
   border-bottom-color: #D3D3D3;
 }
 
-#lbgkmqgcdq .gt_footnotes {
+#hrocrknwwj .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -709,7 +709,7 @@ MVN \left(
   border-right-color: #D3D3D3;
 }
 
-#lbgkmqgcdq .gt_footnote {
+#hrocrknwwj .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -718,7 +718,7 @@ MVN \left(
   padding-right: 5px;
 }
 
-#lbgkmqgcdq .gt_sourcenotes {
+#hrocrknwwj .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -732,7 +732,7 @@ MVN \left(
   border-right-color: #D3D3D3;
 }
 
-#lbgkmqgcdq .gt_sourcenote {
+#hrocrknwwj .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -740,72 +740,72 @@ MVN \left(
   padding-right: 5px;
 }
 
-#lbgkmqgcdq .gt_left {
+#hrocrknwwj .gt_left {
   text-align: left;
 }
 
-#lbgkmqgcdq .gt_center {
+#hrocrknwwj .gt_center {
   text-align: center;
 }
 
-#lbgkmqgcdq .gt_right {
+#hrocrknwwj .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#lbgkmqgcdq .gt_font_normal {
+#hrocrknwwj .gt_font_normal {
   font-weight: normal;
 }
 
-#lbgkmqgcdq .gt_font_bold {
+#hrocrknwwj .gt_font_bold {
   font-weight: bold;
 }
 
-#lbgkmqgcdq .gt_font_italic {
+#hrocrknwwj .gt_font_italic {
   font-style: italic;
 }
 
-#lbgkmqgcdq .gt_super {
+#hrocrknwwj .gt_super {
   font-size: 65%;
 }
 
-#lbgkmqgcdq .gt_footnote_marks {
+#hrocrknwwj .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#lbgkmqgcdq .gt_asterisk {
+#hrocrknwwj .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#lbgkmqgcdq .gt_indent_1 {
+#hrocrknwwj .gt_indent_1 {
   text-indent: 5px;
 }
 
-#lbgkmqgcdq .gt_indent_2 {
+#hrocrknwwj .gt_indent_2 {
   text-indent: 10px;
 }
 
-#lbgkmqgcdq .gt_indent_3 {
+#hrocrknwwj .gt_indent_3 {
   text-indent: 15px;
 }
 
-#lbgkmqgcdq .gt_indent_4 {
+#hrocrknwwj .gt_indent_4 {
   text-indent: 20px;
 }
 
-#lbgkmqgcdq .gt_indent_5 {
+#hrocrknwwj .gt_indent_5 {
   text-indent: 25px;
 }
 
-#lbgkmqgcdq .katex-display {
+#hrocrknwwj .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#lbgkmqgcdq div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#hrocrknwwj div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -829,7 +829,7 @@ MVN \left(
 </div>
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="ecls-k_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+<p><img src="ecls-k_files/figure-html/ecls_info-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </div>
@@ -851,7 +851,7 @@ MVN \left(
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="ecls-k_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="ecls-k_files/figure-html/ecls_distributions-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1015,23 +1015,23 @@ MVN \left(
 </details>
 
 <div class="no-row-height column-margin column-container"><div class="cell-output-display">
-<div id="nhvtsulnnq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#nhvtsulnnq table {
+<div id="kirokkyqmd" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#kirokkyqmd table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#nhvtsulnnq thead, #nhvtsulnnq tbody, #nhvtsulnnq tfoot, #nhvtsulnnq tr, #nhvtsulnnq td, #nhvtsulnnq th {
+#kirokkyqmd thead, #kirokkyqmd tbody, #kirokkyqmd tfoot, #kirokkyqmd tr, #kirokkyqmd td, #kirokkyqmd th {
   border-style: none;
 }
 
-#nhvtsulnnq p {
+#kirokkyqmd p {
   margin: 0;
   padding: 0;
 }
 
-#nhvtsulnnq .gt_table {
+#kirokkyqmd .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1057,12 +1057,12 @@ MVN \left(
   border-left-color: #D3D3D3;
 }
 
-#nhvtsulnnq .gt_caption {
+#kirokkyqmd .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#nhvtsulnnq .gt_title {
+#kirokkyqmd .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1074,7 +1074,7 @@ MVN \left(
   border-bottom-width: 0;
 }
 
-#nhvtsulnnq .gt_subtitle {
+#kirokkyqmd .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1086,7 +1086,7 @@ MVN \left(
   border-top-width: 0;
 }
 
-#nhvtsulnnq .gt_heading {
+#kirokkyqmd .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1098,13 +1098,13 @@ MVN \left(
   border-right-color: #D3D3D3;
 }
 
-#nhvtsulnnq .gt_bottom_border {
+#kirokkyqmd .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#nhvtsulnnq .gt_col_headings {
+#kirokkyqmd .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1119,7 +1119,7 @@ MVN \left(
   border-right-color: #D3D3D3;
 }
 
-#nhvtsulnnq .gt_col_heading {
+#kirokkyqmd .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1139,7 +1139,7 @@ MVN \left(
   overflow-x: hidden;
 }
 
-#nhvtsulnnq .gt_column_spanner_outer {
+#kirokkyqmd .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1151,15 +1151,15 @@ MVN \left(
   padding-right: 4px;
 }
 
-#nhvtsulnnq .gt_column_spanner_outer:first-child {
+#kirokkyqmd .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#nhvtsulnnq .gt_column_spanner_outer:last-child {
+#kirokkyqmd .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#nhvtsulnnq .gt_column_spanner {
+#kirokkyqmd .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1171,11 +1171,11 @@ MVN \left(
   width: 100%;
 }
 
-#nhvtsulnnq .gt_spanner_row {
+#kirokkyqmd .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#nhvtsulnnq .gt_group_heading {
+#kirokkyqmd .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1201,7 +1201,7 @@ MVN \left(
   text-align: left;
 }
 
-#nhvtsulnnq .gt_empty_group_heading {
+#kirokkyqmd .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1216,15 +1216,15 @@ MVN \left(
   vertical-align: middle;
 }
 
-#nhvtsulnnq .gt_from_md > :first-child {
+#kirokkyqmd .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#nhvtsulnnq .gt_from_md > :last-child {
+#kirokkyqmd .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#nhvtsulnnq .gt_row {
+#kirokkyqmd .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1243,7 +1243,7 @@ MVN \left(
   overflow-x: hidden;
 }
 
-#nhvtsulnnq .gt_stub {
+#kirokkyqmd .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1256,7 +1256,7 @@ MVN \left(
   padding-right: 5px;
 }
 
-#nhvtsulnnq .gt_stub_row_group {
+#kirokkyqmd .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1270,15 +1270,15 @@ MVN \left(
   vertical-align: top;
 }
 
-#nhvtsulnnq .gt_row_group_first td {
+#kirokkyqmd .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#nhvtsulnnq .gt_row_group_first th {
+#kirokkyqmd .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#nhvtsulnnq .gt_summary_row {
+#kirokkyqmd .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1288,16 +1288,16 @@ MVN \left(
   padding-right: 5px;
 }
 
-#nhvtsulnnq .gt_first_summary_row {
+#kirokkyqmd .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#nhvtsulnnq .gt_first_summary_row.thick {
+#kirokkyqmd .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#nhvtsulnnq .gt_last_summary_row {
+#kirokkyqmd .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1307,7 +1307,7 @@ MVN \left(
   border-bottom-color: #D3D3D3;
 }
 
-#nhvtsulnnq .gt_grand_summary_row {
+#kirokkyqmd .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1317,7 +1317,7 @@ MVN \left(
   padding-right: 5px;
 }
 
-#nhvtsulnnq .gt_first_grand_summary_row {
+#kirokkyqmd .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1327,7 +1327,7 @@ MVN \left(
   border-top-color: #D3D3D3;
 }
 
-#nhvtsulnnq .gt_last_grand_summary_row_top {
+#kirokkyqmd .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1337,11 +1337,11 @@ MVN \left(
   border-bottom-color: #D3D3D3;
 }
 
-#nhvtsulnnq .gt_striped {
+#kirokkyqmd .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#nhvtsulnnq .gt_table_body {
+#kirokkyqmd .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1350,7 +1350,7 @@ MVN \left(
   border-bottom-color: #D3D3D3;
 }
 
-#nhvtsulnnq .gt_footnotes {
+#kirokkyqmd .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1364,7 +1364,7 @@ MVN \left(
   border-right-color: #D3D3D3;
 }
 
-#nhvtsulnnq .gt_footnote {
+#kirokkyqmd .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1373,7 +1373,7 @@ MVN \left(
   padding-right: 5px;
 }
 
-#nhvtsulnnq .gt_sourcenotes {
+#kirokkyqmd .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1387,7 +1387,7 @@ MVN \left(
   border-right-color: #D3D3D3;
 }
 
-#nhvtsulnnq .gt_sourcenote {
+#kirokkyqmd .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1395,72 +1395,72 @@ MVN \left(
   padding-right: 5px;
 }
 
-#nhvtsulnnq .gt_left {
+#kirokkyqmd .gt_left {
   text-align: left;
 }
 
-#nhvtsulnnq .gt_center {
+#kirokkyqmd .gt_center {
   text-align: center;
 }
 
-#nhvtsulnnq .gt_right {
+#kirokkyqmd .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#nhvtsulnnq .gt_font_normal {
+#kirokkyqmd .gt_font_normal {
   font-weight: normal;
 }
 
-#nhvtsulnnq .gt_font_bold {
+#kirokkyqmd .gt_font_bold {
   font-weight: bold;
 }
 
-#nhvtsulnnq .gt_font_italic {
+#kirokkyqmd .gt_font_italic {
   font-style: italic;
 }
 
-#nhvtsulnnq .gt_super {
+#kirokkyqmd .gt_super {
   font-size: 65%;
 }
 
-#nhvtsulnnq .gt_footnote_marks {
+#kirokkyqmd .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#nhvtsulnnq .gt_asterisk {
+#kirokkyqmd .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#nhvtsulnnq .gt_indent_1 {
+#kirokkyqmd .gt_indent_1 {
   text-indent: 5px;
 }
 
-#nhvtsulnnq .gt_indent_2 {
+#kirokkyqmd .gt_indent_2 {
   text-indent: 10px;
 }
 
-#nhvtsulnnq .gt_indent_3 {
+#kirokkyqmd .gt_indent_3 {
   text-indent: 15px;
 }
 
-#nhvtsulnnq .gt_indent_4 {
+#kirokkyqmd .gt_indent_4 {
   text-indent: 20px;
 }
 
-#nhvtsulnnq .gt_indent_5 {
+#kirokkyqmd .gt_indent_5 {
   text-indent: 25px;
 }
 
-#nhvtsulnnq .katex-display {
+#kirokkyqmd .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#nhvtsulnnq div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#kirokkyqmd div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1490,23 +1490,26 @@ MVN \left(
 <p>Starting conditions: number of level-one units (students) within level-two units (schools). This set of parameters creates 4 conditions.</p>
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">walk</span>(<span class="fu">tar_read</span>(condition_plt), print)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>targets<span class="sc">::</span><span class="fu">tar_read</span>(condition_plt_files, </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>                  <span class="at">store =</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"_targets"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unlist</span>() <span class="sc">|&gt;</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell column-page quarto-layout-panel" data-layout-ncol="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="ecls-k_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+<p><img src="outputs/condition_plt_condition_plt_files_376f0e4774a7d4cc.png" class="img-fluid" width="1200"></p>
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="ecls-k_files/figure-html/unnamed-chunk-7-2.png" class="img-fluid" width="672"></p>
+<p><img src="outputs/condition_plt_condition_plt_files_9e2c9f8e00027bcb.png" class="img-fluid" width="1200"></p>
 </div>
 </div>
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="ecls-k_files/figure-html/unnamed-chunk-7-3.png" class="img-fluid" width="672"></p>
+<p><img src="outputs/condition_plt_condition_plt_files_f54fde2683bd5d17.png" class="img-fluid" width="1200"></p>
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="ecls-k_files/figure-html/unnamed-chunk-7-4.png" class="img-fluid" width="672"></p>
+<p><img src="outputs/condition_plt_condition_plt_files_c179681eae92a588.png" class="img-fluid" width="1200"></p>
 </div>
 </div>
 </div>
@@ -1524,7 +1527,7 @@ MVN \left(
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="ecls-k_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="ecls-k_files/figure-html/icc_plt-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1539,7 +1542,7 @@ MVN \left(
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="ecls-k_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="ecls-k_files/figure-html/r2_plt-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1548,62 +1551,102 @@ MVN \left(
 </div>
 </div>
 </section>
+</section>
+<section id="bootstrapping-from-one-subset" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="bootstrapping-from-one-subset">Bootstrapping From One Subset</h2>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>targets<span class="sc">::</span><span class="fu">tar_read</span>(condition_plt_v_subset_files, </span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>                  <span class="at">store =</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"_targets"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unlist</span>() <span class="sc">|&gt;</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell column-page quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_plt_v_subset_condition_plt_v_subset_files_c2fe933539550b1e.png" class="img-fluid" width="1200"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_plt_v_subset_condition_plt_v_subset_files_004d6e20af8c5751.png" class="img-fluid" width="1200"></p>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_plt_v_subset_condition_plt_v_subset_files_14b527853abc5852.png" class="img-fluid" width="1200"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_plt_v_subset_condition_plt_v_subset_files_31a7b0e2cdc99034.png" class="img-fluid" width="1200"></p>
+</div>
+</div>
+</div>
 </section>
 <section id="simulated-data-from-bootstrap-hit" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="simulated-data-from-bootstrap-hit">Simulated Data from Bootstrap Hit</h2>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>examples_params <span class="sc">|&gt;</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>iter) <span class="sc">|&gt;</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unique</span>() <span class="sc">|&gt;</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_split</span>(<span class="at">.by =</span> example_type,</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">.keep =</span> F) <span class="sc">|&gt;</span></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(\(data) {</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    title <span class="ot">&lt;-</span> data<span class="sc">$</span>example_type</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    data <span class="sc">|&gt;</span></span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>      <span class="fu">j_gt</span>() <span class="sc">|&gt;</span></span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>      <span class="fu">cols_hide</span>(<span class="fu">c</span>(example_type, n_bootstraps)) <span class="sc">|&gt;</span></span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>      <span class="fu">fmt_number</span>() <span class="sc">|&gt;</span></span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>      <span class="fu">tab_header</span>(<span class="at">title =</span> title)</span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>    } <span class="sc">|&gt;</span> <span class="fu">wrap_table</span>()) <span class="sc">|&gt;</span></span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">wrap_plots</span>(<span class="at">ncol =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>examples_params <span class="sc">|&gt;</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>iter) <span class="sc">|&gt;</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unique</span>() <span class="sc">|&gt;</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_split</span>(<span class="at">.by =</span> example_type,</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">.keep =</span> F) <span class="sc">|&gt;</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(\(data) {</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    title <span class="ot">&lt;-</span> data<span class="sc">$</span>example_type</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    data <span class="sc">|&gt;</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>      <span class="fu">select</span>(<span class="sc">-</span>example_type) <span class="sc">|&gt;</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>      <span class="fu">pivot_longer</span>(<span class="fu">everything</span>(),</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>                   <span class="at">names_to =</span> <span class="st">"Parameter"</span>,</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>                   <span class="at">values_to =</span> <span class="st">"Value"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>      <span class="fu">j_gt</span>() <span class="sc">|&gt;</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>      <span class="fu">fmt_number</span>() <span class="sc">|&gt;</span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>      <span class="fu">tab_header</span>(<span class="at">title =</span> <span class="fu">str_to_title</span>(title))</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>    } <span class="sc">|&gt;</span> <span class="fu">wrap_table</span>()) <span class="sc">|&gt;</span></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">wrap_plots</span>(<span class="at">ncol =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="ecls-k_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="ecls-k_files/figure-html/examples_params_tbl-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">walk</span>(examples_spaghetti_plts, print)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">walk</span>(examples_spaghetti_plts, print)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 20 rows containing missing values or values outside the scale range
+(`geom_line()`).</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 60 rows containing missing values or values outside the scale range
+(`geom_line()`).</code></pre>
+</div>
 <div class="cell quarto-layout-panel" data-layout-ncol="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="ecls-k_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
+<p><img src="ecls-k_files/figure-html/examples_spaghetti_plts-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="ecls-k_files/figure-html/unnamed-chunk-11-2.png" class="img-fluid" width="672"></p>
+<p><img src="ecls-k_files/figure-html/examples_spaghetti_plts-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </div>
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>examples_condition_plt_files <span class="ot">&lt;-</span> targets<span class="sc">::</span><span class="fu">tar_read</span>(examples_condition_plt_files)</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>examples_condition_plt_files_flat <span class="ot">&lt;-</span> <span class="fu">unlist</span>(examples_condition_plt_files)</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(examples_condition_plt_files_flat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>targets<span class="sc">::</span><span class="fu">tar_read</span>(examples_condition_plt_files, </span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>                  <span class="at">store =</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"_targets"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unlist</span>() <span class="sc">|&gt;</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell column-page quarto-layout-panel" data-layout-ncol="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="outputs/examples_condition_plt_examples_condition_plt_files_66d1788c930c2bc2.png" class="img-fluid" width="1200"></p>
+<p><img src="outputs/examples_condition_plt_examples_condition_plt_files_6f4479b11fe83902.png" class="img-fluid" width="1200"></p>
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="outputs/examples_condition_plt_examples_condition_plt_files_c3c3d7601e3b4c65.png" class="img-fluid" width="1200"></p>
+<p><img src="outputs/examples_condition_plt_examples_condition_plt_files_e20a095d0da04db5.png" class="img-fluid" width="1200"></p>
 </div>
 </div>
 </div>
@@ -1614,12 +1657,12 @@ MVN \left(
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>examples_icc_plt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>examples_icc_plt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="ecls-k_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="ecls-k_files/figure-html/examples_icc_plt-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1629,12 +1672,12 @@ MVN \left(
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>examples_r2_plt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>examples_r2_plt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="ecls-k_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="ecls-k_files/figure-html/examples_r2_plt-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1948,73 +1991,73 @@ MVN \left(
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># bootres &lt;- get_bootres(10)</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co"># plt_dat &lt;- make_plt_dat(bootres)</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co"># pat &lt;- make_plt_pattern(plt_dat)</span></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="co"># plt_dat |&gt;</span></span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="co">#     pull(plots) |&gt;</span></span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="co">#     unlist(recursive = F) |&gt;</span></span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="co">#     wrap_plots(design = pat,</span></span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="co">#                axes = "collect")</span></span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="fu">list</span>(<span class="at">n_bootstraps =</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">20</span>),</span>
-<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>     <span class="at">n_students =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">10</span>),</span>
-<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>     <span class="at">n_schools =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">20</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">do.call</span>(crossing, <span class="at">args =</span> _) <span class="sc">|&gt;</span></span>
-<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">condition_id =</span> <span class="fu">row_number</span>()) <span class="sc">|&gt;</span></span>
-<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nest</span>(<span class="at">params =</span> <span class="sc">-</span>condition_id) <span class="sc">|&gt;</span></span>
-<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(params) <span class="sc">|&gt;</span></span>
-<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(\(params) {</span>
-<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(params)</span>
-<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>    params <span class="sc">|&gt;</span></span>
-<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>      <span class="fu">pivot_longer</span>(<span class="fu">everything</span>(),</span>
-<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>                   <span class="at">names_to =</span> <span class="st">"param"</span>,</span>
-<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a>                   <span class="at">values_to =</span> <span class="st">"value"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a>      <span class="fu">pmap</span>(\(param, value) <span class="fu">assign</span>(param, value))</span>
-<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a>    glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">"{param}: {value}"</span>)</span>
-<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a>  })</span>
-<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a><span class="co"># bs_dat &lt;- do.call(crossing, params) |&gt;</span></span>
-<span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a><span class="co">#   mutate(condition_id = row_number()) |&gt;</span></span>
-<span id="cb16-34"><a href="#cb16-34" aria-hidden="true" tabindex="-1"></a><span class="co">#   pmap(\(...) {</span></span>
-<span id="cb16-35"><a href="#cb16-35" aria-hidden="true" tabindex="-1"></a><span class="co">#     list2env(list(...), envir = environment())</span></span>
-<span id="cb16-36"><a href="#cb16-36" aria-hidden="true" tabindex="-1"></a><span class="co">#     glue::glue("condition {condition_id}: n_bootstraps={n_bootstraps}, n_students={n_students}, n_schools={n_schools}")</span></span>
-<span id="cb16-37"><a href="#cb16-37" aria-hidden="true" tabindex="-1"></a><span class="co">#     </span></span>
-<span id="cb16-38"><a href="#cb16-38" aria-hidden="true" tabindex="-1"></a><span class="co">#     get_bootres(n_bootstraps, n_students, n_schools) |&gt;</span></span>
-<span id="cb16-39"><a href="#cb16-39" aria-hidden="true" tabindex="-1"></a><span class="co">#       mutate(condition_str = glue::glue("condition {condition_id}: n_bootstraps={n_bootstraps}, n_students={n_students},  n_schools={n_schools}"))</span></span>
-<span id="cb16-40"><a href="#cb16-40" aria-hidden="true" tabindex="-1"></a><span class="co">#   })</span></span>
-<span id="cb16-41"><a href="#cb16-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-42"><a href="#cb16-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-43"><a href="#cb16-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-44"><a href="#cb16-44" aria-hidden="true" tabindex="-1"></a>bs_dat <span class="sc">|&gt;</span></span>
-<span id="cb16-45"><a href="#cb16-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">2</span>) <span class="sc">|&gt;</span></span>
-<span id="cb16-46"><a href="#cb16-46" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(\(bootres) {</span>
-<span id="cb16-47"><a href="#cb16-47" aria-hidden="true" tabindex="-1"></a>    plt_dat <span class="ot">&lt;-</span> </span>
-<span id="cb16-48"><a href="#cb16-48" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb16-49"><a href="#cb16-49" aria-hidden="true" tabindex="-1"></a>    <span class="fu">make_plt_pattern</span>(plt_dat)</span>
-<span id="cb16-50"><a href="#cb16-50" aria-hidden="true" tabindex="-1"></a>    })</span>
-<span id="cb16-51"><a href="#cb16-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-52"><a href="#cb16-52" aria-hidden="true" tabindex="-1"></a><span class="fu">make_plt_dat</span>(bres) <span class="sc">|&gt;</span></span>
-<span id="cb16-53"><a href="#cb16-53" aria-hidden="true" tabindex="-1"></a>    get_table_row_location</span>
-<span id="cb16-54"><a href="#cb16-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-55"><a href="#cb16-55" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mtcars) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="fu">aes</span>(mpg, disp)) <span class="sc">+</span> <span class="fu">theme_classic</span>()</span>
-<span id="cb16-56"><a href="#cb16-56" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mtcars) <span class="sc">+</span> <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(gear, disp, <span class="at">group =</span> gear)) <span class="sc">+</span> <span class="fu">theme_classic</span>()</span>
-<span id="cb16-57"><a href="#cb16-57" aria-hidden="true" tabindex="-1"></a>p3 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mtcars) <span class="sc">+</span> <span class="fu">geom_bar</span>(<span class="fu">aes</span>(gear)) <span class="sc">+</span> <span class="fu">facet_wrap</span>(<span class="sc">~</span>cyl) <span class="sc">+</span> <span class="fu">theme_classic</span>()</span>
-<span id="cb16-58"><a href="#cb16-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-59"><a href="#cb16-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-60"><a href="#cb16-60" aria-hidden="true" tabindex="-1"></a>design <span class="ot">&lt;-</span> <span class="st">"</span></span>
-<span id="cb16-61"><a href="#cb16-61" aria-hidden="true" tabindex="-1"></a><span class="st">  AB</span></span>
-<span id="cb16-62"><a href="#cb16-62" aria-hidden="true" tabindex="-1"></a><span class="st">  AC</span></span>
-<span id="cb16-63"><a href="#cb16-63" aria-hidden="true" tabindex="-1"></a><span class="st">"</span></span>
-<span id="cb16-64"><a href="#cb16-64" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-65"><a href="#cb16-65" aria-hidden="true" tabindex="-1"></a>(p1 <span class="sc">+</span> p2 <span class="sc">+</span> p3) <span class="sc">+</span></span>
-<span id="cb16-66"><a href="#cb16-66" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_layout</span>(<span class="at">design =</span> design, <span class="at">heights =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">1</span>), <span class="at">axes =</span> <span class="st">"collect"</span>) <span class="sc">&amp;</span></span>
-<span id="cb16-67"><a href="#cb16-67" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># bootres &lt;- get_bootres(10)</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co"># plt_dat &lt;- make_plt_dat(bootres)</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="co"># pat &lt;- make_plt_pattern(plt_dat)</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="co"># plt_dat |&gt;</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="co">#     pull(plots) |&gt;</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a><span class="co">#     unlist(recursive = F) |&gt;</span></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a><span class="co">#     wrap_plots(design = pat,</span></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a><span class="co">#                axes = "collect")</span></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a><span class="fu">list</span>(<span class="at">n_bootstraps =</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">20</span>),</span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>     <span class="at">n_students =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">10</span>),</span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>     <span class="at">n_schools =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">20</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">do.call</span>(crossing, <span class="at">args =</span> _) <span class="sc">|&gt;</span></span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">condition_id =</span> <span class="fu">row_number</span>()) <span class="sc">|&gt;</span></span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nest</span>(<span class="at">params =</span> <span class="sc">-</span>condition_id) <span class="sc">|&gt;</span></span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(params) <span class="sc">|&gt;</span></span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(\(params) {</span>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(params)</span>
+<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a>    params <span class="sc">|&gt;</span></span>
+<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a>      <span class="fu">pivot_longer</span>(<span class="fu">everything</span>(),</span>
+<span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a>                   <span class="at">names_to =</span> <span class="st">"param"</span>,</span>
+<span id="cb19-26"><a href="#cb19-26" aria-hidden="true" tabindex="-1"></a>                   <span class="at">values_to =</span> <span class="st">"value"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb19-27"><a href="#cb19-27" aria-hidden="true" tabindex="-1"></a>      <span class="fu">pmap</span>(\(param, value) <span class="fu">assign</span>(param, value))</span>
+<span id="cb19-28"><a href="#cb19-28" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb19-29"><a href="#cb19-29" aria-hidden="true" tabindex="-1"></a>    glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">"{param}: {value}"</span>)</span>
+<span id="cb19-30"><a href="#cb19-30" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb19-31"><a href="#cb19-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-32"><a href="#cb19-32" aria-hidden="true" tabindex="-1"></a><span class="co"># bs_dat &lt;- do.call(crossing, params) |&gt;</span></span>
+<span id="cb19-33"><a href="#cb19-33" aria-hidden="true" tabindex="-1"></a><span class="co">#   mutate(condition_id = row_number()) |&gt;</span></span>
+<span id="cb19-34"><a href="#cb19-34" aria-hidden="true" tabindex="-1"></a><span class="co">#   pmap(\(...) {</span></span>
+<span id="cb19-35"><a href="#cb19-35" aria-hidden="true" tabindex="-1"></a><span class="co">#     list2env(list(...), envir = environment())</span></span>
+<span id="cb19-36"><a href="#cb19-36" aria-hidden="true" tabindex="-1"></a><span class="co">#     glue::glue("condition {condition_id}: n_bootstraps={n_bootstraps}, n_students={n_students}, n_schools={n_schools}")</span></span>
+<span id="cb19-37"><a href="#cb19-37" aria-hidden="true" tabindex="-1"></a><span class="co">#     </span></span>
+<span id="cb19-38"><a href="#cb19-38" aria-hidden="true" tabindex="-1"></a><span class="co">#     get_bootres(n_bootstraps, n_students, n_schools) |&gt;</span></span>
+<span id="cb19-39"><a href="#cb19-39" aria-hidden="true" tabindex="-1"></a><span class="co">#       mutate(condition_str = glue::glue("condition {condition_id}: n_bootstraps={n_bootstraps}, n_students={n_students},  n_schools={n_schools}"))</span></span>
+<span id="cb19-40"><a href="#cb19-40" aria-hidden="true" tabindex="-1"></a><span class="co">#   })</span></span>
+<span id="cb19-41"><a href="#cb19-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-42"><a href="#cb19-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-43"><a href="#cb19-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-44"><a href="#cb19-44" aria-hidden="true" tabindex="-1"></a>bs_dat <span class="sc">|&gt;</span></span>
+<span id="cb19-45"><a href="#cb19-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">2</span>) <span class="sc">|&gt;</span></span>
+<span id="cb19-46"><a href="#cb19-46" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(\(bootres) {</span>
+<span id="cb19-47"><a href="#cb19-47" aria-hidden="true" tabindex="-1"></a>    plt_dat <span class="ot">&lt;-</span> </span>
+<span id="cb19-48"><a href="#cb19-48" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb19-49"><a href="#cb19-49" aria-hidden="true" tabindex="-1"></a>    <span class="fu">make_plt_pattern</span>(plt_dat)</span>
+<span id="cb19-50"><a href="#cb19-50" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb19-51"><a href="#cb19-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-52"><a href="#cb19-52" aria-hidden="true" tabindex="-1"></a><span class="fu">make_plt_dat</span>(bres) <span class="sc">|&gt;</span></span>
+<span id="cb19-53"><a href="#cb19-53" aria-hidden="true" tabindex="-1"></a>    get_table_row_location</span>
+<span id="cb19-54"><a href="#cb19-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-55"><a href="#cb19-55" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mtcars) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="fu">aes</span>(mpg, disp)) <span class="sc">+</span> <span class="fu">theme_classic</span>()</span>
+<span id="cb19-56"><a href="#cb19-56" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mtcars) <span class="sc">+</span> <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(gear, disp, <span class="at">group =</span> gear)) <span class="sc">+</span> <span class="fu">theme_classic</span>()</span>
+<span id="cb19-57"><a href="#cb19-57" aria-hidden="true" tabindex="-1"></a>p3 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mtcars) <span class="sc">+</span> <span class="fu">geom_bar</span>(<span class="fu">aes</span>(gear)) <span class="sc">+</span> <span class="fu">facet_wrap</span>(<span class="sc">~</span>cyl) <span class="sc">+</span> <span class="fu">theme_classic</span>()</span>
+<span id="cb19-58"><a href="#cb19-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-59"><a href="#cb19-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-60"><a href="#cb19-60" aria-hidden="true" tabindex="-1"></a>design <span class="ot">&lt;-</span> <span class="st">"</span></span>
+<span id="cb19-61"><a href="#cb19-61" aria-hidden="true" tabindex="-1"></a><span class="st">  AB</span></span>
+<span id="cb19-62"><a href="#cb19-62" aria-hidden="true" tabindex="-1"></a><span class="st">  AC</span></span>
+<span id="cb19-63"><a href="#cb19-63" aria-hidden="true" tabindex="-1"></a><span class="st">"</span></span>
+<span id="cb19-64"><a href="#cb19-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-65"><a href="#cb19-65" aria-hidden="true" tabindex="-1"></a>(p1 <span class="sc">+</span> p2 <span class="sc">+</span> p3) <span class="sc">+</span></span>
+<span id="cb19-66"><a href="#cb19-66" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_layout</span>(<span class="at">design =</span> design, <span class="at">heights =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">1</span>), <span class="at">axes =</span> <span class="st">"collect"</span>) <span class="sc">&amp;</span></span>
+<span id="cb19-67"><a href="#cb19-67" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <!-- ### Bootstrapped Data -->

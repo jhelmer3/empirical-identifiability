@@ -13,7 +13,7 @@ get_examples_dat <- function(results, model_terms) {
     pull(rep)
   
   ex_good_id <- potential_examples |>
-    filter(when_all(condition_id == 4, term == "sd__ses")) |>
+    filter(when_all(condition_id == 4, term == "cor__(Intercept).ses")) |>
     mutate(dist_from_mean = abs(estimate - mean(estimate, na.rm = T))) |>
     filter(dist_from_mean == min(dist_from_mean)) |>
     pull(rep)

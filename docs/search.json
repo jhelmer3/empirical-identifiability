@@ -53,7 +53,7 @@
     "href": "ecls-k.html#bootstrapping",
     "title": "ECLS-K Bootstrapping",
     "section": "Bootstrapping",
-    "text": "Bootstrapping\n\n\nCode\ntibble(parameters = names(param_set),\n       values = map(param_set, \\(values) reduce(values, list))) |&gt;\n  gt() |&gt;\n  tab_style(cell_text(weight = \"bold\"),\n            cells_column_labels()) |&gt;\n  cols_label_with(fn = str_to_title)\n\n\n\n\n\n\n  \n    \n      Parameters\n      Values\n    \n  \n  \n    n_bootstraps\n240\n    n_students\n3, 10\n    n_schools\n10, 30\n  \n  \n\n\n\nCode\nn_conditions &lt;- param_set |&gt; map(length) |&gt; reduce(`*`)\n\n\nStarting conditions: number of level-one units (students) within level-two units (schools). This set of parameters creates 4 conditions.\n\nCode\nwalk(tar_read(condition_plt), print)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOther Distributions by Condition\n\nICC\\(R^2\\)\n\n\n\n\nCode\nicc_plt\n\n\n\n\n\n\n\n\n\n\n\n\n\nCode\nr2_plt"
+    "text": "Bootstrapping\n\n\nCode\ntibble(parameters = names(param_set),\n       values = map(param_set, \\(values) reduce(values, list))) |&gt;\n  gt() |&gt;\n  tab_style(cell_text(weight = \"bold\"),\n            cells_column_labels()) |&gt;\n  cols_label_with(fn = str_to_title)\n\n\n\n\n\n\n  \n    \n      Parameters\n      Values\n    \n  \n  \n    n_bootstraps\n240\n    n_students\n3, 10\n    n_schools\n10, 30\n  \n  \n\n\n\nCode\nn_conditions &lt;- param_set |&gt; map(length) |&gt; reduce(`*`)\n\n\nStarting conditions: number of level-one units (students) within level-two units (schools). This set of parameters creates 4 conditions.\n\nCode\ntargets::tar_read(condition_plt_files, \n                  store = here::here(\"_targets\")) |&gt;\n  unlist() |&gt;\n  knitr::include_graphics()\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOther Distributions by Condition\n\nICC\\(R^2\\)\n\n\n\n\nCode\nicc_plt\n\n\n\n\n\n\n\n\n\n\n\n\n\nCode\nr2_plt"
   },
   {
     "objectID": "ecls-k.html#archive",
@@ -81,6 +81,13 @@
     "href": "ecls-k.html#simulated-data-from-bootstrap-hit",
     "title": "ECLS-K Bootstrapping",
     "section": "Simulated Data from Bootstrap Hit",
-    "text": "Simulated Data from Bootstrap Hit\n\n\nCode\nexamples_params |&gt;\n  select(-iter) |&gt;\n  unique() |&gt;\n  group_split(.by = example_type,\n              .keep = F) |&gt;\n  map(\\(data) {\n    title &lt;- data$example_type\n    data |&gt;\n      j_gt() |&gt;\n      cols_hide(c(example_type, n_bootstraps)) |&gt;\n      fmt_number() |&gt;\n      tab_header(title = title)\n    } |&gt; wrap_table()) |&gt;\n  wrap_plots(ncol = 1)\n\n\n\n\n\n\n\n\n\n\nCode\nwalk(examples_spaghetti_plts, print)\n\n\n\n\n\n\n\n\n\n\n\n\nCode\nexamples_condition_plt_files &lt;- targets::tar_read(examples_condition_plt_files)\nexamples_condition_plt_files_flat &lt;- unlist(examples_condition_plt_files)\nknitr::include_graphics(examples_condition_plt_files_flat)\n\n\n\n\n\n\n\n\n\n\n\n\nICC\\(R^2\\)\n\n\n\n\nCode\nexamples_icc_plt\n\n\n\n\n\n\n\n\n\n\n\n\n\nCode\nexamples_r2_plt"
+    "text": "Simulated Data from Bootstrap Hit\n\n\nCode\nexamples_params |&gt;\n  select(-iter) |&gt;\n  unique() |&gt;\n  group_split(.by = example_type,\n              .keep = F) |&gt;\n  map(\\(data) {\n    title &lt;- data$example_type\n    data |&gt;\n      select(-example_type) |&gt;\n      pivot_longer(everything(),\n                   names_to = \"Parameter\",\n                   values_to = \"Value\") |&gt;\n      j_gt() |&gt;\n      fmt_number() |&gt;\n      tab_header(title = str_to_title(title))\n    } |&gt; wrap_table()) |&gt;\n  wrap_plots(ncol = 2)\n\n\n\n\n\n\n\n\n\n\nCode\nwalk(examples_spaghetti_plts, print)\n\n\nWarning: Removed 20 rows containing missing values or values outside the scale range\n(`geom_line()`).\n\n\nWarning: Removed 60 rows containing missing values or values outside the scale range\n(`geom_line()`).\n\n\n\n\n\n\n\n\n\n\n\n\nCode\ntargets::tar_read(examples_condition_plt_files, \n                  store = here::here(\"_targets\")) |&gt;\n  unlist() |&gt;\n  knitr::include_graphics()\n\n\n\n\n\n\n\n\n\n\n\n\nICC\\(R^2\\)\n\n\n\n\nCode\nexamples_icc_plt\n\n\n\n\n\n\n\n\n\n\n\n\n\nCode\nexamples_r2_plt"
+  },
+  {
+    "objectID": "ecls-k.html#bootstrapping-from-one-subset",
+    "href": "ecls-k.html#bootstrapping-from-one-subset",
+    "title": "ECLS-K Bootstrapping",
+    "section": "Bootstrapping From One Subset",
+    "text": "Bootstrapping From One Subset\n\nCode\ntargets::tar_read(condition_plt_v_subset_files, \n                  store = here::here(\"_targets\")) |&gt;\n  unlist() |&gt;\n  knitr::include_graphics()"
   }
 ]

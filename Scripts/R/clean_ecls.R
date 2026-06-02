@@ -1,5 +1,6 @@
 clean_ecls <- function(data) {
   data |>
+    as_tibble() |>
     select(childid, s2_id, x12sesl, x2pubpri, x2mthetk5) |>
     mutate(private = recode_values(as.character(x2pubpri),
                                    "1: PUBLIC" ~ 0,

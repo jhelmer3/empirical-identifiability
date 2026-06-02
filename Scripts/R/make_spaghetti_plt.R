@@ -27,8 +27,7 @@ plt_spaghetti <- function(fmtted_spaghetti_dat) {
   fmtted_spaghetti_dat |>
     ggplot(aes(x = ses, y = mathscore_pred, group = grp)) +
     geom_line(alpha = 0.1) +
-    scale_x_continuous(limits = c(-3, 3), breaks = c(-3, -1, 0, 1, 3)) +
-    scale_y_continuous(breaks = c(-1, 0, 1)) +
+    scale_x_continuous(limits = c(-2.5, 2.5), breaks = c(-2.5, -1, 0, 1, 2.5)) +
     guides(x = guide_axis(cap = T),
            y = guide_axis(cap = T)) +
     labs(x = "School SES", y = "Predicted Math Score") +

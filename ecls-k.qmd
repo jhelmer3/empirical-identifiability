@@ -12,7 +12,7 @@ html-table-processing: none
 ::: panel-tabset
 ### Setup
 
-```{r}
+```{r reading}
 #| message: false
 #| code-fold: show
 library(tidyverse)
@@ -24,8 +24,7 @@ library(gt)
 tar_source(here::here("Scripts", "R"))
 
 c(ecls_dat, param_set, icc_plt, r2_plt, 
-  examples_params, examples_spaghetti_plts,
-  examples_condition_plt, examples_icc_plt, examples_r2_plt) |>
+  examples_params, examples_spaghetti_plts, examples_icc_plt, examples_r2_plt) |>
   tar_load(store = here::here("_targets"))
 ```
 
@@ -125,7 +124,7 @@ Selecting columns with the outcome (math scores), level-one predictor (student S
 
 ```
 
-```{r}
+```{r ecls_info}
 #| layout-ncol: 2
 ecls_dat |>
   select(schoolid, childid) |>
@@ -149,7 +148,7 @@ ecls_dat |>
 
 Distributions of the outcome and predictors in the remaining data.
 
-```{r}
+```{r ecls_distributions}
 #| fig-height: 3
 ecls_dat |>
   select(-c(childid, schoolid)) |>
@@ -166,7 +165,7 @@ ecls_dat |>
 Results from the model applied to the full dataset.
 
 ::: {style="font-size:70%"}
-```{r}
+```{r tab_models}
 #| layout-ncol: 2
 m0 <- tar_read(full_unconditional_model, here::here("_targets"))
 sjPlot::tab_model(m0,
@@ -181,7 +180,7 @@ sjPlot::tab_model(m1,
 
 ## Bootstrapping
 
-```{r}
+```{r param_tbl}
 #| column: margin
 tibble(parameters = names(param_set),
        values = map(param_set, \(values) reduce(values, list))) |>
@@ -197,13 +196,16 @@ Starting conditions: number of level-one units (students) within level-two units
 
 
 
-```{r}
+```{r condition_plts}
 #| column: page
 #| fig-height: 8
 #| layout-ncol: 2
 #| warning: false
 
-walk(tar_read(condition_plt), print)
+targets::tar_read(condition_plt_files, 
+                  store = here::here("_targets")) |>
+  unlist() |>
+  knitr::include_graphics()
 ```
 
 
@@ -213,22 +215,37 @@ walk(tar_read(condition_plt), print)
 
 ### ICC
 
-```{r}
+```{r icc_plt}
 icc_plt
 ```
 
 ### $R^2$ 
 
-```{r}
+```{r r2_plt}
 r2_plt
 ```
 
 :::
 
 
+## Bootstrapping From One Subset
+
+```{r condition_plts_v_subset}
+#| column: page
+#| fig-height: 8
+#| layout-ncol: 2
+#| warning: false
+
+targets::tar_read(condition_plt_v_subset_files, 
+                  store = here::here("_targets")) |>
+  unlist() |>
+  knitr::include_graphics()
+```
+
+
 ## Simulated Data from Bootstrap Hit
 
-```{r}
+```{r examples_params_tbl}
 examples_params |>
   select(-iter) |>
   unique() |>
@@ -237,39 +254,44 @@ examples_params |>
   map(\(data) {
     title <- data$example_type
     data |>
+      select(-example_type) |>
+      pivot_longer(everything(),
+                   names_to = "Parameter",
+                   values_to = "Value") |>
       j_gt() |>
-      cols_hide(c(example_type, n_bootstraps)) |>
       fmt_number() |>
-      tab_header(title = title)
+      tab_header(title = str_to_title(title))
     } |> wrap_table()) |>
-  wrap_plots(ncol = 1)
+  wrap_plots(ncol = 2)
 ```
 
-```{r}
+```{r examples_spaghetti_plts}
 #| layout-ncol: 2
+#| fig-height: 2.5
 walk(examples_spaghetti_plts, print)
 ```
 
 
-```{r}
+```{r examples_condition_plts}
 #| column: page
 #| layout-ncol: 2
-examples_condition_plt_files <- targets::tar_read(examples_condition_plt_files)
-examples_condition_plt_files_flat <- unlist(examples_condition_plt_files)
-knitr::include_graphics(examples_condition_plt_files_flat)
+targets::tar_read(examples_condition_plt_files, 
+                  store = here::here("_targets")) |>
+  unlist() |>
+  knitr::include_graphics()
 ```
 
 ::: panel-tabset
 
 ### ICC
 
-```{r}
+```{r examples_icc_plt}
 examples_icc_plt
 ```
 
 ### $R^2$ 
 
-```{r}
+```{r examples_r2_plt}
 examples_r2_plt
 ```
 
