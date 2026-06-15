@@ -194,14 +194,11 @@ n_conditions <- param_set |> map(length) |> reduce(`*`)
 
 Starting conditions: number of level-one units (students) within level-two units (schools). This set of parameters creates `r n_conditions` conditions.
 
-
-
 ```{r condition_plts}
 #| column: page
 #| fig-height: 8
 #| layout-ncol: 2
 #| warning: false
-
 targets::tar_read(condition_plt_files, 
                   store = here::here("_targets")) |>
   unlist() |>
@@ -228,19 +225,19 @@ r2_plt
 :::
 
 
-## Bootstrapping From One Subset
+<!-- ## Bootstrapping From One Subset -->
 
-```{r condition_plts_v_subset}
-#| column: page
-#| fig-height: 8
-#| layout-ncol: 2
-#| warning: false
+<!-- ```{r condition_plts_v_subset} -->
+<!-- #| column: page -->
+<!-- #| fig-height: 8 -->
+<!-- #| layout-ncol: 2 -->
+<!-- #| warning: false -->
 
-targets::tar_read(condition_plt_v_subset_files, 
-                  store = here::here("_targets")) |>
-  unlist() |>
-  knitr::include_graphics()
-```
+<!-- targets::tar_read(condition_plt_v_subset_files,  -->
+<!--                   store = here::here("_targets")) |> -->
+<!--   unlist() |> -->
+<!--   knitr::include_graphics() -->
+<!-- ``` -->
 
 
 ## Simulated Data from Bootstrap Hit

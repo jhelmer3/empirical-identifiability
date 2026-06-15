@@ -10,14 +10,19 @@ make_warnings_tbl <- function(condition_dat) {
     "\n\\s*See.*"
   ) |> str_c(collapse = "|")
   
+  error_patterns_rm <- "^[^;]*;\\s*|\\s\\(or scale parameter\\)"
+  
   condition_dat |>
     # some of this should probably be moved to fit_model()
     mutate(
       lme4_warnings = map(lme4_warnings, \(lme4_warnings)
                               map(lme4_warnings, \(warning) 
-                                  str_remove_all(warning, warning_patterns_rm)))
+                                  str_remove_all(warning, warning_patterns_rm))),
+      error = map_chr(error, \(err) str_remove_all(err, error_patterns_rm) |>
+                        str_wrap(width = 45) |>
+                        str_replace_all("\n", "<br>"))
     ) |>
-    mutate(across(c(opt_warnings, lme4_warnings, error),
+    mutate(across(c(opt_warnings, lme4_warnings),
                   \(col) map_chr(col, \(w) if (is.na(w)) w[[1]] 
                                  else str_c(w |> flatten() |> str_to_sentence(), collapse = "<br> ")))) |>
     summarize(.by = c(opt_warnings, lme4_warnings, error),
@@ -44,7 +49,7 @@ make_warnings_tbl <- function(condition_dat) {
 }
 
 # tar_read(results_grouped) |>
-#   filter(condition_id == 3) |>
+#   filter(condition_id == 1) |>
 #   make_warnings_tbl()
 
 

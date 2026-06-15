@@ -38,35 +38,14 @@ list(
   tar_target(params, define_params(param_set)),
   
   ## subsetting once per condition, bootstrapping within
+  ## still need to overall replicate this multiple times
+  
   tar_target(params_w_subset, subset_dat(ecls_dat, params),
              pattern = map(params)),
-  tar_target(results_v_subset, bootstrap_subset(params_w_subset) |>
+  tar_target(results, bootstrap_subset(params_w_subset) |>
                fit_model(),
              pattern = map(params_w_subset)),
-  tar_target(axis_limits_v_subset, identify_axis_limits(results_v_subset)),
-  tar_group_by(results_grouped_v_subset, results_v_subset |> 
-                 dplyr::mutate(.by = condition_id,
-                               rep = row_number()), 
-               condition_id),
-  tar_target(condition_plt_v_subset, 
-             patch_plt_dat(results_grouped_v_subset, plt_layout, true_values, axis_limits_v_subset),
-             pattern = map(results_grouped_v_subset),
-             iteration = "list"),
-  tar_target(condition_plt_v_subset_files,
-             paste0("outputs/condition_plt_v_subset_", 
-                    targets::tar_name(), ".png") |>
-               ggsave_and_return_path(condition_plt_v_subset, 
-                                      width = 8, height = 8),
-             pattern = map(condition_plt_v_subset),
-             iteration = "list",
-             format = "file"),
   
-  ## subsetting on each "bootstrap" replication
-  tar_rep(results, ecls_dat |> 
-            bootstrap_data(params) |>
-            fit_model(), 
-          reps = n_bootstraps / 6, 
-          batches = 6),
   tar_target(axis_limits, identify_axis_limits(results)),
   tar_group_by(results_grouped, results |> 
                  dplyr::mutate(.by = condition_id,

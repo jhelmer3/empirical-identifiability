@@ -1,6 +1,7 @@
 
 get_examples_dat <- function(results, model_terms) {
   potential_examples <- results |>
+    filter_out(is.na(model)) |>
     select(rep, condition_id, tidy) |>
     mutate(tidy = map(tidy, \(tidy) tidy |> 
                         complete(term = model_terms))) |>
@@ -24,6 +25,12 @@ get_examples_dat <- function(results, model_terms) {
     left_join(results,
               by = c("rep", "condition_id"))
 }
+# 
+# tar_read(results_grouped) |>
+#   select(rep, condition_id, tidy) |>
+#   pull(tidy)
+#   mutate(tidy = map(tidy, \(tidy) tidy |> 
+#                       complete(term = tar_read(model_terms))))
 
 # tar_read(results_grouped) |>
 #   get_examples_dat(tar_read(model_terms)) 

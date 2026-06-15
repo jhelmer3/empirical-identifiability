@@ -2,11 +2,18 @@
 bootstrap_subset <- function(params_w_subset) {
   params_w_subset |>
     uncount(n_bootstraps, .remove = F) |>
-    mutate(bootstrap = pmap(list(n_students, n_schools, data_subset),
-                            \(n_students, n_schools, data_subset) 
-                            data_subset |>
-                              filter(childid %in% sample(childid, nrow(data_subset),
-                                                         replace = T))))
+    mutate(
+      bootstrap = pmap(
+        list(n_students, n_schools, data_subset),
+        \(n_students, n_schools, data_subset) 
+        data_subset |>
+          filter(schoolid %in% sample(schoolid, params_w_subset$n_schools, 
+                                      replace = T)) |>
+          filter(.by = schoolid,
+                 childid %in% sample(childid, params_w_subset$n_students,
+                                     replace = T))
+      )
+    )
 }
 
 
