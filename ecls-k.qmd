@@ -23,8 +23,12 @@ library(gt)
 
 tar_source(here::here("Scripts", "R"))
 
-c(ecls_dat, param_set, icc_plt, r2_plt, 
-  examples_params, examples_spaghetti_plts, examples_icc_plt, examples_r2_plt) |>
+c(
+  ecls_dat, param_set, params,
+  full_data_models,
+  icc_plts, r2_plts#, 
+  #examples_params, examples_spaghetti_plts, examples_icc_plt, examples_r2_plt
+  ) |>
   tar_load(store = here::here("_targets"))
 ```
 
@@ -165,15 +169,19 @@ ecls_dat |>
 Results from the model applied to the full dataset.
 
 ::: {style="font-size:70%"}
-```{r tab_models}
-#| layout-ncol: 2
-m0 <- tar_read(full_unconditional_model, here::here("_targets"))
-sjPlot::tab_model(m0,
-                  title = "Unconditional")
+```{r}
+#| layout-ncol: 3
+#| column: page
+full_data_models[1, "full_res"][[1]] |> sjPlot::tab_model(title = "Unconditional")
 
-m1 <- tar_read(full_conditional_model, here::here("_targets"))
-sjPlot::tab_model(m1,
-                  title = "Conditional")
+full_data_models[2, "full_res"][[1]] |> sjPlot::tab_model(title = "Level-One Predictor")
+
+full_data_models[3, "full_res"][[1]] |> sjPlot::tab_model(title = "Level-One and Level-Two Predictor")
+
+full_data_models[4, "full_res"][[1]] |> sjPlot::tab_model(title = "Cross-Level Interaction")
+
+full_data_models[5, "full_res"][[1]] |> sjPlot::tab_model(title = "Full")
+
 ```
 :::
 
@@ -182,47 +190,160 @@ sjPlot::tab_model(m1,
 
 ```{r param_tbl}
 #| column: margin
-tibble(parameters = names(param_set),
-       values = map(param_set, \(values) reduce(values, list))) |>
+param_set_no_model <- param_set |>
+  list_modify("model_string" = rlang::zap())
+
+tibble(parameters = names(param_set_no_model),
+       values = map(param_set_no_model, \(values) reduce(values, list))) |>
   gt() |>
   tab_style(cell_text(weight = "bold"),
             cells_column_labels()) |>
   cols_label_with(fn = str_to_title)
 
-n_conditions <- param_set |> map(length) |> reduce(`*`)
+n_conditions <- param_set_no_model |> map(length) |> reduce(`*`)
+
+n_within_model_conditions <- params |>
+  count(model_string) |>
+  pluck("n", 1)
+
+condition_plt_files <- targets::tar_read(condition_plt_files, 
+                                         store = here::here("_targets")) |>
+  unlist()
 ```
 
-Starting conditions: number of level-one units (students) within level-two units (schools). This set of parameters creates `r n_conditions` conditions.
+Starting conditions: number of level-one units (students) within level-two units (schools). This set of parameters creates `r n_conditions` conditions per model.
 
-```{r condition_plts}
+:::: panel-tabset
+
+## Unconditional Model
+
+```{r model_0_condition_plts}
 #| column: page
-#| fig-height: 8
 #| layout-ncol: 2
 #| warning: false
-targets::tar_read(condition_plt_files, 
-                  store = here::here("_targets")) |>
-  unlist() |>
+
+model_ids <- condition_plt_files |> 
+  str_extract("model_(\\d)", group = 1) |> 
+  unique()
+
+model_id_idxs <- map(model_ids, 
+                     \(model_id) which(
+                       str_detect(condition_plt_files, glue::glue("model_{model_id}"))
+                     ))
+
+condition_plt_files[model_id_idxs[[1]]] |>
   knitr::include_graphics()
 ```
 
+## Level-One Predictor Model
+
+```{r model_1_condition_plts}
+#| column: page
+#| layout-ncol: 2
+#| warning: false
+
+condition_plt_files[model_id_idxs[[2]]] |>
+  knitr::include_graphics()
+```
+
+## Level-One and Level-Two Predictor Model
+
+```{r model_3_condition_plts}
+#| column: page
+#| layout-ncol: 2
+#| warning: false
+
+condition_plt_files[model_id_idxs[[3]]] |>
+  knitr::include_graphics()
+```
+
+## Cross-Level Interaction Model
+
+```{r model_4_condition_plts}
+#| column: page
+#| layout-ncol: 2
+#| warning: false
+
+condition_plt_files[model_id_idxs[[4]]] |>
+  knitr::include_graphics()
+```
+
+## Full Model
+
+```{r model_5_condition_plts}
+#| column: page
+#| layout-ncol: 2
+#| warning: false
+
+condition_plt_files[model_id_idxs[[5]]] |>
+  knitr::include_graphics()
+```
+
+::::
 
 #### Other Distributions by Condition
 
-::: panel-tabset
+:::: panel-tabset
 
 ### ICC
 
-```{r icc_plt}
-icc_plt
+::: panel-tabset
+### Unconditional Model
+```{r icc_plt_1}
+icc_plts[[1]]
 ```
+
+### Level-One Predictor Model
+```{r icc_plt_2}
+icc_plts[[2]]
+```
+
+### Level-One and Level-Two Predictor Model
+```{r icc_plt_3}
+icc_plts[[3]]
+```
+
+### Cross-Level Interaction Model
+```{r icc_plt_4}
+icc_plts[[4]]
+```
+
+### Full Model
+```{r icc_plt_5}
+icc_plts[[5]]
+```
+:::
 
 ### $R^2$ 
 
-```{r r2_plt}
-r2_plt
+::: panel-tabset
+### Unconditional Model
+```{r r2_plt_1}
+r2_plts[[1]]
 ```
 
+### One-Predictor Model
+```{r r2_plt_2}
+r2_plts[[2]]
+```
+
+### Level-One and Level-Two Predictor Model
+```{r r2_plt_3}
+r2_plts[[3]]
+```
+
+### Cross-Level Interaction Model
+```{r r2_plt_4}
+r2_plts[[4]]
+```
+
+### Full Model
+```{r r2_plt_5}
+r2_plts[[5]]
+```
 :::
+
+::::
 
 
 <!-- ## Bootstrapping From One Subset -->
@@ -240,59 +361,59 @@ r2_plt
 <!-- ``` -->
 
 
-## Simulated Data from Bootstrap Hit
+<!-- ## Simulated Data from Bootstrap Hit -->
 
-```{r examples_params_tbl}
-examples_params |>
-  select(-iter) |>
-  unique() |>
-  group_split(.by = example_type,
-              .keep = F) |>
-  map(\(data) {
-    title <- data$example_type
-    data |>
-      select(-example_type) |>
-      pivot_longer(everything(),
-                   names_to = "Parameter",
-                   values_to = "Value") |>
-      j_gt() |>
-      fmt_number() |>
-      tab_header(title = str_to_title(title))
-    } |> wrap_table()) |>
-  wrap_plots(ncol = 2)
-```
+<!-- ```{r examples_params_tbl} -->
+<!-- examples_params |> -->
+<!--   select(-iter) |> -->
+<!--   unique() |> -->
+<!--   group_split(.by = example_type, -->
+<!--               .keep = F) |> -->
+<!--   map(\(data) { -->
+<!--     title <- data$example_type -->
+<!--     data |> -->
+<!--       select(-example_type) |> -->
+<!--       pivot_longer(everything(), -->
+<!--                    names_to = "Parameter", -->
+<!--                    values_to = "Value") |> -->
+<!--       j_gt() |> -->
+<!--       fmt_number() |> -->
+<!--       tab_header(title = str_to_title(title)) -->
+<!--     } |> wrap_table()) |> -->
+<!--   wrap_plots(ncol = 2) -->
+<!-- ``` -->
 
-```{r examples_spaghetti_plts}
-#| layout-ncol: 2
-#| fig-height: 2.5
-walk(examples_spaghetti_plts, print)
-```
+<!-- ```{r examples_spaghetti_plts} -->
+<!-- #| layout-ncol: 2 -->
+<!-- #| fig-height: 2.5 -->
+<!-- walk(examples_spaghetti_plts, print) -->
+<!-- ``` -->
 
 
-```{r examples_condition_plts}
-#| column: page
-#| layout-ncol: 2
-targets::tar_read(examples_condition_plt_files, 
-                  store = here::here("_targets")) |>
-  unlist() |>
-  knitr::include_graphics()
-```
+<!-- ```{r examples_condition_plts} -->
+<!-- #| column: page -->
+<!-- #| layout-ncol: 2 -->
+<!-- targets::tar_read(examples_condition_plt_files,  -->
+<!--                   store = here::here("_targets")) |> -->
+<!--   unlist() |> -->
+<!--   knitr::include_graphics() -->
+<!-- ``` -->
 
-::: panel-tabset
+<!-- ::: panel-tabset -->
 
-### ICC
+<!-- ### ICC -->
 
-```{r examples_icc_plt}
-examples_icc_plt
-```
+<!-- ```{r examples_icc_plt} -->
+<!-- examples_icc_plt -->
+<!-- ``` -->
 
-### $R^2$ 
+<!-- ### $R^2$  -->
 
-```{r examples_r2_plt}
-examples_r2_plt
-```
+<!-- ```{r examples_r2_plt} -->
+<!-- examples_r2_plt -->
+<!-- ``` -->
 
-:::
+<!-- ::: -->
 
 <!-- ## Generated Data -->
 

@@ -1,6 +1,9 @@
 
-patch_plt_dat <- function(condition_dat, plt_layout, true_values, axis_limits, table_height_prop = 1/4,
+patch_plt_dat <- function(condition_dat, axis_limits, table_height_prop = 1/4,
                           title_info_vars = c("n_bootstraps", "n_students", "n_schools")) {
+  
+  plt_layout <- condition_dat[1, "plt_layout"][[1]][[1]]
+  true_values <- condition_dat[1, "full_tidy"][[1]][[1]]
   
   condition_plt_dat <- make_plt_dat(condition_dat, plt_layout, true_values, axis_limits)
   
@@ -27,6 +30,11 @@ patch_plt_dat <- function(condition_dat, plt_layout, true_values, axis_limits, t
       x = 0.5, y = 1, vjust = 1, fontface = "bold", size = 14)
 }
 
+
+# tar_read(results_grouped) |>
+#   filter(condition_id == 4) |>
+#   patch_plt_dat(tar_read(axis_limits))
+# 
 
 # tar_read(results_grouped_v_subset) |>
 #   filter(condition_id == 1) |> 

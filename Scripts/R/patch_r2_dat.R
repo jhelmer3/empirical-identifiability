@@ -1,6 +1,7 @@
 
 patch_r2_dat <- function(r2_dat) {
   r2_dat |>
+    group_split(condition_id) |>
     map(\(data) {
       error_dat <- data |>
         mutate(r2_error = is.na(r2_estimate)) |>

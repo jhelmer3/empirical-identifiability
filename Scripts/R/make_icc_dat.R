@@ -1,7 +1,7 @@
 
 make_icc_dat <- function(condition_dat) {
   condition_dat |>
-    select(model) |>
+    select(condition_id, model_id, model) |>
     mutate(
       icc = map_dbl(model, \(model) {
         icc <- performance::icc(model) |>

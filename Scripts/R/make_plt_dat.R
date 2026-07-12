@@ -11,10 +11,16 @@ make_plt_dat <- function(condition_dat, plt_layout, true_values, axis_limits) {
                                               make_single_plt(true_values, xterm, yterm, axis_limits)
                                             })) |> pluck("plot")))
 }
+
+# plt_layout <- (tar_read(results_grouped) |>
+#                  filter(condition_id == 1))[1, "plt_layout"][[1]][[1]]
+# true_values <- (tar_read(results_grouped) |>
+#                   filter(condition_id == 1))[1, "full_tidy"][[1]][[1]]
+# 
 # 
 # tar_read(results_grouped) |>
 #   filter(condition_id == 1) |>
-#   make_plt_dat(tar_read(plt_layout), tar_read(results_grouped) |>
+#   make_plt_dat(plt_layout, true_values, tar_read(results_grouped) |>
 #                  filter(condition_id == 1) |> identify_axis_limits())
 
 # make_plt_dat <- function(bootres) {

@@ -1,7 +1,7 @@
 
 patch_icc_dat <- function(icc_dat) {
-  
   icc_dat |>
+    group_split(condition_id) |>
     map(\(data) data |>
           ggplot(aes(x = icc)) +
           geom_density(na.rm = T) +
@@ -17,3 +17,6 @@ patch_icc_dat <- function(icc_dat) {
                 axis.line.y = element_blank())) |>
     wrap_plots(ncol = 2, axes = "collect_x")
 }
+
+# tar_read(icc_dat_grouped_by_model) |>
+#   filter(model_id == 1)
