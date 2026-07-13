@@ -34,7 +34,7 @@ patch_plt_dat <- function(condition_dat, axis_limits, table_height_prop = 1/4,
 # tar_read(results_grouped) |>
 #   filter(condition_id == 4) |>
 #   patch_plt_dat(tar_read(axis_limits))
-# 
+ 
 
 # tar_read(results_grouped_v_subset) |>
 #   filter(condition_id == 1) |> 

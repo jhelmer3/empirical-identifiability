@@ -15,10 +15,11 @@ make_single_plt <- function(plt_dat, true_values,
                                         xterm, yterm, xlims, ylims)
   else make_scatter_plt(plt_dat, true_values,
                         xterm, yterm, xlims, ylims)} +
-    scale_x_continuous(breaks = NULL) +
-    scale_y_continuous(breaks = NULL) +
+    # scale_x_continuous(breaks = NULL) +
+    # scale_y_continuous(breaks = NULL) +
     theme_classic() +
-    theme(legend.position = "none")
+    theme(legend.position = "none",
+          axis.text.x = element_text(angle = 270))
 }
 
 # add something as an indicator of how many are removed?

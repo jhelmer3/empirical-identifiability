@@ -6,7 +6,23 @@ subset_dat <- function(ecls_dat, params) {
                               ecls_dat |>
                                 filter(schoolid %in% sample(schoolid, n_schools)) |>
                                 filter(.by = schoolid,
-                                       childid %in% sample(childid, n_students))))
+                                       childid %in% sample(childid, n_students)) |>
+                                mutate(rural = (rural - mean(rural)),
+                                       ses = (ses - mean(ses)))))
 }
 
 
+# tar_read(params_w_subset) |> pluck("data_subset", 1) |>
+#   summary()
+
+# tar_read(params) |>
+#   slice_head(n = 1) |>
+#   subset_dat(tar_read(ecls_dat), params = _) |>
+#   pluck("data_subset", 1) |>
+#   summary()
+
+# subset <- tar_read(results) |>
+#   select(data_subset) |>
+#   slice(2)
+# subset[[1]][[1]] |>
+#   summary()

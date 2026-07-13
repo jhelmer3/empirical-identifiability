@@ -42,7 +42,6 @@ list(
   
   ## subsetting once per condition, bootstrapping within
   ## still need to overall replicate this multiple times
-  
   tar_target(params_w_subset, subset_dat(ecls_dat, params),
              pattern = map(params)),
   tar_target(results, bootstrap_subset(params_w_subset) |>
@@ -52,8 +51,7 @@ list(
   tar_target(axis_limits, identify_axis_limits(results)),
   tar_group_by(results_grouped, results |> 
                  dplyr::mutate(.by = condition_id,
-                               rep = row_number()) |>
-                 dplyr::arrange(model_string), 
+                               rep = row_number()), 
                condition_id),
 
   tar_target(condition_plt, 
@@ -62,8 +60,7 @@ list(
              iteration = "list"),
   tar_target(condition_plt_files,
              paste0("outputs/condition_", first(results_grouped$condition_id),
-                    "_model_", first(results_grouped$model_id),
-                    ".png") |>
+                    "_model_", first(results_grouped$model_id), ".png") |>
                ggsave_and_return_path(condition_plt, 
                                       width = get_condition_plt_dim(results_grouped), 
                                       height = get_condition_plt_dim(results_grouped)),

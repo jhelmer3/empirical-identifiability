@@ -7,19 +7,21 @@ make_density_plt <- function(plt_dat, true_values,
                filter(term == xterm) |>
                pull(estimate), y = 0, yend = Inf) +
     geom_density() +
+    guides(x = guide_axis(cap = T),
+           y = guide_none(NULL)) +
     coord_cartesian(xlim = xlims) +
-    labs(x = wrap_axis_labels(xterm),
-         y = NULL)
+    labs(x = wrap_axis_labels(xterm))
 }
-# 
+
 # x_term <- "(Intercept)"
 # y_term <- "(Intercept)"
 # 
-# 
+# true_values <- (tar_read(results_grouped) |>
+#                   filter(condition_id == 1))[1, "full_tidy"][[1]][[1]]
 # tar_read(results_grouped) |>
 #   filter(condition_id == 1) |>
 #   format_plt_dat(xterm = x_term, yterm = x_term) |>
-#   make_single_plt(xterm = x_term, yterm = x_term,
+#   make_single_plt(xterm = x_term, yterm = x_term, true_values = true_values,
 #                   tar_read(results_grouped) |>
 #                     filter(condition_id == 1) |> identify_axis_limits())
 # 

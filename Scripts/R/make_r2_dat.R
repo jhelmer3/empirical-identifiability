@@ -5,10 +5,10 @@ make_r2_dat <- function(condition_dat) {
     mutate(
       r2s = map(model, \(model) {
         
-        r2s <- performance::r2(model)
+        r2s <- quiet_r2(model)
         
-        r2_conditional <- r2s$R2_conditional
-        r2_marginal <- r2s$R2_marginal
+        r2_conditional <- r2s$result$R2_conditional
+        r2_marginal <- r2s$result$R2_marginal
         
         tribble(~ r2_type, ~ r2_estimate,
                 "conditional", ifelse(is.null(r2_conditional), NA, r2_conditional),
@@ -17,3 +17,9 @@ make_r2_dat <- function(condition_dat) {
     ) |>
     unnest(r2s)
 }
+
+quiet_r2 <- purrr::quietly(\(model) performance::r2(model))
+# 
+# d <- tar_read(results_grouped) |>
+#   filter(condition_id == 2)
+# d |> make_r2_dat()
