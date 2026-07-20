@@ -7,27 +7,46 @@ bootstrap_subset <- function(params_w_subset) {
         list(n_students, n_schools, data_subset),
         \(n_students, n_schools, data_subset) 
         data_subset |>
-          filter(schoolid %in% sample(schoolid, params_w_subset$n_schools, 
-                                      replace = T)) |>
-          filter(.by = schoolid,
-                 childid %in% sample(childid, params_w_subset$n_students,
-                                     replace = T))
+          # nest all data within schools, to
+          nest(cluster_data = -schoolid) |>
+          # sample n_schools schools, then
+          slice_sample(n = n_schools, replace = T) |>
+          # sample n_students students within schools, and finally
+          mutate(cluster_data = map(
+            cluster_data, \(cluster_data) 
+            cluster_data |>
+              slice_sample(n = n_students, replace = T))
+          ) |>
+          # unnest the data within schools
+          unnest(cluster_data)
       )
     )
 }
 
-
-
-
+# 
+# tar_read(params_w_subset) |>
+#   head(1) |>
+#   bootstrap_subset() |>
+#   pull(bootstrap)
 
 
 
 # n_bootstraps <- 100
 # 
 # d <- tibble(cluster_id = 1:5,
-#        n_indivs = c(3, 5, 7, 10, 15)) |>
-#   uncount(n_indivs, .remove = F, .id = "n_within") |>
-#   mutate(indiv_id = paste0(cluster_id, n_within))
+#        n_indivs = c(3, 3, 3, 3, 3)) |>
+#   uncount(n_indivs) |>
+#   mutate(indiv_id = row_number())
+# d
+# 
+# set.seed(1)
+# d |>
+#   nest(cluster_data = -cluster_id) |>
+#   slice_sample(n = 3, replace = T) |>
+#   mutate(cluster_data = map(cluster_data, \(cluster_data) cluster_data |>
+#                                       slice_sample(n = 3, replace = T))) |>
+#   unnest(cluster_data)
+
 # 
 # bs <- d |>
 #   modelr::bootstrap(n_bootstraps) |>

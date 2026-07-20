@@ -19,7 +19,7 @@ make_single_plt <- function(plt_dat, true_values,
     # scale_y_continuous(breaks = NULL) +
     theme_classic() +
     theme(legend.position = "none",
-          axis.text.x = element_text(angle = 270))
+          axis.text.x = element_text(angle = 90))
 }
 
 # add something as an indicator of how many are removed?

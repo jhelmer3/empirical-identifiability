@@ -8,14 +8,14 @@ tar_option_set(
   packages = c("tidyverse", "patchwork", "gt"),
   controller = crew_controller_local(workers = 4),
   format = "qs",
-  seed = 123456
+  seed = 12345
 )
 
 tar_source(here::here("Scripts", "R"))
 
 dir.create("outputs", showWarnings = FALSE, recursive = TRUE)
 
-n_bootstraps <- 240
+n_bootstraps <- 480
 
 list(
   tar_target(ecls_file,
