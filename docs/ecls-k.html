@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Jess Helmer">
-<meta name="dcterms.date" content="2026-07-12">
+<meta name="dcterms.date" content="2026-07-29">
 
 <title>ECLS-K Bootstrapping – Empirical Identifiability</title>
 <style>
@@ -185,7 +185,6 @@ window.Quarto = {
   <ul>
   <li><a href="#full-data" id="toc-full-data" class="nav-link active" data-scroll-target="#full-data">Full Data</a></li>
   <li><a href="#bootstrapping" id="toc-bootstrapping" class="nav-link" data-scroll-target="#bootstrapping">Bootstrapping</a></li>
-  <li><a href="#archive" id="toc-archive" class="nav-link" data-scroll-target="#archive">Archive</a></li>
   </ul>
 </nav>
     </div>
@@ -211,7 +210,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">July 12, 2026</p>
+      <p class="date">July 29, 2026</p>
     </div>
   </div>
   
@@ -240,11 +239,10 @@ window.Quarto = {
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(</span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  ecls_dat, param_set, params,</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  full_data_models,</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  icc_plts, r2_plts<span class="co">#, </span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="co">#examples_params, examples_spaghetti_plts, examples_icc_plt, examples_r2_plt</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tar_load</span>(<span class="at">store =</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"_targets"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  full_data_models</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="co">#examples_params, examples_spaghetti_plts, examples_icc_plt, examples_r2_plt</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tar_load</span>(<span class="at">store =</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"_targets"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </div>
@@ -362,23 +360,23 @@ MVN \left(
 <div class="cell quarto-layout-panel" data-layout-ncol="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
-<div id="bwfaicbsgt" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#bwfaicbsgt table {
+<div id="ajjetbuewg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ajjetbuewg table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#bwfaicbsgt thead, #bwfaicbsgt tbody, #bwfaicbsgt tfoot, #bwfaicbsgt tr, #bwfaicbsgt td, #bwfaicbsgt th {
+#ajjetbuewg thead, #ajjetbuewg tbody, #ajjetbuewg tfoot, #ajjetbuewg tr, #ajjetbuewg td, #ajjetbuewg th {
   border-style: none;
 }
 
-#bwfaicbsgt p {
+#ajjetbuewg p {
   margin: 0;
   padding: 0;
 }
 
-#bwfaicbsgt .gt_table {
+#ajjetbuewg .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -404,12 +402,12 @@ MVN \left(
   border-left-color: #D3D3D3;
 }
 
-#bwfaicbsgt .gt_caption {
+#ajjetbuewg .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#bwfaicbsgt .gt_title {
+#ajjetbuewg .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -421,7 +419,7 @@ MVN \left(
   border-bottom-width: 0;
 }
 
-#bwfaicbsgt .gt_subtitle {
+#ajjetbuewg .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -433,7 +431,7 @@ MVN \left(
   border-top-width: 0;
 }
 
-#bwfaicbsgt .gt_heading {
+#ajjetbuewg .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -445,13 +443,13 @@ MVN \left(
   border-right-color: #D3D3D3;
 }
 
-#bwfaicbsgt .gt_bottom_border {
+#ajjetbuewg .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#bwfaicbsgt .gt_col_headings {
+#ajjetbuewg .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -466,7 +464,7 @@ MVN \left(
   border-right-color: #D3D3D3;
 }
 
-#bwfaicbsgt .gt_col_heading {
+#ajjetbuewg .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -486,7 +484,7 @@ MVN \left(
   overflow-x: hidden;
 }
 
-#bwfaicbsgt .gt_column_spanner_outer {
+#ajjetbuewg .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -498,15 +496,15 @@ MVN \left(
   padding-right: 4px;
 }
 
-#bwfaicbsgt .gt_column_spanner_outer:first-child {
+#ajjetbuewg .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#bwfaicbsgt .gt_column_spanner_outer:last-child {
+#ajjetbuewg .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#bwfaicbsgt .gt_column_spanner {
+#ajjetbuewg .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -518,11 +516,11 @@ MVN \left(
   width: 100%;
 }
 
-#bwfaicbsgt .gt_spanner_row {
+#ajjetbuewg .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#bwfaicbsgt .gt_group_heading {
+#ajjetbuewg .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -548,7 +546,7 @@ MVN \left(
   text-align: left;
 }
 
-#bwfaicbsgt .gt_empty_group_heading {
+#ajjetbuewg .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -563,15 +561,15 @@ MVN \left(
   vertical-align: middle;
 }
 
-#bwfaicbsgt .gt_from_md > :first-child {
+#ajjetbuewg .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#bwfaicbsgt .gt_from_md > :last-child {
+#ajjetbuewg .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#bwfaicbsgt .gt_row {
+#ajjetbuewg .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -590,7 +588,7 @@ MVN \left(
   overflow-x: hidden;
 }
 
-#bwfaicbsgt .gt_stub {
+#ajjetbuewg .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -603,7 +601,7 @@ MVN \left(
   padding-right: 5px;
 }
 
-#bwfaicbsgt .gt_stub_row_group {
+#ajjetbuewg .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -617,15 +615,15 @@ MVN \left(
   vertical-align: top;
 }
 
-#bwfaicbsgt .gt_row_group_first td {
+#ajjetbuewg .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#bwfaicbsgt .gt_row_group_first th {
+#ajjetbuewg .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#bwfaicbsgt .gt_summary_row {
+#ajjetbuewg .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -635,16 +633,16 @@ MVN \left(
   padding-right: 5px;
 }
 
-#bwfaicbsgt .gt_first_summary_row {
+#ajjetbuewg .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#bwfaicbsgt .gt_first_summary_row.thick {
+#ajjetbuewg .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#bwfaicbsgt .gt_last_summary_row {
+#ajjetbuewg .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -654,7 +652,7 @@ MVN \left(
   border-bottom-color: #D3D3D3;
 }
 
-#bwfaicbsgt .gt_grand_summary_row {
+#ajjetbuewg .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -664,7 +662,7 @@ MVN \left(
   padding-right: 5px;
 }
 
-#bwfaicbsgt .gt_first_grand_summary_row {
+#ajjetbuewg .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -674,7 +672,7 @@ MVN \left(
   border-top-color: #D3D3D3;
 }
 
-#bwfaicbsgt .gt_last_grand_summary_row_top {
+#ajjetbuewg .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -684,11 +682,11 @@ MVN \left(
   border-bottom-color: #D3D3D3;
 }
 
-#bwfaicbsgt .gt_striped {
+#ajjetbuewg .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#bwfaicbsgt .gt_table_body {
+#ajjetbuewg .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -697,7 +695,7 @@ MVN \left(
   border-bottom-color: #D3D3D3;
 }
 
-#bwfaicbsgt .gt_footnotes {
+#ajjetbuewg .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -711,7 +709,7 @@ MVN \left(
   border-right-color: #D3D3D3;
 }
 
-#bwfaicbsgt .gt_footnote {
+#ajjetbuewg .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -720,7 +718,7 @@ MVN \left(
   padding-right: 5px;
 }
 
-#bwfaicbsgt .gt_sourcenotes {
+#ajjetbuewg .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -734,7 +732,7 @@ MVN \left(
   border-right-color: #D3D3D3;
 }
 
-#bwfaicbsgt .gt_sourcenote {
+#ajjetbuewg .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -742,72 +740,72 @@ MVN \left(
   padding-right: 5px;
 }
 
-#bwfaicbsgt .gt_left {
+#ajjetbuewg .gt_left {
   text-align: left;
 }
 
-#bwfaicbsgt .gt_center {
+#ajjetbuewg .gt_center {
   text-align: center;
 }
 
-#bwfaicbsgt .gt_right {
+#ajjetbuewg .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#bwfaicbsgt .gt_font_normal {
+#ajjetbuewg .gt_font_normal {
   font-weight: normal;
 }
 
-#bwfaicbsgt .gt_font_bold {
+#ajjetbuewg .gt_font_bold {
   font-weight: bold;
 }
 
-#bwfaicbsgt .gt_font_italic {
+#ajjetbuewg .gt_font_italic {
   font-style: italic;
 }
 
-#bwfaicbsgt .gt_super {
+#ajjetbuewg .gt_super {
   font-size: 65%;
 }
 
-#bwfaicbsgt .gt_footnote_marks {
+#ajjetbuewg .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#bwfaicbsgt .gt_asterisk {
+#ajjetbuewg .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#bwfaicbsgt .gt_indent_1 {
+#ajjetbuewg .gt_indent_1 {
   text-indent: 5px;
 }
 
-#bwfaicbsgt .gt_indent_2 {
+#ajjetbuewg .gt_indent_2 {
   text-indent: 10px;
 }
 
-#bwfaicbsgt .gt_indent_3 {
+#ajjetbuewg .gt_indent_3 {
   text-indent: 15px;
 }
 
-#bwfaicbsgt .gt_indent_4 {
+#ajjetbuewg .gt_indent_4 {
   text-indent: 20px;
 }
 
-#bwfaicbsgt .gt_indent_5 {
+#ajjetbuewg .gt_indent_5 {
   text-indent: 25px;
 }
 
-#bwfaicbsgt .katex-display {
+#ajjetbuewg .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#bwfaicbsgt div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#ajjetbuewg div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1210,23 +1208,23 @@ MVN \left(
 </details>
 
 <div class="no-row-height column-margin column-container"><div class="cell-output-display">
-<div id="ihqtznuxxm" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#ihqtznuxxm table {
+<div id="ppcyadivgh" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ppcyadivgh table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ihqtznuxxm thead, #ihqtznuxxm tbody, #ihqtznuxxm tfoot, #ihqtznuxxm tr, #ihqtznuxxm td, #ihqtznuxxm th {
+#ppcyadivgh thead, #ppcyadivgh tbody, #ppcyadivgh tfoot, #ppcyadivgh tr, #ppcyadivgh td, #ppcyadivgh th {
   border-style: none;
 }
 
-#ihqtznuxxm p {
+#ppcyadivgh p {
   margin: 0;
   padding: 0;
 }
 
-#ihqtznuxxm .gt_table {
+#ppcyadivgh .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1252,12 +1250,12 @@ MVN \left(
   border-left-color: #D3D3D3;
 }
 
-#ihqtznuxxm .gt_caption {
+#ppcyadivgh .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ihqtznuxxm .gt_title {
+#ppcyadivgh .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1269,7 +1267,7 @@ MVN \left(
   border-bottom-width: 0;
 }
 
-#ihqtznuxxm .gt_subtitle {
+#ppcyadivgh .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1281,7 +1279,7 @@ MVN \left(
   border-top-width: 0;
 }
 
-#ihqtznuxxm .gt_heading {
+#ppcyadivgh .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1293,13 +1291,13 @@ MVN \left(
   border-right-color: #D3D3D3;
 }
 
-#ihqtznuxxm .gt_bottom_border {
+#ppcyadivgh .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ihqtznuxxm .gt_col_headings {
+#ppcyadivgh .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1314,7 +1312,7 @@ MVN \left(
   border-right-color: #D3D3D3;
 }
 
-#ihqtznuxxm .gt_col_heading {
+#ppcyadivgh .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1334,7 +1332,7 @@ MVN \left(
   overflow-x: hidden;
 }
 
-#ihqtznuxxm .gt_column_spanner_outer {
+#ppcyadivgh .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1346,15 +1344,15 @@ MVN \left(
   padding-right: 4px;
 }
 
-#ihqtznuxxm .gt_column_spanner_outer:first-child {
+#ppcyadivgh .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ihqtznuxxm .gt_column_spanner_outer:last-child {
+#ppcyadivgh .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ihqtznuxxm .gt_column_spanner {
+#ppcyadivgh .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1366,11 +1364,11 @@ MVN \left(
   width: 100%;
 }
 
-#ihqtznuxxm .gt_spanner_row {
+#ppcyadivgh .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ihqtznuxxm .gt_group_heading {
+#ppcyadivgh .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1396,7 +1394,7 @@ MVN \left(
   text-align: left;
 }
 
-#ihqtznuxxm .gt_empty_group_heading {
+#ppcyadivgh .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1411,15 +1409,15 @@ MVN \left(
   vertical-align: middle;
 }
 
-#ihqtznuxxm .gt_from_md > :first-child {
+#ppcyadivgh .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ihqtznuxxm .gt_from_md > :last-child {
+#ppcyadivgh .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ihqtznuxxm .gt_row {
+#ppcyadivgh .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1438,7 +1436,7 @@ MVN \left(
   overflow-x: hidden;
 }
 
-#ihqtznuxxm .gt_stub {
+#ppcyadivgh .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1451,7 +1449,7 @@ MVN \left(
   padding-right: 5px;
 }
 
-#ihqtznuxxm .gt_stub_row_group {
+#ppcyadivgh .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1465,15 +1463,15 @@ MVN \left(
   vertical-align: top;
 }
 
-#ihqtznuxxm .gt_row_group_first td {
+#ppcyadivgh .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ihqtznuxxm .gt_row_group_first th {
+#ppcyadivgh .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ihqtznuxxm .gt_summary_row {
+#ppcyadivgh .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1483,16 +1481,16 @@ MVN \left(
   padding-right: 5px;
 }
 
-#ihqtznuxxm .gt_first_summary_row {
+#ppcyadivgh .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ihqtznuxxm .gt_first_summary_row.thick {
+#ppcyadivgh .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ihqtznuxxm .gt_last_summary_row {
+#ppcyadivgh .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1502,7 +1500,7 @@ MVN \left(
   border-bottom-color: #D3D3D3;
 }
 
-#ihqtznuxxm .gt_grand_summary_row {
+#ppcyadivgh .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1512,7 +1510,7 @@ MVN \left(
   padding-right: 5px;
 }
 
-#ihqtznuxxm .gt_first_grand_summary_row {
+#ppcyadivgh .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1522,7 +1520,7 @@ MVN \left(
   border-top-color: #D3D3D3;
 }
 
-#ihqtznuxxm .gt_last_grand_summary_row_top {
+#ppcyadivgh .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1532,11 +1530,11 @@ MVN \left(
   border-bottom-color: #D3D3D3;
 }
 
-#ihqtznuxxm .gt_striped {
+#ppcyadivgh .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ihqtznuxxm .gt_table_body {
+#ppcyadivgh .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1545,7 +1543,7 @@ MVN \left(
   border-bottom-color: #D3D3D3;
 }
 
-#ihqtznuxxm .gt_footnotes {
+#ppcyadivgh .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1559,7 +1557,7 @@ MVN \left(
   border-right-color: #D3D3D3;
 }
 
-#ihqtznuxxm .gt_footnote {
+#ppcyadivgh .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1568,7 +1566,7 @@ MVN \left(
   padding-right: 5px;
 }
 
-#ihqtznuxxm .gt_sourcenotes {
+#ppcyadivgh .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1582,7 +1580,7 @@ MVN \left(
   border-right-color: #D3D3D3;
 }
 
-#ihqtznuxxm .gt_sourcenote {
+#ppcyadivgh .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1590,72 +1588,72 @@ MVN \left(
   padding-right: 5px;
 }
 
-#ihqtznuxxm .gt_left {
+#ppcyadivgh .gt_left {
   text-align: left;
 }
 
-#ihqtznuxxm .gt_center {
+#ppcyadivgh .gt_center {
   text-align: center;
 }
 
-#ihqtznuxxm .gt_right {
+#ppcyadivgh .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ihqtznuxxm .gt_font_normal {
+#ppcyadivgh .gt_font_normal {
   font-weight: normal;
 }
 
-#ihqtznuxxm .gt_font_bold {
+#ppcyadivgh .gt_font_bold {
   font-weight: bold;
 }
 
-#ihqtznuxxm .gt_font_italic {
+#ppcyadivgh .gt_font_italic {
   font-style: italic;
 }
 
-#ihqtznuxxm .gt_super {
+#ppcyadivgh .gt_super {
   font-size: 65%;
 }
 
-#ihqtznuxxm .gt_footnote_marks {
+#ppcyadivgh .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ihqtznuxxm .gt_asterisk {
+#ppcyadivgh .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ihqtznuxxm .gt_indent_1 {
+#ppcyadivgh .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ihqtznuxxm .gt_indent_2 {
+#ppcyadivgh .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ihqtznuxxm .gt_indent_3 {
+#ppcyadivgh .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ihqtznuxxm .gt_indent_4 {
+#ppcyadivgh .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ihqtznuxxm .gt_indent_5 {
+#ppcyadivgh .gt_indent_5 {
   text-indent: 25px;
 }
 
-#ihqtznuxxm .katex-display {
+#ppcyadivgh .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#ihqtznuxxm div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#ppcyadivgh div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1673,6 +1671,8 @@ MVN \left(
 <td headers="values" class="gt_row gt_center">3, 10</td></tr>
     <tr><td headers="parameters" class="gt_row gt_left">n_schools</td>
 <td headers="values" class="gt_row gt_center">10, 30</td></tr>
+    <tr><td headers="parameters" class="gt_row gt_left">centered</td>
+<td headers="values" class="gt_row gt_center">TRUE, FALSE</td></tr>
   </tbody>
   
 </table>
@@ -1690,9 +1690,13 @@ MVN \left(
 <span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unlist</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p>Starting conditions: number of level-one units (students) within level-two units (schools). This set of parameters creates 4 conditions per model.</p>
+<p>Starting conditions: number of level-one units (students) within level-two units (schools). This set of parameters creates 8 conditions per model.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset page-columns page-full">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true">Unconditional Model</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false">Level-One Predictor Model</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-3" role="tab" aria-controls="tabset-3-3" aria-selected="false">Level-One and Level-Two Predictor Model</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-4" role="tab" aria-controls="tabset-3-4" aria-selected="false">Cross-Level Interaction Model</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-5-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-5" role="tab" aria-controls="tabset-3-5" aria-selected="false">Full Model</a></li></ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-8-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-8-1" role="tab" aria-controls="tabset-8-1" aria-selected="true">Unconditional Model</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-8-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-8-2" role="tab" aria-controls="tabset-8-2" aria-selected="false">Level-One Predictor Model</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-8-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-8-3" role="tab" aria-controls="tabset-8-3" aria-selected="false">Level-One and Level-Two Predictor Model</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-8-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-8-4" role="tab" aria-controls="tabset-8-4" aria-selected="false">Cross-Level Interaction Model</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-8-5-tab" data-bs-toggle="tab" data-bs-target="#tabset-8-5" role="tab" aria-controls="tabset-8-5" aria-selected="false">Full Model</a></li></ul>
+<div class="tab-content page-columns page-full">
+<div id="tabset-8-1" class="tab-pane active page-columns page-full" role="tabpanel" aria-labelledby="tabset-8-1-tab">
+<div class="tabset-margin-container"></div><div class="panel-tabset page-columns page-full">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true">Non-Centered</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false">Centered</a></li></ul>
 <div class="tab-content page-columns page-full">
 <div id="tabset-3-1" class="tab-pane active page-columns page-full" role="tabpanel" aria-labelledby="tabset-3-1-tab">
 <details class="code-fold">
@@ -1701,29 +1705,34 @@ MVN \left(
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_extract</span>(<span class="st">"model_(</span><span class="sc">\\</span><span class="st">d)"</span>, <span class="at">group =</span> <span class="dv">1</span>) <span class="sc">|&gt;</span> </span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unique</span>()</span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>model_id_idxs <span class="ot">&lt;-</span> <span class="fu">map</span>(model_ids, </span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>model_id_centered_idxs <span class="ot">&lt;-</span> <span class="fu">map</span>(model_ids, </span>
 <span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>                     \(model_id) <span class="fu">which</span>(</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>                       <span class="fu">str_detect</span>(condition_plt_files, glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">"model_{model_id}"</span>))</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>                       <span class="fu">str_detect</span>(condition_plt_files, glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">"model_{model_id}_centered_TRUE"</span>))</span>
 <span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>                     ))</span>
 <span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>condition_plt_files[model_id_idxs[[<span class="dv">1</span>]]] <span class="sc">|&gt;</span></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>model_id_not_centered_idxs <span class="ot">&lt;-</span> <span class="fu">map</span>(model_ids, </span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>                     \(model_id) <span class="fu">which</span>(</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>                       <span class="fu">str_detect</span>(condition_plt_files, glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">"model_{model_id}_centered_FALSE"</span>))</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>                     ))</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>condition_plt_files[model_id_not_centered_idxs[[<span class="dv">1</span>]]] <span class="sc">|&gt;</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell column-page quarto-layout-panel" data-layout-ncol="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="outputs/condition_1_model_1.png" class="img-fluid" width="825"></p>
+<p><img src="outputs/condition_1_model_1_centered_FALSE.png" class="img-fluid" width="825"></p>
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="outputs/condition_2_model_1.png" class="img-fluid" width="825"></p>
+<p><img src="outputs/condition_3_model_1_centered_FALSE.png" class="img-fluid" width="825"></p>
 </div>
 </div>
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="outputs/condition_3_model_1.png" class="img-fluid" width="825"></p>
+<p><img src="outputs/condition_5_model_1_centered_FALSE.png" class="img-fluid" width="825"></p>
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="outputs/condition_4_model_1.png" class="img-fluid" width="825"></p>
+<p><img src="outputs/condition_7_model_1_centered_FALSE.png" class="img-fluid" width="825"></p>
 </div>
 </div>
 </div>
@@ -1731,99 +1740,255 @@ MVN \left(
 <div id="tabset-3-2" class="tab-pane page-columns page-full" role="tabpanel" aria-labelledby="tabset-3-2-tab">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>condition_plt_files[model_id_idxs[[<span class="dv">2</span>]]] <span class="sc">|&gt;</span></span>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>condition_plt_files[model_id_centered_idxs[[<span class="dv">1</span>]]] <span class="sc">|&gt;</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell column-page quarto-layout-panel" data-layout-ncol="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="outputs/condition_5_model_2.png" class="img-fluid" width="825"></p>
+<p><img src="outputs/condition_2_model_1_centered_TRUE.png" class="img-fluid" width="825"></p>
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="outputs/condition_6_model_2.png" class="img-fluid" width="825"></p>
+<p><img src="outputs/condition_4_model_1_centered_TRUE.png" class="img-fluid" width="825"></p>
 </div>
 </div>
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="outputs/condition_7_model_2.png" class="img-fluid" width="825"></p>
+<p><img src="outputs/condition_6_model_1_centered_TRUE.png" class="img-fluid" width="825"></p>
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="outputs/condition_8_model_2.png" class="img-fluid" width="825"></p>
+<p><img src="outputs/condition_8_model_1_centered_TRUE.png" class="img-fluid" width="825"></p>
 </div>
 </div>
 </div>
 </div>
-<div id="tabset-3-3" class="tab-pane page-columns page-full" role="tabpanel" aria-labelledby="tabset-3-3-tab">
+</div>
+</div>
+</div>
+<div id="tabset-8-2" class="tab-pane page-columns page-full" role="tabpanel" aria-labelledby="tabset-8-2-tab">
+<div class="tabset-margin-container"></div><div class="panel-tabset page-columns page-full">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-4-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-1" role="tab" aria-controls="tabset-4-1" aria-selected="true">Non-Centered</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-2" role="tab" aria-controls="tabset-4-2" aria-selected="false">Centered</a></li></ul>
+<div class="tab-content page-columns page-full">
+<div id="tabset-4-1" class="tab-pane active page-columns page-full" role="tabpanel" aria-labelledby="tabset-4-1-tab">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>condition_plt_files[model_id_idxs[[<span class="dv">3</span>]]] <span class="sc">|&gt;</span></span>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>condition_plt_files[model_id_not_centered_idxs[[<span class="dv">2</span>]]] <span class="sc">|&gt;</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell column-page quarto-layout-panel" data-layout-ncol="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="outputs/condition_9_model_3.png" class="img-fluid" width="900"></p>
+<p><img src="outputs/condition_9_model_2_centered_FALSE.png" class="img-fluid" width="825"></p>
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="outputs/condition_10_model_3.png" class="img-fluid" width="900"></p>
+<p><img src="outputs/condition_11_model_2_centered_FALSE.png" class="img-fluid" width="825"></p>
 </div>
 </div>
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="outputs/condition_11_model_3.png" class="img-fluid" width="900"></p>
+<p><img src="outputs/condition_13_model_2_centered_FALSE.png" class="img-fluid" width="825"></p>
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="outputs/condition_12_model_3.png" class="img-fluid" width="900"></p>
+<p><img src="outputs/condition_15_model_2_centered_FALSE.png" class="img-fluid" width="825"></p>
 </div>
 </div>
 </div>
 </div>
-<div id="tabset-3-4" class="tab-pane page-columns page-full" role="tabpanel" aria-labelledby="tabset-3-4-tab">
+<div id="tabset-4-2" class="tab-pane page-columns page-full" role="tabpanel" aria-labelledby="tabset-4-2-tab">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>condition_plt_files[model_id_idxs[[<span class="dv">4</span>]]] <span class="sc">|&gt;</span></span>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>condition_plt_files[model_id_centered_idxs[[<span class="dv">2</span>]]] <span class="sc">|&gt;</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell column-page quarto-layout-panel" data-layout-ncol="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="outputs/condition_13_model_4.png" class="img-fluid" width="975"></p>
+<p><img src="outputs/condition_10_model_2_centered_TRUE.png" class="img-fluid" width="825"></p>
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="outputs/condition_14_model_4.png" class="img-fluid" width="975"></p>
+<p><img src="outputs/condition_12_model_2_centered_TRUE.png" class="img-fluid" width="825"></p>
 </div>
 </div>
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="outputs/condition_15_model_4.png" class="img-fluid" width="975"></p>
+<p><img src="outputs/condition_14_model_2_centered_TRUE.png" class="img-fluid" width="825"></p>
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="outputs/condition_16_model_4.png" class="img-fluid" width="975"></p>
+<p><img src="outputs/condition_16_model_2_centered_TRUE.png" class="img-fluid" width="825"></p>
 </div>
 </div>
 </div>
 </div>
-<div id="tabset-3-5" class="tab-pane page-columns page-full" role="tabpanel" aria-labelledby="tabset-3-5-tab">
+</div>
+</div>
+</div>
+<div id="tabset-8-3" class="tab-pane page-columns page-full" role="tabpanel" aria-labelledby="tabset-8-3-tab">
+<div class="tabset-margin-container"></div><div class="panel-tabset page-columns page-full">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-5-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-1" role="tab" aria-controls="tabset-5-1" aria-selected="true">Non-Centered</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-5-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-2" role="tab" aria-controls="tabset-5-2" aria-selected="false">Centered</a></li></ul>
+<div class="tab-content page-columns page-full">
+<div id="tabset-5-1" class="tab-pane active page-columns page-full" role="tabpanel" aria-labelledby="tabset-5-1-tab">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>condition_plt_files[model_id_idxs[[<span class="dv">5</span>]]] <span class="sc">|&gt;</span></span>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>condition_plt_files[model_id_not_centered_idxs[[<span class="dv">3</span>]]] <span class="sc">|&gt;</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell column-page quarto-layout-panel" data-layout-ncol="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="outputs/condition_17_model_5.png" class="img-fluid" width="1200"></p>
+<p><img src="outputs/condition_17_model_3_centered_FALSE.png" class="img-fluid" width="900"></p>
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="outputs/condition_18_model_5.png" class="img-fluid" width="1200"></p>
+<p><img src="outputs/condition_19_model_3_centered_FALSE.png" class="img-fluid" width="900"></p>
 </div>
 </div>
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="outputs/condition_19_model_5.png" class="img-fluid" width="1200"></p>
+<p><img src="outputs/condition_21_model_3_centered_FALSE.png" class="img-fluid" width="900"></p>
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="outputs/condition_20_model_5.png" class="img-fluid" width="1200"></p>
+<p><img src="outputs/condition_23_model_3_centered_FALSE.png" class="img-fluid" width="900"></p>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-5-2" class="tab-pane page-columns page-full" role="tabpanel" aria-labelledby="tabset-5-2-tab">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>condition_plt_files[model_id_centered_idxs[[<span class="dv">3</span>]]] <span class="sc">|&gt;</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell column-page quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_18_model_3_centered_TRUE.png" class="img-fluid" width="900"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_20_model_3_centered_TRUE.png" class="img-fluid" width="900"></p>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_22_model_3_centered_TRUE.png" class="img-fluid" width="900"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_24_model_3_centered_TRUE.png" class="img-fluid" width="900"></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-8-4" class="tab-pane page-columns page-full" role="tabpanel" aria-labelledby="tabset-8-4-tab">
+<div class="tabset-margin-container"></div><div class="panel-tabset page-columns page-full">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-6-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-6-1" role="tab" aria-controls="tabset-6-1" aria-selected="true">Non-Centered</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-6-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-6-2" role="tab" aria-controls="tabset-6-2" aria-selected="false">Centered</a></li></ul>
+<div class="tab-content page-columns page-full">
+<div id="tabset-6-1" class="tab-pane active page-columns page-full" role="tabpanel" aria-labelledby="tabset-6-1-tab">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>condition_plt_files[model_id_not_centered_idxs[[<span class="dv">4</span>]]] <span class="sc">|&gt;</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell column-page quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_25_model_4_centered_FALSE.png" class="img-fluid" width="975"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_27_model_4_centered_FALSE.png" class="img-fluid" width="975"></p>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_29_model_4_centered_FALSE.png" class="img-fluid" width="975"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_31_model_4_centered_FALSE.png" class="img-fluid" width="975"></p>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-6-2" class="tab-pane page-columns page-full" role="tabpanel" aria-labelledby="tabset-6-2-tab">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>condition_plt_files[model_id_centered_idxs[[<span class="dv">4</span>]]] <span class="sc">|&gt;</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell column-page quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_26_model_4_centered_TRUE.png" class="img-fluid" width="975"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_28_model_4_centered_TRUE.png" class="img-fluid" width="975"></p>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_30_model_4_centered_TRUE.png" class="img-fluid" width="975"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_32_model_4_centered_TRUE.png" class="img-fluid" width="975"></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-8-5" class="tab-pane page-columns page-full" role="tabpanel" aria-labelledby="tabset-8-5-tab">
+<div class="tabset-margin-container"></div><div class="panel-tabset page-columns page-full">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-7-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-1" role="tab" aria-controls="tabset-7-1" aria-selected="true">Non-Centered</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-7-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-2" role="tab" aria-controls="tabset-7-2" aria-selected="false">Centered</a></li></ul>
+<div class="tab-content page-columns page-full">
+<div id="tabset-7-1" class="tab-pane active page-columns page-full" role="tabpanel" aria-labelledby="tabset-7-1-tab">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>condition_plt_files[model_id_not_centered_idxs[[<span class="dv">5</span>]]] <span class="sc">|&gt;</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell column-page quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_33_model_5_centered_FALSE.png" class="img-fluid" width="1200"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_35_model_5_centered_FALSE.png" class="img-fluid" width="1200"></p>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_37_model_5_centered_FALSE.png" class="img-fluid" width="1200"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_39_model_5_centered_FALSE.png" class="img-fluid" width="1200"></p>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-7-2" class="tab-pane page-columns page-full" role="tabpanel" aria-labelledby="tabset-7-2-tab">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>condition_plt_files[model_id_centered_idxs[[<span class="dv">5</span>]]] <span class="sc">|&gt;</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell column-page quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_34_model_5_centered_TRUE.png" class="img-fluid" width="1200"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_36_model_5_centered_TRUE.png" class="img-fluid" width="1200"></p>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_38_model_5_centered_TRUE.png" class="img-fluid" width="1200"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_40_model_5_centered_TRUE.png" class="img-fluid" width="1200"></p>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -1832,83 +1997,103 @@ MVN \left(
 </div>
 <section id="other-distributions-by-condition" class="level4">
 <h4 class="anchored" data-anchor-id="other-distributions-by-condition">Other Distributions by Condition</h4>
+<p>All of these distributions are from the non-centered versions of the data subsets.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-6-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-6-1" role="tab" aria-controls="tabset-6-1" aria-selected="true">ICC</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-6-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-6-2" role="tab" aria-controls="tabset-6-2" aria-selected="false"><span class="math inline">\(R^2\)</span></a></li></ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-11-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-11-1" role="tab" aria-controls="tabset-11-1" aria-selected="true">ICC</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-11-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-11-2" role="tab" aria-controls="tabset-11-2" aria-selected="false"><span class="math inline">\(R^2\)</span></a></li></ul>
 <div class="tab-content">
-<div id="tabset-6-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-6-1-tab">
+<div id="tabset-11-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-11-1-tab">
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-4-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-1" role="tab" aria-controls="tabset-4-1" aria-selected="true">Unconditional Model</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-2" role="tab" aria-controls="tabset-4-2" aria-selected="false">Level-One Predictor Model</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-3" role="tab" aria-controls="tabset-4-3" aria-selected="false">Level-One and Level-Two Predictor Model</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-4" role="tab" aria-controls="tabset-4-4" aria-selected="false">Cross-Level Interaction Model</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-5-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-5" role="tab" aria-controls="tabset-4-5" aria-selected="false">Full Model</a></li></ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-9-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-9-1" role="tab" aria-controls="tabset-9-1" aria-selected="true">Unconditional Model</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-9-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-9-2" role="tab" aria-controls="tabset-9-2" aria-selected="false">Level-One Predictor Model</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-9-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-9-3" role="tab" aria-controls="tabset-9-3" aria-selected="false">Level-One and Level-Two Predictor Model</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-9-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-9-4" role="tab" aria-controls="tabset-9-4" aria-selected="false">Cross-Level Interaction Model</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-9-5-tab" data-bs-toggle="tab" data-bs-target="#tabset-9-5" role="tab" aria-controls="tabset-9-5" aria-selected="false">Full Model</a></li></ul>
 <div class="tab-content">
-<div id="tabset-4-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-4-1-tab">
+<div id="tabset-9-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-9-1-tab">
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>icc_plts[[<span class="dv">1</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>icc_plt_files <span class="ot">&lt;-</span> targets<span class="sc">::</span><span class="fu">tar_read</span>(icc_plt_files, </span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">store =</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"_targets"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unlist</span>()</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>icc_plt_model_id_centered_idxs <span class="ot">&lt;-</span> <span class="fu">map</span>(model_ids, </span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>                     \(model_id) <span class="fu">which</span>(</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>                       <span class="fu">str_detect</span>(icc_plt_files, glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">"model_{model_id}_centered_TRUE"</span>))</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>                     ))</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>icc_plt_model_id_not_centered_idxs <span class="ot">&lt;-</span> <span class="fu">map</span>(model_ids, </span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>                     \(model_id) <span class="fu">which</span>(</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>                       <span class="fu">str_detect</span>(icc_plt_files, glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">"model_{model_id}_centered_FALSE"</span>))</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>                     ))</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>icc_plt_files[icc_plt_model_id_not_centered_idxs[[<span class="dv">1</span>]]] <span class="sc">|&gt;</span></span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="ecls-k_files/figure-html/icc_plt_1-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="outputs/icc_plt_model_1_centered_FALSE.png" class="img-fluid figure-img" width="1050"></p>
 </figure>
 </div>
 </div>
 </div>
 </div>
-<div id="tabset-4-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-4-2-tab">
+<div id="tabset-9-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-9-2-tab">
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>icc_plts[[<span class="dv">2</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>icc_plt_files[icc_plt_model_id_not_centered_idxs[[<span class="dv">2</span>]]] <span class="sc">|&gt;</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="ecls-k_files/figure-html/icc_plt_2-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="outputs/icc_plt_model_2_centered_FALSE.png" class="img-fluid figure-img" width="1050"></p>
 </figure>
 </div>
 </div>
 </div>
 </div>
-<div id="tabset-4-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-4-3-tab">
+<div id="tabset-9-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-9-3-tab">
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>icc_plts[[<span class="dv">3</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>icc_plt_files[icc_plt_model_id_not_centered_idxs[[<span class="dv">3</span>]]] <span class="sc">|&gt;</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="ecls-k_files/figure-html/icc_plt_3-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="outputs/icc_plt_model_3_centered_FALSE.png" class="img-fluid figure-img" width="1050"></p>
 </figure>
 </div>
 </div>
 </div>
 </div>
-<div id="tabset-4-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-4-4-tab">
+<div id="tabset-9-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-9-4-tab">
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>icc_plts[[<span class="dv">4</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>icc_plt_files[icc_plt_model_id_not_centered_idxs[[<span class="dv">4</span>]]] <span class="sc">|&gt;</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="ecls-k_files/figure-html/icc_plt_4-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="outputs/icc_plt_model_4_centered_FALSE.png" class="img-fluid figure-img" width="1050"></p>
 </figure>
 </div>
 </div>
 </div>
 </div>
-<div id="tabset-4-5" class="tab-pane" role="tabpanel" aria-labelledby="tabset-4-5-tab">
+<div id="tabset-9-5" class="tab-pane" role="tabpanel" aria-labelledby="tabset-9-5-tab">
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>icc_plts[[<span class="dv">5</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>icc_plt_files[icc_plt_model_id_not_centered_idxs[[<span class="dv">5</span>]]] <span class="sc">|&gt;</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="ecls-k_files/figure-html/icc_plt_5-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="outputs/icc_plt_model_5_centered_FALSE.png" class="img-fluid figure-img" width="1050"></p>
 </figure>
 </div>
 </div>
@@ -1917,80 +2102,99 @@ MVN \left(
 </div>
 </div>
 </div>
-<div id="tabset-6-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-6-2-tab">
+<div id="tabset-11-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-11-2-tab">
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-5-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-1" role="tab" aria-controls="tabset-5-1" aria-selected="true">Unconditional Model</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-5-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-2" role="tab" aria-controls="tabset-5-2" aria-selected="false">One-Predictor Model</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-5-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-3" role="tab" aria-controls="tabset-5-3" aria-selected="false">Level-One and Level-Two Predictor Model</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-5-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-4" role="tab" aria-controls="tabset-5-4" aria-selected="false">Cross-Level Interaction Model</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-5-5-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-5" role="tab" aria-controls="tabset-5-5" aria-selected="false">Full Model</a></li></ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-10-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-10-1" role="tab" aria-controls="tabset-10-1" aria-selected="true">Unconditional Model</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-10-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-10-2" role="tab" aria-controls="tabset-10-2" aria-selected="false">One-Predictor Model</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-10-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-10-3" role="tab" aria-controls="tabset-10-3" aria-selected="false">Level-One and Level-Two Predictor Model</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-10-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-10-4" role="tab" aria-controls="tabset-10-4" aria-selected="false">Cross-Level Interaction Model</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-10-5-tab" data-bs-toggle="tab" data-bs-target="#tabset-10-5" role="tab" aria-controls="tabset-10-5" aria-selected="false">Full Model</a></li></ul>
 <div class="tab-content">
-<div id="tabset-5-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-5-1-tab">
+<div id="tabset-10-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-10-1-tab">
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>r2_plts[[<span class="dv">1</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>r2_plt_files <span class="ot">&lt;-</span> targets<span class="sc">::</span><span class="fu">tar_read</span>(r2_plt_files, </span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">store =</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"_targets"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unlist</span>()</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>r2_plt_model_id_centered_idxs <span class="ot">&lt;-</span> <span class="fu">map</span>(model_ids, </span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>                     \(model_id) <span class="fu">which</span>(</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>                       <span class="fu">str_detect</span>(r2_plt_files, glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">"model_{model_id}_centered_TRUE"</span>))</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>                     ))</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>r2_plt_model_id_not_centered_idxs <span class="ot">&lt;-</span> <span class="fu">map</span>(model_ids, </span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>                     \(model_id) <span class="fu">which</span>(</span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>                       <span class="fu">str_detect</span>(icc_plt_files, glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">"model_{model_id}_centered_FALSE"</span>))</span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>                     ))</span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>r2_plt_files[r2_plt_model_id_not_centered_idxs[[<span class="dv">1</span>]]] <span class="sc">|&gt;</span></span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="ecls-k_files/figure-html/r2_plt_1-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="outputs/r2_plt_model_1_centered_FALSE.png" class="img-fluid figure-img" width="1050"></p>
 </figure>
 </div>
 </div>
 </div>
 </div>
-<div id="tabset-5-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-5-2-tab">
+<div id="tabset-10-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-10-2-tab">
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>r2_plts[[<span class="dv">2</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>r2_plt_files[r2_plt_model_id_not_centered_idxs[[<span class="dv">2</span>]]] <span class="sc">|&gt;</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="ecls-k_files/figure-html/r2_plt_2-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="outputs/r2_plt_model_2_centered_FALSE.png" class="img-fluid figure-img" width="1050"></p>
 </figure>
 </div>
 </div>
 </div>
 </div>
-<div id="tabset-5-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-5-3-tab">
+<div id="tabset-10-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-10-3-tab">
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>r2_plts[[<span class="dv">3</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>r2_plt_files[r2_plt_model_id_not_centered_idxs[[<span class="dv">3</span>]]] <span class="sc">|&gt;</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="ecls-k_files/figure-html/r2_plt_3-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="outputs/r2_plt_model_3_centered_FALSE.png" class="img-fluid figure-img" width="1050"></p>
 </figure>
 </div>
 </div>
 </div>
 </div>
-<div id="tabset-5-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-5-4-tab">
+<div id="tabset-10-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-10-4-tab">
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>r2_plts[[<span class="dv">4</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>r2_plt_files[r2_plt_model_id_not_centered_idxs[[<span class="dv">4</span>]]] <span class="sc">|&gt;</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="ecls-k_files/figure-html/r2_plt_4-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="outputs/r2_plt_model_4_centered_FALSE.png" class="img-fluid figure-img" width="1050"></p>
 </figure>
 </div>
 </div>
 </div>
 </div>
-<div id="tabset-5-5" class="tab-pane" role="tabpanel" aria-labelledby="tabset-5-5-tab">
+<div id="tabset-10-5" class="tab-pane" role="tabpanel" aria-labelledby="tabset-10-5-tab">
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>r2_plts[[<span class="dv">5</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>r2_plt_files[r2_plt_model_id_not_centered_idxs[[<span class="dv">5</span>]]] <span class="sc">|&gt;</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="ecls-k_files/figure-html/r2_plt_5-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="outputs/r2_plt_model_5_centered_FALSE.png" class="img-fluid figure-img" width="1050"></p>
 </figure>
 </div>
 </div>
@@ -2001,525 +2205,9 @@ MVN \left(
 </div>
 </div>
 </div>
-<!-- ## Bootstrapping From One Subset -->
-<!-- ```{r condition_plts_v_subset} -->
-<!-- #| column: page -->
-<!-- #| fig-height: 8 -->
-<!-- #| layout-ncol: 2 -->
-<!-- #| warning: false -->
-<!-- targets::tar_read(condition_plt_v_subset_files,  -->
-<!--                   store = here::here("_targets")) |> -->
-<!--   unlist() |> -->
-<!--   knitr::include_graphics() -->
-<!-- ``` -->
-<!-- ## Simulated Data from Bootstrap Hit -->
-<!-- ```{r examples_params_tbl} -->
-<!-- examples_params |> -->
-<!--   select(-iter) |> -->
-<!--   unique() |> -->
-<!--   group_split(.by = example_type, -->
-<!--               .keep = F) |> -->
-<!--   map(\(data) { -->
-<!--     title <- data$example_type -->
-<!--     data |> -->
-<!--       select(-example_type) |> -->
-<!--       pivot_longer(everything(), -->
-<!--                    names_to = "Parameter", -->
-<!--                    values_to = "Value") |> -->
-<!--       j_gt() |> -->
-<!--       fmt_number() |> -->
-<!--       tab_header(title = str_to_title(title)) -->
-<!--     } |> wrap_table()) |> -->
-<!--   wrap_plots(ncol = 2) -->
-<!-- ``` -->
-<!-- ```{r examples_spaghetti_plts} -->
-<!-- #| layout-ncol: 2 -->
-<!-- #| fig-height: 2.5 -->
-<!-- walk(examples_spaghetti_plts, print) -->
-<!-- ``` -->
-<!-- ```{r examples_condition_plts} -->
-<!-- #| column: page -->
-<!-- #| layout-ncol: 2 -->
-<!-- targets::tar_read(examples_condition_plt_files,  -->
-<!--                   store = here::here("_targets")) |> -->
-<!--   unlist() |> -->
-<!--   knitr::include_graphics() -->
-<!-- ``` -->
-<!-- ::: panel-tabset -->
-<!-- ### ICC -->
-<!-- ```{r examples_icc_plt} -->
-<!-- examples_icc_plt -->
-<!-- ``` -->
-<!-- ### $R^2$  -->
-<!-- ```{r examples_r2_plt} -->
-<!-- examples_r2_plt -->
-<!-- ``` -->
-<!-- ::: -->
-<!-- ## Generated Data -->
-<!-- Generating data from model estimates of one bootstrap hit. -->
-<!-- ```{r} -->
-<!-- # bs_dat |> -->
-<!-- #   pluck(1) |> -->
-<!-- #   unnest(tidy) |> -->
-<!-- #   filter(term == "ses") |> -->
-<!-- #   filter(estimate > quantile(estimate, .97)) |> -->
-<!-- #   arrange(desc(estimate)) # didn't estimate intercept -->
-<!-- bs_dat |> -->
-<!--   pluck(1) |> -->
-<!--   unnest(tidy) |> -->
-<!--   filter(term == "sd__(Intercept)") |> -->
-<!--   filter(estimate > quantile(estimate, .97)) |> -->
-<!--   arrange(desc(estimate)) -->
-<!-- data_gen_params <- bs_dat |> -->
-<!--   pluck(1) |> -->
-<!--   filter(id == "331") |> -->
-<p><!-- unnest(tidy) |> --> <!-- select(param_n_bootstraps, param_n_schools, param_n_students, term, estimate) |> --> <!-- pivot_wider(names_from = term, values_from = estimate) --></p>
-<!-- data_gen_params |> -->
-<!--   gt() |> -->
-<!--   fmt_number() -->
-<!-- data_gen_vcov <- matrix(c(data_gen_params$`sd__(Intercept)`, -->
-<!--          0, -->
-<!--          0, -->
-<!--          data_gen_params$`sd__ses`), -->
-<!--        ncol = 2, byrow = T) %*% -->
-<!--   matrix(c(1, -->
-<!--            data_gen_params$`cor__(Intercept).ses`, -->
-<!--            data_gen_params$`cor__(Intercept).ses`, -->
-<!--            1), -->
-<!--        ncol = 2, byrow = T) %*% -->
-<!--   matrix(c(data_gen_params$`sd__(Intercept)`, -->
-<!--            0, -->
-<!--            0, -->
-<!--            data_gen_params$`sd__ses`), -->
-<!--        ncol = 2, byrow = T) -->
-<!-- ``` -->
-<!-- ```{r} -->
-<!-- gen_data <- function(data_gen_params) { -->
-<!--   tibble(schoolid = seq(1, data_gen_params$param_n_schools), -->
-<!--          n_students = data_gen_params$param_n_students, -->
-<!--          private = rbinom(data_gen_params$param_n_schools, 1, .3), -->
-<!--          beta_ses = data_gen_params$ses, -->
-<!--          beta_private = data_gen_params$private, -->
-<!--          beta_private_by_ses = data_gen_params$`ses:private`) |> -->
-<!--     bind_cols(varying_effects = MASS::mvrnorm(data_gen_params$param_n_schools, -->
-<!--                                               mu = c(data_gen_params$`(Intercept)`, data_gen_params$ses), -->
-<!--                                               Sigma = data_gen_vcov) |> -->
-<!--                 as_tibble() |> -->
-<!--                 set_names(c("alpha_school", "beta_ses_school"))) |> -->
-<!--     uncount(n_students) |> -->
-<!--     mutate(studentid = row_number(), -->
-<!--            .after = schoolid) |> -->
-<!--     mutate(ses = rnorm(data_gen_params$param_n_schools * data_gen_params$param_n_students), -->
-<!--            private_by_ses = private * ses, -->
-<!--            mu_school = alpha_school + -->
-<!--              beta_private * private + -->
-<!--              beta_private_by_ses * private_by_ses, -->
-<!--            mu = mu_school + beta_ses * ses, -->
-<!--            mathscore = rnorm(data_gen_params$param_n_schools * data_gen_params$param_n_students, -->
-<!--                         mean = mu, sd = data_gen_params$sd__Observation)) |> -->
-<!--     nest(gen_params = c(starts_with("beta"), starts_with("alpha"), starts_with("mu"))) -->
-<!-- } -->
-<!-- ``` -->
-<!-- ```{r} -->
-<!-- #| warning: false -->
-<!-- #| message: false -->
-<!-- frm <- mathscore ~ ses * private + (ses | schoolid) -->
-<!-- bs_gen_dat <- tibble(iter = seq(1, data_gen_params$param_n_bootstraps), -->
-<!--                      strap = map(iter, \(iter) gen_data(data_gen_params))) |> -->
-<!--   mutate(res = map(strap,  -->
-<!--                    safely(\(strap) lme4::lmer(frm, -->
-<!--                                               data = strap), -->
-<!--                           otherwise = NA_real_)), -->
-<!--          model = map(res, "result"), -->
-<!--          error = map_chr(res, \(res) pluck(res, "error", "message", .default = NA)), -->
-<!--          tidy = imap(model, \(model, idx) model |> -->
-<!--                        broom.mixed::tidy() |> -->
-<!--                        mutate(iter = idx)), -->
-<!--          opt_warnings = map_chr(model, get_warnings), -->
-<!--          lme4_warnings = map_chr(model, get_lme4_warnings)) |> -->
-<!--   bind_cols(data_gen_params) -->
-<!-- ``` -->
-<!-- ```{r} -->
-<!-- #| column: page -->
-<!-- #| fig-height: 8 -->
-<!-- #| warning: false -->
-<!-- list(bs_gen_dat) |> -->
-<!--   walk(\(bootres) { -->
-<!--     plt_dat <- make_plt_dat(bootres) -->
-<!--     pat <- make_plt_pattern(plt_dat) -->
-<!--     n_terms <- plt_dat |> -->
-<!--       select(n_terms) |> -->
-<!--       max() -->
-<!--     table_height_prop <- 1/4 -->
-<!--     { -->
-<!--       (plt_dat |> -->
-<!--          pull(plots) |> -->
-<!--          unlist(recursive = F) |> -->
-<!--          append(wrap_table(make_warnings_tbl(bootres))) |> -->
-<!--          wrap_plots(design = pat, -->
-<!--                     axes = "collect", -->
-<!--                     heights = c(rep(((1 - table_height_prop) / n_terms),  -->
-<!--                                   times = n_terms), -->
-<!--                                 table_height_prop))) |> -->
-<!--         cowplot::ggdraw() +  -->
-<!--         cowplot::draw_label( -->
-<!--           plot_annotation("Generated Data Bootstrap"), -->
-<!--           x = 0.5, y = 1, vjust = 1, fontface = "bold", size = 14) -->
-<!--     } |> -->
-<!--       print() -->
-<!--   }) -->
-<!-- ``` -->
-<!-- #### Other Distributions by Condition -->
-<!-- ::: panel-tabset -->
-<!-- ### ICC -->
-<!-- ```{r} -->
-<!-- #| message: false -->
-<!-- #| warning: false -->
-<!-- icc_dat <- list(bs_gen_dat) |> -->
-<!--   map(\(data) data |> -->
-<!--         select(model) |> -->
-<!--         mutate( -->
-<!--           icc = map_dbl(model, \(model) { -->
-<!--             icc <- performance::icc(model) |> -->
-<!--               pluck("ICC_adjusted")  -->
-<!--             ifelse(is.null(icc), NA, icc)   -->
-<!--           }) -->
-<!--         )) -->
-<!-- icc_dat |> -->
-<!--   map(\(data) data |> -->
-<!--         ggplot(aes(x = icc)) + -->
-<!--         geom_density(na.rm = T) + -->
-<!--         geom_text(data = data |> -->
-<!--                     mutate(icc_error = is.na(icc)) |> -->
-<!--                     summarize(percent_removed = mean(icc_error) * 100), -->
-<!--                   aes(label = glue::glue("{round(percent_removed, 2)}% ICCs errored"), -->
-<!--                       x = -Inf, y = Inf, vjust = 1, hjust = 0)) + -->
-<!--         scale_x_continuous("ICC", limits = c(0, 1), breaks = seq(0, 1, .2)) + -->
-<!--         scale_y_continuous(NULL, breaks = NULL) + -->
-<!--         guides(x = guide_axis(cap = T)) + -->
-<!--         theme(aspect.ratio = (1.618)^-1, -->
-<!--               axis.line.y = element_blank())) |> -->
-<!--   wrap_plots(ncol = 2, axes = "collect_x") -->
-<!-- ``` -->
-<!-- ### $R^2$ -->
-<!-- ```{r} -->
-<!-- #| message: false -->
-<!-- #| warning: false -->
-<!-- #| results: hide -->
-<!-- r2_dat <- list(bs_gen_dat) |> -->
-<!--   map(\(data) data |> -->
-<!--         select(model) |> -->
-<!--         mutate( -->
-<!--           r2s = map(model, \(model) { -->
-<!--             r2s <- performance::r2(model)  -->
-<!--             r2_conditional <- r2s$R2_conditional -->
-<!--             r2_marginal <- r2s$R2_marginal -->
-<!--             tribble(~ r2_type, ~ r2_estimate, -->
-<!--                     "conditional", ifelse(is.null(r2_conditional), NA, r2_conditional), -->
-<!--                     "marginal", ifelse(is.null(r2_marginal), NA, r2_marginal)) -->
-<!--           }) -->
-<!--         ) |> -->
-<!--             unnest(r2s)) -->
-<!-- r2_dat |> -->
-<!--   map(\(data) { -->
-<!--     error_dat <- data |> -->
-<!--       mutate(r2_error = is.na(r2_estimate)) |> -->
-<!--       summarize(.by = r2_type, -->
-<!--                 percent_removed = mean(r2_error) * 100) |> -->
-<!--       mutate(string = glue::glue("{round(percent_removed, 2)}% {r2_type} R^2s errored")) -->
-<!--     data |> -->
-<!--       ggplot(aes(x = r2_estimate, color = r2_type)) + -->
-<!--       geom_density(na.rm = T) + -->
-<!--       geom_text(data = error_dat, -->
-<!--                 aes(label = string, -->
-<!--                     x = -Inf, y = Inf, vjust = c(1, 2.3), hjust = 0)) + -->
-<!--       scale_x_continuous("R^2", limits = c(0, 1), breaks = seq(0, 1, .2)) + -->
-<!--       scale_y_continuous(NULL, breaks = NULL) + -->
-<!--       guides(x = guide_axis(cap = T), -->
-<!--              color = guide_none()) + -->
-<!--       theme(aspect.ratio = (1.618)^-1, -->
-<!--             axis.line.y = element_blank(), -->
-<!--             axis.title.x = ggtext::element_markdown()) -->
-<!--     }) |> -->
-<!--  wrap_plots(ncol = 2, axes = "collect_x") -->
-<!-- ``` -->
-</section>
-</section>
-<section id="archive" class="level2">
-<h2 class="anchored" data-anchor-id="archive">Archive</h2>
-<!-- ```{r} -->
-<!-- bootstr <- ecls_dat |> -->
-<!--   # should this take into account the clustering more? -->
-<!--   modelr::bootstrap(n_bootstraps, id = "id") -->
-<!-- t1 <- Sys.time() -->
-<!-- bootres <- bootstr |> -->
-<!--   mutate(model = map(strap,  -->
-<!--                      \(strap) lme4::lmer(mathscore ~ ses * private + (ses | schoolid), -->
-<!--                                          data = strap)), -->
-<!--          tidy = map(model, broom.mixed::tidy), -->
-<!--          opt_warnings = map_chr(model, get_warnings), -->
-<!--          lme4_warnings = map_chr(model, get_lme4_warnings)) -->
-<!-- t2 <- Sys.time() -->
-<!-- get_bootres <- function(bootstrapped_dat) { -->
-<!--   frm <- mathscore ~ ses * private + (ses | schoolid) -->
-<!--   bootstrapped_dat |> -->
-<!--     mutate(model = map(strap,  -->
-<!--                        \(strap) lme4::lmer(frm, -->
-<!--                                            data = strap)), -->
-<!--            tidy = map(model, broom.mixed::tidy), -->
-<!--            opt_warnings = map_chr(model, get_warnings), -->
-<!--            lme4_warnings = map_chr(model, get_lme4_warnings)) -->
-<!-- } -->
-<!-- t3 <- Sys.time() -->
-<!-- get_bootres(bootstr) -->
-<!-- t4 <- Sys.time() -->
-<!-- (t2 - t1) -->
-<!-- (t4 - t3) -->
-<!-- bootest <- bootres |> -->
-<!--   # giving each `tidy` an iteration id -->
-<!--   mutate(tidy = imap(tidy, \(tidy, idx) mutate(tidy, iter = idx))) |> -->
-<!--   pull(tidy) |> -->
-<!--   list_rbind() |> -->
-<!--   select(group, term, estimate, iter) -->
-<!-- ``` -->
-<!-- ```{r} -->
-<!-- bootstr <- ecls_dat |> -->
-<!--   # should this take into account the clustering more? -->
-<!--   modelr::bootstrap(n_bootstraps, id = "id") -->
-<!-- t1 <- Sys.time() -->
-<!-- bootres <- ecls_dat |> -->
-<!--   # should this take into account the clustering more? -->
-<!--   modelr::bootstrap(n_bootstraps, id = "id") |> -->
-<!--   mutate(model = map(strap,  -->
-<!--                      \(strap) lme4::lmer(mathscore ~ ses * private + (ses | schoolid), -->
-<!--                                          data = strap)), -->
-<!--          tidy = map(model, broom.mixed::tidy), -->
-<!--          opt_warnings = map_chr(model, get_warnings), -->
-<!--          lme4_warnings = map_chr(model, get_lme4_warnings)) -->
-<!-- t2 <- Sys.time() -->
-<!-- get_bootres <- function(n_bootstraps) { -->
-<!--   frm <- mathscore ~ ses * private + (ses | schoolid) -->
-<!--   ecls_dat |> -->
-<!--     # should this take into account the clustering more? -->
-<!--     modelr::bootstrap(n_bootstraps, id = "id") |> -->
-<!--     mutate(model = map(strap,  -->
-<!--                        \(strap) lme4::lmer(frm, -->
-<!--                                            data = strap)), -->
-<!--            tidy = imap(model, \(model, idx) model |> -->
-<!--                         broom.mixed::tidy() |> -->
-<!--                         mutate(iter = idx)), -->
-<!--            opt_warnings = map_chr(model, get_warnings), -->
-<!--            lme4_warnings = map_chr(model, get_lme4_warnings)) -->
-<!-- } -->
-<!-- t3 <- Sys.time() -->
-<!-- get_bootres(n_bootstraps) -->
-<!-- t4 <- Sys.time() -->
-<!-- (t2 - t1) -->
-<!-- (t4 - t3) -->
-<!-- b <- get_bootres(10) -->
-<!-- b |> mutate(tidy = imap(tidy, \(tidy, idx) mutate(tidy, iter = idx))) |> -->
-<!--   pull(tidy) -->
-<!-- bootest <- bootres |> -->
-<!--   # giving each `tidy` an iteration id -->
-<!--   mutate(tidy = imap(tidy, \(tidy, idx) mutate(tidy, iter = idx))) |> -->
-<!--   pull(tidy) |> -->
-<!--   list_rbind() |> -->
-<!--   select(group, term, estimate, iter) -->
-<!-- ``` -->
-<!-- ```{r} -->
-<!-- plt_dat <- tibble(term = terms) |> -->
-<!--   mutate(plot_terms = imap(term, \(term, idx) tibble(xterm = term, -->
-<!--                                                      yterm = head(terms, idx))), -->
-<!--          n_terms = map_int(plot_terms, \(plot_terms) nrow(plot_terms)), -->
-<!--          n_prev_terms = map_int(n_terms, \(n_terms) seq(n_terms - 1, 0) |> sum()), -->
-<!--          # pat only worked as a way to setup the patchwork when length(terms) < 7 -->
-<!--          pat = map2_chr(n_terms, n_prev_terms, -->
-<!--                         \(n_terms, n_prev_terms) paste0(LETTERS[seq(n_prev_terms + 1, length.out = n_terms)] |>  -->
-<!--                                                           paste(collapse = ""), -->
-<!--                                             rep("#", times = length(terms) - n_terms) |> paste(collapse = "")))) |> -->
-<!--   mutate(plots = map(plot_terms, -->
-<!--                           \(plot_terms) plot_terms |> -->
-<!--                             mutate(plot = map2(xterm, yterm, -->
-<!--                                                \(xterm, yterm) { -->
-<!--                                                  df <- bootest |> -->
-<!--                                                    filter(term %in% c(xterm, yterm)) |> -->
-<!--                                                    select(term, estimate, iter) |> -->
-<!--                                                    pivot_wider(names_from = term, values_from = estimate) -->
-<!--                                                  mapping <- if (xterm == yterm) { -->
-<!--                                                    do.call(aes, list(x = as.name(xterm))) -->
-<!--                                                  } else { -->
-<!--                                                    do.call(aes, list(y = as.name(xterm), x = as.name(yterm))) -->
-<!--                                                  } -->
-<!--                                                  geom <- if (xterm == yterm) geom_density() else geom_point() -->
-<!--                                                  ggplot(df, mapping) +  -->
-<!--                                                    geom + -->
-<!--                                                    {if (xterm == yterm) labs(y = NULL) else NULL} + -->
-<!--                                                    scale_x_continuous(breaks = NULL) + -->
-<!--                                                    scale_y_continuous(breaks = NULL) + -->
-<!--                                                    theme_classic() -->
-<!--                                                }))  |> pluck("plot"))) -->
-<!-- ``` -->
-<div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># bootres &lt;- get_bootres(10)</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="co"># plt_dat &lt;- make_plt_dat(bootres)</span></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="co"># pat &lt;- make_plt_pattern(plt_dat)</span></span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="co"># plt_dat |&gt;</span></span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="co">#     pull(plots) |&gt;</span></span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a><span class="co">#     unlist(recursive = F) |&gt;</span></span>
-<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a><span class="co">#     wrap_plots(design = pat,</span></span>
-<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a><span class="co">#                axes = "collect")</span></span>
-<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a><span class="fu">list</span>(<span class="at">n_bootstraps =</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">20</span>),</span>
-<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>     <span class="at">n_students =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">10</span>),</span>
-<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>     <span class="at">n_schools =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">20</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">do.call</span>(crossing, <span class="at">args =</span> _) <span class="sc">|&gt;</span></span>
-<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">condition_id =</span> <span class="fu">row_number</span>()) <span class="sc">|&gt;</span></span>
-<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nest</span>(<span class="at">params =</span> <span class="sc">-</span>condition_id) <span class="sc">|&gt;</span></span>
-<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(params) <span class="sc">|&gt;</span></span>
-<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(\(params) {</span>
-<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(params)</span>
-<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a>    params <span class="sc">|&gt;</span></span>
-<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a>      <span class="fu">pivot_longer</span>(<span class="fu">everything</span>(),</span>
-<span id="cb23-25"><a href="#cb23-25" aria-hidden="true" tabindex="-1"></a>                   <span class="at">names_to =</span> <span class="st">"param"</span>,</span>
-<span id="cb23-26"><a href="#cb23-26" aria-hidden="true" tabindex="-1"></a>                   <span class="at">values_to =</span> <span class="st">"value"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb23-27"><a href="#cb23-27" aria-hidden="true" tabindex="-1"></a>      <span class="fu">pmap</span>(\(param, value) <span class="fu">assign</span>(param, value))</span>
-<span id="cb23-28"><a href="#cb23-28" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb23-29"><a href="#cb23-29" aria-hidden="true" tabindex="-1"></a>    glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">"{param}: {value}"</span>)</span>
-<span id="cb23-30"><a href="#cb23-30" aria-hidden="true" tabindex="-1"></a>  })</span>
-<span id="cb23-31"><a href="#cb23-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-32"><a href="#cb23-32" aria-hidden="true" tabindex="-1"></a><span class="co"># bs_dat &lt;- do.call(crossing, params) |&gt;</span></span>
-<span id="cb23-33"><a href="#cb23-33" aria-hidden="true" tabindex="-1"></a><span class="co">#   mutate(condition_id = row_number()) |&gt;</span></span>
-<span id="cb23-34"><a href="#cb23-34" aria-hidden="true" tabindex="-1"></a><span class="co">#   pmap(\(...) {</span></span>
-<span id="cb23-35"><a href="#cb23-35" aria-hidden="true" tabindex="-1"></a><span class="co">#     list2env(list(...), envir = environment())</span></span>
-<span id="cb23-36"><a href="#cb23-36" aria-hidden="true" tabindex="-1"></a><span class="co">#     glue::glue("condition {condition_id}: n_bootstraps={n_bootstraps}, n_students={n_students}, n_schools={n_schools}")</span></span>
-<span id="cb23-37"><a href="#cb23-37" aria-hidden="true" tabindex="-1"></a><span class="co">#     </span></span>
-<span id="cb23-38"><a href="#cb23-38" aria-hidden="true" tabindex="-1"></a><span class="co">#     get_bootres(n_bootstraps, n_students, n_schools) |&gt;</span></span>
-<span id="cb23-39"><a href="#cb23-39" aria-hidden="true" tabindex="-1"></a><span class="co">#       mutate(condition_str = glue::glue("condition {condition_id}: n_bootstraps={n_bootstraps}, n_students={n_students},  n_schools={n_schools}"))</span></span>
-<span id="cb23-40"><a href="#cb23-40" aria-hidden="true" tabindex="-1"></a><span class="co">#   })</span></span>
-<span id="cb23-41"><a href="#cb23-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-42"><a href="#cb23-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-43"><a href="#cb23-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-44"><a href="#cb23-44" aria-hidden="true" tabindex="-1"></a>bs_dat <span class="sc">|&gt;</span></span>
-<span id="cb23-45"><a href="#cb23-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">2</span>) <span class="sc">|&gt;</span></span>
-<span id="cb23-46"><a href="#cb23-46" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(\(bootres) {</span>
-<span id="cb23-47"><a href="#cb23-47" aria-hidden="true" tabindex="-1"></a>    plt_dat <span class="ot">&lt;-</span> </span>
-<span id="cb23-48"><a href="#cb23-48" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb23-49"><a href="#cb23-49" aria-hidden="true" tabindex="-1"></a>    <span class="fu">make_plt_pattern</span>(plt_dat)</span>
-<span id="cb23-50"><a href="#cb23-50" aria-hidden="true" tabindex="-1"></a>    })</span>
-<span id="cb23-51"><a href="#cb23-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-52"><a href="#cb23-52" aria-hidden="true" tabindex="-1"></a><span class="fu">make_plt_dat</span>(bres) <span class="sc">|&gt;</span></span>
-<span id="cb23-53"><a href="#cb23-53" aria-hidden="true" tabindex="-1"></a>    get_table_row_location</span>
-<span id="cb23-54"><a href="#cb23-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-55"><a href="#cb23-55" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mtcars) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="fu">aes</span>(mpg, disp)) <span class="sc">+</span> <span class="fu">theme_classic</span>()</span>
-<span id="cb23-56"><a href="#cb23-56" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mtcars) <span class="sc">+</span> <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(gear, disp, <span class="at">group =</span> gear)) <span class="sc">+</span> <span class="fu">theme_classic</span>()</span>
-<span id="cb23-57"><a href="#cb23-57" aria-hidden="true" tabindex="-1"></a>p3 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mtcars) <span class="sc">+</span> <span class="fu">geom_bar</span>(<span class="fu">aes</span>(gear)) <span class="sc">+</span> <span class="fu">facet_wrap</span>(<span class="sc">~</span>cyl) <span class="sc">+</span> <span class="fu">theme_classic</span>()</span>
-<span id="cb23-58"><a href="#cb23-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-59"><a href="#cb23-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-60"><a href="#cb23-60" aria-hidden="true" tabindex="-1"></a>design <span class="ot">&lt;-</span> <span class="st">"</span></span>
-<span id="cb23-61"><a href="#cb23-61" aria-hidden="true" tabindex="-1"></a><span class="st">  AB</span></span>
-<span id="cb23-62"><a href="#cb23-62" aria-hidden="true" tabindex="-1"></a><span class="st">  AC</span></span>
-<span id="cb23-63"><a href="#cb23-63" aria-hidden="true" tabindex="-1"></a><span class="st">"</span></span>
-<span id="cb23-64"><a href="#cb23-64" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-65"><a href="#cb23-65" aria-hidden="true" tabindex="-1"></a>(p1 <span class="sc">+</span> p2 <span class="sc">+</span> p3) <span class="sc">+</span></span>
-<span id="cb23-66"><a href="#cb23-66" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_layout</span>(<span class="at">design =</span> design, <span class="at">heights =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">1</span>), <span class="at">axes =</span> <span class="st">"collect"</span>) <span class="sc">&amp;</span></span>
-<span id="cb23-67"><a href="#cb23-67" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<!-- ### Bootstrapped Data -->
-<!-- ```{r} -->
-<!-- m1_bs <- function(n_students) { -->
-<!--   bootstr <- ecls_dat |> -->
-<!--     filter(.by = schoolid, -->
-<!--            childid %in% sample(childid, n_students)) |> -->
-<!--     modelr::bootstrap(n_bootstraps, id = "studentid") -->
-<!--   bootres <- bootstr |> -->
-<!--     mutate(model = map(strap, -->
-<!--                        \(strap) lme4::lmer(mathscore ~ ses * private + (ses | schoolid), -->
-<!--                                            dat = strap)), -->
-<!--            tidy = map(model, broom.mixed::tidy), -->
-<!--            opt_warnings = map_chr(model, get_warnings), -->
-<!--            lme4_warnings = map_chr(model, get_lme4_warnings)) -->
-<!--   #  -->
-<!--   # # n_students <- bootres |> -->
-<!--   # #   pull(n_students) |>  -->
-<!--   # #   first() -->
-<!--   #  -->
-<!--   bootest <- bootres |> -->
-<!--     # giving each `tidy` an iteration id -->
-<!--     mutate(tidy = imap(tidy, \(tidy, idx) mutate(tidy, iter = idx))) |> -->
-<!--     pull(tidy) |> -->
-<!--     list_rbind() |> -->
-<!--     select(group, term, estimate, iter) -->
-<!--   #  -->
-<!--   terms <- bootest |> pull(term) |> unique() -->
-<!--   plt_dat <- tibble(term = terms) |> -->
-<!--     mutate(plot_terms = imap(term, \(term, idx) tibble(xterm = term, -->
-<!--                                                        yterm = head(terms, idx))), -->
-<!--            n_terms = map_int(plot_terms, \(plot_terms) nrow(plot_terms)), -->
-<!--            n_prev_terms = map_int(n_terms, \(n_terms) seq(n_terms - 1, 0) |> sum()), -->
-<!--            pat = map2_chr(n_terms, n_prev_terms, -->
-<!--                           \(n_terms, n_prev_terms) paste0(LETTERS[seq(n_prev_terms + 1, length.out = n_terms)] |> -->
-<!--                                                             paste(collapse = ""), -->
-<!--                                                           rep("#", times = length(terms) - n_terms) |> paste(collapse = "")))) |> -->
-<!--     mutate(plots = map(plot_terms, -->
-<!--                        \(plot_terms) plot_terms |> -->
-<!--                          mutate(plot = map2(xterm, yterm, -->
-<!--                                             \(xterm, yterm) { -->
-<!--                                               df <- bootest |> -->
-<!--                                                 filter(term %in% c(xterm, yterm)) |> -->
-<!--                                                 select(term, estimate, iter) |> -->
-<!--                                                 pivot_wider(names_from = term, values_from = estimate) -->
-<!--                                               mapping <- if (xterm == yterm) { -->
-<!--                                                 do.call(aes, list(x = as.name(xterm))) -->
-<!--                                               } else { -->
-<!--                                                 do.call(aes, list(y = as.name(xterm), x = as.name(yterm))) -->
-<!--                                               } -->
-<!--                                               geom <- if (xterm == yterm) geom_density() else geom_point() -->
-<!--                                               ggplot(df, mapping) + -->
-<!--                                                 geom + -->
-<!--                                                 {if (xterm == yterm) labs(y = NULL) else NULL} + -->
-<!--                                                 scale_x_continuous(breaks = NULL) + -->
-<!--                                                 scale_y_continuous(breaks = NULL) + -->
-<!--                                                 theme_classic() -->
-<!--                                             }))  |> pluck("plot"))) -->
-<!--   pat <- plt_dat |> -->
-<!--     select(n_terms, n_prev_terms) |> -->
-<!--     mutate(areas = map(n_terms, -->
-<!--                        \(n_terms) seq(1, n_terms) |> -->
-<!--                          map2(n_terms, \(y, x) c(x, y)) -->
-<!--     )) |> -->
-<!--     pull(areas) |> -->
-<!--     list_flatten() |> -->
-<!--     map(\(a) area(t = a[1], l = a[2], b = a[1], r = a[2])) |> -->
-<!--     reduce(c) -->
-<!--   plt_dat |> -->
-<!--     pull(plots) |> -->
-<!--     unlist(recursive = F) |> -->
-<!--     wrap_plots(design = pat, -->
-<!--                axes = "collect") + -->
-<!--     plot_annotation(title = glue::glue("Students per Classroom: {n_students}")) -->
-<!-- } -->
-<!-- ``` -->
-<!-- ```{r} -->
-<!-- list(3, 10) |> -->
-<!--   map(\(n_students) m1_bs(n_students)) -->
-<!-- bootres <- list(3, 10) |> -->
-<!--   map(\(n_students) m1_bs(n_students)) -->
-<!-- m1_bs(3) -->
-<!-- bootres |> -->
-<!--   map(m1_bs_plt) -->
-<!-- bootres |> -->
-<!--   map(\(bootres) bootres |> -->
-<!--         summarize(opt_warnings = list(unique(opt_warnings)))) -->
-<!-- ``` -->
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

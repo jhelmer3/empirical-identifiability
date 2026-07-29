@@ -30,8 +30,4 @@ make_scatter_plt <- function(plt_dat, true_values,
          x = wrap_axis_labels(xterm))
 }
 
-# tar_read(results_grouped) |>
-#   filter(condition_id == 1) |>
-#   make_plt_dat(tar_read(plt_layout), tar_read(true_values),
-#                tar_read(results_grouped) |>
-#                  filter(condition_id == 1) |> identify_axis_limits())
+

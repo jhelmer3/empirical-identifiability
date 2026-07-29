@@ -1,5 +1,7 @@
 
 patch_icc_dat <- function(icc_dat) {
+  ggplot2::set_theme(ggplot2::theme_classic(base_size = 14))
+  
   icc_dat |>
     group_split(condition_id) |>
     map(\(data) data |>

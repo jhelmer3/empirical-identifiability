@@ -11,6 +11,8 @@ make_single_plt <- function(plt_dat, true_values,
     select(-term) |>
     reduce(c)
   
+  print(paste(xterm, yterm))
+  
   {if (xterm == yterm) make_density_plt(plt_dat, true_values, 
                                         xterm, yterm, xlims, ylims)
   else make_scatter_plt(plt_dat, true_values,
@@ -22,18 +24,36 @@ make_single_plt <- function(plt_dat, true_values,
           axis.text.x = element_text(angle = 90))
 }
 
-# add something as an indicator of how many are removed?
+# tar_read(results) |>
+#   filter(model_id == 2) |>
+#   first() |>
+#   pull(model)
+
+# tar_read(results) |>
+#   filter_out(is.na(tidy)) |>
+#   summarize(.by = term,
+#             min_est = min(estimate, na.rm = T),
+#             max_est = max(estimate, na.rm = T))
+
+# true_values <- (tar_read(results_grouped) |>
+                  # filter(condition_id == 9))[1, "full_tidy"][[1]][[1]]
+
+# # add something as an indicator of how many are removed?
 # tar_read(results_grouped) |>
 #   # mimic grouping
-#   filter(condition_id ==  1) |>
-#   format_plt_dat("(Intercept)", "private") |>
-#   filter(if_any(everything(), is.na)) |>
-#   nrow()
-#   make_single_plt(tar_read(true_values),
-#                   "(Intercept)", "private",
-#                   tar_read(results_grouped) |>
-#                     filter(condition_id == 1) |> identify_axis_limits())
-
+#   filter(condition_id ==  9) |>
+#   # first() |>
+#   # select(tidy) |>
+#   # unnest(tidy)
+#   format_plt_dat("(Intercept)", "ses") |>
+#   make_single_plt(true_values,
+#                   "(Intercept)", "ses",
+#                   tar_read(axis_limits))
+# 
+# tar_read(axis_limits) |>
+#   filter(term == "ses") |>
+#   select(-term) |>
+#   reduce(c)
 
 # make_single_plt <- function(plt_dat, xterm, yterm, axis_limits) {
 # 

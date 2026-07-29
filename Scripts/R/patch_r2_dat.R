@@ -1,5 +1,7 @@
 
 patch_r2_dat <- function(r2_dat) {
+  ggplot2::set_theme(ggplot2::theme_classic(base_size = 14))
+  
   r2_dat |>
     group_split(condition_id) |>
     map(\(data) {

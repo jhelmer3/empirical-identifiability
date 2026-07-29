@@ -6,7 +6,9 @@ define_params <- function(params, models) {
     mutate(.by = model_string,
            model_id = cur_group_id()) |>
     mutate(condition_id = row_number(),
-           .before = everything())
+           .before = everything()) |>
+    mutate(.by = c(model_id, centered),
+           btwn_condition_id = cur_group_id())
 }
 
 # tar_read(param_set) |>

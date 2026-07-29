@@ -12,17 +12,16 @@ make_plt_dat <- function(condition_dat, plt_layout, true_values, axis_limits) {
                                             })) |> pluck("plot")))
 }
 
-# tar_read(full_data_models)[5, "plt_layout"][[1]][[1]][2, "plot_terms"][[1]]
+# tar_read(full_data_models)[2, "plt_layout"][[1]][[1]][2, "plot_terms"][[1]]
 # 
 # plt_layout <- (tar_read(results_grouped) |>
-#                  filter(condition_id == 1))[1, "plt_layout"][[1]][[1]]
+#                  filter(condition_id == 9))[1, "plt_layout"][[1]][[1]]
 # true_values <- (tar_read(results_grouped) |>
-#                   filter(condition_id == 1))[1, "full_tidy"][[1]][[1]]
+#                   filter(condition_id == 9))[1, "full_tidy"][[1]][[1]]
 # 
 # pltdat <- tar_read(results_grouped) |>
-#   filter(condition_id == 1) |>
-#   make_plt_dat(plt_layout, true_values, tar_read(results_grouped) |>
-#                  filter(condition_id == 1) |> identify_axis_limits())
+#   filter(condition_id == 9) |>
+#   make_plt_dat(plt_layout, true_values, tar_read(axis_limits))
 # pltdat$plots
 # 
 # 
