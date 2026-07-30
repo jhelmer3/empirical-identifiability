@@ -1,7 +1,7 @@
 
 make_icc_dat <- function(condition_dat) {
   condition_dat |>
-    select(condition_id, model_id, centered, btwn_condition_id, model) |>
+    select(condition_id, model_id, centered, bootstrap_type, btwn_condition_id, model) |>
     mutate(
       icc = map_dbl(model, \(model) {
         icc <- quiet_icc(model)

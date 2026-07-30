@@ -138,7 +138,7 @@ window.Quarto = {
 <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="nav-fixed quarto-light">
+<body class="floating nav-fixed slimcontent quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -177,16 +177,33 @@ window.Quarto = {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-<!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">On this page</h2>
    
   <ul>
   <li><a href="#full-data" id="toc-full-data" class="nav-link active" data-scroll-target="#full-data">Full Data</a></li>
-  <li><a href="#bootstrapping" id="toc-bootstrapping" class="nav-link" data-scroll-target="#bootstrapping">Bootstrapping</a></li>
+  <li><a href="#bootstrapping" id="toc-bootstrapping" class="nav-link" data-scroll-target="#bootstrapping">Bootstrapping</a>
+  <ul>
+  <li><a href="#bootstrapping-type-both" id="toc-bootstrapping-type-both" class="nav-link" data-scroll-target="#bootstrapping-type-both">Bootstrapping Type: Both</a>
+  <ul class="collapse">
+  <li><a href="#other-distributions" id="toc-other-distributions" class="nav-link" data-scroll-target="#other-distributions">Other Distributions</a></li>
+  </ul></li>
+  <li><a href="#bootstrapping-type-cluster" id="toc-bootstrapping-type-cluster" class="nav-link" data-scroll-target="#bootstrapping-type-cluster">Bootstrapping Type: Cluster</a>
+  <ul class="collapse">
+  <li><a href="#other-distributions-1" id="toc-other-distributions-1" class="nav-link" data-scroll-target="#other-distributions-1">Other Distributions</a></li>
+  </ul></li>
+  <li><a href="#bootstrapping-type-individual" id="toc-bootstrapping-type-individual" class="nav-link" data-scroll-target="#bootstrapping-type-individual">Bootstrapping Type: Individual</a>
+  <ul class="collapse">
+  <li><a href="#other-distributions-2" id="toc-other-distributions-2" class="nav-link" data-scroll-target="#other-distributions-2">Other Distributions</a></li>
+  </ul></li>
+  </ul></li>
   </ul>
 </nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
     </div>
 <!-- main -->
 <main class="content page-columns page-full" id="quarto-document-content">
@@ -222,12 +239,8 @@ window.Quarto = {
 </header>
 
 
-<div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">Setup</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Reading</a></li></ul>
-<div class="tab-content">
-<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
 <div class="cell">
-<details open="" class="code-fold">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(targets)</span>
@@ -245,17 +258,11 @@ window.Quarto = {
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tar_load</span>(<span class="at">store =</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"_targets"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</div>
-<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
-
-</div>
-</div>
-</div>
 <p>Model: two-levels (students nested in schools) with a level-one predictor (student SES), level-two predictor (private vs.&nbsp;public school), and an interaction between them. The effect of SES has a varying slope over school. Outcome is student math score.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true">Traditional</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false">Distributional</a></li></ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">Traditional</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Distributional</a></li></ul>
 <div class="tab-content">
-<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
 <div class="math">
 <span class="math display">\[\begin{aligned}
 
@@ -273,7 +280,7 @@ window.Quarto = {
 \end{aligned}\]</span>
 </div>
 </div>
-<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
 <div class="math">
 <span class="math display">\[\begin{aligned}
 \text{MATH}_{i} &amp;\sim Normal(\mu_{i}, \sigma) \\
@@ -318,8 +325,8 @@ MVN \left(
 </div>
 </div>
 </div>
-<section id="full-data" class="level3 page-columns page-full">
-<h3 class="anchored" data-anchor-id="full-data">Full Data</h3>
+<section id="full-data" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="full-data">Full Data</h2>
 <p>Selecting columns with the outcome (math scores), level-one predictor (student SES), and level-two predictor (public vs.&nbsp;private school indicator). Removing any students with missing data on any of the predictors, and removing schools that have fewer than 10 students remaining.</p>
 
 <div class="no-row-height column-margin column-container"><div class="cell">
@@ -360,23 +367,23 @@ MVN \left(
 <div class="cell quarto-layout-panel" data-layout-ncol="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
-<div id="ajjetbuewg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#ajjetbuewg table {
+<div id="sfffovboni" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#sfffovboni table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ajjetbuewg thead, #ajjetbuewg tbody, #ajjetbuewg tfoot, #ajjetbuewg tr, #ajjetbuewg td, #ajjetbuewg th {
+#sfffovboni thead, #sfffovboni tbody, #sfffovboni tfoot, #sfffovboni tr, #sfffovboni td, #sfffovboni th {
   border-style: none;
 }
 
-#ajjetbuewg p {
+#sfffovboni p {
   margin: 0;
   padding: 0;
 }
 
-#ajjetbuewg .gt_table {
+#sfffovboni .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -402,12 +409,12 @@ MVN \left(
   border-left-color: #D3D3D3;
 }
 
-#ajjetbuewg .gt_caption {
+#sfffovboni .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ajjetbuewg .gt_title {
+#sfffovboni .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -419,7 +426,7 @@ MVN \left(
   border-bottom-width: 0;
 }
 
-#ajjetbuewg .gt_subtitle {
+#sfffovboni .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -431,7 +438,7 @@ MVN \left(
   border-top-width: 0;
 }
 
-#ajjetbuewg .gt_heading {
+#sfffovboni .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -443,13 +450,13 @@ MVN \left(
   border-right-color: #D3D3D3;
 }
 
-#ajjetbuewg .gt_bottom_border {
+#sfffovboni .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ajjetbuewg .gt_col_headings {
+#sfffovboni .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -464,7 +471,7 @@ MVN \left(
   border-right-color: #D3D3D3;
 }
 
-#ajjetbuewg .gt_col_heading {
+#sfffovboni .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -484,7 +491,7 @@ MVN \left(
   overflow-x: hidden;
 }
 
-#ajjetbuewg .gt_column_spanner_outer {
+#sfffovboni .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -496,15 +503,15 @@ MVN \left(
   padding-right: 4px;
 }
 
-#ajjetbuewg .gt_column_spanner_outer:first-child {
+#sfffovboni .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ajjetbuewg .gt_column_spanner_outer:last-child {
+#sfffovboni .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ajjetbuewg .gt_column_spanner {
+#sfffovboni .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -516,11 +523,11 @@ MVN \left(
   width: 100%;
 }
 
-#ajjetbuewg .gt_spanner_row {
+#sfffovboni .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ajjetbuewg .gt_group_heading {
+#sfffovboni .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -546,7 +553,7 @@ MVN \left(
   text-align: left;
 }
 
-#ajjetbuewg .gt_empty_group_heading {
+#sfffovboni .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -561,15 +568,15 @@ MVN \left(
   vertical-align: middle;
 }
 
-#ajjetbuewg .gt_from_md > :first-child {
+#sfffovboni .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ajjetbuewg .gt_from_md > :last-child {
+#sfffovboni .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ajjetbuewg .gt_row {
+#sfffovboni .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -588,7 +595,7 @@ MVN \left(
   overflow-x: hidden;
 }
 
-#ajjetbuewg .gt_stub {
+#sfffovboni .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -601,7 +608,7 @@ MVN \left(
   padding-right: 5px;
 }
 
-#ajjetbuewg .gt_stub_row_group {
+#sfffovboni .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -615,15 +622,15 @@ MVN \left(
   vertical-align: top;
 }
 
-#ajjetbuewg .gt_row_group_first td {
+#sfffovboni .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ajjetbuewg .gt_row_group_first th {
+#sfffovboni .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ajjetbuewg .gt_summary_row {
+#sfffovboni .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -633,16 +640,16 @@ MVN \left(
   padding-right: 5px;
 }
 
-#ajjetbuewg .gt_first_summary_row {
+#sfffovboni .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ajjetbuewg .gt_first_summary_row.thick {
+#sfffovboni .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ajjetbuewg .gt_last_summary_row {
+#sfffovboni .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -652,7 +659,7 @@ MVN \left(
   border-bottom-color: #D3D3D3;
 }
 
-#ajjetbuewg .gt_grand_summary_row {
+#sfffovboni .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -662,7 +669,7 @@ MVN \left(
   padding-right: 5px;
 }
 
-#ajjetbuewg .gt_first_grand_summary_row {
+#sfffovboni .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -672,7 +679,7 @@ MVN \left(
   border-top-color: #D3D3D3;
 }
 
-#ajjetbuewg .gt_last_grand_summary_row_top {
+#sfffovboni .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -682,11 +689,11 @@ MVN \left(
   border-bottom-color: #D3D3D3;
 }
 
-#ajjetbuewg .gt_striped {
+#sfffovboni .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ajjetbuewg .gt_table_body {
+#sfffovboni .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -695,7 +702,7 @@ MVN \left(
   border-bottom-color: #D3D3D3;
 }
 
-#ajjetbuewg .gt_footnotes {
+#sfffovboni .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -709,7 +716,7 @@ MVN \left(
   border-right-color: #D3D3D3;
 }
 
-#ajjetbuewg .gt_footnote {
+#sfffovboni .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -718,7 +725,7 @@ MVN \left(
   padding-right: 5px;
 }
 
-#ajjetbuewg .gt_sourcenotes {
+#sfffovboni .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -732,7 +739,7 @@ MVN \left(
   border-right-color: #D3D3D3;
 }
 
-#ajjetbuewg .gt_sourcenote {
+#sfffovboni .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -740,72 +747,72 @@ MVN \left(
   padding-right: 5px;
 }
 
-#ajjetbuewg .gt_left {
+#sfffovboni .gt_left {
   text-align: left;
 }
 
-#ajjetbuewg .gt_center {
+#sfffovboni .gt_center {
   text-align: center;
 }
 
-#ajjetbuewg .gt_right {
+#sfffovboni .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ajjetbuewg .gt_font_normal {
+#sfffovboni .gt_font_normal {
   font-weight: normal;
 }
 
-#ajjetbuewg .gt_font_bold {
+#sfffovboni .gt_font_bold {
   font-weight: bold;
 }
 
-#ajjetbuewg .gt_font_italic {
+#sfffovboni .gt_font_italic {
   font-style: italic;
 }
 
-#ajjetbuewg .gt_super {
+#sfffovboni .gt_super {
   font-size: 65%;
 }
 
-#ajjetbuewg .gt_footnote_marks {
+#sfffovboni .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ajjetbuewg .gt_asterisk {
+#sfffovboni .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ajjetbuewg .gt_indent_1 {
+#sfffovboni .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ajjetbuewg .gt_indent_2 {
+#sfffovboni .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ajjetbuewg .gt_indent_3 {
+#sfffovboni .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ajjetbuewg .gt_indent_4 {
+#sfffovboni .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ajjetbuewg .gt_indent_5 {
+#sfffovboni .gt_indent_5 {
   text-indent: 25px;
 }
 
-#ajjetbuewg .katex-display {
+#sfffovboni .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#ajjetbuewg div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#sfffovboni div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1208,23 +1215,23 @@ MVN \left(
 </details>
 
 <div class="no-row-height column-margin column-container"><div class="cell-output-display">
-<div id="ppcyadivgh" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#ppcyadivgh table {
+<div id="kxpaxigdpk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#kxpaxigdpk table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ppcyadivgh thead, #ppcyadivgh tbody, #ppcyadivgh tfoot, #ppcyadivgh tr, #ppcyadivgh td, #ppcyadivgh th {
+#kxpaxigdpk thead, #kxpaxigdpk tbody, #kxpaxigdpk tfoot, #kxpaxigdpk tr, #kxpaxigdpk td, #kxpaxigdpk th {
   border-style: none;
 }
 
-#ppcyadivgh p {
+#kxpaxigdpk p {
   margin: 0;
   padding: 0;
 }
 
-#ppcyadivgh .gt_table {
+#kxpaxigdpk .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1250,12 +1257,12 @@ MVN \left(
   border-left-color: #D3D3D3;
 }
 
-#ppcyadivgh .gt_caption {
+#kxpaxigdpk .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ppcyadivgh .gt_title {
+#kxpaxigdpk .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1267,7 +1274,7 @@ MVN \left(
   border-bottom-width: 0;
 }
 
-#ppcyadivgh .gt_subtitle {
+#kxpaxigdpk .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1279,7 +1286,7 @@ MVN \left(
   border-top-width: 0;
 }
 
-#ppcyadivgh .gt_heading {
+#kxpaxigdpk .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1291,13 +1298,13 @@ MVN \left(
   border-right-color: #D3D3D3;
 }
 
-#ppcyadivgh .gt_bottom_border {
+#kxpaxigdpk .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ppcyadivgh .gt_col_headings {
+#kxpaxigdpk .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1312,7 +1319,7 @@ MVN \left(
   border-right-color: #D3D3D3;
 }
 
-#ppcyadivgh .gt_col_heading {
+#kxpaxigdpk .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1332,7 +1339,7 @@ MVN \left(
   overflow-x: hidden;
 }
 
-#ppcyadivgh .gt_column_spanner_outer {
+#kxpaxigdpk .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1344,15 +1351,15 @@ MVN \left(
   padding-right: 4px;
 }
 
-#ppcyadivgh .gt_column_spanner_outer:first-child {
+#kxpaxigdpk .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ppcyadivgh .gt_column_spanner_outer:last-child {
+#kxpaxigdpk .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ppcyadivgh .gt_column_spanner {
+#kxpaxigdpk .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1364,11 +1371,11 @@ MVN \left(
   width: 100%;
 }
 
-#ppcyadivgh .gt_spanner_row {
+#kxpaxigdpk .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ppcyadivgh .gt_group_heading {
+#kxpaxigdpk .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1394,7 +1401,7 @@ MVN \left(
   text-align: left;
 }
 
-#ppcyadivgh .gt_empty_group_heading {
+#kxpaxigdpk .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1409,15 +1416,15 @@ MVN \left(
   vertical-align: middle;
 }
 
-#ppcyadivgh .gt_from_md > :first-child {
+#kxpaxigdpk .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ppcyadivgh .gt_from_md > :last-child {
+#kxpaxigdpk .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ppcyadivgh .gt_row {
+#kxpaxigdpk .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1436,7 +1443,7 @@ MVN \left(
   overflow-x: hidden;
 }
 
-#ppcyadivgh .gt_stub {
+#kxpaxigdpk .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1449,7 +1456,7 @@ MVN \left(
   padding-right: 5px;
 }
 
-#ppcyadivgh .gt_stub_row_group {
+#kxpaxigdpk .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1463,15 +1470,15 @@ MVN \left(
   vertical-align: top;
 }
 
-#ppcyadivgh .gt_row_group_first td {
+#kxpaxigdpk .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ppcyadivgh .gt_row_group_first th {
+#kxpaxigdpk .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ppcyadivgh .gt_summary_row {
+#kxpaxigdpk .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1481,16 +1488,16 @@ MVN \left(
   padding-right: 5px;
 }
 
-#ppcyadivgh .gt_first_summary_row {
+#kxpaxigdpk .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ppcyadivgh .gt_first_summary_row.thick {
+#kxpaxigdpk .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ppcyadivgh .gt_last_summary_row {
+#kxpaxigdpk .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1500,7 +1507,7 @@ MVN \left(
   border-bottom-color: #D3D3D3;
 }
 
-#ppcyadivgh .gt_grand_summary_row {
+#kxpaxigdpk .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1510,7 +1517,7 @@ MVN \left(
   padding-right: 5px;
 }
 
-#ppcyadivgh .gt_first_grand_summary_row {
+#kxpaxigdpk .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1520,7 +1527,7 @@ MVN \left(
   border-top-color: #D3D3D3;
 }
 
-#ppcyadivgh .gt_last_grand_summary_row_top {
+#kxpaxigdpk .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1530,11 +1537,11 @@ MVN \left(
   border-bottom-color: #D3D3D3;
 }
 
-#ppcyadivgh .gt_striped {
+#kxpaxigdpk .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ppcyadivgh .gt_table_body {
+#kxpaxigdpk .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1543,7 +1550,7 @@ MVN \left(
   border-bottom-color: #D3D3D3;
 }
 
-#ppcyadivgh .gt_footnotes {
+#kxpaxigdpk .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1557,7 +1564,7 @@ MVN \left(
   border-right-color: #D3D3D3;
 }
 
-#ppcyadivgh .gt_footnote {
+#kxpaxigdpk .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1566,7 +1573,7 @@ MVN \left(
   padding-right: 5px;
 }
 
-#ppcyadivgh .gt_sourcenotes {
+#kxpaxigdpk .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1580,7 +1587,7 @@ MVN \left(
   border-right-color: #D3D3D3;
 }
 
-#ppcyadivgh .gt_sourcenote {
+#kxpaxigdpk .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1588,72 +1595,72 @@ MVN \left(
   padding-right: 5px;
 }
 
-#ppcyadivgh .gt_left {
+#kxpaxigdpk .gt_left {
   text-align: left;
 }
 
-#ppcyadivgh .gt_center {
+#kxpaxigdpk .gt_center {
   text-align: center;
 }
 
-#ppcyadivgh .gt_right {
+#kxpaxigdpk .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ppcyadivgh .gt_font_normal {
+#kxpaxigdpk .gt_font_normal {
   font-weight: normal;
 }
 
-#ppcyadivgh .gt_font_bold {
+#kxpaxigdpk .gt_font_bold {
   font-weight: bold;
 }
 
-#ppcyadivgh .gt_font_italic {
+#kxpaxigdpk .gt_font_italic {
   font-style: italic;
 }
 
-#ppcyadivgh .gt_super {
+#kxpaxigdpk .gt_super {
   font-size: 65%;
 }
 
-#ppcyadivgh .gt_footnote_marks {
+#kxpaxigdpk .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ppcyadivgh .gt_asterisk {
+#kxpaxigdpk .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ppcyadivgh .gt_indent_1 {
+#kxpaxigdpk .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ppcyadivgh .gt_indent_2 {
+#kxpaxigdpk .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ppcyadivgh .gt_indent_3 {
+#kxpaxigdpk .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ppcyadivgh .gt_indent_4 {
+#kxpaxigdpk .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ppcyadivgh .gt_indent_5 {
+#kxpaxigdpk .gt_indent_5 {
   text-indent: 25px;
 }
 
-#ppcyadivgh .katex-display {
+#kxpaxigdpk .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#ppcyadivgh div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#kxpaxigdpk div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1666,13 +1673,15 @@ MVN \left(
   </thead>
   <tbody class="gt_table_body">
     <tr><td headers="parameters" class="gt_row gt_left">n_bootstraps</td>
-<td headers="values" class="gt_row gt_center">480</td></tr>
+<td headers="values" class="gt_row gt_center">120</td></tr>
     <tr><td headers="parameters" class="gt_row gt_left">n_students</td>
 <td headers="values" class="gt_row gt_center">3, 10</td></tr>
     <tr><td headers="parameters" class="gt_row gt_left">n_schools</td>
 <td headers="values" class="gt_row gt_center">10, 30</td></tr>
     <tr><td headers="parameters" class="gt_row gt_left">centered</td>
 <td headers="values" class="gt_row gt_center">TRUE, FALSE</td></tr>
+    <tr><td headers="parameters" class="gt_row gt_left">bootstrap_type</td>
+<td headers="values" class="gt_row gt_center">list("both", "cluster"), individual</td></tr>
   </tbody>
   
 </table>
@@ -1687,52 +1696,146 @@ MVN \left(
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>condition_plt_files <span class="ot">&lt;-</span> targets<span class="sc">::</span><span class="fu">tar_read</span>(condition_plt_files, </span>
 <span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>                                         <span class="at">store =</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"_targets"</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unlist</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unlist</span>()</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="st">"both"</span>, <span class="st">"cluster"</span>, <span class="st">"individual"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">walk</span>(\(bstype) {</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    nm <span class="ot">&lt;-</span> <span class="fu">as.character</span>(glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">"condition_plt_files_bstype_{bstype}"</span>))</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">assign</span>(nm, condition_plt_files[<span class="fu">which</span>(<span class="fu">str_detect</span>(condition_plt_files, glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">"bstype_{bstype}"</span>)))], .GlobalEnv)</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>icc_plt_files <span class="ot">&lt;-</span> targets<span class="sc">::</span><span class="fu">tar_read</span>(icc_plt_files, </span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">store =</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"_targets"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unlist</span>()</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="st">"both"</span>, <span class="st">"cluster"</span>, <span class="st">"individual"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">walk</span>(\(bstype) {</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>    nm <span class="ot">&lt;-</span> <span class="fu">as.character</span>(glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">"icc_plt_files_bstype_{bstype}"</span>))</span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">assign</span>(nm, icc_plt_files[<span class="fu">which</span>(<span class="fu">str_detect</span>(icc_plt_files, glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">"bstype_{bstype}"</span>)))], .GlobalEnv)</span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>r2_plt_files <span class="ot">&lt;-</span> targets<span class="sc">::</span><span class="fu">tar_read</span>(r2_plt_files, </span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">store =</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"_targets"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unlist</span>()</span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="st">"both"</span>, <span class="st">"cluster"</span>, <span class="st">"individual"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">walk</span>(\(bstype) {</span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>    nm <span class="ot">&lt;-</span> <span class="fu">as.character</span>(glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">"r2_plt_files_bstype_{bstype}"</span>))</span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>    <span class="fu">assign</span>(nm, r2_plt_files[<span class="fu">which</span>(<span class="fu">str_detect</span>(r2_plt_files, glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">"bstype_{bstype}"</span>)))], .GlobalEnv)</span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>  })</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p>Starting conditions: number of level-one units (students) within level-two units (schools). This set of parameters creates 8 conditions per model.</p>
+<p>Starting conditions: number of level-one units (students) within level-two units (schools). This set of parameters creates 24 conditions per model.</p>
+<section id="bootstrapping-type-both" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="bootstrapping-type-both">Bootstrapping Type: Both</h3>
+<p>First randomly sampling <code>n_schools</code> schools, then randomly sampling <code>n_students</code> students from within those schools.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>condition_plt_files <span class="ot">&lt;-</span> condition_plt_files_bstype_both</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>icc_plt_files <span class="ot">&lt;-</span> icc_plt_files_bstype_both</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>r2_plt_files <span class="ot">&lt;-</span> r2_plt_files_bstype_both</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>model_ids <span class="ot">&lt;-</span> condition_plt_files <span class="sc">|&gt;</span> </span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_extract</span>(<span class="st">"model_(</span><span class="sc">\\</span><span class="st">d)"</span>, <span class="at">group =</span> <span class="dv">1</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unique</span>()</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>model_id_centered_idxs <span class="ot">&lt;-</span> <span class="fu">map</span>(model_ids, </span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>                     \(model_id) <span class="fu">which</span>(</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>                       <span class="fu">str_detect</span>(condition_plt_files, glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">"model_{model_id}_centered_TRUE"</span>))</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>                     ))</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>model_id_not_centered_idxs <span class="ot">&lt;-</span> <span class="fu">map</span>(model_ids, </span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>                     \(model_id) <span class="fu">which</span>(</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>                       <span class="fu">str_detect</span>(condition_plt_files, glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">"model_{model_id}_centered_FALSE"</span>))</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>                     ))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
 <div class="tabset-margin-container"></div><div class="panel-tabset page-columns page-full">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-8-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-8-1" role="tab" aria-controls="tabset-8-1" aria-selected="true">Unconditional Model</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-8-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-8-2" role="tab" aria-controls="tabset-8-2" aria-selected="false">Level-One Predictor Model</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-8-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-8-3" role="tab" aria-controls="tabset-8-3" aria-selected="false">Level-One and Level-Two Predictor Model</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-8-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-8-4" role="tab" aria-controls="tabset-8-4" aria-selected="false">Cross-Level Interaction Model</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-8-5-tab" data-bs-toggle="tab" data-bs-target="#tabset-8-5" role="tab" aria-controls="tabset-8-5" aria-selected="false">Full Model</a></li></ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-7-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-1" role="tab" aria-controls="tabset-7-1" aria-selected="true">Unconditional Model</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-7-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-2" role="tab" aria-controls="tabset-7-2" aria-selected="false">Level-One Predictor Model</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-7-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-3" role="tab" aria-controls="tabset-7-3" aria-selected="false">Level-One and Level-Two Predictor Model</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-7-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-4" role="tab" aria-controls="tabset-7-4" aria-selected="false">Cross-Level Interaction Model</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-7-5-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-5" role="tab" aria-controls="tabset-7-5" aria-selected="false">Full Model</a></li></ul>
 <div class="tab-content page-columns page-full">
-<div id="tabset-8-1" class="tab-pane active page-columns page-full" role="tabpanel" aria-labelledby="tabset-8-1-tab">
+<div id="tabset-7-1" class="tab-pane active page-columns page-full" role="tabpanel" aria-labelledby="tabset-7-1-tab">
+<div class="tabset-margin-container"></div><div class="panel-tabset page-columns page-full">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true">Non-Centered</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false">Centered</a></li></ul>
+<div class="tab-content page-columns page-full">
+<div id="tabset-2-1" class="tab-pane active page-columns page-full" role="tabpanel" aria-labelledby="tabset-2-1-tab">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>condition_plt_files[model_id_not_centered_idxs[[<span class="dv">1</span>]]] <span class="sc">|&gt;</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell column-page quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_1_model_1_centered_FALSE_bstype_both.png" class="img-fluid" width="825"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_7_model_1_centered_FALSE_bstype_both.png" class="img-fluid" width="825"></p>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_13_model_1_centered_FALSE_bstype_both.png" class="img-fluid" width="825"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_19_model_1_centered_FALSE_bstype_both.png" class="img-fluid" width="825"></p>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-2-2" class="tab-pane page-columns page-full" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>condition_plt_files[model_id_centered_idxs[[<span class="dv">1</span>]]] <span class="sc">|&gt;</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell column-page quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_4_model_1_centered_TRUE_bstype_both.png" class="img-fluid" width="825"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_10_model_1_centered_TRUE_bstype_both.png" class="img-fluid" width="825"></p>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_16_model_1_centered_TRUE_bstype_both.png" class="img-fluid" width="825"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_22_model_1_centered_TRUE_bstype_both.png" class="img-fluid" width="825"></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-7-2" class="tab-pane page-columns page-full" role="tabpanel" aria-labelledby="tabset-7-2-tab">
 <div class="tabset-margin-container"></div><div class="panel-tabset page-columns page-full">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true">Non-Centered</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false">Centered</a></li></ul>
 <div class="tab-content page-columns page-full">
 <div id="tabset-3-1" class="tab-pane active page-columns page-full" role="tabpanel" aria-labelledby="tabset-3-1-tab">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>model_ids <span class="ot">&lt;-</span> condition_plt_files <span class="sc">|&gt;</span> </span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_extract</span>(<span class="st">"model_(</span><span class="sc">\\</span><span class="st">d)"</span>, <span class="at">group =</span> <span class="dv">1</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unique</span>()</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>model_id_centered_idxs <span class="ot">&lt;-</span> <span class="fu">map</span>(model_ids, </span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>                     \(model_id) <span class="fu">which</span>(</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>                       <span class="fu">str_detect</span>(condition_plt_files, glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">"model_{model_id}_centered_TRUE"</span>))</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>                     ))</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>model_id_not_centered_idxs <span class="ot">&lt;-</span> <span class="fu">map</span>(model_ids, </span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>                     \(model_id) <span class="fu">which</span>(</span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>                       <span class="fu">str_detect</span>(condition_plt_files, glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">"model_{model_id}_centered_FALSE"</span>))</span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>                     ))</span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>condition_plt_files[model_id_not_centered_idxs[[<span class="dv">1</span>]]] <span class="sc">|&gt;</span></span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>condition_plt_files[model_id_not_centered_idxs[[<span class="dv">2</span>]]] <span class="sc">|&gt;</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell column-page quarto-layout-panel" data-layout-ncol="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="outputs/condition_1_model_1_centered_FALSE.png" class="img-fluid" width="825"></p>
+<p><img src="outputs/condition_25_model_2_centered_FALSE_bstype_both.png" class="img-fluid" width="825"></p>
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="outputs/condition_3_model_1_centered_FALSE.png" class="img-fluid" width="825"></p>
+<p><img src="outputs/condition_31_model_2_centered_FALSE_bstype_both.png" class="img-fluid" width="825"></p>
 </div>
 </div>
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="outputs/condition_5_model_1_centered_FALSE.png" class="img-fluid" width="825"></p>
+<p><img src="outputs/condition_37_model_2_centered_FALSE_bstype_both.png" class="img-fluid" width="825"></p>
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="outputs/condition_7_model_1_centered_FALSE.png" class="img-fluid" width="825"></p>
+<p><img src="outputs/condition_43_model_2_centered_FALSE_bstype_both.png" class="img-fluid" width="825"></p>
 </div>
 </div>
 </div>
@@ -1740,24 +1843,24 @@ MVN \left(
 <div id="tabset-3-2" class="tab-pane page-columns page-full" role="tabpanel" aria-labelledby="tabset-3-2-tab">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>condition_plt_files[model_id_centered_idxs[[<span class="dv">1</span>]]] <span class="sc">|&gt;</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>condition_plt_files[model_id_centered_idxs[[<span class="dv">2</span>]]] <span class="sc">|&gt;</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell column-page quarto-layout-panel" data-layout-ncol="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="outputs/condition_2_model_1_centered_TRUE.png" class="img-fluid" width="825"></p>
+<p><img src="outputs/condition_28_model_2_centered_TRUE_bstype_both.png" class="img-fluid" width="825"></p>
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="outputs/condition_4_model_1_centered_TRUE.png" class="img-fluid" width="825"></p>
+<p><img src="outputs/condition_34_model_2_centered_TRUE_bstype_both.png" class="img-fluid" width="825"></p>
 </div>
 </div>
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="outputs/condition_6_model_1_centered_TRUE.png" class="img-fluid" width="825"></p>
+<p><img src="outputs/condition_40_model_2_centered_TRUE_bstype_both.png" class="img-fluid" width="825"></p>
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="outputs/condition_8_model_1_centered_TRUE.png" class="img-fluid" width="825"></p>
+<p><img src="outputs/condition_46_model_2_centered_TRUE_bstype_both.png" class="img-fluid" width="825"></p>
 </div>
 </div>
 </div>
@@ -1765,31 +1868,31 @@ MVN \left(
 </div>
 </div>
 </div>
-<div id="tabset-8-2" class="tab-pane page-columns page-full" role="tabpanel" aria-labelledby="tabset-8-2-tab">
+<div id="tabset-7-3" class="tab-pane page-columns page-full" role="tabpanel" aria-labelledby="tabset-7-3-tab">
 <div class="tabset-margin-container"></div><div class="panel-tabset page-columns page-full">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-4-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-1" role="tab" aria-controls="tabset-4-1" aria-selected="true">Non-Centered</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-2" role="tab" aria-controls="tabset-4-2" aria-selected="false">Centered</a></li></ul>
 <div class="tab-content page-columns page-full">
 <div id="tabset-4-1" class="tab-pane active page-columns page-full" role="tabpanel" aria-labelledby="tabset-4-1-tab">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>condition_plt_files[model_id_not_centered_idxs[[<span class="dv">2</span>]]] <span class="sc">|&gt;</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>condition_plt_files[model_id_not_centered_idxs[[<span class="dv">3</span>]]] <span class="sc">|&gt;</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell column-page quarto-layout-panel" data-layout-ncol="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="outputs/condition_9_model_2_centered_FALSE.png" class="img-fluid" width="825"></p>
+<p><img src="outputs/condition_49_model_3_centered_FALSE_bstype_both.png" class="img-fluid" width="900"></p>
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="outputs/condition_11_model_2_centered_FALSE.png" class="img-fluid" width="825"></p>
+<p><img src="outputs/condition_55_model_3_centered_FALSE_bstype_both.png" class="img-fluid" width="900"></p>
 </div>
 </div>
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="outputs/condition_13_model_2_centered_FALSE.png" class="img-fluid" width="825"></p>
+<p><img src="outputs/condition_61_model_3_centered_FALSE_bstype_both.png" class="img-fluid" width="900"></p>
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="outputs/condition_15_model_2_centered_FALSE.png" class="img-fluid" width="825"></p>
+<p><img src="outputs/condition_67_model_3_centered_FALSE_bstype_both.png" class="img-fluid" width="900"></p>
 </div>
 </div>
 </div>
@@ -1797,24 +1900,24 @@ MVN \left(
 <div id="tabset-4-2" class="tab-pane page-columns page-full" role="tabpanel" aria-labelledby="tabset-4-2-tab">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>condition_plt_files[model_id_centered_idxs[[<span class="dv">2</span>]]] <span class="sc">|&gt;</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>condition_plt_files[model_id_centered_idxs[[<span class="dv">3</span>]]] <span class="sc">|&gt;</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell column-page quarto-layout-panel" data-layout-ncol="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="outputs/condition_10_model_2_centered_TRUE.png" class="img-fluid" width="825"></p>
+<p><img src="outputs/condition_52_model_3_centered_TRUE_bstype_both.png" class="img-fluid" width="900"></p>
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="outputs/condition_12_model_2_centered_TRUE.png" class="img-fluid" width="825"></p>
+<p><img src="outputs/condition_58_model_3_centered_TRUE_bstype_both.png" class="img-fluid" width="900"></p>
 </div>
 </div>
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="outputs/condition_14_model_2_centered_TRUE.png" class="img-fluid" width="825"></p>
+<p><img src="outputs/condition_64_model_3_centered_TRUE_bstype_both.png" class="img-fluid" width="900"></p>
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="outputs/condition_16_model_2_centered_TRUE.png" class="img-fluid" width="825"></p>
+<p><img src="outputs/condition_70_model_3_centered_TRUE_bstype_both.png" class="img-fluid" width="900"></p>
 </div>
 </div>
 </div>
@@ -1822,31 +1925,31 @@ MVN \left(
 </div>
 </div>
 </div>
-<div id="tabset-8-3" class="tab-pane page-columns page-full" role="tabpanel" aria-labelledby="tabset-8-3-tab">
+<div id="tabset-7-4" class="tab-pane page-columns page-full" role="tabpanel" aria-labelledby="tabset-7-4-tab">
 <div class="tabset-margin-container"></div><div class="panel-tabset page-columns page-full">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-5-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-1" role="tab" aria-controls="tabset-5-1" aria-selected="true">Non-Centered</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-5-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-2" role="tab" aria-controls="tabset-5-2" aria-selected="false">Centered</a></li></ul>
 <div class="tab-content page-columns page-full">
 <div id="tabset-5-1" class="tab-pane active page-columns page-full" role="tabpanel" aria-labelledby="tabset-5-1-tab">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>condition_plt_files[model_id_not_centered_idxs[[<span class="dv">3</span>]]] <span class="sc">|&gt;</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>condition_plt_files[model_id_not_centered_idxs[[<span class="dv">4</span>]]] <span class="sc">|&gt;</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell column-page quarto-layout-panel" data-layout-ncol="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="outputs/condition_17_model_3_centered_FALSE.png" class="img-fluid" width="900"></p>
+<p><img src="outputs/condition_73_model_4_centered_FALSE_bstype_both.png" class="img-fluid" width="975"></p>
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="outputs/condition_19_model_3_centered_FALSE.png" class="img-fluid" width="900"></p>
+<p><img src="outputs/condition_79_model_4_centered_FALSE_bstype_both.png" class="img-fluid" width="975"></p>
 </div>
 </div>
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="outputs/condition_21_model_3_centered_FALSE.png" class="img-fluid" width="900"></p>
+<p><img src="outputs/condition_85_model_4_centered_FALSE_bstype_both.png" class="img-fluid" width="975"></p>
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="outputs/condition_23_model_3_centered_FALSE.png" class="img-fluid" width="900"></p>
+<p><img src="outputs/condition_91_model_4_centered_FALSE_bstype_both.png" class="img-fluid" width="975"></p>
 </div>
 </div>
 </div>
@@ -1854,24 +1957,24 @@ MVN \left(
 <div id="tabset-5-2" class="tab-pane page-columns page-full" role="tabpanel" aria-labelledby="tabset-5-2-tab">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>condition_plt_files[model_id_centered_idxs[[<span class="dv">3</span>]]] <span class="sc">|&gt;</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>condition_plt_files[model_id_centered_idxs[[<span class="dv">4</span>]]] <span class="sc">|&gt;</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell column-page quarto-layout-panel" data-layout-ncol="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="outputs/condition_18_model_3_centered_TRUE.png" class="img-fluid" width="900"></p>
+<p><img src="outputs/condition_76_model_4_centered_TRUE_bstype_both.png" class="img-fluid" width="975"></p>
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="outputs/condition_20_model_3_centered_TRUE.png" class="img-fluid" width="900"></p>
+<p><img src="outputs/condition_82_model_4_centered_TRUE_bstype_both.png" class="img-fluid" width="975"></p>
 </div>
 </div>
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="outputs/condition_22_model_3_centered_TRUE.png" class="img-fluid" width="900"></p>
+<p><img src="outputs/condition_88_model_4_centered_TRUE_bstype_both.png" class="img-fluid" width="975"></p>
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="outputs/condition_24_model_3_centered_TRUE.png" class="img-fluid" width="900"></p>
+<p><img src="outputs/condition_94_model_4_centered_TRUE_bstype_both.png" class="img-fluid" width="975"></p>
 </div>
 </div>
 </div>
@@ -1879,31 +1982,31 @@ MVN \left(
 </div>
 </div>
 </div>
-<div id="tabset-8-4" class="tab-pane page-columns page-full" role="tabpanel" aria-labelledby="tabset-8-4-tab">
+<div id="tabset-7-5" class="tab-pane page-columns page-full" role="tabpanel" aria-labelledby="tabset-7-5-tab">
 <div class="tabset-margin-container"></div><div class="panel-tabset page-columns page-full">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-6-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-6-1" role="tab" aria-controls="tabset-6-1" aria-selected="true">Non-Centered</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-6-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-6-2" role="tab" aria-controls="tabset-6-2" aria-selected="false">Centered</a></li></ul>
 <div class="tab-content page-columns page-full">
 <div id="tabset-6-1" class="tab-pane active page-columns page-full" role="tabpanel" aria-labelledby="tabset-6-1-tab">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>condition_plt_files[model_id_not_centered_idxs[[<span class="dv">4</span>]]] <span class="sc">|&gt;</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>condition_plt_files[model_id_not_centered_idxs[[<span class="dv">5</span>]]] <span class="sc">|&gt;</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell column-page quarto-layout-panel" data-layout-ncol="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="outputs/condition_25_model_4_centered_FALSE.png" class="img-fluid" width="975"></p>
+<p><img src="outputs/condition_97_model_5_centered_FALSE_bstype_both.png" class="img-fluid" width="1200"></p>
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="outputs/condition_27_model_4_centered_FALSE.png" class="img-fluid" width="975"></p>
+<p><img src="outputs/condition_103_model_5_centered_FALSE_bstype_both.png" class="img-fluid" width="1200"></p>
 </div>
 </div>
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="outputs/condition_29_model_4_centered_FALSE.png" class="img-fluid" width="975"></p>
+<p><img src="outputs/condition_109_model_5_centered_FALSE_bstype_both.png" class="img-fluid" width="1200"></p>
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="outputs/condition_31_model_4_centered_FALSE.png" class="img-fluid" width="975"></p>
+<p><img src="outputs/condition_115_model_5_centered_FALSE_bstype_both.png" class="img-fluid" width="1200"></p>
 </div>
 </div>
 </div>
@@ -1911,81 +2014,24 @@ MVN \left(
 <div id="tabset-6-2" class="tab-pane page-columns page-full" role="tabpanel" aria-labelledby="tabset-6-2-tab">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>condition_plt_files[model_id_centered_idxs[[<span class="dv">4</span>]]] <span class="sc">|&gt;</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>condition_plt_files[model_id_centered_idxs[[<span class="dv">5</span>]]] <span class="sc">|&gt;</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell column-page quarto-layout-panel" data-layout-ncol="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="outputs/condition_26_model_4_centered_TRUE.png" class="img-fluid" width="975"></p>
+<p><img src="outputs/condition_100_model_5_centered_TRUE_bstype_both.png" class="img-fluid" width="1200"></p>
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="outputs/condition_28_model_4_centered_TRUE.png" class="img-fluid" width="975"></p>
+<p><img src="outputs/condition_106_model_5_centered_TRUE_bstype_both.png" class="img-fluid" width="1200"></p>
 </div>
 </div>
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="outputs/condition_30_model_4_centered_TRUE.png" class="img-fluid" width="975"></p>
+<p><img src="outputs/condition_112_model_5_centered_TRUE_bstype_both.png" class="img-fluid" width="1200"></p>
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="outputs/condition_32_model_4_centered_TRUE.png" class="img-fluid" width="975"></p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div id="tabset-8-5" class="tab-pane page-columns page-full" role="tabpanel" aria-labelledby="tabset-8-5-tab">
-<div class="tabset-margin-container"></div><div class="panel-tabset page-columns page-full">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-7-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-1" role="tab" aria-controls="tabset-7-1" aria-selected="true">Non-Centered</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-7-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-2" role="tab" aria-controls="tabset-7-2" aria-selected="false">Centered</a></li></ul>
-<div class="tab-content page-columns page-full">
-<div id="tabset-7-1" class="tab-pane active page-columns page-full" role="tabpanel" aria-labelledby="tabset-7-1-tab">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>condition_plt_files[model_id_not_centered_idxs[[<span class="dv">5</span>]]] <span class="sc">|&gt;</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell column-page quarto-layout-panel" data-layout-ncol="2">
-<div class="quarto-layout-row">
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="outputs/condition_33_model_5_centered_FALSE.png" class="img-fluid" width="1200"></p>
-</div>
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="outputs/condition_35_model_5_centered_FALSE.png" class="img-fluid" width="1200"></p>
-</div>
-</div>
-<div class="quarto-layout-row">
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="outputs/condition_37_model_5_centered_FALSE.png" class="img-fluid" width="1200"></p>
-</div>
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="outputs/condition_39_model_5_centered_FALSE.png" class="img-fluid" width="1200"></p>
-</div>
-</div>
-</div>
-</div>
-<div id="tabset-7-2" class="tab-pane page-columns page-full" role="tabpanel" aria-labelledby="tabset-7-2-tab">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>condition_plt_files[model_id_centered_idxs[[<span class="dv">5</span>]]] <span class="sc">|&gt;</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell column-page quarto-layout-panel" data-layout-ncol="2">
-<div class="quarto-layout-row">
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="outputs/condition_34_model_5_centered_TRUE.png" class="img-fluid" width="1200"></p>
-</div>
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="outputs/condition_36_model_5_centered_TRUE.png" class="img-fluid" width="1200"></p>
-</div>
-</div>
-<div class="quarto-layout-row">
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="outputs/condition_38_model_5_centered_TRUE.png" class="img-fluid" width="1200"></p>
-</div>
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="outputs/condition_40_model_5_centered_TRUE.png" class="img-fluid" width="1200"></p>
+<p><img src="outputs/condition_118_model_5_centered_TRUE_bstype_both.png" class="img-fluid" width="1200"></p>
 </div>
 </div>
 </div>
@@ -1995,41 +2041,134 @@ MVN \left(
 </div>
 </div>
 </div>
-<section id="other-distributions-by-condition" class="level4">
-<h4 class="anchored" data-anchor-id="other-distributions-by-condition">Other Distributions by Condition</h4>
+<section id="other-distributions" class="level4">
+<h4 class="anchored" data-anchor-id="other-distributions">Other Distributions</h4>
 <p>All of these distributions are from the non-centered versions of the data subsets.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-11-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-11-1" role="tab" aria-controls="tabset-11-1" aria-selected="true">ICC</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-11-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-11-2" role="tab" aria-controls="tabset-11-2" aria-selected="false"><span class="math inline">\(R^2\)</span></a></li></ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-10-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-10-1" role="tab" aria-controls="tabset-10-1" aria-selected="true">ICC</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-10-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-10-2" role="tab" aria-controls="tabset-10-2" aria-selected="false"><span class="math inline">\(R^2\)</span></a></li></ul>
 <div class="tab-content">
-<div id="tabset-11-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-11-1-tab">
+<div id="tabset-10-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-10-1-tab">
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-9-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-9-1" role="tab" aria-controls="tabset-9-1" aria-selected="true">Unconditional Model</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-9-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-9-2" role="tab" aria-controls="tabset-9-2" aria-selected="false">Level-One Predictor Model</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-9-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-9-3" role="tab" aria-controls="tabset-9-3" aria-selected="false">Level-One and Level-Two Predictor Model</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-9-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-9-4" role="tab" aria-controls="tabset-9-4" aria-selected="false">Cross-Level Interaction Model</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-9-5-tab" data-bs-toggle="tab" data-bs-target="#tabset-9-5" role="tab" aria-controls="tabset-9-5" aria-selected="false">Full Model</a></li></ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-8-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-8-1" role="tab" aria-controls="tabset-8-1" aria-selected="true">Unconditional Model</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-8-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-8-2" role="tab" aria-controls="tabset-8-2" aria-selected="false">Level-One Predictor Model</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-8-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-8-3" role="tab" aria-controls="tabset-8-3" aria-selected="false">Level-One and Level-Two Predictor Model</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-8-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-8-4" role="tab" aria-controls="tabset-8-4" aria-selected="false">Cross-Level Interaction Model</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-8-5-tab" data-bs-toggle="tab" data-bs-target="#tabset-8-5" role="tab" aria-controls="tabset-8-5" aria-selected="false">Full Model</a></li></ul>
+<div class="tab-content">
+<div id="tabset-8-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-8-1-tab">
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>icc_plt_model_id_centered_idxs <span class="ot">&lt;-</span> <span class="fu">map</span>(model_ids, </span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>                     \(model_id) <span class="fu">which</span>(</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>                       <span class="fu">str_detect</span>(icc_plt_files, glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">"model_{model_id}_centered_TRUE"</span>))</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>                     ))</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>icc_plt_model_id_not_centered_idxs <span class="ot">&lt;-</span> <span class="fu">map</span>(model_ids, </span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>                     \(model_id) <span class="fu">which</span>(</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>                       <span class="fu">str_detect</span>(icc_plt_files, glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">"model_{model_id}_centered_FALSE"</span>))</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>                     ))</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>icc_plt_files[icc_plt_model_id_not_centered_idxs[[<span class="dv">1</span>]]] <span class="sc">|&gt;</span></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="outputs/icc_plt_model_1_centered_FALSE_bstype_both.png" class="img-fluid figure-img" width="1050"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-8-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-8-2-tab">
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>icc_plt_files[icc_plt_model_id_not_centered_idxs[[<span class="dv">2</span>]]] <span class="sc">|&gt;</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="outputs/icc_plt_model_2_centered_FALSE_bstype_both.png" class="img-fluid figure-img" width="1050"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-8-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-8-3-tab">
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>icc_plt_files[icc_plt_model_id_not_centered_idxs[[<span class="dv">3</span>]]] <span class="sc">|&gt;</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="outputs/icc_plt_model_3_centered_FALSE_bstype_both.png" class="img-fluid figure-img" width="1050"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-8-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-8-4-tab">
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>icc_plt_files[icc_plt_model_id_not_centered_idxs[[<span class="dv">4</span>]]] <span class="sc">|&gt;</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="outputs/icc_plt_model_4_centered_FALSE_bstype_both.png" class="img-fluid figure-img" width="1050"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-8-5" class="tab-pane" role="tabpanel" aria-labelledby="tabset-8-5-tab">
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>icc_plt_files[icc_plt_model_id_not_centered_idxs[[<span class="dv">5</span>]]] <span class="sc">|&gt;</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="outputs/icc_plt_model_5_centered_FALSE_bstype_both.png" class="img-fluid figure-img" width="1050"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-10-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-10-2-tab">
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-9-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-9-1" role="tab" aria-controls="tabset-9-1" aria-selected="true">Unconditional Model</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-9-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-9-2" role="tab" aria-controls="tabset-9-2" aria-selected="false">One-Predictor Model</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-9-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-9-3" role="tab" aria-controls="tabset-9-3" aria-selected="false">Level-One and Level-Two Predictor Model</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-9-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-9-4" role="tab" aria-controls="tabset-9-4" aria-selected="false">Cross-Level Interaction Model</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-9-5-tab" data-bs-toggle="tab" data-bs-target="#tabset-9-5" role="tab" aria-controls="tabset-9-5" aria-selected="false">Full Model</a></li></ul>
 <div class="tab-content">
 <div id="tabset-9-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-9-1-tab">
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>icc_plt_files <span class="ot">&lt;-</span> targets<span class="sc">::</span><span class="fu">tar_read</span>(icc_plt_files, </span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">store =</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"_targets"</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unlist</span>()</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>icc_plt_model_id_centered_idxs <span class="ot">&lt;-</span> <span class="fu">map</span>(model_ids, </span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>                     \(model_id) <span class="fu">which</span>(</span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>                       <span class="fu">str_detect</span>(icc_plt_files, glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">"model_{model_id}_centered_TRUE"</span>))</span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>                     ))</span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>icc_plt_model_id_not_centered_idxs <span class="ot">&lt;-</span> <span class="fu">map</span>(model_ids, </span>
-<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>                     \(model_id) <span class="fu">which</span>(</span>
-<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>                       <span class="fu">str_detect</span>(icc_plt_files, glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">"model_{model_id}_centered_FALSE"</span>))</span>
-<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>                     ))</span>
-<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>icc_plt_files[icc_plt_model_id_not_centered_idxs[[<span class="dv">1</span>]]] <span class="sc">|&gt;</span></span>
-<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>r2_plt_model_id_centered_idxs <span class="ot">&lt;-</span> <span class="fu">map</span>(model_ids, </span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>                     \(model_id) <span class="fu">which</span>(</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>                       <span class="fu">str_detect</span>(r2_plt_files, glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">"model_{model_id}_centered_TRUE"</span>))</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>                     ))</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>r2_plt_model_id_not_centered_idxs <span class="ot">&lt;-</span> <span class="fu">map</span>(model_ids, </span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>                     \(model_id) <span class="fu">which</span>(</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>                       <span class="fu">str_detect</span>(icc_plt_files, glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">"model_{model_id}_centered_FALSE"</span>))</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>                     ))</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>r2_plt_files[r2_plt_model_id_not_centered_idxs[[<span class="dv">1</span>]]] <span class="sc">|&gt;</span></span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="outputs/icc_plt_model_1_centered_FALSE.png" class="img-fluid figure-img" width="1050"></p>
+<p><img src="outputs/r2_plt_model_1_centered_FALSE_bstype_both.png" class="img-fluid figure-img" width="1050"></p>
 </figure>
 </div>
 </div>
@@ -2039,13 +2178,13 @@ MVN \left(
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>icc_plt_files[icc_plt_model_id_not_centered_idxs[[<span class="dv">2</span>]]] <span class="sc">|&gt;</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>r2_plt_files[r2_plt_model_id_not_centered_idxs[[<span class="dv">2</span>]]] <span class="sc">|&gt;</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="outputs/icc_plt_model_2_centered_FALSE.png" class="img-fluid figure-img" width="1050"></p>
+<p><img src="outputs/r2_plt_model_2_centered_FALSE_bstype_both.png" class="img-fluid figure-img" width="1050"></p>
 </figure>
 </div>
 </div>
@@ -2055,13 +2194,13 @@ MVN \left(
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>icc_plt_files[icc_plt_model_id_not_centered_idxs[[<span class="dv">3</span>]]] <span class="sc">|&gt;</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>r2_plt_files[r2_plt_model_id_not_centered_idxs[[<span class="dv">3</span>]]] <span class="sc">|&gt;</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="outputs/icc_plt_model_3_centered_FALSE.png" class="img-fluid figure-img" width="1050"></p>
+<p><img src="outputs/r2_plt_model_3_centered_FALSE_bstype_both.png" class="img-fluid figure-img" width="1050"></p>
 </figure>
 </div>
 </div>
@@ -2071,13 +2210,13 @@ MVN \left(
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>icc_plt_files[icc_plt_model_id_not_centered_idxs[[<span class="dv">4</span>]]] <span class="sc">|&gt;</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>r2_plt_files[r2_plt_model_id_not_centered_idxs[[<span class="dv">4</span>]]] <span class="sc">|&gt;</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="outputs/icc_plt_model_4_centered_FALSE.png" class="img-fluid figure-img" width="1050"></p>
+<p><img src="outputs/r2_plt_model_4_centered_FALSE_bstype_both.png" class="img-fluid figure-img" width="1050"></p>
 </figure>
 </div>
 </div>
@@ -2087,13 +2226,13 @@ MVN \left(
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>icc_plt_files[icc_plt_model_id_not_centered_idxs[[<span class="dv">5</span>]]] <span class="sc">|&gt;</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>r2_plt_files[r2_plt_model_id_not_centered_idxs[[<span class="dv">5</span>]]] <span class="sc">|&gt;</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="outputs/icc_plt_model_5_centered_FALSE.png" class="img-fluid figure-img" width="1050"></p>
+<p><img src="outputs/r2_plt_model_5_centered_FALSE_bstype_both.png" class="img-fluid figure-img" width="1050"></p>
 </figure>
 </div>
 </div>
@@ -2102,99 +2241,1036 @@ MVN \left(
 </div>
 </div>
 </div>
-<div id="tabset-11-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-11-2-tab">
+</div>
+</div>
+</section>
+</section>
+<section id="bootstrapping-type-cluster" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="bootstrapping-type-cluster">Bootstrapping Type: Cluster</h3>
+<p>Randomly sampling <code>n_schools</code> schools.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>condition_plt_files <span class="ot">&lt;-</span> condition_plt_files_bstype_cluster</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>icc_plt_files <span class="ot">&lt;-</span> icc_plt_files_bstype_cluster</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>r2_plt_files <span class="ot">&lt;-</span> r2_plt_files_bstype_cluster</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>model_ids <span class="ot">&lt;-</span> condition_plt_files <span class="sc">|&gt;</span> </span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_extract</span>(<span class="st">"model_(</span><span class="sc">\\</span><span class="st">d)"</span>, <span class="at">group =</span> <span class="dv">1</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unique</span>()</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>model_id_centered_idxs <span class="ot">&lt;-</span> <span class="fu">map</span>(model_ids, </span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>                     \(model_id) <span class="fu">which</span>(</span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>                       <span class="fu">str_detect</span>(condition_plt_files, glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">"model_{model_id}_centered_TRUE"</span>))</span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>                     ))</span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a>model_id_not_centered_idxs <span class="ot">&lt;-</span> <span class="fu">map</span>(model_ids, </span>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a>                     \(model_id) <span class="fu">which</span>(</span>
+<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a>                       <span class="fu">str_detect</span>(condition_plt_files, glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">"model_{model_id}_centered_FALSE"</span>))</span>
+<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a>                     ))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="tabset-margin-container"></div><div class="panel-tabset page-columns page-full">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-16-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-16-1" role="tab" aria-controls="tabset-16-1" aria-selected="true">Unconditional Model</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-16-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-16-2" role="tab" aria-controls="tabset-16-2" aria-selected="false">Level-One Predictor Model</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-16-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-16-3" role="tab" aria-controls="tabset-16-3" aria-selected="false">Level-One and Level-Two Predictor Model</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-16-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-16-4" role="tab" aria-controls="tabset-16-4" aria-selected="false">Cross-Level Interaction Model</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-16-5-tab" data-bs-toggle="tab" data-bs-target="#tabset-16-5" role="tab" aria-controls="tabset-16-5" aria-selected="false">Full Model</a></li></ul>
+<div class="tab-content page-columns page-full">
+<div id="tabset-16-1" class="tab-pane active page-columns page-full" role="tabpanel" aria-labelledby="tabset-16-1-tab">
+<div class="tabset-margin-container"></div><div class="panel-tabset page-columns page-full">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-11-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-11-1" role="tab" aria-controls="tabset-11-1" aria-selected="true">Non-Centered</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-11-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-11-2" role="tab" aria-controls="tabset-11-2" aria-selected="false">Centered</a></li></ul>
+<div class="tab-content page-columns page-full">
+<div id="tabset-11-1" class="tab-pane active page-columns page-full" role="tabpanel" aria-labelledby="tabset-11-1-tab">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>condition_plt_files[model_id_not_centered_idxs[[<span class="dv">1</span>]]] <span class="sc">|&gt;</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell column-page quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_2_model_1_centered_FALSE_bstype_cluster.png" class="img-fluid" width="825"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_8_model_1_centered_FALSE_bstype_cluster.png" class="img-fluid" width="825"></p>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_14_model_1_centered_FALSE_bstype_cluster.png" class="img-fluid" width="825"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_20_model_1_centered_FALSE_bstype_cluster.png" class="img-fluid" width="825"></p>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-11-2" class="tab-pane page-columns page-full" role="tabpanel" aria-labelledby="tabset-11-2-tab">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>condition_plt_files[model_id_centered_idxs[[<span class="dv">1</span>]]] <span class="sc">|&gt;</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell column-page quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_5_model_1_centered_TRUE_bstype_cluster.png" class="img-fluid" width="825"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_11_model_1_centered_TRUE_bstype_cluster.png" class="img-fluid" width="825"></p>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_17_model_1_centered_TRUE_bstype_cluster.png" class="img-fluid" width="825"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_23_model_1_centered_TRUE_bstype_cluster.png" class="img-fluid" width="825"></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-16-2" class="tab-pane page-columns page-full" role="tabpanel" aria-labelledby="tabset-16-2-tab">
+<div class="tabset-margin-container"></div><div class="panel-tabset page-columns page-full">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-12-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-12-1" role="tab" aria-controls="tabset-12-1" aria-selected="true">Non-Centered</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-12-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-12-2" role="tab" aria-controls="tabset-12-2" aria-selected="false">Centered</a></li></ul>
+<div class="tab-content page-columns page-full">
+<div id="tabset-12-1" class="tab-pane active page-columns page-full" role="tabpanel" aria-labelledby="tabset-12-1-tab">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>condition_plt_files[model_id_not_centered_idxs[[<span class="dv">2</span>]]] <span class="sc">|&gt;</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell column-page quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_26_model_2_centered_FALSE_bstype_cluster.png" class="img-fluid" width="825"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_32_model_2_centered_FALSE_bstype_cluster.png" class="img-fluid" width="825"></p>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_38_model_2_centered_FALSE_bstype_cluster.png" class="img-fluid" width="825"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_44_model_2_centered_FALSE_bstype_cluster.png" class="img-fluid" width="825"></p>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-12-2" class="tab-pane page-columns page-full" role="tabpanel" aria-labelledby="tabset-12-2-tab">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>condition_plt_files[model_id_centered_idxs[[<span class="dv">2</span>]]] <span class="sc">|&gt;</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell column-page quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_29_model_2_centered_TRUE_bstype_cluster.png" class="img-fluid" width="825"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_35_model_2_centered_TRUE_bstype_cluster.png" class="img-fluid" width="825"></p>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_41_model_2_centered_TRUE_bstype_cluster.png" class="img-fluid" width="825"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_47_model_2_centered_TRUE_bstype_cluster.png" class="img-fluid" width="825"></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-16-3" class="tab-pane page-columns page-full" role="tabpanel" aria-labelledby="tabset-16-3-tab">
+<div class="tabset-margin-container"></div><div class="panel-tabset page-columns page-full">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-13-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-13-1" role="tab" aria-controls="tabset-13-1" aria-selected="true">Non-Centered</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-13-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-13-2" role="tab" aria-controls="tabset-13-2" aria-selected="false">Centered</a></li></ul>
+<div class="tab-content page-columns page-full">
+<div id="tabset-13-1" class="tab-pane active page-columns page-full" role="tabpanel" aria-labelledby="tabset-13-1-tab">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>condition_plt_files[model_id_not_centered_idxs[[<span class="dv">3</span>]]] <span class="sc">|&gt;</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell column-page quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_50_model_3_centered_FALSE_bstype_cluster.png" class="img-fluid" width="900"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_56_model_3_centered_FALSE_bstype_cluster.png" class="img-fluid" width="900"></p>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_62_model_3_centered_FALSE_bstype_cluster.png" class="img-fluid" width="900"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_68_model_3_centered_FALSE_bstype_cluster.png" class="img-fluid" width="900"></p>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-13-2" class="tab-pane page-columns page-full" role="tabpanel" aria-labelledby="tabset-13-2-tab">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>condition_plt_files[model_id_centered_idxs[[<span class="dv">3</span>]]] <span class="sc">|&gt;</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell column-page quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_53_model_3_centered_TRUE_bstype_cluster.png" class="img-fluid" width="900"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_59_model_3_centered_TRUE_bstype_cluster.png" class="img-fluid" width="900"></p>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_65_model_3_centered_TRUE_bstype_cluster.png" class="img-fluid" width="900"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_71_model_3_centered_TRUE_bstype_cluster.png" class="img-fluid" width="900"></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-16-4" class="tab-pane page-columns page-full" role="tabpanel" aria-labelledby="tabset-16-4-tab">
+<div class="tabset-margin-container"></div><div class="panel-tabset page-columns page-full">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-14-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-14-1" role="tab" aria-controls="tabset-14-1" aria-selected="true">Non-Centered</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-14-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-14-2" role="tab" aria-controls="tabset-14-2" aria-selected="false">Centered</a></li></ul>
+<div class="tab-content page-columns page-full">
+<div id="tabset-14-1" class="tab-pane active page-columns page-full" role="tabpanel" aria-labelledby="tabset-14-1-tab">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>condition_plt_files[model_id_not_centered_idxs[[<span class="dv">4</span>]]] <span class="sc">|&gt;</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell column-page quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_74_model_4_centered_FALSE_bstype_cluster.png" class="img-fluid" width="975"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_80_model_4_centered_FALSE_bstype_cluster.png" class="img-fluid" width="975"></p>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_86_model_4_centered_FALSE_bstype_cluster.png" class="img-fluid" width="975"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_92_model_4_centered_FALSE_bstype_cluster.png" class="img-fluid" width="975"></p>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-14-2" class="tab-pane page-columns page-full" role="tabpanel" aria-labelledby="tabset-14-2-tab">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>condition_plt_files[model_id_centered_idxs[[<span class="dv">4</span>]]] <span class="sc">|&gt;</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell column-page quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_77_model_4_centered_TRUE_bstype_cluster.png" class="img-fluid" width="975"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_83_model_4_centered_TRUE_bstype_cluster.png" class="img-fluid" width="975"></p>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_89_model_4_centered_TRUE_bstype_cluster.png" class="img-fluid" width="975"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_95_model_4_centered_TRUE_bstype_cluster.png" class="img-fluid" width="975"></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-16-5" class="tab-pane page-columns page-full" role="tabpanel" aria-labelledby="tabset-16-5-tab">
+<div class="tabset-margin-container"></div><div class="panel-tabset page-columns page-full">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-15-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-15-1" role="tab" aria-controls="tabset-15-1" aria-selected="true">Non-Centered</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-15-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-15-2" role="tab" aria-controls="tabset-15-2" aria-selected="false">Centered</a></li></ul>
+<div class="tab-content page-columns page-full">
+<div id="tabset-15-1" class="tab-pane active page-columns page-full" role="tabpanel" aria-labelledby="tabset-15-1-tab">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>condition_plt_files[model_id_not_centered_idxs[[<span class="dv">5</span>]]] <span class="sc">|&gt;</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell column-page quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_98_model_5_centered_FALSE_bstype_cluster.png" class="img-fluid" width="1200"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_104_model_5_centered_FALSE_bstype_cluster.png" class="img-fluid" width="1200"></p>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_110_model_5_centered_FALSE_bstype_cluster.png" class="img-fluid" width="1200"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_116_model_5_centered_FALSE_bstype_cluster.png" class="img-fluid" width="1200"></p>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-15-2" class="tab-pane page-columns page-full" role="tabpanel" aria-labelledby="tabset-15-2-tab">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>condition_plt_files[model_id_centered_idxs[[<span class="dv">5</span>]]] <span class="sc">|&gt;</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell column-page quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_101_model_5_centered_TRUE_bstype_cluster.png" class="img-fluid" width="1200"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_107_model_5_centered_TRUE_bstype_cluster.png" class="img-fluid" width="1200"></p>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_113_model_5_centered_TRUE_bstype_cluster.png" class="img-fluid" width="1200"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_119_model_5_centered_TRUE_bstype_cluster.png" class="img-fluid" width="1200"></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<section id="other-distributions-1" class="level4">
+<h4 class="anchored" data-anchor-id="other-distributions-1">Other Distributions</h4>
+<p>All of these distributions are from the non-centered versions of the data subsets.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-10-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-10-1" role="tab" aria-controls="tabset-10-1" aria-selected="true">Unconditional Model</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-10-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-10-2" role="tab" aria-controls="tabset-10-2" aria-selected="false">One-Predictor Model</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-10-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-10-3" role="tab" aria-controls="tabset-10-3" aria-selected="false">Level-One and Level-Two Predictor Model</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-10-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-10-4" role="tab" aria-controls="tabset-10-4" aria-selected="false">Cross-Level Interaction Model</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-10-5-tab" data-bs-toggle="tab" data-bs-target="#tabset-10-5" role="tab" aria-controls="tabset-10-5" aria-selected="false">Full Model</a></li></ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-19-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-19-1" role="tab" aria-controls="tabset-19-1" aria-selected="true">ICC</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-19-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-19-2" role="tab" aria-controls="tabset-19-2" aria-selected="false"><span class="math inline">\(R^2\)</span></a></li></ul>
 <div class="tab-content">
-<div id="tabset-10-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-10-1-tab">
+<div id="tabset-19-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-19-1-tab">
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-17-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-17-1" role="tab" aria-controls="tabset-17-1" aria-selected="true">Unconditional Model</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-17-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-17-2" role="tab" aria-controls="tabset-17-2" aria-selected="false">Level-One Predictor Model</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-17-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-17-3" role="tab" aria-controls="tabset-17-3" aria-selected="false">Level-One and Level-Two Predictor Model</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-17-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-17-4" role="tab" aria-controls="tabset-17-4" aria-selected="false">Cross-Level Interaction Model</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-17-5-tab" data-bs-toggle="tab" data-bs-target="#tabset-17-5" role="tab" aria-controls="tabset-17-5" aria-selected="false">Full Model</a></li></ul>
+<div class="tab-content">
+<div id="tabset-17-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-17-1-tab">
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>r2_plt_files <span class="ot">&lt;-</span> targets<span class="sc">::</span><span class="fu">tar_read</span>(r2_plt_files, </span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">store =</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"_targets"</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unlist</span>()</span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>r2_plt_model_id_centered_idxs <span class="ot">&lt;-</span> <span class="fu">map</span>(model_ids, </span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>                     \(model_id) <span class="fu">which</span>(</span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>                       <span class="fu">str_detect</span>(r2_plt_files, glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">"model_{model_id}_centered_TRUE"</span>))</span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>                     ))</span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>r2_plt_model_id_not_centered_idxs <span class="ot">&lt;-</span> <span class="fu">map</span>(model_ids, </span>
-<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>                     \(model_id) <span class="fu">which</span>(</span>
-<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>                       <span class="fu">str_detect</span>(icc_plt_files, glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">"model_{model_id}_centered_FALSE"</span>))</span>
-<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>                     ))</span>
-<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>r2_plt_files[r2_plt_model_id_not_centered_idxs[[<span class="dv">1</span>]]] <span class="sc">|&gt;</span></span>
-<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>icc_plt_model_id_centered_idxs <span class="ot">&lt;-</span> <span class="fu">map</span>(model_ids, </span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>                     \(model_id) <span class="fu">which</span>(</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>                       <span class="fu">str_detect</span>(icc_plt_files, glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">"model_{model_id}_centered_TRUE"</span>))</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>                     ))</span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>icc_plt_model_id_not_centered_idxs <span class="ot">&lt;-</span> <span class="fu">map</span>(model_ids, </span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>                     \(model_id) <span class="fu">which</span>(</span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a>                       <span class="fu">str_detect</span>(icc_plt_files, glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">"model_{model_id}_centered_FALSE"</span>))</span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a>                     ))</span>
+<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-11"><a href="#cb40-11" aria-hidden="true" tabindex="-1"></a>icc_plt_files[icc_plt_model_id_not_centered_idxs[[<span class="dv">1</span>]]] <span class="sc">|&gt;</span></span>
+<span id="cb40-12"><a href="#cb40-12" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="outputs/r2_plt_model_1_centered_FALSE.png" class="img-fluid figure-img" width="1050"></p>
+<p><img src="outputs/icc_plt_model_1_centered_FALSE_bstype_cluster.png" class="img-fluid figure-img" width="1050"></p>
 </figure>
 </div>
 </div>
 </div>
 </div>
-<div id="tabset-10-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-10-2-tab">
+<div id="tabset-17-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-17-2-tab">
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>r2_plt_files[r2_plt_model_id_not_centered_idxs[[<span class="dv">2</span>]]] <span class="sc">|&gt;</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>icc_plt_files[icc_plt_model_id_not_centered_idxs[[<span class="dv">2</span>]]] <span class="sc">|&gt;</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="outputs/r2_plt_model_2_centered_FALSE.png" class="img-fluid figure-img" width="1050"></p>
+<p><img src="outputs/icc_plt_model_2_centered_FALSE_bstype_cluster.png" class="img-fluid figure-img" width="1050"></p>
 </figure>
 </div>
 </div>
 </div>
 </div>
-<div id="tabset-10-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-10-3-tab">
+<div id="tabset-17-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-17-3-tab">
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>r2_plt_files[r2_plt_model_id_not_centered_idxs[[<span class="dv">3</span>]]] <span class="sc">|&gt;</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>icc_plt_files[icc_plt_model_id_not_centered_idxs[[<span class="dv">3</span>]]] <span class="sc">|&gt;</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="outputs/r2_plt_model_3_centered_FALSE.png" class="img-fluid figure-img" width="1050"></p>
+<p><img src="outputs/icc_plt_model_3_centered_FALSE_bstype_cluster.png" class="img-fluid figure-img" width="1050"></p>
 </figure>
 </div>
 </div>
 </div>
 </div>
-<div id="tabset-10-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-10-4-tab">
+<div id="tabset-17-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-17-4-tab">
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>r2_plt_files[r2_plt_model_id_not_centered_idxs[[<span class="dv">4</span>]]] <span class="sc">|&gt;</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>icc_plt_files[icc_plt_model_id_not_centered_idxs[[<span class="dv">4</span>]]] <span class="sc">|&gt;</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="outputs/r2_plt_model_4_centered_FALSE.png" class="img-fluid figure-img" width="1050"></p>
+<p><img src="outputs/icc_plt_model_4_centered_FALSE_bstype_cluster.png" class="img-fluid figure-img" width="1050"></p>
 </figure>
 </div>
 </div>
 </div>
 </div>
-<div id="tabset-10-5" class="tab-pane" role="tabpanel" aria-labelledby="tabset-10-5-tab">
+<div id="tabset-17-5" class="tab-pane" role="tabpanel" aria-labelledby="tabset-17-5-tab">
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>r2_plt_files[r2_plt_model_id_not_centered_idxs[[<span class="dv">5</span>]]] <span class="sc">|&gt;</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>icc_plt_files[icc_plt_model_id_not_centered_idxs[[<span class="dv">5</span>]]] <span class="sc">|&gt;</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="outputs/r2_plt_model_5_centered_FALSE.png" class="img-fluid figure-img" width="1050"></p>
+<p><img src="outputs/icc_plt_model_5_centered_FALSE_bstype_cluster.png" class="img-fluid figure-img" width="1050"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-19-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-19-2-tab">
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-18-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-18-1" role="tab" aria-controls="tabset-18-1" aria-selected="true">Unconditional Model</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-18-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-18-2" role="tab" aria-controls="tabset-18-2" aria-selected="false">One-Predictor Model</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-18-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-18-3" role="tab" aria-controls="tabset-18-3" aria-selected="false">Level-One and Level-Two Predictor Model</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-18-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-18-4" role="tab" aria-controls="tabset-18-4" aria-selected="false">Cross-Level Interaction Model</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-18-5-tab" data-bs-toggle="tab" data-bs-target="#tabset-18-5" role="tab" aria-controls="tabset-18-5" aria-selected="false">Full Model</a></li></ul>
+<div class="tab-content">
+<div id="tabset-18-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-18-1-tab">
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>r2_plt_model_id_centered_idxs <span class="ot">&lt;-</span> <span class="fu">map</span>(model_ids, </span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>                     \(model_id) <span class="fu">which</span>(</span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>                       <span class="fu">str_detect</span>(r2_plt_files, glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">"model_{model_id}_centered_TRUE"</span>))</span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>                     ))</span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a>r2_plt_model_id_not_centered_idxs <span class="ot">&lt;-</span> <span class="fu">map</span>(model_ids, </span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a>                     \(model_id) <span class="fu">which</span>(</span>
+<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a>                       <span class="fu">str_detect</span>(icc_plt_files, glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">"model_{model_id}_centered_FALSE"</span>))</span>
+<span id="cb45-9"><a href="#cb45-9" aria-hidden="true" tabindex="-1"></a>                     ))</span>
+<span id="cb45-10"><a href="#cb45-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-11"><a href="#cb45-11" aria-hidden="true" tabindex="-1"></a>r2_plt_files[r2_plt_model_id_not_centered_idxs[[<span class="dv">1</span>]]] <span class="sc">|&gt;</span></span>
+<span id="cb45-12"><a href="#cb45-12" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="outputs/r2_plt_model_1_centered_FALSE_bstype_cluster.png" class="img-fluid figure-img" width="1050"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-18-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-18-2-tab">
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>r2_plt_files[r2_plt_model_id_not_centered_idxs[[<span class="dv">2</span>]]] <span class="sc">|&gt;</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="outputs/r2_plt_model_2_centered_FALSE_bstype_cluster.png" class="img-fluid figure-img" width="1050"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-18-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-18-3-tab">
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>r2_plt_files[r2_plt_model_id_not_centered_idxs[[<span class="dv">3</span>]]] <span class="sc">|&gt;</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="outputs/r2_plt_model_3_centered_FALSE_bstype_cluster.png" class="img-fluid figure-img" width="1050"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-18-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-18-4-tab">
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>r2_plt_files[r2_plt_model_id_not_centered_idxs[[<span class="dv">4</span>]]] <span class="sc">|&gt;</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="outputs/r2_plt_model_4_centered_FALSE_bstype_cluster.png" class="img-fluid figure-img" width="1050"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-18-5" class="tab-pane" role="tabpanel" aria-labelledby="tabset-18-5-tab">
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>r2_plt_files[r2_plt_model_id_not_centered_idxs[[<span class="dv">5</span>]]] <span class="sc">|&gt;</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="outputs/r2_plt_model_5_centered_FALSE_bstype_cluster.png" class="img-fluid figure-img" width="1050"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="bootstrapping-type-individual" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="bootstrapping-type-individual">Bootstrapping Type: Individual</h3>
+<p>Randomly sampling <code>n_schools * n_students</code> students.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>condition_plt_files <span class="ot">&lt;-</span> condition_plt_files_bstype_individual</span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>icc_plt_files <span class="ot">&lt;-</span> icc_plt_files_bstype_individual</span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>r2_plt_files <span class="ot">&lt;-</span> r2_plt_files_bstype_individual</span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>model_ids <span class="ot">&lt;-</span> condition_plt_files <span class="sc">|&gt;</span> </span>
+<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_extract</span>(<span class="st">"model_(</span><span class="sc">\\</span><span class="st">d)"</span>, <span class="at">group =</span> <span class="dv">1</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unique</span>()</span>
+<span id="cb50-8"><a href="#cb50-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-9"><a href="#cb50-9" aria-hidden="true" tabindex="-1"></a>model_id_centered_idxs <span class="ot">&lt;-</span> <span class="fu">map</span>(model_ids, </span>
+<span id="cb50-10"><a href="#cb50-10" aria-hidden="true" tabindex="-1"></a>                     \(model_id) <span class="fu">which</span>(</span>
+<span id="cb50-11"><a href="#cb50-11" aria-hidden="true" tabindex="-1"></a>                       <span class="fu">str_detect</span>(condition_plt_files, glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">"model_{model_id}_centered_TRUE"</span>))</span>
+<span id="cb50-12"><a href="#cb50-12" aria-hidden="true" tabindex="-1"></a>                     ))</span>
+<span id="cb50-13"><a href="#cb50-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-14"><a href="#cb50-14" aria-hidden="true" tabindex="-1"></a>model_id_not_centered_idxs <span class="ot">&lt;-</span> <span class="fu">map</span>(model_ids, </span>
+<span id="cb50-15"><a href="#cb50-15" aria-hidden="true" tabindex="-1"></a>                     \(model_id) <span class="fu">which</span>(</span>
+<span id="cb50-16"><a href="#cb50-16" aria-hidden="true" tabindex="-1"></a>                       <span class="fu">str_detect</span>(condition_plt_files, glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">"model_{model_id}_centered_FALSE"</span>))</span>
+<span id="cb50-17"><a href="#cb50-17" aria-hidden="true" tabindex="-1"></a>                     ))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="tabset-margin-container"></div><div class="panel-tabset page-columns page-full">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-25-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-25-1" role="tab" aria-controls="tabset-25-1" aria-selected="true">Unconditional Model</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-25-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-25-2" role="tab" aria-controls="tabset-25-2" aria-selected="false">Level-One Predictor Model</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-25-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-25-3" role="tab" aria-controls="tabset-25-3" aria-selected="false">Level-One and Level-Two Predictor Model</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-25-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-25-4" role="tab" aria-controls="tabset-25-4" aria-selected="false">Cross-Level Interaction Model</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-25-5-tab" data-bs-toggle="tab" data-bs-target="#tabset-25-5" role="tab" aria-controls="tabset-25-5" aria-selected="false">Full Model</a></li></ul>
+<div class="tab-content page-columns page-full">
+<div id="tabset-25-1" class="tab-pane active page-columns page-full" role="tabpanel" aria-labelledby="tabset-25-1-tab">
+<div class="tabset-margin-container"></div><div class="panel-tabset page-columns page-full">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-20-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-20-1" role="tab" aria-controls="tabset-20-1" aria-selected="true">Non-Centered</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-20-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-20-2" role="tab" aria-controls="tabset-20-2" aria-selected="false">Centered</a></li></ul>
+<div class="tab-content page-columns page-full">
+<div id="tabset-20-1" class="tab-pane active page-columns page-full" role="tabpanel" aria-labelledby="tabset-20-1-tab">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>condition_plt_files[model_id_not_centered_idxs[[<span class="dv">1</span>]]] <span class="sc">|&gt;</span></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell column-page quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_3_model_1_centered_FALSE_bstype_individual.png" class="img-fluid" width="825"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_9_model_1_centered_FALSE_bstype_individual.png" class="img-fluid" width="825"></p>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_15_model_1_centered_FALSE_bstype_individual.png" class="img-fluid" width="825"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_21_model_1_centered_FALSE_bstype_individual.png" class="img-fluid" width="825"></p>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-20-2" class="tab-pane page-columns page-full" role="tabpanel" aria-labelledby="tabset-20-2-tab">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>condition_plt_files[model_id_centered_idxs[[<span class="dv">1</span>]]] <span class="sc">|&gt;</span></span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell column-page quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_6_model_1_centered_TRUE_bstype_individual.png" class="img-fluid" width="825"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_12_model_1_centered_TRUE_bstype_individual.png" class="img-fluid" width="825"></p>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_18_model_1_centered_TRUE_bstype_individual.png" class="img-fluid" width="825"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_24_model_1_centered_TRUE_bstype_individual.png" class="img-fluid" width="825"></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-25-2" class="tab-pane page-columns page-full" role="tabpanel" aria-labelledby="tabset-25-2-tab">
+<div class="tabset-margin-container"></div><div class="panel-tabset page-columns page-full">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-21-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-21-1" role="tab" aria-controls="tabset-21-1" aria-selected="true">Non-Centered</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-21-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-21-2" role="tab" aria-controls="tabset-21-2" aria-selected="false">Centered</a></li></ul>
+<div class="tab-content page-columns page-full">
+<div id="tabset-21-1" class="tab-pane active page-columns page-full" role="tabpanel" aria-labelledby="tabset-21-1-tab">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>condition_plt_files[model_id_not_centered_idxs[[<span class="dv">2</span>]]] <span class="sc">|&gt;</span></span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell column-page quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_27_model_2_centered_FALSE_bstype_individual.png" class="img-fluid" width="825"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_33_model_2_centered_FALSE_bstype_individual.png" class="img-fluid" width="825"></p>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_39_model_2_centered_FALSE_bstype_individual.png" class="img-fluid" width="825"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_45_model_2_centered_FALSE_bstype_individual.png" class="img-fluid" width="825"></p>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-21-2" class="tab-pane page-columns page-full" role="tabpanel" aria-labelledby="tabset-21-2-tab">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>condition_plt_files[model_id_centered_idxs[[<span class="dv">2</span>]]] <span class="sc">|&gt;</span></span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell column-page quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_30_model_2_centered_TRUE_bstype_individual.png" class="img-fluid" width="825"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_36_model_2_centered_TRUE_bstype_individual.png" class="img-fluid" width="825"></p>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_42_model_2_centered_TRUE_bstype_individual.png" class="img-fluid" width="825"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_48_model_2_centered_TRUE_bstype_individual.png" class="img-fluid" width="825"></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-25-3" class="tab-pane page-columns page-full" role="tabpanel" aria-labelledby="tabset-25-3-tab">
+<div class="tabset-margin-container"></div><div class="panel-tabset page-columns page-full">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-22-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-22-1" role="tab" aria-controls="tabset-22-1" aria-selected="true">Non-Centered</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-22-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-22-2" role="tab" aria-controls="tabset-22-2" aria-selected="false">Centered</a></li></ul>
+<div class="tab-content page-columns page-full">
+<div id="tabset-22-1" class="tab-pane active page-columns page-full" role="tabpanel" aria-labelledby="tabset-22-1-tab">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>condition_plt_files[model_id_not_centered_idxs[[<span class="dv">3</span>]]] <span class="sc">|&gt;</span></span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell column-page quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_51_model_3_centered_FALSE_bstype_individual.png" class="img-fluid" width="900"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_57_model_3_centered_FALSE_bstype_individual.png" class="img-fluid" width="900"></p>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_63_model_3_centered_FALSE_bstype_individual.png" class="img-fluid" width="900"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_69_model_3_centered_FALSE_bstype_individual.png" class="img-fluid" width="900"></p>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-22-2" class="tab-pane page-columns page-full" role="tabpanel" aria-labelledby="tabset-22-2-tab">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>condition_plt_files[model_id_centered_idxs[[<span class="dv">3</span>]]] <span class="sc">|&gt;</span></span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell column-page quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_54_model_3_centered_TRUE_bstype_individual.png" class="img-fluid" width="900"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_60_model_3_centered_TRUE_bstype_individual.png" class="img-fluid" width="900"></p>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_66_model_3_centered_TRUE_bstype_individual.png" class="img-fluid" width="900"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_72_model_3_centered_TRUE_bstype_individual.png" class="img-fluid" width="900"></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-25-4" class="tab-pane page-columns page-full" role="tabpanel" aria-labelledby="tabset-25-4-tab">
+<div class="tabset-margin-container"></div><div class="panel-tabset page-columns page-full">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-23-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-23-1" role="tab" aria-controls="tabset-23-1" aria-selected="true">Non-Centered</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-23-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-23-2" role="tab" aria-controls="tabset-23-2" aria-selected="false">Centered</a></li></ul>
+<div class="tab-content page-columns page-full">
+<div id="tabset-23-1" class="tab-pane active page-columns page-full" role="tabpanel" aria-labelledby="tabset-23-1-tab">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>condition_plt_files[model_id_not_centered_idxs[[<span class="dv">4</span>]]] <span class="sc">|&gt;</span></span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell column-page quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_75_model_4_centered_FALSE_bstype_individual.png" class="img-fluid" width="975"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_81_model_4_centered_FALSE_bstype_individual.png" class="img-fluid" width="975"></p>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_87_model_4_centered_FALSE_bstype_individual.png" class="img-fluid" width="975"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_93_model_4_centered_FALSE_bstype_individual.png" class="img-fluid" width="975"></p>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-23-2" class="tab-pane page-columns page-full" role="tabpanel" aria-labelledby="tabset-23-2-tab">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>condition_plt_files[model_id_centered_idxs[[<span class="dv">4</span>]]] <span class="sc">|&gt;</span></span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell column-page quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_78_model_4_centered_TRUE_bstype_individual.png" class="img-fluid" width="975"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_84_model_4_centered_TRUE_bstype_individual.png" class="img-fluid" width="975"></p>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_90_model_4_centered_TRUE_bstype_individual.png" class="img-fluid" width="975"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_96_model_4_centered_TRUE_bstype_individual.png" class="img-fluid" width="975"></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-25-5" class="tab-pane page-columns page-full" role="tabpanel" aria-labelledby="tabset-25-5-tab">
+<div class="tabset-margin-container"></div><div class="panel-tabset page-columns page-full">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-24-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-24-1" role="tab" aria-controls="tabset-24-1" aria-selected="true">Non-Centered</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-24-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-24-2" role="tab" aria-controls="tabset-24-2" aria-selected="false">Centered</a></li></ul>
+<div class="tab-content page-columns page-full">
+<div id="tabset-24-1" class="tab-pane active page-columns page-full" role="tabpanel" aria-labelledby="tabset-24-1-tab">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>condition_plt_files[model_id_not_centered_idxs[[<span class="dv">5</span>]]] <span class="sc">|&gt;</span></span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell column-page quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_99_model_5_centered_FALSE_bstype_individual.png" class="img-fluid" width="1200"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_105_model_5_centered_FALSE_bstype_individual.png" class="img-fluid" width="1200"></p>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_111_model_5_centered_FALSE_bstype_individual.png" class="img-fluid" width="1200"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_117_model_5_centered_FALSE_bstype_individual.png" class="img-fluid" width="1200"></p>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-24-2" class="tab-pane page-columns page-full" role="tabpanel" aria-labelledby="tabset-24-2-tab">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>condition_plt_files[model_id_centered_idxs[[<span class="dv">5</span>]]] <span class="sc">|&gt;</span></span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell column-page quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_102_model_5_centered_TRUE_bstype_individual.png" class="img-fluid" width="1200"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_108_model_5_centered_TRUE_bstype_individual.png" class="img-fluid" width="1200"></p>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_114_model_5_centered_TRUE_bstype_individual.png" class="img-fluid" width="1200"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="outputs/condition_120_model_5_centered_TRUE_bstype_individual.png" class="img-fluid" width="1200"></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<section id="other-distributions-2" class="level4">
+<h4 class="anchored" data-anchor-id="other-distributions-2">Other Distributions</h4>
+<p>All of these distributions are from the non-centered versions of the data subsets.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-28-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-28-1" role="tab" aria-controls="tabset-28-1" aria-selected="true">ICC</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-28-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-28-2" role="tab" aria-controls="tabset-28-2" aria-selected="false"><span class="math inline">\(R^2\)</span></a></li></ul>
+<div class="tab-content">
+<div id="tabset-28-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-28-1-tab">
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-26-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-26-1" role="tab" aria-controls="tabset-26-1" aria-selected="true">Unconditional Model</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-26-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-26-2" role="tab" aria-controls="tabset-26-2" aria-selected="false">Level-One Predictor Model</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-26-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-26-3" role="tab" aria-controls="tabset-26-3" aria-selected="false">Level-One and Level-Two Predictor Model</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-26-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-26-4" role="tab" aria-controls="tabset-26-4" aria-selected="false">Cross-Level Interaction Model</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-26-5-tab" data-bs-toggle="tab" data-bs-target="#tabset-26-5" role="tab" aria-controls="tabset-26-5" aria-selected="false">Full Model</a></li></ul>
+<div class="tab-content">
+<div id="tabset-26-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-26-1-tab">
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>icc_plt_model_id_centered_idxs <span class="ot">&lt;-</span> <span class="fu">map</span>(model_ids, </span>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a>                     \(model_id) <span class="fu">which</span>(</span>
+<span id="cb61-3"><a href="#cb61-3" aria-hidden="true" tabindex="-1"></a>                       <span class="fu">str_detect</span>(icc_plt_files, glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">"model_{model_id}_centered_TRUE"</span>))</span>
+<span id="cb61-4"><a href="#cb61-4" aria-hidden="true" tabindex="-1"></a>                     ))</span>
+<span id="cb61-5"><a href="#cb61-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-6"><a href="#cb61-6" aria-hidden="true" tabindex="-1"></a>icc_plt_model_id_not_centered_idxs <span class="ot">&lt;-</span> <span class="fu">map</span>(model_ids, </span>
+<span id="cb61-7"><a href="#cb61-7" aria-hidden="true" tabindex="-1"></a>                     \(model_id) <span class="fu">which</span>(</span>
+<span id="cb61-8"><a href="#cb61-8" aria-hidden="true" tabindex="-1"></a>                       <span class="fu">str_detect</span>(icc_plt_files, glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">"model_{model_id}_centered_FALSE"</span>))</span>
+<span id="cb61-9"><a href="#cb61-9" aria-hidden="true" tabindex="-1"></a>                     ))</span>
+<span id="cb61-10"><a href="#cb61-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-11"><a href="#cb61-11" aria-hidden="true" tabindex="-1"></a>icc_plt_files[icc_plt_model_id_not_centered_idxs[[<span class="dv">1</span>]]] <span class="sc">|&gt;</span></span>
+<span id="cb61-12"><a href="#cb61-12" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="outputs/icc_plt_model_1_centered_FALSE_bstype_individual.png" class="img-fluid figure-img" width="1050"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-26-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-26-2-tab">
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>icc_plt_files[icc_plt_model_id_not_centered_idxs[[<span class="dv">2</span>]]] <span class="sc">|&gt;</span></span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="outputs/icc_plt_model_2_centered_FALSE_bstype_individual.png" class="img-fluid figure-img" width="1050"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-26-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-26-3-tab">
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>icc_plt_files[icc_plt_model_id_not_centered_idxs[[<span class="dv">3</span>]]] <span class="sc">|&gt;</span></span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="outputs/icc_plt_model_3_centered_FALSE_bstype_individual.png" class="img-fluid figure-img" width="1050"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-26-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-26-4-tab">
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>icc_plt_files[icc_plt_model_id_not_centered_idxs[[<span class="dv">4</span>]]] <span class="sc">|&gt;</span></span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="outputs/icc_plt_model_4_centered_FALSE_bstype_individual.png" class="img-fluid figure-img" width="1050"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-26-5" class="tab-pane" role="tabpanel" aria-labelledby="tabset-26-5-tab">
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>icc_plt_files[icc_plt_model_id_not_centered_idxs[[<span class="dv">5</span>]]] <span class="sc">|&gt;</span></span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="outputs/icc_plt_model_5_centered_FALSE_bstype_individual.png" class="img-fluid figure-img" width="1050"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-28-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-28-2-tab">
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-27-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-27-1" role="tab" aria-controls="tabset-27-1" aria-selected="true">Unconditional Model</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-27-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-27-2" role="tab" aria-controls="tabset-27-2" aria-selected="false">One-Predictor Model</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-27-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-27-3" role="tab" aria-controls="tabset-27-3" aria-selected="false">Level-One and Level-Two Predictor Model</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-27-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-27-4" role="tab" aria-controls="tabset-27-4" aria-selected="false">Cross-Level Interaction Model</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-27-5-tab" data-bs-toggle="tab" data-bs-target="#tabset-27-5" role="tab" aria-controls="tabset-27-5" aria-selected="false">Full Model</a></li></ul>
+<div class="tab-content">
+<div id="tabset-27-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-27-1-tab">
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>r2_plt_model_id_centered_idxs <span class="ot">&lt;-</span> <span class="fu">map</span>(model_ids, </span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>                     \(model_id) <span class="fu">which</span>(</span>
+<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a>                       <span class="fu">str_detect</span>(r2_plt_files, glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">"model_{model_id}_centered_TRUE"</span>))</span>
+<span id="cb66-4"><a href="#cb66-4" aria-hidden="true" tabindex="-1"></a>                     ))</span>
+<span id="cb66-5"><a href="#cb66-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-6"><a href="#cb66-6" aria-hidden="true" tabindex="-1"></a>r2_plt_model_id_not_centered_idxs <span class="ot">&lt;-</span> <span class="fu">map</span>(model_ids, </span>
+<span id="cb66-7"><a href="#cb66-7" aria-hidden="true" tabindex="-1"></a>                     \(model_id) <span class="fu">which</span>(</span>
+<span id="cb66-8"><a href="#cb66-8" aria-hidden="true" tabindex="-1"></a>                       <span class="fu">str_detect</span>(icc_plt_files, glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">"model_{model_id}_centered_FALSE"</span>))</span>
+<span id="cb66-9"><a href="#cb66-9" aria-hidden="true" tabindex="-1"></a>                     ))</span>
+<span id="cb66-10"><a href="#cb66-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-11"><a href="#cb66-11" aria-hidden="true" tabindex="-1"></a>r2_plt_files[r2_plt_model_id_not_centered_idxs[[<span class="dv">1</span>]]] <span class="sc">|&gt;</span></span>
+<span id="cb66-12"><a href="#cb66-12" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="outputs/r2_plt_model_1_centered_FALSE_bstype_individual.png" class="img-fluid figure-img" width="1050"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-27-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-27-2-tab">
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>r2_plt_files[r2_plt_model_id_not_centered_idxs[[<span class="dv">2</span>]]] <span class="sc">|&gt;</span></span>
+<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="outputs/r2_plt_model_2_centered_FALSE_bstype_individual.png" class="img-fluid figure-img" width="1050"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-27-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-27-3-tab">
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>r2_plt_files[r2_plt_model_id_not_centered_idxs[[<span class="dv">3</span>]]] <span class="sc">|&gt;</span></span>
+<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="outputs/r2_plt_model_3_centered_FALSE_bstype_individual.png" class="img-fluid figure-img" width="1050"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-27-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-27-4-tab">
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a>r2_plt_files[r2_plt_model_id_not_centered_idxs[[<span class="dv">4</span>]]] <span class="sc">|&gt;</span></span>
+<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="outputs/r2_plt_model_4_centered_FALSE_bstype_individual.png" class="img-fluid figure-img" width="1050"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-27-5" class="tab-pane" role="tabpanel" aria-labelledby="tabset-27-5-tab">
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>r2_plt_files[r2_plt_model_id_not_centered_idxs[[<span class="dv">5</span>]]] <span class="sc">|&gt;</span></span>
+<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="outputs/r2_plt_model_5_centered_FALSE_bstype_individual.png" class="img-fluid figure-img" width="1050"></p>
 </figure>
 </div>
 </div>
@@ -2207,6 +3283,7 @@ MVN \left(
 </div>
 
 
+</section>
 </section>
 </section>
 

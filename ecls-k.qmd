@@ -2,19 +2,17 @@
 title: "ECLS-K Bootstrapping"
 author: "Jess Helmer"
 date: last-modified
-toc: true
 format: 
   html:
     code-fold: true
+    toc: true
+    toc-location: left
+toc-depth: 4
 html-table-processing: none
 ---
 
-::: panel-tabset
-### Setup
-
 ```{r reading}
 #| message: false
-#| code-fold: show
 library(tidyverse)
 library(targets)
 library(patchwork)
@@ -31,9 +29,6 @@ c(
   tar_load(store = here::here("_targets"))
 ```
 
-### Reading
-
-:::
 
 Model: two-levels (students nested in schools) with a level-one predictor (student SES), level-two predictor (private vs. public school), and an interaction between them. The effect of SES has a varying slope over school. Outcome is student math score.
 
@@ -106,7 +101,7 @@ MVN \left(
 :::
 
 
-### Full Data
+## Full Data
 
 Selecting columns with the outcome (math scores), level-one predictor (student SES), and level-two predictor (public vs. private school indicator). Removing any students with missing data on any of the predictors, and removing schools that have fewer than 10 students remaining.
 
@@ -208,21 +203,44 @@ n_within_model_conditions <- params |>
 condition_plt_files <- targets::tar_read(condition_plt_files, 
                                          store = here::here("_targets")) |>
   unlist()
+
+c("both", "cluster", "individual") |>
+  walk(\(bstype) {
+    nm <- as.character(glue::glue("condition_plt_files_bstype_{bstype}"))
+    assign(nm, condition_plt_files[which(str_detect(condition_plt_files, glue::glue("bstype_{bstype}")))], .GlobalEnv)
+  })
+
+icc_plt_files <- targets::tar_read(icc_plt_files, 
+                                   store = here::here("_targets")) |>
+  unlist()
+
+c("both", "cluster", "individual") |>
+  walk(\(bstype) {
+    nm <- as.character(glue::glue("icc_plt_files_bstype_{bstype}"))
+    assign(nm, icc_plt_files[which(str_detect(icc_plt_files, glue::glue("bstype_{bstype}")))], .GlobalEnv)
+  })
+
+r2_plt_files <- targets::tar_read(r2_plt_files, 
+                                   store = here::here("_targets")) |>
+  unlist()
+
+c("both", "cluster", "individual") |>
+  walk(\(bstype) {
+    nm <- as.character(glue::glue("r2_plt_files_bstype_{bstype}"))
+    assign(nm, r2_plt_files[which(str_detect(r2_plt_files, glue::glue("bstype_{bstype}")))], .GlobalEnv)
+  })
 ```
 
 Starting conditions: number of level-one units (students) within level-two units (schools). This set of parameters creates `r n_conditions` conditions per model.
 
-:::: panel-tabset
+### Bootstrapping Type: Both
 
-## Unconditional Model
+First randomly sampling `n_schools` schools, then randomly sampling `n_students` students from within those schools. 
 
-::: panel-tabset
-
-### Non-Centered
-```{r model_1_not_centered_condition_plts}
-#| column: page
-#| layout-ncol: 2
-#| warning: false
+```{r}
+condition_plt_files <- condition_plt_files_bstype_both
+icc_plt_files <- icc_plt_files_bstype_both
+r2_plt_files <- r2_plt_files_bstype_both
 
 model_ids <- condition_plt_files |> 
   str_extract("model_(\\d)", group = 1) |> 
@@ -237,13 +255,26 @@ model_id_not_centered_idxs <- map(model_ids,
                      \(model_id) which(
                        str_detect(condition_plt_files, glue::glue("model_{model_id}_centered_FALSE"))
                      ))
+```
+
+:::: panel-tabset
+
+## Unconditional Model
+
+::: panel-tabset
+
+### Non-Centered
+```{r model_1_not_centered_condition_plts_both}
+#| column: page
+#| layout-ncol: 2
+#| warning: false
 
 condition_plt_files[model_id_not_centered_idxs[[1]]] |>
   knitr::include_graphics()
 ```
 
 ### Centered
-```{r model_1_centered_condition_plts}
+```{r model_1_centered_condition_plts_both}
 #| column: page
 #| layout-ncol: 2
 #| warning: false
@@ -258,7 +289,7 @@ condition_plt_files[model_id_centered_idxs[[1]]] |>
 ::: panel-tabset
 
 ### Non-Centered
-```{r model_2_not_centered_condition_plts}
+```{r model_2_not_centered_condition_plts_both}
 #| column: page
 #| layout-ncol: 2
 #| warning: false
@@ -268,7 +299,7 @@ condition_plt_files[model_id_not_centered_idxs[[2]]] |>
 ```
 
 ### Centered
-```{r model_2_centered_condition_plts}
+```{r model_2_centered_condition_plts_both}
 #| column: page
 #| layout-ncol: 2
 #| warning: false
@@ -284,7 +315,7 @@ condition_plt_files[model_id_centered_idxs[[2]]] |>
 ::: panel-tabset
 
 ### Non-Centered
-```{r model_3_not_centered_condition_plts}
+```{r model_3_not_centered_condition_plts_both}
 #| column: page
 #| layout-ncol: 2
 #| warning: false
@@ -294,7 +325,7 @@ condition_plt_files[model_id_not_centered_idxs[[3]]] |>
 ```
 
 ### Centered
-```{r model_3_centered_condition_plts}
+```{r model_3_centered_condition_plts_both}
 #| column: page
 #| layout-ncol: 2
 #| warning: false
@@ -310,7 +341,7 @@ condition_plt_files[model_id_centered_idxs[[3]]] |>
 ::: panel-tabset
 
 ### Non-Centered
-```{r model_4_not_centered_condition_plts}
+```{r model_4_not_centered_condition_plts_both}
 #| column: page
 #| layout-ncol: 2
 #| warning: false
@@ -320,7 +351,7 @@ condition_plt_files[model_id_not_centered_idxs[[4]]] |>
 ```
 
 ### Centered
-```{r model_4_centered_condition_plts}
+```{r model_4_centered_condition_plts_both}
 #| column: page
 #| layout-ncol: 2
 #| warning: false
@@ -336,7 +367,7 @@ condition_plt_files[model_id_centered_idxs[[4]]] |>
 ::: panel-tabset
 
 ### Non-Centered
-```{r model_5_not_centered_condition_plts}
+```{r model_5_not_centered_condition_plts_both}
 #| column: page
 #| layout-ncol: 2
 #| warning: false
@@ -346,7 +377,7 @@ condition_plt_files[model_id_not_centered_idxs[[5]]] |>
 ```
 
 ### Centered
-```{r model_5_centered_condition_plts}
+```{r model_5_centered_condition_plts_both}
 #| column: page
 #| layout-ncol: 2
 #| warning: false
@@ -358,7 +389,7 @@ condition_plt_files[model_id_centered_idxs[[5]]] |>
 :::
 ::::
 
-#### Other Distributions by Condition
+#### Other Distributions
 
 All of these distributions are from the non-centered versions of the data subsets.
 
@@ -368,11 +399,7 @@ All of these distributions are from the non-centered versions of the data subset
 
 ::: panel-tabset
 ### Unconditional Model
-```{r icc_plt_1}
-icc_plt_files <- targets::tar_read(icc_plt_files, 
-                                   store = here::here("_targets")) |>
-  unlist()
-
+```{r icc_plt_1_both}
 icc_plt_model_id_centered_idxs <- map(model_ids, 
                      \(model_id) which(
                        str_detect(icc_plt_files, glue::glue("model_{model_id}_centered_TRUE"))
@@ -388,25 +415,25 @@ icc_plt_files[icc_plt_model_id_not_centered_idxs[[1]]] |>
 ```
 
 ### Level-One Predictor Model
-```{r icc_plt_2}
+```{r icc_plt_2_both}
 icc_plt_files[icc_plt_model_id_not_centered_idxs[[2]]] |>
   knitr::include_graphics()
 ```
 
 ### Level-One and Level-Two Predictor Model
-```{r icc_plt_3}
+```{r icc_plt_3_both}
 icc_plt_files[icc_plt_model_id_not_centered_idxs[[3]]] |>
   knitr::include_graphics()
 ```
 
 ### Cross-Level Interaction Model
-```{r icc_plt_4}
+```{r icc_plt_4_both}
 icc_plt_files[icc_plt_model_id_not_centered_idxs[[4]]] |>
   knitr::include_graphics()
 ```
 
 ### Full Model
-```{r icc_plt_5}
+```{r icc_plt_5_both}
 icc_plt_files[icc_plt_model_id_not_centered_idxs[[5]]] |>
   knitr::include_graphics()
 ```
@@ -416,11 +443,7 @@ icc_plt_files[icc_plt_model_id_not_centered_idxs[[5]]] |>
 
 ::: panel-tabset
 ### Unconditional Model
-```{r r2_plt_1}
-r2_plt_files <- targets::tar_read(r2_plt_files, 
-                                   store = here::here("_targets")) |>
-  unlist()
-
+```{r r2_plt_1_both}
 r2_plt_model_id_centered_idxs <- map(model_ids, 
                      \(model_id) which(
                        str_detect(r2_plt_files, glue::glue("model_{model_id}_centered_TRUE"))
@@ -436,25 +459,25 @@ r2_plt_files[r2_plt_model_id_not_centered_idxs[[1]]] |>
 ```
 
 ### One-Predictor Model
-```{r r2_plt_2}
+```{r r2_plt_2_both}
 r2_plt_files[r2_plt_model_id_not_centered_idxs[[2]]] |>
   knitr::include_graphics()
 ```
 
 ### Level-One and Level-Two Predictor Model
-```{r r2_plt_3}
+```{r r2_plt_3_both}
 r2_plt_files[r2_plt_model_id_not_centered_idxs[[3]]] |>
   knitr::include_graphics()
 ```
 
 ### Cross-Level Interaction Model
-```{r r2_plt_4}
+```{r r2_plt_4_both}
 r2_plt_files[r2_plt_model_id_not_centered_idxs[[4]]] |>
   knitr::include_graphics()
 ```
 
 ### Full Model
-```{r r2_plt_5}
+```{r r2_plt_5_both}
 r2_plt_files[r2_plt_model_id_not_centered_idxs[[5]]] |>
   knitr::include_graphics()
 ```
@@ -463,8 +486,510 @@ r2_plt_files[r2_plt_model_id_not_centered_idxs[[5]]] |>
 ::::
 
 
+### Bootstrapping Type: Cluster
+
+Randomly sampling `n_schools` schools.
+
+```{r}
+condition_plt_files <- condition_plt_files_bstype_cluster
+icc_plt_files <- icc_plt_files_bstype_cluster
+r2_plt_files <- r2_plt_files_bstype_cluster
+
+model_ids <- condition_plt_files |> 
+  str_extract("model_(\\d)", group = 1) |> 
+  unique()
+
+model_id_centered_idxs <- map(model_ids, 
+                     \(model_id) which(
+                       str_detect(condition_plt_files, glue::glue("model_{model_id}_centered_TRUE"))
+                     ))
+
+model_id_not_centered_idxs <- map(model_ids, 
+                     \(model_id) which(
+                       str_detect(condition_plt_files, glue::glue("model_{model_id}_centered_FALSE"))
+                     ))
+```
+
+:::: panel-tabset
+
+## Unconditional Model
+
+::: panel-tabset
+
+### Non-Centered
+```{r model_1_not_centered_condition_plts_cluster}
+#| column: page
+#| layout-ncol: 2
+#| warning: false
+
+condition_plt_files[model_id_not_centered_idxs[[1]]] |>
+  knitr::include_graphics()
+```
+
+### Centered
+```{r model_1_centered_condition_plts_cluster}
+#| column: page
+#| layout-ncol: 2
+#| warning: false
+
+condition_plt_files[model_id_centered_idxs[[1]]] |>
+  knitr::include_graphics()
+```
+:::
+
+## Level-One Predictor Model
+
+::: panel-tabset
+
+### Non-Centered
+```{r model_2_not_centered_condition_plts_cluster}
+#| column: page
+#| layout-ncol: 2
+#| warning: false
+
+condition_plt_files[model_id_not_centered_idxs[[2]]] |>
+  knitr::include_graphics()
+```
+
+### Centered
+```{r model_2_centered_condition_plts_cluster}
+#| column: page
+#| layout-ncol: 2
+#| warning: false
+
+condition_plt_files[model_id_centered_idxs[[2]]] |>
+  knitr::include_graphics()
+```
+
+:::
+
+## Level-One and Level-Two Predictor Model
+
+::: panel-tabset
+
+### Non-Centered
+```{r model_3_not_centered_condition_plts_cluster}
+#| column: page
+#| layout-ncol: 2
+#| warning: false
+
+condition_plt_files[model_id_not_centered_idxs[[3]]] |>
+  knitr::include_graphics()
+```
+
+### Centered
+```{r model_3_centered_condition_plts_cluster}
+#| column: page
+#| layout-ncol: 2
+#| warning: false
+
+condition_plt_files[model_id_centered_idxs[[3]]] |>
+  knitr::include_graphics()
+```
+
+:::
+
+## Cross-Level Interaction Model
+
+::: panel-tabset
+
+### Non-Centered
+```{r model_4_not_centered_condition_plts_cluster}
+#| column: page
+#| layout-ncol: 2
+#| warning: false
+
+condition_plt_files[model_id_not_centered_idxs[[4]]] |>
+  knitr::include_graphics()
+```
+
+### Centered
+```{r model_4_centered_condition_plts_cluster}
+#| column: page
+#| layout-ncol: 2
+#| warning: false
+
+condition_plt_files[model_id_centered_idxs[[4]]] |>
+  knitr::include_graphics()
+```
+
+:::
+
+## Full Model
+
+::: panel-tabset
+
+### Non-Centered
+```{r model_5_not_centered_condition_plts_cluster}
+#| column: page
+#| layout-ncol: 2
+#| warning: false
+
+condition_plt_files[model_id_not_centered_idxs[[5]]] |>
+  knitr::include_graphics()
+```
+
+### Centered
+```{r model_5_centered_condition_plts_cluster}
+#| column: page
+#| layout-ncol: 2
+#| warning: false
+
+condition_plt_files[model_id_centered_idxs[[5]]] |>
+  knitr::include_graphics()
+```
+
+:::
+::::
+
+#### Other Distributions
+
+All of these distributions are from the non-centered versions of the data subsets.
+
+:::: panel-tabset
+
+### ICC
+
+::: panel-tabset
+### Unconditional Model
+```{r icc_plt_1_cluster}
+icc_plt_model_id_centered_idxs <- map(model_ids, 
+                     \(model_id) which(
+                       str_detect(icc_plt_files, glue::glue("model_{model_id}_centered_TRUE"))
+                     ))
+
+icc_plt_model_id_not_centered_idxs <- map(model_ids, 
+                     \(model_id) which(
+                       str_detect(icc_plt_files, glue::glue("model_{model_id}_centered_FALSE"))
+                     ))
+
+icc_plt_files[icc_plt_model_id_not_centered_idxs[[1]]] |>
+  knitr::include_graphics()
+```
+
+### Level-One Predictor Model
+```{r icc_plt_2_cluster}
+icc_plt_files[icc_plt_model_id_not_centered_idxs[[2]]] |>
+  knitr::include_graphics()
+```
+
+### Level-One and Level-Two Predictor Model
+```{r icc_plt_3_cluster}
+icc_plt_files[icc_plt_model_id_not_centered_idxs[[3]]] |>
+  knitr::include_graphics()
+```
+
+### Cross-Level Interaction Model
+```{r icc_plt_4_cluster}
+icc_plt_files[icc_plt_model_id_not_centered_idxs[[4]]] |>
+  knitr::include_graphics()
+```
+
+### Full Model
+```{r icc_plt_5_cluster}
+icc_plt_files[icc_plt_model_id_not_centered_idxs[[5]]] |>
+  knitr::include_graphics()
+```
+:::
+
+### $R^2$ 
+
+::: panel-tabset
+### Unconditional Model
+```{r r2_plt_1_cluster}
+r2_plt_model_id_centered_idxs <- map(model_ids, 
+                     \(model_id) which(
+                       str_detect(r2_plt_files, glue::glue("model_{model_id}_centered_TRUE"))
+                     ))
+
+r2_plt_model_id_not_centered_idxs <- map(model_ids, 
+                     \(model_id) which(
+                       str_detect(icc_plt_files, glue::glue("model_{model_id}_centered_FALSE"))
+                     ))
+
+r2_plt_files[r2_plt_model_id_not_centered_idxs[[1]]] |>
+  knitr::include_graphics()
+```
+
+### One-Predictor Model
+```{r r2_plt_2_cluster}
+r2_plt_files[r2_plt_model_id_not_centered_idxs[[2]]] |>
+  knitr::include_graphics()
+```
+
+### Level-One and Level-Two Predictor Model
+```{r r2_plt_3_cluster}
+r2_plt_files[r2_plt_model_id_not_centered_idxs[[3]]] |>
+  knitr::include_graphics()
+```
+
+### Cross-Level Interaction Model
+```{r r2_plt_4_cluster}
+r2_plt_files[r2_plt_model_id_not_centered_idxs[[4]]] |>
+  knitr::include_graphics()
+```
+
+### Full Model
+```{r r2_plt_5_cluster}
+r2_plt_files[r2_plt_model_id_not_centered_idxs[[5]]] |>
+  knitr::include_graphics()
+```
+:::
+
+::::
 
 
+### Bootstrapping Type: Individual
+
+Randomly sampling `n_schools * n_students` students.
+
+```{r}
+condition_plt_files <- condition_plt_files_bstype_individual
+icc_plt_files <- icc_plt_files_bstype_individual
+r2_plt_files <- r2_plt_files_bstype_individual
+
+model_ids <- condition_plt_files |> 
+  str_extract("model_(\\d)", group = 1) |> 
+  unique()
+
+model_id_centered_idxs <- map(model_ids, 
+                     \(model_id) which(
+                       str_detect(condition_plt_files, glue::glue("model_{model_id}_centered_TRUE"))
+                     ))
+
+model_id_not_centered_idxs <- map(model_ids, 
+                     \(model_id) which(
+                       str_detect(condition_plt_files, glue::glue("model_{model_id}_centered_FALSE"))
+                     ))
+```
+
+:::: panel-tabset
+
+## Unconditional Model
+
+::: panel-tabset
+
+### Non-Centered
+```{r model_1_not_centered_condition_plts_individual}
+#| column: page
+#| layout-ncol: 2
+#| warning: false
+
+condition_plt_files[model_id_not_centered_idxs[[1]]] |>
+  knitr::include_graphics()
+```
+
+### Centered
+```{r model_1_centered_condition_plts_individual}
+#| column: page
+#| layout-ncol: 2
+#| warning: false
+
+condition_plt_files[model_id_centered_idxs[[1]]] |>
+  knitr::include_graphics()
+```
+:::
+
+## Level-One Predictor Model
+
+::: panel-tabset
+
+### Non-Centered
+```{r model_2_not_centered_condition_plts_individual}
+#| column: page
+#| layout-ncol: 2
+#| warning: false
+
+condition_plt_files[model_id_not_centered_idxs[[2]]] |>
+  knitr::include_graphics()
+```
+
+### Centered
+```{r model_2_centered_condition_plts_individual}
+#| column: page
+#| layout-ncol: 2
+#| warning: false
+
+condition_plt_files[model_id_centered_idxs[[2]]] |>
+  knitr::include_graphics()
+```
+
+:::
+
+## Level-One and Level-Two Predictor Model
+
+::: panel-tabset
+
+### Non-Centered
+```{r model_3_not_centered_condition_plts_individual}
+#| column: page
+#| layout-ncol: 2
+#| warning: false
+
+condition_plt_files[model_id_not_centered_idxs[[3]]] |>
+  knitr::include_graphics()
+```
+
+### Centered
+```{r model_3_centered_condition_plts_individual}
+#| column: page
+#| layout-ncol: 2
+#| warning: false
+
+condition_plt_files[model_id_centered_idxs[[3]]] |>
+  knitr::include_graphics()
+```
+
+:::
+
+## Cross-Level Interaction Model
+
+::: panel-tabset
+
+### Non-Centered
+```{r model_4_not_centered_condition_plts_individual}
+#| column: page
+#| layout-ncol: 2
+#| warning: false
+
+condition_plt_files[model_id_not_centered_idxs[[4]]] |>
+  knitr::include_graphics()
+```
+
+### Centered
+```{r model_4_centered_condition_plts_individual}
+#| column: page
+#| layout-ncol: 2
+#| warning: false
+
+condition_plt_files[model_id_centered_idxs[[4]]] |>
+  knitr::include_graphics()
+```
+
+:::
+
+## Full Model
+
+::: panel-tabset
+
+### Non-Centered
+```{r model_5_not_centered_condition_plts_individual}
+#| column: page
+#| layout-ncol: 2
+#| warning: false
+
+condition_plt_files[model_id_not_centered_idxs[[5]]] |>
+  knitr::include_graphics()
+```
+
+### Centered
+```{r model_5_centered_condition_plts_individual}
+#| column: page
+#| layout-ncol: 2
+#| warning: false
+
+condition_plt_files[model_id_centered_idxs[[5]]] |>
+  knitr::include_graphics()
+```
+
+:::
+::::
+
+#### Other Distributions
+
+All of these distributions are from the non-centered versions of the data subsets.
+
+:::: panel-tabset
+
+### ICC
+
+::: panel-tabset
+### Unconditional Model
+```{r icc_plt_1_individual}
+icc_plt_model_id_centered_idxs <- map(model_ids, 
+                     \(model_id) which(
+                       str_detect(icc_plt_files, glue::glue("model_{model_id}_centered_TRUE"))
+                     ))
+
+icc_plt_model_id_not_centered_idxs <- map(model_ids, 
+                     \(model_id) which(
+                       str_detect(icc_plt_files, glue::glue("model_{model_id}_centered_FALSE"))
+                     ))
+
+icc_plt_files[icc_plt_model_id_not_centered_idxs[[1]]] |>
+  knitr::include_graphics()
+```
+
+### Level-One Predictor Model
+```{r icc_plt_2_individual}
+icc_plt_files[icc_plt_model_id_not_centered_idxs[[2]]] |>
+  knitr::include_graphics()
+```
+
+### Level-One and Level-Two Predictor Model
+```{r icc_plt_3_individual}
+icc_plt_files[icc_plt_model_id_not_centered_idxs[[3]]] |>
+  knitr::include_graphics()
+```
+
+### Cross-Level Interaction Model
+```{r icc_plt_4_individual}
+icc_plt_files[icc_plt_model_id_not_centered_idxs[[4]]] |>
+  knitr::include_graphics()
+```
+
+### Full Model
+```{r icc_plt_5_individual}
+icc_plt_files[icc_plt_model_id_not_centered_idxs[[5]]] |>
+  knitr::include_graphics()
+```
+:::
+
+### $R^2$ 
+
+::: panel-tabset
+### Unconditional Model
+```{r r2_plt_1_individual}
+r2_plt_model_id_centered_idxs <- map(model_ids, 
+                     \(model_id) which(
+                       str_detect(r2_plt_files, glue::glue("model_{model_id}_centered_TRUE"))
+                     ))
+
+r2_plt_model_id_not_centered_idxs <- map(model_ids, 
+                     \(model_id) which(
+                       str_detect(icc_plt_files, glue::glue("model_{model_id}_centered_FALSE"))
+                     ))
+
+r2_plt_files[r2_plt_model_id_not_centered_idxs[[1]]] |>
+  knitr::include_graphics()
+```
+
+### One-Predictor Model
+```{r r2_plt_2_individual}
+r2_plt_files[r2_plt_model_id_not_centered_idxs[[2]]] |>
+  knitr::include_graphics()
+```
+
+### Level-One and Level-Two Predictor Model
+```{r r2_plt_3_individual}
+r2_plt_files[r2_plt_model_id_not_centered_idxs[[3]]] |>
+  knitr::include_graphics()
+```
+
+### Cross-Level Interaction Model
+```{r r2_plt_4_individual}
+r2_plt_files[r2_plt_model_id_not_centered_idxs[[4]]] |>
+  knitr::include_graphics()
+```
+
+### Full Model
+```{r r2_plt_5_individual}
+r2_plt_files[r2_plt_model_id_not_centered_idxs[[5]]] |>
+  knitr::include_graphics()
+```
+:::
+
+::::
 
 
 

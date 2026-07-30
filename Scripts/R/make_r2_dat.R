@@ -1,7 +1,7 @@
 
 make_r2_dat <- function(condition_dat) {
   condition_dat |>
-  select(condition_id, model_id, centered, btwn_condition_id, model) |>
+  select(condition_id, model_id, centered, bootstrap_type, btwn_condition_id, model) |>
     mutate(
       r2s = map(model, \(model) {
         

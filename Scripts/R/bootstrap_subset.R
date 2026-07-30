@@ -1,27 +1,60 @@
 
 bootstrap_subset <- function(params_w_subset) {
-  params_w_subset |>
-    uncount(n_bootstraps, .remove = F) |>
-    mutate(
-      bootstrap = pmap(
-        list(n_students, n_schools, data_subset),
-        \(n_students, n_schools, data_subset) 
-        data_subset |>
-          # nest all data within schools, to
-          nest(cluster_data = -schoolid) |>
-          # sample n_schools schools, then
-          slice_sample(n = n_schools, replace = T) |>
-          # sample n_students students within schools, and finally
-          mutate(cluster_data = map(
-            cluster_data, \(cluster_data) 
-            cluster_data |>
-              slice_sample(n = n_students, replace = T))
-          ) |>
-          # unnest the data within schools
-          unnest(cluster_data)
+  bootstrap_type <- params_w_subset["bootstrap_type"][[1]]
+  
+  all_bootstraps <- params_w_subset |>
+    uncount(n_bootstraps, .remove = F)
+  
+  if (bootstrap_type == "both") {
+    all_bootstraps |>
+      mutate(
+        bootstrap = pmap(
+          list(n_students, n_schools, data_subset),
+          \(n_students, n_schools, data_subset) 
+          data_subset |>
+            # nest all data within schools, to
+            nest(cluster_data = -schoolid) |>
+            # sample n_schools schools, then
+            slice_sample(n = n_schools, replace = T) |>
+            # sample n_students students within schools, and finally
+            mutate(cluster_data = map(
+              cluster_data, \(cluster_data) 
+              cluster_data |>
+                slice_sample(n = n_students, replace = T))
+            ) |>
+            # unnest the data within schools
+            unnest(cluster_data)
+        )
       )
-    )
+  } else if (bootstrap_type == "cluster") {
+    all_bootstraps |>
+      mutate(
+        bootstrap = pmap(
+          list(n_schools, data_subset),
+          \(n_schools, data_subset) 
+          data_subset |>
+            # nest all data within schools, to
+            nest(cluster_data = -schoolid) |>
+            # sample n_schools schools, then
+            slice_sample(n = n_schools, replace = T) |>
+            # unnest the data within schools
+            unnest(cluster_data)
+        )
+      )
+  } else if (bootstrap_type == "individual") {
+    all_bootstraps |>
+      mutate(
+        bootstrap = pmap(
+          list(n_students, n_schools, data_subset),
+          \(n_students, n_schools, data_subset) 
+          data_subset |>
+            # sample dataset size (n_students * n_schools) students
+            slice_sample(n = n_students * n_schools, replace = T)
+        )
+      )
+  }
 }
+
 
 # 
 # tar_read(params_w_subset) |>

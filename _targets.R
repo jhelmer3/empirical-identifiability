@@ -8,14 +8,14 @@ tar_option_set(
   packages = c("tidyverse", "patchwork", "gt"),
   controller = crew_controller_local(workers = 4),
   format = "qs",
-  seed = 12
+  seed = 12345
 )
 
 tar_source(here::here("Scripts", "R"))
 
 dir.create("outputs", showWarnings = FALSE, recursive = TRUE)
 
-n_bootstraps <- 480
+n_bootstraps <- 120
 
 list(
   tar_target(ecls_file,
@@ -44,7 +44,8 @@ list(
   ## still need to overall replicate this multiple times
   tar_target(params_w_subset, subset_dat(ecls_dat, params)),
   tar_target(results, bootstrap_subset(params_w_subset) |>
-               fit_model(),
+               fit_model() |>
+               dplyr::select(-c(bootstrap, res)),
              pattern = map(params_w_subset)),
   
   tar_target(axis_limits, identify_axis_limits(results)),
@@ -60,7 +61,9 @@ list(
   tar_target(condition_plt_files,
              paste0("outputs/condition_", first(results_grouped$condition_id),
                     "_model_", first(results_grouped$model_id),
-                    "_centered_", first(results_grouped$centered),".png") |>
+                    "_centered_", first(results_grouped$centered),
+                    "_bstype_", first(results_grouped$bootstrap_type),
+                    ".png") |>
                ggsave_and_return_path(condition_plt, 
                                       width = get_condition_plt_dim(results_grouped), 
                                       height = get_condition_plt_dim(results_grouped)),
@@ -75,7 +78,9 @@ list(
   tar_target(icc_plt_files,
              paste0("outputs/icc_plt",
                     "_model_", first(icc_dat_grouped_by_btwn$model_id),
-                    "_centered_", first(icc_dat_grouped_by_btwn$centered),".png") |>
+                    "_centered_", first(icc_dat_grouped_by_btwn$centered),
+                    "_bstype_", first(icc_dat_grouped_by_btwn$bootstrap_type), 
+                    ".png") |>
                ggsave_and_return_path(patch_icc_dat(icc_dat_grouped_by_btwn)),
              pattern = map(icc_dat_grouped_by_btwn),
              iteration = "list",
@@ -88,7 +93,9 @@ list(
   tar_target(r2_plt_files,
              paste0("outputs/r2_plt",
                     "_model_", first(r2_dat_grouped_by_btwn$model_id),
-                    "_centered_", first(r2_dat_grouped_by_btwn$centered),".png") |>
+                    "_centered_", first(r2_dat_grouped_by_btwn$centered),
+                    "_bstype_", first(r2_dat_grouped_by_btwn$bootstrap_type), 
+                    ".png") |>
                ggsave_and_return_path(patch_r2_dat(r2_dat_grouped_by_btwn)),
              pattern = map(r2_dat_grouped_by_btwn),
              iteration = "list",

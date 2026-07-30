@@ -7,7 +7,7 @@ define_params <- function(params, models) {
            model_id = cur_group_id()) |>
     mutate(condition_id = row_number(),
            .before = everything()) |>
-    mutate(.by = c(model_id, centered),
+    mutate(.by = c(model_id, centered, bootstrap_type),
            btwn_condition_id = cur_group_id())
 }
 
