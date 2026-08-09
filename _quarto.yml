@@ -10,6 +10,7 @@ website:
         text: Home
       - ecls-k.qmd
       - proposal.qmd
+      - writeup.qmd
 
 format:
   html:

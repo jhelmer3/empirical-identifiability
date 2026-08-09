@@ -15,14 +15,17 @@ tar_source(here::here("Scripts", "R"))
 
 dir.create("outputs", showWarnings = FALSE, recursive = TRUE)
 
-n_bootstraps <- 120
+n_bootstraps_global <- 120
 
 list(
+  tar_target(n_bootstraps, n_bootstraps_global),
   tar_target(ecls_file,
              here::here("..", "Data", "ECLS-K", "ECLS-K.rds"),
              format = "file"),
   tar_target(ecls, readRDS(ecls_file)),
   tar_target(ecls_dat, clean_ecls(ecls)),
+  tar_target(full_and_subset_sample_sizes, get_full_and_subset_sample_sizes(ecls, ecls_dat)),
+  
   tar_target(models, c("mathscore ~ 1 + (1 | schoolid)",
                        "mathscore ~ ses + (1 | schoolid)",
                        "mathscore ~ ses + rural + (1 | schoolid)",
