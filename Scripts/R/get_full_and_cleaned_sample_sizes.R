@@ -1,7 +1,7 @@
 
-get_full_and_subset_sample_sizes <- function(ecls_full, ecls_subset) {
+get_full_and_cleaned_sample_sizes <- function(ecls_full, ecls_cleaned) {
   list("full" = ecls_full |> rename(schoolid = s2_id), 
-       "subset" = ecls_subset) |>
+       "cleaned" = ecls_cleaned) |>
     imap(
       \(data, idx) data |>
         summarize(

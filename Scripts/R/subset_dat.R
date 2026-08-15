@@ -1,11 +1,16 @@
 
 subset_dat <- function(ecls_dat, params) {
   params |>
-    nest(conditions = -c(n_bootstraps, n_students, n_schools)) |>
+    nest(conditions = -c(n_bootstraps, n_students, n_schools, full_data)) |>
     mutate(
       data_subset = pmap(
-        list(n_bootstraps, n_students, n_schools), 
-        \(n_bootstraps, n_students, n_schools) {
+        list(n_bootstraps, n_students, n_schools, full_data),
+        \(n_bootstraps, n_students, n_schools, full_data)
+        if (full_data) {
+          ecls_dat
+          }
+        else
+          {
           ecls_dat |>
             filter(schoolid %in% sample(schoolid, n_schools)) |>
             filter(.by = schoolid,
@@ -14,8 +19,8 @@ subset_dat <- function(ecls_dat, params) {
       )
     ) |>
     unnest(conditions) |>
-    nest(conditions = -c(n_bootstraps, n_students, n_schools, 
-                         data_subset, centered)) |>
+    nest(conditions = -c(n_bootstraps, n_students, n_schools,
+                         full_data, data_subset, centered)) |>
     mutate(data_subset = map2(
       centered, data_subset,
       \(centered, data_subset) if (centered) {
@@ -28,6 +33,25 @@ subset_dat <- function(ecls_dat, params) {
     )) |>
     unnest(conditions)
 }
+
+# tar_read(params) |> 
+#   mutate(keep_full_data = ifelse(n_students == max(n_students) & n_schools == max(n_schools), T, F)) |>
+#   nest(conditions = -c(n_bootstraps, n_students, n_schools, keep_full_data)) |>
+#   mutate(
+#     data_subset = pmap(
+#       list(n_bootstraps, n_students, n_schools, keep_full_data), 
+#       \(n_bootstraps, n_students, n_schools, keep_full_data) if (keep_full_data) {
+#         tar_read(ecls_dat) 
+#         }
+#       else {
+#         tar_read(ecls_dat) |>
+#           filter(schoolid %in% sample(schoolid, n_schools)) |>
+#           filter(.by = schoolid,
+#                  childid %in% sample(childid, n_students))
+#       }
+#     )
+#   ) |>
+#   pull(data_subset)
 
 # subset_dat(tar_read(ecls_dat), tar_read(params)) |>
   # select(data_subset) |>

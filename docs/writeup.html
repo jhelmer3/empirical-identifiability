@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Jess Helmer">
-<meta name="dcterms.date" content="2026-08-09">
+<meta name="dcterms.date" content="2026-08-15">
 
 <title>Empirical Identifiability MLM Writeup – Empirical Identifiability</title>
 <style>
@@ -154,6 +154,7 @@ window.Quarto = {
   <li><a href="#background" id="toc-background" class="nav-link active" data-scroll-target="#background">Background</a>
   <ul>
   <li><a href="#multilevel-models" id="toc-multilevel-models" class="nav-link" data-scroll-target="#multilevel-models">Multilevel Models</a></li>
+  <li><a href="#multilevel-models-and-model-identification" id="toc-multilevel-models-and-model-identification" class="nav-link" data-scroll-target="#multilevel-models-and-model-identification">Multilevel Models and Model Identification</a></li>
   </ul></li>
   <li><a href="#methods" id="toc-methods" class="nav-link" data-scroll-target="#methods">Methods</a>
   <ul>
@@ -197,7 +198,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">August 9, 2026</p>
+      <p class="date">August 15, 2026</p>
     </div>
   </div>
   
@@ -214,9 +215,106 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="background">Background</h2>
 <section id="multilevel-models" class="level3">
 <h3 class="anchored" data-anchor-id="multilevel-models">Multilevel Models</h3>
+<p>Multilevel modeling is a method used when data violate the independence assumption; that is, when observations are in some way clustered or interdependent. A common example of this type of data is in education research, where student outcomes are not independent, but are instead clustered within classrooms, grade levels, or schools. Multilevel modeling accounts for this by allowing outcomes to vary not just at the observation-level, but also at the cluster-level.</p>
+<p>Considering first a model that contains no predictors, called an “unconditional model” in the multilevel modeling literature, a single-level model would contain a parameter for the intercept and an error term. Its best prediction of the outcome of any given observation would just be the intercept, the mean.</p>
+<div class="columns">
+<div class="column" style="width:66%;">
 <p><span class="math display">\[
-x = y + z
+y_i = \gamma_0 + r_i
 \]</span></p>
+<p>In this model, <span class="math inline">\(i\)</span> indexes observations, <span class="math inline">\(\gamma_0\)</span> represents the intercept parameter, and <span class="math inline">\(r_i\)</span> represents the remaining error between each observation and the model’s prediction <span class="math inline">\(\hat{y}\)</span>. Here, <span class="math inline">\(\hat{y_i} = \gamma_0 = \bar{y}\)</span>, so the model’s prediction is just the overall mean of <span class="math inline">\(y\)</span>.</p>
+</div><div class="column" style="width:33%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="writeup_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="384"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>A multilevel model allows for the intercept of each cluster to vary by adding an additional error term for each cluster.</p>
+<div class="columns">
+<div class="column" style="width:66%;">
+<p><span class="math display">\[
+\begin{aligned}
+  \text{Level 1}: &amp; \quad \text{y}_{ij} = \beta_{0j} + r_i \\[.8em]
+  \text{Level 2}: &amp; \quad \vcenter{\begin{array}{l}
+      \beta_{0j} = \gamma_{00} + u_{0j} \\
+    \end{array}} \\[1.6em]
+  \text{y}_{ij} &amp;= \gamma_{00} + u_{0j} + r_i
+\end{aligned}
+\]</span></p>
+<p>Here, <span class="math inline">\(u_{0j}\)</span> represents the cluster error term. Now, the model’s best prediction for an observation given some cluster <span class="math inline">\(j\)</span> would be <span class="math inline">\(\gamma_{00} + u_{0j}\)</span>.</p>
+</div><div class="column" style="width:33%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="writeup_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="384"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>Multilevel models can include predictors of the outcome like single-level models, and these predictors can be at either the observation- or cluster-level. In the education research context, an student-level predictor may be a student’s age, gender, or socioeconomic status, and a school-level predictor may be a school’s size, amount of after-school programs, or whether its a public or private school.</p>
+<div class="columns">
+<div class="column" style="width:66%;">
+<p><span class="math display">\[
+\begin{aligned}
+  \text{Level 1}: &amp; \quad \text{y}_{ij} = \beta_{0j} + \beta_{1j} SES_i + r_i \\[.8em]
+  \text{Level 2}: &amp; \quad \vcenter{\begin{array}{l}
+      \beta_{0j} = \gamma_{00} + u_{0j} \\
+      \beta_{1j} = \gamma_{10}
+    \end{array}} \\[1.6em]
+  \text{y}_{ij} &amp;= \gamma_{00} + \gamma_{10} SES_i + u_{0j} + r_i
+\end{aligned}
+\]</span></p>
+<p>Here, <span class="math inline">\(\beta_{1j}\)</span> represents the slope for the effect of <span class="math inline">\(\beta_{1j}\)</span> across schools. The model’s prediction for an observation within some observed cluster <span class="math inline">\(j\)</span> and <span class="math inline">\(SES\)</span> levels for each student would be <span class="math inline">\(\gamma_{00} + \gamma_{10} SES_i + u_{0j}\)</span>.</p>
+</div><div class="column" style="width:33%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="writeup_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="432"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>Beyond just varying the intercept, multilevel models can also allow for the effect of predictors to vary over clusters by adding an additional error term capturing cluster-level slope deviances. For example, consider that while lower socioeconomic status may be linked to poorer test scores across schools, for some schools, that effect may be weaker or stronger than for others. Allowing slopes to vary over schools, rather than constraining slope variance to be zero as before, can yield a model that’s much more representative of the observed data.</p>
+<div class="columns">
+<div class="column" style="width:66%;">
+<p><span class="math display">\[
+\begin{aligned}
+  \text{Level 1}: &amp; \quad \text{y}_{ij} = \beta_{0j} + \beta_{1j} SES_i + r_i \\[.8em]
+  \text{Level 2}: &amp; \quad \vcenter{\begin{array}{l}
+      \beta_{0j} = \gamma_{00} + u_{0j} \\
+      \beta_{1j} = \gamma_{10} + u_{1j}
+    \end{array}} \\[1.6em]
+  \text{y}_{ij} &amp;= \gamma_{00} + (\gamma_{10} + u_{1j}) SES_i + u_{0j} + r_i
+\end{aligned}
+\]</span></p>
+<p>Here, <span class="math inline">\(u_{1j}\)</span> represents the slope error term for each cluster. Now, the model’s best prediction for an observation within some observed cluster <span class="math inline">\(j\)</span> would be <span class="math inline">\(\gamma_{00} + (\gamma_{10} + u_{1j}) SES_i + u_{0j}\)</span>.</p>
+</div><div class="column" style="width:33%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="writeup_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="432"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="multilevel-models-and-model-identification" class="level3">
+<h3 class="anchored" data-anchor-id="multilevel-models-and-model-identification">Multilevel Models and Model Identification</h3>
 </section>
 </section>
 <section id="methods" class="level2">
@@ -298,9 +396,9 @@ x = y + z
 </section>
 <section id="procedure" class="level3">
 <h3 class="anchored" data-anchor-id="procedure">Procedure</h3>
-<p>We subsetted the full ECLS-K dataset to include just the variables of interest for this study (student math achievement, student SES, and school type (public vs.&nbsp;private), and we removed any observations with missing data. We also removed any schools with fewer than ten students, such that all schools in the dataset would be able to accommodate the maximum students-per-school condition. The remaining data contained 18,174 students, 1,308 schools, for 18,174. All analysis was conducted on this data subset.</p>
-<p>We conducted <code>[n]</code> replications for each combination of conditions in this study. For each replication, we randomly sampled a four smaller subsets of the data with <span class="math inline">\(N_{schools}\)</span> schools and <span class="math inline">\(N_{students per school}\)</span>, one for each of the combinatiosn</p>
-<p>For each data subset, we created <code>n_boostraps</code> bootstraps of each dataset.</p>
+<p>We subsetted the full ECLS-K dataset to include just the variables of interest for this study (student math achievement, student SES, and school type (public vs.&nbsp;private), and we removed any observations with missing data. We also removed any schools with fewer than ten students, such that all schools in the dataset would be able to accommodate the maximum students-per-school condition. The remaining data contained students, schools, for . All analysis was conducted on this data subset.</p>
+<p>We conducted <code>[n]</code> replications for each combination of conditions in this study. For each replication, we randomly sampled a four smaller subsets of the data with <span class="math inline">\(N_{schools}\)</span> schools and <span class="math inline">\(N_{students per school}\)</span>, one for each of the combinations of <span class="math inline">\(N_{schools} \in [10, 30]\)</span> and <span class="math inline">\(N_{students per school} \in [3, 10]\)</span>.</p>
+<p>Within each data subset, we had 30 bootstrapping conditions: centering the data before bootstrapping (centered vs.&nbsp;not-centered), the method of bootstrapping (two-stage vs.&nbsp;cluster vs.&nbsp;individual), and the model (the five models described above). For each of those conditions, we created <code>n_boostraps</code> bootstraps of each dataset by sampling the data with replacement at the level(s) specified by the bootstrapping method.</p>
 </section>
 <section id="outcomes" class="level3">
 <h3 class="anchored" data-anchor-id="outcomes">Outcomes</h3>

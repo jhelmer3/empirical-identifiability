@@ -179,11 +179,15 @@ full_data_models[5, "full_res"][[1]] |> sjPlot::tab_model(title = "Full")
 ```
 :::
 
+### Bootstrapping the Full Data
+
 
 ## Bootstrapping
 
 ```{r param_tbl}
 #| column: margin
+
+
 param_set_no_model <- param_set |>
   list_modify("model_string" = rlang::zap())
 
@@ -230,6 +234,14 @@ c("both", "cluster", "individual") |>
     assign(nm, r2_plt_files[which(str_detect(r2_plt_files, glue::glue("bstype_{bstype}")))], .GlobalEnv)
   })
 ```
+
+```{r}
+tar_read(params) |>
+  select(btwn_condition_id, n_students, n_schools, model_string,
+         centered, bootstrap_type, full_data) |>
+  unique()
+```
+
 
 Starting conditions: number of level-one units (students) within level-two units (schools). This set of parameters creates `r n_conditions` conditions per model.
 

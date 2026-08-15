@@ -6,16 +6,21 @@ library(crew.cluster)
 
 tar_option_set(
   packages = c("tidyverse", "patchwork", "gt"),
-  controller = crew_controller_local(workers = 4),
+  controller = crew_controller_local(workers = 1),
   format = "qs",
-  seed = 12345
+  seed = 12345,
+  error = "trim"
+)
+
+tar_config_set(
+  as_job = T
 )
 
 tar_source(here::here("Scripts", "R"))
 
 dir.create("outputs", showWarnings = FALSE, recursive = TRUE)
 
-n_bootstraps_global <- 120
+n_bootstraps_global <- 12
 
 list(
   tar_target(n_bootstraps, n_bootstraps_global),
@@ -24,7 +29,7 @@ list(
              format = "file"),
   tar_target(ecls, readRDS(ecls_file)),
   tar_target(ecls_dat, clean_ecls(ecls)),
-  tar_target(full_and_subset_sample_sizes, get_full_and_subset_sample_sizes(ecls, ecls_dat)),
+  tar_target(full_and_cleaned_sample_sizes, get_full_and_cleaned_sample_sizes(ecls, ecls_dat)),
   
   tar_target(models, c("mathscore ~ 1 + (1 | schoolid)",
                        "mathscore ~ ses + (1 | schoolid)",
@@ -66,6 +71,7 @@ list(
                     "_model_", first(results_grouped$model_id),
                     "_centered_", first(results_grouped$centered),
                     "_bstype_", first(results_grouped$bootstrap_type),
+                    # "_full_", first(results_grouped$keep_full_data),
                     ".png") |>
                ggsave_and_return_path(condition_plt, 
                                       width = get_condition_plt_dim(results_grouped), 
@@ -82,7 +88,8 @@ list(
              paste0("outputs/icc_plt",
                     "_model_", first(icc_dat_grouped_by_btwn$model_id),
                     "_centered_", first(icc_dat_grouped_by_btwn$centered),
-                    "_bstype_", first(icc_dat_grouped_by_btwn$bootstrap_type), 
+                    "_bstype_", first(icc_dat_grouped_by_btwn$bootstrap_type),
+                    # "_full_", first(results_grouped$keep_full_data),
                     ".png") |>
                ggsave_and_return_path(patch_icc_dat(icc_dat_grouped_by_btwn)),
              pattern = map(icc_dat_grouped_by_btwn),
@@ -98,11 +105,13 @@ list(
                     "_model_", first(r2_dat_grouped_by_btwn$model_id),
                     "_centered_", first(r2_dat_grouped_by_btwn$centered),
                     "_bstype_", first(r2_dat_grouped_by_btwn$bootstrap_type), 
+                    # "_full_", first(results_grouped$keep_full_data),
                     ".png") |>
                ggsave_and_return_path(patch_r2_dat(r2_dat_grouped_by_btwn)),
              pattern = map(r2_dat_grouped_by_btwn),
              iteration = "list",
              format = "file"),
+  
   # tar_target(examples_dat,
   #            get_examples_dat(results_grouped, model_terms)),
   # tar_target(examples_params, 
@@ -153,6 +162,6 @@ list(
   #            iteration = "list"),
   # tar_target(examples_r2_plt,
   #            patch_r2_dat(examples_r2_dat)),
-  tar_quarto(ecls_report, "ecls-k.qmd",
-             quiet = F)
+  tar_quarto(ecls_report, "ecls-k.qmd", quiet = F),
+  tar_quarto(writeup, "writeup.qmd", quiet = F)
 )

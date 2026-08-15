@@ -21,21 +21,23 @@ library(patchwork)
 library(ggtext)
 library(gt)
 
+set.seed(1)
+
 tar_source(here::here("Scripts", "R"))
 
 tar_load(
   c(
-    ecls_dat, full_and_subset_sample_sizes, #n_boostraps,
+    ecls_dat, full_and_cleaned_sample_sizes, #n_boostraps,
     param_set, params,
     full_data_models
   ),
   store = here::here("_targets")
 )
 
-ecls_full <- full_and_subset_sample_sizes |>
+ecls_full <- tar_read(full_and_subset_sample_sizes) |>
   filter(data_type == "full")
-ecls_subset <- full_and_subset_sample_sizes |>
-  filter(data_type == "full")
+ecls_cleaned <- tar_read(full_and_subset_sample_sizes) |>
+  filter(data_type == "cleaned")
 ```
 
 Using bootstrapping as a method to diagnose poor empirical identifiability is not limited to the explicit factor analysis framework. We now present an example of this technique successfully showing when a multilevel model has reached a complexity level where the variability in the data is not sufficient to provide an identified solution. To do this, we manipulated the sample size of a dataset as a proxy for whether or not the data was likely to be well-identified, and examined the distributions of bootstrapped parameter estimates for multilevel models of increasing complexity.
@@ -44,9 +46,183 @@ Using bootstrapping as a method to diagnose poor empirical identifiability is no
 
 ### Multilevel Models
 
+Multilevel modeling is a method used when data violate the independence assumption; that is, when observations are in some way clustered or interdependent. A common example of this type of data is in education research, where student outcomes are not independent, but are instead clustered within classrooms, grade levels, or schools. Multilevel modeling accounts for this by allowing outcomes to vary not just at the observation-level, but also at the cluster-level.
+
+Considering first a model that contains no predictors, called an "unconditional model" in the multilevel modeling literature, a single-level model would contain a parameter for the intercept and an error term. Its best prediction of the outcome of any given observation would just be the intercept, the mean.
+
+:::: {.columns}
+::: {.column width="66%"}
 $$
-x = y + z
+y_i = \gamma_0 + r_i
 $$
+
+In this model, $i$ indexes observations, $\gamma_0$ represents the intercept parameter, and $r_i$ represents the remaining error between each observation and the model's prediction $\hat{y}$. Here, $\hat{y_i} = \gamma_0 = \bar{y}$, so the model's prediction is just the overall mean of $y$.
+:::
+
+::: {.column width="33%"}
+```{r}
+#| fig-width: 4
+#| fig-height: 4
+n_clusters = 4
+n_people_per_cluster = 5
+n_people = n_clusters * n_people_per_cluster
+
+gamma_00 = 10
+
+tau = 2
+sigma = 1
+
+d <- tibble(
+  cluster_id = seq.int(1, n_clusters),
+  n_people_per_cluster = n_people_per_cluster,
+  u_0j = rnorm(n_clusters, 0, tau)
+  ) |>
+  uncount(n_people_per_cluster) |>
+  mutate(person_id = row_number(),
+         cluster_estimate = gamma_00 + u_0j,
+         y = rnorm(n_people, cluster_estimate, sigma))
+
+d |>
+  ggplot(aes(x = person_id, y = y)) +
+  annotate("segment", y = gamma_00, x = 1, xend = n_people) +
+  geom_point(aes(color = factor(cluster_id))) +
+  coord_cartesian(ylim = c(2, 18)) +
+  scale_x_continuous("ID", breaks = c(1, 20)) +
+  guides(x = guide_axis(cap = T),
+         y = guide_axis(cap = T)) +
+  theme(aspect.ratio = 1,
+        legend.position = "none")
+```
+:::
+::::
+
+A multilevel model allows for the intercept of each cluster to vary by adding an additional error term for each cluster. 
+
+:::: {.columns}
+::: {.column width="66%"}
+$$
+\begin{aligned}
+  \text{Level 1}: & \quad \text{y}_{ij} = \beta_{0j} + r_i \\[.8em]
+  \text{Level 2}: & \quad \vcenter{\begin{array}{l}
+      \beta_{0j} = \gamma_{00} + u_{0j} \\
+    \end{array}} \\[1.6em]
+  \text{y}_{ij} &= \gamma_{00} + u_{0j} + r_i
+\end{aligned}
+$$
+
+Here, $u_{0j}$ represents the cluster error term. Now, the model's best prediction for an observation given some cluster $j$ would be $\gamma_{00} + u_{0j}$.
+:::
+
+::: {.column width="33%"}
+```{r}
+#| fig-width: 4
+#| fig-height: 4
+d |>
+  ggplot(aes(x = person_id, y = y)) +
+  geom_line(aes(y = cluster_estimate, group = cluster_id)) +
+  # annotate("segment", y = gamma_00, x = 1, xend = n_people, linetype = "dashed") +
+  coord_cartesian(ylim = c(2, 18)) +
+  geom_point(aes(color = factor(cluster_id))) +
+  scale_x_continuous("ID", breaks = c(1, 20)) +
+  guides(x = guide_axis(cap = T),
+         y = guide_axis("y", cap = T)) +
+  theme(aspect.ratio = 1,
+        legend.position = "none")
+```
+:::
+::::
+
+Multilevel models can include predictors of the outcome like single-level models, and these predictors can be at either the observation- or cluster-level. In the education research context, an student-level predictor may be a student's age, gender, or socioeconomic status, and a school-level predictor may be a school's size, amount of after-school programs, or whether its a public or private school.
+
+:::: {.columns}
+::: {.column width="66%"}
+$$
+\begin{aligned}
+  \text{Level 1}: & \quad \text{y}_{ij} = \beta_{0j} + \beta_{1j} SES_i + r_i \\[.8em]
+  \text{Level 2}: & \quad \vcenter{\begin{array}{l}
+      \beta_{0j} = \gamma_{00} + u_{0j} \\
+      \beta_{1j} = \gamma_{10} 
+    \end{array}} \\[1.6em]
+  \text{y}_{ij} &= \gamma_{00} + \gamma_{10} SES_i + u_{0j} + r_i
+\end{aligned}
+$$
+
+Here, $\beta_{1j}$ represents the slope for the effect of $\beta_{1j}$ across schools. The model's prediction for an observation within some observed cluster $j$ and $SES$ levels for each student would be $\gamma_{00} + \gamma_{10} SES_i + u_{0j}$.
+:::
+
+::: {.column width="33%"}
+```{r}
+#| fig-height: 4.5
+#| fig-width: 4.5
+gamma_ses = 3
+sigma_beta_ses = 3
+
+d2 <- d |>
+  mutate(ses = rbeta(n_people, 1.25, 1.25),
+         u_1j = rep(rnorm(n_clusters, 0, sigma_beta_ses), each = n_people_per_cluster),
+         cluster_estimate_2 = gamma_00 + (gamma_ses + u_1j) * ses + u_0j,
+         y2 = rnorm(n_people, cluster_estimate_2, sigma)) |>
+  mutate(ses_pred_0 = 0.05,
+         ses_pred_1 = 0.95,
+         y2_pred_0 = gamma_00 + (gamma_ses + u_1j) * ses_pred_0 + u_0j,
+         y2_pred_1 = gamma_00 + (gamma_ses + u_1j) * ses_pred_1 + u_0j,
+         y2_naivepred_0 = gamma_00 + (gamma_ses) * ses_pred_0 + u_0j,
+         y2_naivepred_1 = gamma_00 + (gamma_ses) * ses_pred_1 + u_0j)
+
+d2 |>
+  ggplot(aes(x = ses, y = y2, group = cluster_id)) +
+  geom_segment(aes(x = ses_pred_0, y = y2_naivepred_0,
+                   xend = ses_pred_1, yend = y2_naivepred_1)) +
+  geom_point(aes(color = factor(cluster_id))) +
+  coord_cartesian(ylim = c(0, 20), xlim = 0:1) +
+  scale_x_continuous("SES", breaks = seq(0, 1, .2)) +
+  guides(x = guide_axis(cap = T),
+         y = guide_axis("y", cap = T)) +
+  theme(aspect.ratio = 1,
+        legend.position = "none")
+```
+:::
+::::
+
+Beyond just varying the intercept, multilevel models can also allow for the effect of predictors to vary over clusters by adding an additional error term capturing cluster-level slope deviances. For example, consider that while lower socioeconomic status may be linked to poorer test scores across schools, for some schools, that effect may be weaker or stronger than for others. Allowing slopes to vary over schools, rather than constraining slope variance to be zero as before, can yield a model that's much more representative of the observed data. 
+
+:::: {.columns}
+::: {.column width="66%"}
+$$
+\begin{aligned}
+  \text{Level 1}: & \quad \text{y}_{ij} = \beta_{0j} + \beta_{1j} SES_i + r_i \\[.8em]
+  \text{Level 2}: & \quad \vcenter{\begin{array}{l}
+      \beta_{0j} = \gamma_{00} + u_{0j} \\
+      \beta_{1j} = \gamma_{10} + u_{1j}
+    \end{array}} \\[1.6em]
+  \text{y}_{ij} &= \gamma_{00} + (\gamma_{10} + u_{1j}) SES_i + u_{0j} + r_i
+\end{aligned}
+$$
+
+Here, $u_{1j}$ represents the slope error term for each cluster. Now, the model's best prediction for an observation within some observed cluster $j$ would be $\gamma_{00} + (\gamma_{10} + u_{1j}) SES_i + u_{0j}$.
+:::
+
+::: {.column width="33%"}
+```{r}
+#| fig-height: 4.5
+#| fig-width: 4.5
+d2 |>
+  ggplot(aes(x = ses, y = y2, group = cluster_id)) +
+  geom_segment(aes(x = ses_pred_0, y = y2_pred_0,
+                   xend = ses_pred_1, yend = y2_pred_1)) +
+  geom_point(aes(color = factor(cluster_id))) +
+  coord_cartesian(ylim = c(0, 20), xlim = 0:1) +
+  scale_x_continuous("SES", breaks = seq(0, 1, .2)) +
+  guides(x = guide_axis(cap = T),
+         y = guide_axis("y", cap = T)) +
+  theme(aspect.ratio = 1,
+        legend.position = "none")
+```
+:::
+::::
+
+### Multilevel Models and Model Identification
+
 
 ## Methods
 
@@ -139,15 +315,15 @@ Non-parametric bootstrapping is the perhaps more familiar kind, where observatio
 
 ### Procedure 
 
-We subsetted the full ECLS-K dataset to include just the variables of interest for this study (student math achievement, student SES, and school type (public vs. private), and we removed any observations with missing data. We also removed any schools with fewer than ten students, such that all schools in the dataset would be able to accommodate the maximum students-per-school condition. The remaining data contained `r format(ecls_subset$n_students, big.mark = ",")` students, `r format(ecls_subset$n_schools, big.mark = ",")` schools, for `r format(ecls_subset$n_observations, big.mark = ",")`. All analysis was conducted on this data subset.
+We subsetted the full ECLS-K dataset to include just the variables of interest for this study (student math achievement, student SES, and school type (public vs. private), and we removed any observations with missing data. We also removed any schools with fewer than ten students, such that all schools in the dataset would be able to accommodate the maximum students-per-school condition. The remaining data contained `r format(ecls_cleaned$n_students, big.mark = ",")` students, `r format(ecls_cleaned$n_schools, big.mark = ",")` schools, for `r format(ecls_cleaned$n_observations, big.mark = ",")`. All analysis was conducted on this data subset.
 
-We conducted `[n]` replications for each combination of conditions in this study. For each replication, we randomly sampled a four smaller subsets of the data with $N_{schools}$ schools and $N_{students per school}$, one for each of the combinatiosn 
+We conducted `[n]` replications for each combination of conditions in this study. For each replication, we randomly sampled a four smaller subsets of the data with $N_{schools}$ schools and $N_{students per school}$, one for each of the combinations of $N_{schools} \in [10, 30]$ and $N_{students per school} \in [3, 10]$. 
 
-For each data subset, we created `n_boostraps` bootstraps of each dataset. 
+Within each data subset, we had `r params |> select(n_bootstraps, centered, bootstrap_type, model_string) |> unique() |> nrow()` bootstrapping conditions: centering the data before bootstrapping (centered vs. not-centered), the method of bootstrapping (two-stage vs. cluster vs. individual), and the model (the five models described above). For each of those conditions, we created `n_boostraps` bootstraps of each dataset by sampling the data with replacement at the level(s) specified by the bootstrapping method. 
 
 ### Outcomes
 
-Our outcome of interest was the bootstrapped sampling distribution for each parameter; specifically, the shape of each distribution and the correlations of the sampling distributions between pairs of parameters. We also tracked warning and error messages from the `{lme4}` package. 
+Our outcome of interest was the bootstrapped sampling distribution for each parameter; specifically, the shape of each distribution and the correlations of the sampling distributions between pairs of parameters. We also tracked warning and error messages from the `{lme4}` package.
 
 
 ## Results
