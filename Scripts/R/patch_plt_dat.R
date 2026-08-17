@@ -1,6 +1,6 @@
 
 patch_plt_dat <- function(condition_dat, axis_limits, table_height_prop = 1/4,
-                          title_info_vars = c("n_bootstraps", "n_students", "n_schools")) {
+                          title_info_vars = c("n_bootstraps", "n_students", "n_schools", "full_data")) {
   
   plt_layout <- condition_dat[1, "plt_layout"][[1]][[1]]
   true_values <- condition_dat[1, "full_tidy"][[1]][[1]]
@@ -30,6 +30,13 @@ patch_plt_dat <- function(condition_dat, axis_limits, table_height_prop = 1/4,
       x = 0.5, y = 1, vjust = 1, fontface = "bold", size = 14)
 }
 
+# d <- tar_read(results_grouped_full_data) |>
+#   first()
+# # # issue: why is it 3 students 10 schools
+# d |>
+#   patch_plt_dat(tar_read(axis_limits_full_data))
+#   head(1) |>
+#   select(all_of(c("n_bootstraps", "n_students", "n_schools")))
 
 # map(1:40, \(idx) {
 #   print(idx)

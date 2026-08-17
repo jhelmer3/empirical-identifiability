@@ -6,10 +6,11 @@ library(crew.cluster)
 
 tar_option_set(
   packages = c("tidyverse", "patchwork", "gt"),
-  controller = crew_controller_local(workers = 1),
+  controller = crew_controller_local(workers = 2),
   format = "qs",
   seed = 12345,
-  error = "trim"
+  error = "trim",
+  memory = "transient"
 )
 
 tar_config_set(
@@ -20,7 +21,7 @@ tar_source(here::here("Scripts", "R"))
 
 dir.create("outputs", showWarnings = FALSE, recursive = TRUE)
 
-n_bootstraps_global <- 12
+n_bootstraps_global <- 120
 
 list(
   tar_target(n_bootstraps, n_bootstraps_global),
@@ -44,73 +45,80 @@ list(
                             plt_layout = purrr::map(terms, make_plt_layout)),
              pattern = map(models)),
   
-  tar_target(param_set, init_params(n_bootstraps, models)),
-  tar_target(params, define_params(param_set, models) |>
-               dplyr::left_join(full_data_models)),
-  
-  ## subsetting once per condition, bootstrapping within
-  ## still need to overall replicate this multiple times
-  tar_target(params_w_subset, subset_dat(ecls_dat, params)),
-  tar_target(results, bootstrap_subset(params_w_subset) |>
-               fit_model() |>
-               dplyr::select(-c(bootstrap, res)),
-             pattern = map(params_w_subset)),
-  
-  tar_target(axis_limits, identify_axis_limits(results)),
-  tar_group_by(results_grouped, results |> 
-                 dplyr::mutate(.by = condition_id,
-                               rep = row_number()), 
-               condition_id),
-
-  tar_target(condition_plt, 
-             patch_plt_dat(results_grouped, axis_limits),
-             pattern = map(results_grouped),
-             iteration = "list"),
-  tar_target(condition_plt_files,
-             paste0("outputs/condition_", first(results_grouped$condition_id),
-                    "_model_", first(results_grouped$model_id),
-                    "_centered_", first(results_grouped$centered),
-                    "_bstype_", first(results_grouped$bootstrap_type),
-                    # "_full_", first(results_grouped$keep_full_data),
-                    ".png") |>
-               ggsave_and_return_path(condition_plt, 
-                                      width = get_condition_plt_dim(results_grouped), 
-                                      height = get_condition_plt_dim(results_grouped)),
-             pattern = map(condition_plt, results_grouped),
-             iteration = "list",
-             format = "file"),
-  
-  tar_target(icc_dat, 
-             make_icc_dat(results_grouped),
-             pattern = map(results_grouped)),
-  tar_group_by(icc_dat_grouped_by_btwn, icc_dat, btwn_condition_id),
-  tar_target(icc_plt_files,
-             paste0("outputs/icc_plt",
-                    "_model_", first(icc_dat_grouped_by_btwn$model_id),
-                    "_centered_", first(icc_dat_grouped_by_btwn$centered),
-                    "_bstype_", first(icc_dat_grouped_by_btwn$bootstrap_type),
-                    # "_full_", first(results_grouped$keep_full_data),
-                    ".png") |>
-               ggsave_and_return_path(patch_icc_dat(icc_dat_grouped_by_btwn)),
-             pattern = map(icc_dat_grouped_by_btwn),
-             iteration = "list",
-             format = "file"),
-  
-  tar_target(r2_dat, 
-             make_r2_dat(results_grouped),
-             pattern = map(results_grouped)),
-  tar_group_by(r2_dat_grouped_by_btwn, r2_dat, btwn_condition_id),
-  tar_target(r2_plt_files,
-             paste0("outputs/r2_plt",
-                    "_model_", first(r2_dat_grouped_by_btwn$model_id),
-                    "_centered_", first(r2_dat_grouped_by_btwn$centered),
-                    "_bstype_", first(r2_dat_grouped_by_btwn$bootstrap_type), 
-                    # "_full_", first(results_grouped$keep_full_data),
-                    ".png") |>
-               ggsave_and_return_path(patch_r2_dat(r2_dat_grouped_by_btwn)),
-             pattern = map(r2_dat_grouped_by_btwn),
-             iteration = "list",
-             format = "file"),
+  tar_map(
+    list(full_data = c(F, T),
+         full_data_name = c("subset", "full_data")),
+    names = full_data_name,
+    list(
+      tar_target(param_set, init_params(n_bootstraps, models,
+                                        full_data, full_and_cleaned_sample_sizes)),
+      tar_target(params, define_params(param_set, models) |>
+                   dplyr::left_join(full_data_models)),
+      ## subsetting once per condition, bootstrapping within
+      ## still need to overall replicate this multiple times
+      tar_target(params_w_subset, subset_dat(ecls_dat, params)),
+      tar_target(results, bootstrap_subset(params_w_subset) |>
+                   fit_model() |>
+                   dplyr::select(-c(bootstrap, res)),
+                 pattern = map(params_w_subset)),
+      
+      tar_target(axis_limits, identify_axis_limits(results)),
+      tar_group_by(results_grouped, results |> 
+                     dplyr::mutate(.by = condition_id,
+                                   rep = row_number()), 
+                   condition_id),
+      
+      tar_target(condition_plt, 
+                 patch_plt_dat(results_grouped, axis_limits),
+                 pattern = map(results_grouped),
+                 iteration = "list"),
+      tar_target(condition_plt_files,
+                 paste0("outputs/condition_", first(results_grouped$condition_id),
+                        "_model_", first(results_grouped$model_id),
+                        "_centered_", first(results_grouped$centered),
+                        "_bstype_", first(results_grouped$bootstrap_type),
+                        "_", full_data_name,
+                        ".png") |>
+                   ggsave_and_return_path(condition_plt, 
+                                          width = get_condition_plt_dim(results_grouped), 
+                                          height = get_condition_plt_dim(results_grouped)),
+                 pattern = map(condition_plt, results_grouped),
+                 iteration = "list",
+                 format = "file"),
+      
+      tar_target(icc_dat, 
+                 make_icc_dat(results_grouped),
+                 pattern = map(results_grouped)),
+      tar_group_by(icc_dat_grouped_by_btwn, icc_dat, btwn_condition_id),
+      tar_target(icc_plt_files,
+                 paste0("outputs/icc_plt",
+                        "_model_", first(icc_dat_grouped_by_btwn$model_id),
+                        "_centered_", first(icc_dat_grouped_by_btwn$centered),
+                        "_bstype_", first(icc_dat_grouped_by_btwn$bootstrap_type),
+                        "_", full_data_name,
+                        ".png") |>
+                   ggsave_and_return_path(patch_icc_dat(icc_dat_grouped_by_btwn)),
+                 pattern = map(icc_dat_grouped_by_btwn),
+                 iteration = "list",
+                 format = "file"),
+      
+      tar_target(r2_dat, 
+                 make_r2_dat(results_grouped),
+                 pattern = map(results_grouped)),
+      tar_group_by(r2_dat_grouped_by_btwn, r2_dat, btwn_condition_id),
+      tar_target(r2_plt_files,
+                 paste0("outputs/r2_plt",
+                        "_model_", first(r2_dat_grouped_by_btwn$model_id),
+                        "_centered_", first(r2_dat_grouped_by_btwn$centered),
+                        "_bstype_", first(r2_dat_grouped_by_btwn$bootstrap_type), 
+                        "_", full_data_name,
+                        ".png") |>
+                   ggsave_and_return_path(patch_r2_dat(r2_dat_grouped_by_btwn)),
+                 pattern = map(r2_dat_grouped_by_btwn),
+                 iteration = "list",
+                 format = "file")
+    )
+  ),
   
   # tar_target(examples_dat,
   #            get_examples_dat(results_grouped, model_terms)),
