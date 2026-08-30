@@ -1,9 +1,8 @@
 
 bootstrap_subset <- function(params_w_subset) {
-  bootstrap_type <- params_w_subset["bootstrap_type"][[1]]
+  bootstrap_type <- params_w_subset["bootstrap_type"][[1]][1]
   
-  all_bootstraps <- params_w_subset |>
-    uncount(n_bootstraps, .remove = F)
+  all_bootstraps <- params_w_subset
   
   if (bootstrap_type == "both") {
     all_bootstraps |>

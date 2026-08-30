@@ -1,5 +1,5 @@
 make_warnings_tbl <- function(condition_dat) {
-  
+  browser()
   warning_patterns_rm <- c(
     " with max\\|grad\\| = [\\d.]+ .+[\\s\\S]*",
     " with  \\(tol .+[\\s\\S]*",

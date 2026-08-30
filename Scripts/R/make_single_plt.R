@@ -1,7 +1,6 @@
 
 make_single_plt <- function(plt_dat, true_values,
                             xterm, yterm, axis_limits) {
-  
   xlims <- axis_limits |>
     filter(term == xterm) |>
     select(-term) |>

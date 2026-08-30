@@ -28,15 +28,15 @@ tar_source(here::here("Scripts", "R"))
 tar_load(
   c(
     ecls_dat, full_and_cleaned_sample_sizes, #n_boostraps,
-    param_set, params,
+    param_set_full_data, params_subset,
     full_data_models
   ),
   store = here::here("_targets")
 )
 
-ecls_full <- tar_read(full_and_subset_sample_sizes) |>
+ecls_full <- full_and_cleaned_sample_sizes |>
   filter(data_type == "full")
-ecls_cleaned <- tar_read(full_and_subset_sample_sizes) |>
+ecls_cleaned <- full_and_cleaned_sample_sizes |>
   filter(data_type == "cleaned")
 ```
 
@@ -319,7 +319,7 @@ We subsetted the full ECLS-K dataset to include just the variables of interest f
 
 We conducted `[n]` replications for each combination of conditions in this study. For each replication, we randomly sampled a four smaller subsets of the data with $N_{schools}$ schools and $N_{students per school}$, one for each of the combinations of $N_{schools} \in [10, 30]$ and $N_{students per school} \in [3, 10]$. 
 
-Within each data subset, we had `r params |> select(n_bootstraps, centered, bootstrap_type, model_string) |> unique() |> nrow()` bootstrapping conditions: centering the data before bootstrapping (centered vs. not-centered), the method of bootstrapping (two-stage vs. cluster vs. individual), and the model (the five models described above). For each of those conditions, we created `n_boostraps` bootstraps of each dataset by sampling the data with replacement at the level(s) specified by the bootstrapping method. 
+Within each data subset, we had `r params_subset |> select(n_bootstraps, centered, bootstrap_type, model_string) |> unique() |> nrow()` bootstrapping conditions: centering the data before bootstrapping (centered vs. not-centered), the method of bootstrapping (two-stage vs. cluster vs. individual), and the model (the five models described above). For each of those conditions, we created `n_boostraps` bootstraps of each dataset by sampling the data with replacement at the level(s) specified by the bootstrapping method. 
 
 ### Outcomes
 

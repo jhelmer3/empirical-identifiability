@@ -1,9 +1,18 @@
 
-patch_plt_dat <- function(condition_dat, axis_limits, table_height_prop = 1/4,
-                          title_info_vars = c("n_bootstraps", "n_students", "n_schools", "full_data")) {
+patch_plt_dat <- function(condition_dat, axis_limits, full_data_models, table_height_prop = 1/4,
+                          title_info_vars = c("n_students", "n_schools", "full_data")) {
+  # mapping over `condition_id` in pipeline, so grabbing actual
+  condition_id <- condition_dat$condition_id[[1]]
+  # `model_string` is constant within `condition_id`
+  condition_model_string <- condition_dat$model_string[[1]]
   
-  plt_layout <- condition_dat[1, "plt_layout"][[1]][[1]]
-  true_values <- condition_dat[1, "full_tidy"][[1]][[1]]
+  # getting `plt_layout` and `true_values` for the condition's model
+  plt_layout <- full_data_models |> 
+    filter(model_string == condition_model_string) |> 
+    pluck("plt_layout", 1)
+  true_values <- full_data_models |> 
+    filter(model_string == condition_model_string) |> 
+    pluck("full_tidy", 1)
   
   condition_plt_dat <- make_plt_dat(condition_dat, plt_layout, true_values, axis_limits)
   

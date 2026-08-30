@@ -23,3 +23,4 @@ clean_ecls <- function(data) {
     filter_out(.by = schoolid,
                length(unique(childid)) < 10)
 }
+

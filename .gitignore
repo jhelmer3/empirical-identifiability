@@ -5,3 +5,4 @@
 
 /.quarto/
 proposal_cache/
+**/*.quarto_ipynb

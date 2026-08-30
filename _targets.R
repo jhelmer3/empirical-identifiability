@@ -1,16 +1,24 @@
 
+options(tidyverse.quiet = T)
+
+# install.packages(c("broom.mixed", "ggtext", "janitor", "cowplot", "sjPlot"))
+library(tidyverse)
 library(targets)
 library(tarchetypes)
 library(crew)
-library(crew.cluster)
 
 tar_option_set(
   packages = c("tidyverse", "patchwork", "gt"),
-  controller = crew_controller_local(workers = 2),
+  controller = crew_controller_local(
+    workers = 16,
+    options_local = crew_options_local(log_directory = "logs/"),
+    tasks_max = 5
+  ),
   format = "qs",
   seed = 12345,
   error = "trim",
-  memory = "transient"
+  memory = "transient",
+  garbage_collection = T
 )
 
 tar_config_set(
@@ -21,7 +29,9 @@ tar_source(here::here("Scripts", "R"))
 
 dir.create("outputs", showWarnings = FALSE, recursive = TRUE)
 
-n_bootstraps_global <- 120
+n_bootstraps_global <- 1000
+batch_size_subset <- 10
+batch_size_full_data <- 5
 
 list(
   tar_target(n_bootstraps, n_bootstraps_global),
@@ -47,29 +57,41 @@ list(
   
   tar_map(
     list(full_data = c(F, T),
-         full_data_name = c("subset", "full_data")),
+         full_data_name = c("subset", "full_data"),
+         batch_size = c(batch_size_subset, batch_size_full_data)),
     names = full_data_name,
     list(
       tar_target(param_set, init_params(n_bootstraps, models,
                                         full_data, full_and_cleaned_sample_sizes)),
-      tar_target(params, define_params(param_set, models) |>
-                   dplyr::left_join(full_data_models)),
+      tar_target(params, define_params(param_set, models)),
       ## subsetting once per condition, bootstrapping within
       ## still need to overall replicate this multiple times
       tar_target(params_w_subset, subset_dat(ecls_dat, params)),
-      tar_target(results, bootstrap_subset(params_w_subset) |>
-                   fit_model() |>
-                   dplyr::select(-c(bootstrap, res)),
+      tar_target(params_w_subset_grid, 
+                 params_w_subset |>
+                   tidyr::uncount(n_bootstraps, .id = "boot_id", .remove = F) |>
+                   dplyr::mutate(batch_id = ceiling(boot_id / batch_size)),
                  pattern = map(params_w_subset)),
+      tar_target(params_w_subset_grid_grouped, 
+                 params_w_subset_grid |>
+                   dplyr::group_by(batch_id) |>
+                   targets::tar_group(),
+                 iteration = "group"),
+      ## check below
+      tar_target(results, bootstrap_subset(params_w_subset_grid_grouped) |>
+                   fit_model(),
+                 pattern = map(params_w_subset_grid_grouped)),
       
       tar_target(axis_limits, identify_axis_limits(results)),
       tar_group_by(results_grouped, results |> 
+                     nest(r2s = starts_with("r2")) |> 
+                     mutate(rep = row_number()) |>
                      dplyr::mutate(.by = condition_id,
                                    rep = row_number()), 
                    condition_id),
       
       tar_target(condition_plt, 
-                 patch_plt_dat(results_grouped, axis_limits),
+                 patch_plt_dat(results_grouped, axis_limits, full_data_models),
                  pattern = map(results_grouped),
                  iteration = "list"),
       tar_target(condition_plt_files,
@@ -173,3 +195,26 @@ list(
   tar_quarto(ecls_report, "ecls-k.qmd", quiet = F),
   tar_quarto(writeup, "writeup.qmd", quiet = F)
 )
+
+# see if this is 14 min and 738 peak is typical. look for potential timeout arguments
+# peakRAM::peakRAM({
+#   tar_read(params_w_subset_full_data) |> first() |>
+#     tidyr::uncount(n_bootstraps, .id = "boot_id") |>
+#     dplyr::mutate(batch_id = ceiling(boot_id / batch_size_full_data)) |> 
+#     first() |> 
+#     bootstrap_subset() |> 
+#     fit_model()
+# })
+
+
+
+
+
+
+
+
+
+
+
+
+
